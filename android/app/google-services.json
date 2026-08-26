@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "43555663248",
+    "project_id": "stream-pro-7e2d1",
+    "storage_bucket": "stream-pro-7e2d1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43555663248:android:31399a64d6229750d89715",
+        "android_client_info": {
+          "package_name": "com.example.stream_pro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9p6HZRECxRrM_6sfghgnMJzD6-etaeb0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,81 @@
+name: StreamPro CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Java JDK environment for Android build
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      # Step 3: Setup Flutter SDK with caching enabled
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.32.7'
+          channel: 'stable'
+          cache: true
+
+      # Step 4: Install Flutter project dependencies
+      - name: Install Dependencies
+        run: flutter pub get
+
+      # Step 5: Perform static code analysis
+      - name: Analyze Code
+        run: flutter analyze
+
+      # Step 6: Run unit tests
+      - name: Run Unit Tests
+        run: flutter test
+
+      # Step 7: Build release APK
+      - name: Build Release APK
+        run: flutter build apk --release
+
+      # Step 8: Upload build APK as GitHub artifact
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: stream-pro-release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+      # Step 9: Distribute APK to Firebase App Distribution
+      - name: Upload APK to Firebase App Distribution
+        uses: w9jds/firebase-action@master
+        with:
+          args: appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk --app "${{ secrets.FIREBASE_APP_ID }}"
+        env:
+          GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
+
+      # Step 10: Send Telegram Notification
+      - name: Send Telegram Notification
+        if: always()
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          document: build/app/outputs/flutter-apk/app-release.apk
+          format: markdown
+          message: |
+            *Project:* `${{ github.repository }}` 📱
+
+            *Status:* ${{ job.status == 'success' && '✅ Success' || '❌ Failed' }}
+            *Branch:* `${{ github.ref_name }}`
+            *Commit:* `${{ github.event.head_commit.message }}`
+            *By:* `${{ github.actor }}`
+
+            ${{ job.status == 'success' && '🚀 *New Release Ready! The APK is attached below.*' || '⚠️ *Build Failed, check GitHub Actions logs.*' }}
