@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: '18'
 
       # Step 3: Setup Flutter SDK with caching enabled
       - name: Setup Flutter SDK
