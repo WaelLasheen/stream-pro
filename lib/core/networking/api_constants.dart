@@ -1,5 +1,5 @@
 class ApiConstants {
-  static const String baseURL = "http://192.168.0.104:3000/api/v1/";
+  static const String baseURL = "https://stream-pro-ten.vercel.app/api/v1/";
   static const String login = "auth/login";
   static const String register = "auth/register";
   static const String feed = "feed";
