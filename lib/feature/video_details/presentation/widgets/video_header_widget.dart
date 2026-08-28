@@ -41,14 +41,18 @@ class _VideoHeaderWidgetState extends State<VideoHeaderWidget> {
           children: [
             Text(
               '${widget.views} views',
-              style: theme.textTheme.bodySmall?.copyWith(color: Colors.grey),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.hintColor,
+              ),
             ),
             SizedBox(width: 8.w),
-            const Text('•', style: TextStyle(color: Colors.grey)),
+            Text('•', style: TextStyle(color: theme.hintColor)),
             SizedBox(width: 8.w),
             Text(
               _timeAgo(widget.createdAt),
-              style: theme.textTheme.bodySmall?.copyWith(color: Colors.grey),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: theme.hintColor,
+              ),
             ),
           ],
         ),
@@ -59,7 +63,9 @@ class _VideoHeaderWidgetState extends State<VideoHeaderWidget> {
             child: Text(
               widget.description,
               maxLines: isExpanded ? null : 2,
-              overflow: isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
+              overflow: isExpanded
+                  ? TextOverflow.visible
+                  : TextOverflow.ellipsis,
               style: theme.textTheme.bodyMedium,
             ),
           ),

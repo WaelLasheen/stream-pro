@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 
 class HomeFeedShimmer extends StatelessWidget {
   const HomeFeedShimmer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final baseColor = isDark ? Colors.grey[800]! : Colors.grey[300]!;
-    final highlightColor = isDark ? Colors.grey[700]! : Colors.grey[100]!;
+    final appTheme = context.appTheme;
+    final baseColor = appTheme.grey500;
+    final highlightColor = appTheme.grey200;
 
     return Shimmer.fromColors(
       baseColor: baseColor,
@@ -27,7 +28,7 @@ class HomeFeedShimmer extends StatelessWidget {
                   width: 160.w,
                   height: 22.h,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: appTheme.surfaceColor,
                     borderRadius: BorderRadius.circular(4.r),
                   ),
                 ),
@@ -36,7 +37,7 @@ class HomeFeedShimmer extends StatelessWidget {
                   width: 60.w,
                   height: 18.h,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: appTheme.surfaceColor,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                 ),
@@ -59,7 +60,7 @@ class HomeFeedShimmer extends StatelessWidget {
                       Container(
                         height: 180.h,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: appTheme.surfaceColor,
                           borderRadius: BorderRadius.circular(16.r),
                         ),
                       ),
@@ -68,7 +69,7 @@ class HomeFeedShimmer extends StatelessWidget {
                         children: [
                           CircleAvatar(
                             radius: 20.r,
-                            backgroundColor: Colors.white,
+                            backgroundColor: appTheme.surfaceColor,
                           ),
                           10.horizontalSpace,
                           Expanded(
@@ -77,13 +78,13 @@ class HomeFeedShimmer extends StatelessWidget {
                               children: [
                                 Container(
                                   height: 14.h,
-                                  color: Colors.white,
+                                  color: appTheme.surfaceColor,
                                 ),
                                 6.verticalSpace,
                                 Container(
                                   height: 12.h,
                                   width: 120.w,
-                                  color: Colors.white,
+                                  color: appTheme.surfaceColor,
                                 ),
                               ],
                             ),

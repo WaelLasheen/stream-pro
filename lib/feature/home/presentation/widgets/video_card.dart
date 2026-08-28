@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import '../../domain/entities/video_entity.dart';
 
 class VideoCard extends StatelessWidget {
@@ -32,7 +33,7 @@ class VideoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
+    final appTheme = context.appTheme;
 
     return InkWell(
       onTap: onTap,
@@ -45,7 +46,7 @@ class VideoCard extends StatelessWidget {
           color: theme.cardColor,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withAlpha(12),
+              color: appTheme.grey800.withAlpha(14),
               blurRadius: 10.r,
               offset: Offset(0, 4.h),
             ),
@@ -67,14 +68,12 @@ class VideoCard extends StatelessWidget {
                     width: double.infinity,
                     fit: BoxFit.cover,
                     placeholder: (context, url) => Shimmer.fromColors(
-                      baseColor: isDark ? Colors.grey[800]! : Colors.grey[300]!,
-                      highlightColor: isDark
-                          ? Colors.grey[700]!
-                          : Colors.grey[100]!,
+                      baseColor: appTheme.grey500,
+                      highlightColor: appTheme.grey200,
                       child: Container(
                         height: 180.h,
                         width: double.infinity,
-                        color: Colors.white,
+                        color: appTheme.surfaceColor,
                       ),
                     ),
                     errorWidget: (context, url, error) => Container(
@@ -96,15 +95,14 @@ class VideoCard extends StatelessWidget {
                       vertical: 3.h,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.black.withAlpha(190),
+                      color: appTheme.overlayColor,
                       borderRadius: BorderRadius.circular(6.r),
                     ),
                     child: Text(
                       _formatDuration(video.duration),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.bold,
+                      style: theme.textTheme.labelSmall?.copyWith(
+                        color: appTheme.onPrimary,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),

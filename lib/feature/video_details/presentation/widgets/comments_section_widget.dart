@@ -159,7 +159,7 @@ class _CommentItem extends StatelessWidget {
                     Text(
                       '(edited)',
                       style: theme.textTheme.labelSmall?.copyWith(
-                        color: Colors.grey,
+                        color: theme.hintColor,
                       ),
                     ),
                 ],
@@ -170,7 +170,7 @@ class _CommentItem extends StatelessWidget {
           ),
         ),
         PopupMenuButton<String>(
-          icon: Icon(Icons.more_vert, size: 16.sp, color: Colors.grey),
+          icon: Icon(Icons.more_vert, size: 16.sp, color: theme.hintColor),
           onSelected: (value) {
             if (value == 'delete') {
               context.read<VideoCommentsCubit>().deleteComment(

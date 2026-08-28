@@ -1,100 +1,200 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-/// Type scale pulled directly from the "Marketing SAAS" Figma file's
-/// exported text styles (fontFamily: Rubik, letterSpacing: 0% everywhere).
+/// Typography scale for StreamPro.
 ///
-/// Figma scale reference (px):
-///   heading3xl 52 | heading2xl 46 | headingXl 41 | headingLg 36
-///   headingMd  32 | headingSm  29 | headingXs   26
-///   text3xl    23 | text2xl    20 | textXl      18
-///   textLg     16 | textMd     14 | textSm      13 | textXs 11
+/// Font family: Rubik — a rounded, geometric sans-serif that fits the
+/// modern, media-rich nature of a streaming app. The static weights
+/// (Regular 400 / Medium 500 / SemiBold 600 / Bold 700) are bundled in
+/// `fonts/` and declared in `pubspec.yaml`.
 ///
-/// Each of the styles below is mapped to the closest matching Figma
-/// text style (name shown in the comment above each getter).
+/// Every getter below maps 1:1 to a Material 3 [TextTheme] slot:
+///
+/// | Getter          | TextTheme slot | Size  | Weight | Usage                              |
+/// |-----------------|----------------|-------|--------|------------------------------------|
+/// | displayLarge    | displayLarge   | 57.sp | w700   | Hero / onboarding splash numbers   |
+/// | displayMedium   | displayMedium  | 45.sp | w700   | Large hero headings                |
+/// | displaySmall    | displaySmall   | 36.sp | w600   | Prominent hero sub-headings        |
+/// | headlineLarge   | headlineLarge  | 32.sp | w700   | Main page headings                 |
+/// | headlineMedium  | headlineMedium | 28.sp | w600   | Screen titles (auth, details)      |
+/// | headlineSmall   | headlineSmall  | 24.sp | w600   | Section / video titles             |
+/// | titleLarge      | titleLarge     | 22.sp | w600   | App bar titles, dialog titles      |
+/// | titleMedium     | titleMedium    | 16.sp | w600   | Card titles, list headers          |
+/// | titleSmall      | titleSmall     | 14.sp | w600   | Sub-titles, chip labels            |
+/// | bodyLarge       | bodyLarge      | 16.sp | w400   | Long-form paragraphs, inputs       |
+/// | bodyMedium      | bodyMedium     | 14.sp | w400   | Default body copy                  |
+/// | bodySmall       | bodySmall      | 12.sp | w400   | Secondary details, meta lines      |
+/// | labelLarge      | labelLarge     | 14.sp | w600   | Buttons, tabs                      |
+/// | labelMedium     | labelMedium    | 12.sp | w500   | Badges, form labels                |
+/// | labelSmall      | labelSmall     | 11.sp | w500   | Captions, timestamps, view counts  |
+///
+/// Colors are intentionally NOT set here — they are applied from the
+/// [AppTheme] extension / [ColorScheme] where the style is used.
 abstract class FontStyles {
   static const String fontFamily = 'Rubik';
 
-  // Figma: heading3xl/Bold (52) -- kept for large hero/display text if needed.
-  static TextStyle get display => TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 52.sp,
+  static TextStyle _base({
+    required double fontSize,
+    required FontWeight fontWeight,
+    double letterSpacing = 0,
+    double height = 1.3,
+  }) {
+    return TextStyle(
+      fontFamily: fontFamily,
+      fontSize: fontSize.sp,
+      fontWeight: fontWeight,
+      letterSpacing: letterSpacing,
+      height: height,
+    );
+  }
+
+  // ── Display ────────────────────────────────────────────────────────────
+
+  /// Material: displayLarge — extremely large hero text.
+  static TextStyle get displayLarge => _base(
+    fontSize: 57,
+    fontWeight: FontWeight.w700,
+    letterSpacing: -0.25,
+    height: 1.12,
+  );
+
+  /// Material: displayMedium.
+  static TextStyle get displayMedium => _base(
+    fontSize: 45,
     fontWeight: FontWeight.w700,
     letterSpacing: 0,
+    height: 1.15,
   );
 
-  // Figma: headingMd/Bold (32) — exact size match.
-  static TextStyle get h1 => TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 32.sp,
-    fontWeight: FontWeight.bold,
+  /// Material: displaySmall.
+  static TextStyle get displaySmall => _base(
+    fontSize: 36,
+    fontWeight: FontWeight.w600,
     letterSpacing: 0,
+    height: 1.22,
   );
 
-  // Figma: text3xl/Bold (23) — closest match to the previous 24sp h2.
-  static TextStyle get h2 => TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 24.sp,
+  // ── Headline ───────────────────────────────────────────────────────────
+
+  /// Material: headlineLarge — main page headings.
+  static TextStyle get headlineLarge => _base(
+    fontSize: 32,
     fontWeight: FontWeight.w700,
     letterSpacing: 0,
+    height: 1.25,
   );
 
-  // Figma: text2xl/Semibold (20) — exact size match.
-  static TextStyle get h3 => TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 20.sp,
+  /// Material: headlineMedium — screen titles (auth headers, etc.).
+  static TextStyle get headlineMedium => _base(
+    fontSize: 28,
     fontWeight: FontWeight.w600,
     letterSpacing: 0,
+    height: 1.28,
   );
 
-  // Figma: textLg/Regular (16) — exact size match.
-  static TextStyle get bodyLarge => TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 16.sp,
-    fontWeight: FontWeight.normal,
-    letterSpacing: 0,
-  );
-
-  // Figma: textMd/Regular (14) — exact size match.
-  static TextStyle get bodyMedium => TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 14.sp,
-    fontWeight: FontWeight.normal,
-    letterSpacing: 0,
-  );
-
-  // Figma: textSm/Regular (13) — closest match to the previous 12sp bodySmall.
-  static TextStyle get bodySmall => TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 13.sp,
-    fontWeight: FontWeight.normal,
-    letterSpacing: 0,
-  );
-
-  // Figma: textLg/Semibold (16) — exact size match.
-  static TextStyle get button => TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 16.sp,
+  /// Material: headlineSmall — section / video detail titles.
+  static TextStyle get headlineSmall => _base(
+    fontSize: 24,
     fontWeight: FontWeight.w600,
     letterSpacing: 0,
+    height: 1.33,
   );
 
-  // Figma: textMd/Medium (14) — exact size match.
-  // NOTE: color intentionally left out here — set it via textSecondary
-  // from the AppTheme extension where the widget is used, rather than
-  // hardcoding Colors.grey.
-  static TextStyle get label => TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 14.sp,
+  // ── Title ──────────────────────────────────────────────────────────────
+
+  /// Material: titleLarge — app bar titles, dialog titles.
+  static TextStyle get titleLarge => _base(
+    fontSize: 22,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0,
+    height: 1.27,
+  );
+
+  /// Material: titleMedium — card titles, list headers.
+  static TextStyle get titleMedium => _base(
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.15,
+    height: 1.5,
+  );
+
+  /// Material: titleSmall — sub-titles, chip labels.
+  static TextStyle get titleSmall => _base(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.1,
+    height: 1.43,
+  );
+
+  // ── Body ───────────────────────────────────────────────────────────────
+
+  /// Material: bodyLarge — paragraphs and text inputs.
+  static TextStyle get bodyLarge => _base(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.5,
+    height: 1.5,
+  );
+
+  /// Material: bodyMedium — default body copy.
+  static TextStyle get bodyMedium => _base(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.25,
+    height: 1.43,
+  );
+
+  /// Material: bodySmall — secondary details and meta lines.
+  static TextStyle get bodySmall => _base(
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.4,
+    height: 1.33,
+  );
+
+  // ── Label ──────────────────────────────────────────────────────────────
+
+  /// Material: labelLarge — buttons and tabs.
+  static TextStyle get labelLarge => _base(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.1,
+    height: 1.43,
+  );
+
+  /// Material: labelMedium — badges and form labels.
+  static TextStyle get labelMedium => _base(
+    fontSize: 12,
     fontWeight: FontWeight.w500,
-    letterSpacing: 0,
+    letterSpacing: 0.5,
+    height: 1.33,
   );
 
-  // Figma: textXs/Regular (11) — useful for captions/helper text.
-  static TextStyle get caption => TextStyle(
-    fontFamily: fontFamily,
-    fontSize: 11.sp,
-    fontWeight: FontWeight.normal,
-    letterSpacing: 0,
+  /// Material: labelSmall — captions, timestamps, view counts.
+  static TextStyle get labelSmall => _base(
+    fontSize: 11,
+    fontWeight: FontWeight.w500,
+    letterSpacing: 0.5,
+    height: 1.45,
+  );
+
+  /// Convenience: the full Material 3 text theme built from the styles
+  /// above. Injected into [ThemeData.textTheme] in `app_themes.dart`.
+  static TextTheme get textTheme => TextTheme(
+    displayLarge: FontStyles.displayLarge,
+    displayMedium: FontStyles.displayMedium,
+    displaySmall: FontStyles.displaySmall,
+    headlineLarge: FontStyles.headlineLarge,
+    headlineMedium: FontStyles.headlineMedium,
+    headlineSmall: FontStyles.headlineSmall,
+    titleLarge: FontStyles.titleLarge,
+    titleMedium: FontStyles.titleMedium,
+    titleSmall: FontStyles.titleSmall,
+    bodyLarge: FontStyles.bodyLarge,
+    bodyMedium: FontStyles.bodyMedium,
+    bodySmall: FontStyles.bodySmall,
+    labelLarge: FontStyles.labelLarge,
+    labelMedium: FontStyles.labelMedium,
+    labelSmall: FontStyles.labelSmall,
   );
 }

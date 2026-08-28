@@ -52,15 +52,21 @@ class _ChannelInfoWidgetState extends State<ChannelInfoWidget> {
               ),
               Text(
                 '${widget.subscribersCount} subscribers',
-                style: theme.textTheme.bodySmall?.copyWith(color: Colors.grey),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.hintColor,
+                ),
               ),
             ],
           ),
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: isSubscribed ? Colors.grey.shade300 : theme.primaryColor,
-            foregroundColor: isSubscribed ? Colors.black : Colors.white,
+            backgroundColor: isSubscribed
+                ? theme.colorScheme.surfaceContainerHighest
+                : theme.colorScheme.primary,
+            foregroundColor: isSubscribed
+                ? theme.colorScheme.onSurface
+                : theme.colorScheme.onPrimary,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.r),
             ),

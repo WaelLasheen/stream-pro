@@ -30,8 +30,12 @@ class VideoActionsWidget extends StatelessWidget {
             children: [
               // Like Button Action
               _ActionButton(
-                icon: state.isLiked ? Icons.thumb_up_alt : Icons.thumb_up_off_alt,
-                iconColor: state.isLiked ? Theme.of(context).primaryColor : null,
+                icon: state.isLiked
+                    ? Icons.thumb_up_alt
+                    : Icons.thumb_up_off_alt,
+                iconColor: state.isLiked
+                    ? Theme.of(context).primaryColor
+                    : null,
                 label: '${state.likesCount}',
                 onTap: () {
                   context.read<VideoLikesCubit>().toggleLike(videoId);
@@ -76,26 +80,22 @@ class _ActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(20.r),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
         decoration: BoxDecoration(
-          color: Colors.grey.shade200,
+          color: theme.colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(20.r),
         ),
         child: Row(
           children: [
             Icon(icon, size: 18.sp, color: iconColor),
             SizedBox(width: 6.w),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+            Text(label, style: theme.textTheme.labelMedium),
           ],
         ),
       ),
