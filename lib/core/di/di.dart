@@ -46,6 +46,18 @@ import 'package:stream_pro/feature/video_details/domain/use_cases/update_comment
 import 'package:stream_pro/feature/video_details/presentation/controllers/video_comments_cubit/video_comments_cubit.dart';
 import 'package:stream_pro/feature/video_details/presentation/controllers/video_details_cubit/video_details_cubit.dart';
 import 'package:stream_pro/feature/video_details/presentation/controllers/video_likes_cubit/video_likes_cubit.dart';
+import 'package:stream_pro/feature/channel/data/datasources/channel_remote_datasource.dart';
+import 'package:stream_pro/feature/channel/data/datasources/channel_remote_datasource_impl.dart';
+import 'package:stream_pro/feature/channel/data/repositories/channel_repository_impl.dart';
+import 'package:stream_pro/feature/channel/domain/repositories/channel_repository.dart';
+import 'package:stream_pro/feature/channel/domain/use_cases/get_owner_channel_use_case.dart';
+import 'package:stream_pro/feature/channel/domain/use_cases/create_owner_channel_use_case.dart';
+import 'package:stream_pro/feature/channel/domain/use_cases/upload_channel_avatar_use_case.dart';
+import 'package:stream_pro/feature/channel/domain/use_cases/upload_channel_thumbnail_use_case.dart';
+import 'package:stream_pro/feature/channel/domain/use_cases/get_channel_details_use_case.dart';
+import 'package:stream_pro/feature/channel/domain/use_cases/get_channel_home_use_case.dart';
+import 'package:stream_pro/feature/channel/domain/use_cases/get_channel_videos_use_case.dart';
+import 'package:stream_pro/feature/channel/domain/use_cases/get_channel_playlists_use_case.dart';
 
 final getIt = GetIt.instance;
 
@@ -148,7 +160,6 @@ void setUpHome() {
 }
 
 void setUpVideoDetails() {
-  // DataSources
   getIt.registerLazySingleton<VideoRemoteDataSource>(
     () => VideoRemoteDataSourceImpl(getIt<ApiService>()),
   );
@@ -159,7 +170,6 @@ void setUpVideoDetails() {
     () => CommentsRemoteDataSourceImpl(getIt<ApiService>()),
   );
 
-  // Repository
   getIt.registerLazySingleton<VideoDetailsRepository>(
     () => VideoDetailsRepositoryImpl(
       videoRemoteDataSource: getIt<VideoRemoteDataSource>(),
@@ -168,7 +178,6 @@ void setUpVideoDetails() {
     ),
   );
 
-  // UseCases
   getIt.registerLazySingleton(
     () => GetVideoDetailsUseCase(getIt<VideoDetailsRepository>()),
   );
@@ -188,7 +197,6 @@ void setUpVideoDetails() {
     () => DeleteCommentUseCase(getIt<VideoDetailsRepository>()),
   );
 
-  // Cubits
   getIt.registerFactory(
     () => VideoDetailsCubit(getIt<GetVideoDetailsUseCase>()),
   );
@@ -203,6 +211,43 @@ void setUpVideoDetails() {
   );
 }
 
+void setUpChannel() {
+  getIt.registerLazySingleton<ChannelRemoteDataSource>(
+    () => ChannelRemoteDataSourceImpl(getIt<ApiService>()),
+  );
+  
+  getIt.registerLazySingleton<ChannelRepository>(
+    () => ChannelRepositoryImpl(
+      remoteDataSource: getIt<ChannelRemoteDataSource>(),
+    ),
+  );
+
+  getIt.registerLazySingleton(
+    () => GetOwnerChannelUseCase(getIt<ChannelRepository>()),
+  );
+  getIt.registerLazySingleton(
+    () => CreateOwnerChannelUseCase(getIt<ChannelRepository>()),
+  );
+  getIt.registerLazySingleton(
+    () => UploadChannelAvatarUseCase(getIt<ChannelRepository>()),
+  );
+  getIt.registerLazySingleton(
+    () => UploadChannelThumbnailUseCase(getIt<ChannelRepository>()),
+  );
+  getIt.registerLazySingleton(
+    () => GetChannelDetailsUseCase(getIt<ChannelRepository>()),
+  );
+  getIt.registerLazySingleton(
+    () => GetChannelHomeUseCase(getIt<ChannelRepository>()),
+  );
+  getIt.registerLazySingleton(
+    () => GetChannelVideosUseCase(getIt<ChannelRepository>()),
+  );
+  getIt.registerLazySingleton(
+    () => GetChannelPlaylistsUseCase(getIt<ChannelRepository>()),
+  );
+}
+
 Future<void> setUpLocators() async {
   setUpBlocObserver();
   await setUpStorage();
@@ -214,4 +259,5 @@ Future<void> setUpLocators() async {
   setUpAuth();
   setUpHome();
   setUpVideoDetails();
+  setUpChannel();
 }
