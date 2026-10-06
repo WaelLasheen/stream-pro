@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:stream_pro/core/storage/local_storage_service.dart';
+import 'package:stream_pro/core/services/storage/local_storage_service.dart';
 import 'app_config_state.dart';
 
 class AppConfigCubit extends Cubit<AppConfigState> {
