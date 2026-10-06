@@ -1,8 +1,9 @@
 import 'package:stream_pro/core/error/failures/failure.dart';
 
 class ServerFailure extends Failure {
-  const ServerFailure(super.message);
+  final int? statusCode;
+  const ServerFailure(super.message, {this.statusCode});
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [message, statusCode];
 }

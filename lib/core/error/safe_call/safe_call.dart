@@ -8,7 +8,7 @@ Future<Either<Failure, T>> safeCall<T>(Future<T> Function() action) async {
   try {
     return Right(await action());
   } on ServerException catch (e) {
-    return Left(ServerFailure(e.message));
+    return Left(ServerFailure(e.message, statusCode: e.statusCode));
   } catch (e) {
     return Left(UnknownFailure(e.toString()));
   }

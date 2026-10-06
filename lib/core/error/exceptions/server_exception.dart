@@ -4,7 +4,8 @@ import 'package:stream_pro/core/utils/extensions/number_range.dart';
 import 'package:stream_pro/generated/l10n.dart';
 
 class ServerException extends AppException {
-  const ServerException(super.message);
+  final int? statusCode;
+  const ServerException(super.message, {this.statusCode});
 
   factory ServerException.fromDioException(DioException dioException) {
     final s = S.current;
@@ -46,7 +47,7 @@ class ServerException extends AppException {
     final data = response?.data;
 
     if (statusCode != null && statusCode.isBetween(400, 499)) {
-      return ServerException(data['message']);
+      return ServerException(data['message'], statusCode: statusCode);
     } else if (statusCode != null && statusCode.isBetween(500, 599)) {
       return ServerException(s.internalServerError);
     } else {
