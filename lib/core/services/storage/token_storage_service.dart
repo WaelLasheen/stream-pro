@@ -1,4 +1,4 @@
-import 'package:stream_pro/core/storage/secure_storage_service.dart';
+import 'package:stream_pro/core/services/storage/secure_storage_service.dart';
 
 class TokenStorageService {
   final SecureStorageService _secureStorage;

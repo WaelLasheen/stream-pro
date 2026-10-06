@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:stream_pro/core/storage/token_storage_service.dart';
+import 'package:stream_pro/core/services/storage/token_storage_service.dart';
 
 abstract class StorageKeys {
   static const String accessToken = 'ACCESS_TOKEN';
