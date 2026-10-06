@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
 extension NavigationExtension on BuildContext {
-  void navigateTo(String route, {Object? arguments}) {
-    Navigator.of(this).pushNamed(route, arguments: arguments);
+  Future<T?> navigateTo<T extends Object?>(
+    String route, {
+    Object? arguments,
+  }) async {
+    final result = await Navigator.of(
+      this,
+    ).pushNamed(route, arguments: arguments);
+    return result as T?;
   }
 
   void navigateToAndReplace(String route, {Object? arguments}) {
@@ -23,7 +29,7 @@ extension NavigationExtension on BuildContext {
     );
   }
 
-  void navigateBack() {
-    Navigator.of(this).pop();
+  void navigateBack<T extends Object?>([T? result]) {
+    Navigator.of(this).pop(result);
   }
 }
