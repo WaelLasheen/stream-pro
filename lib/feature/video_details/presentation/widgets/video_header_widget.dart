@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_pro/core/utils/extensions/formatters.dart';
 
 class VideoHeaderWidget extends StatefulWidget {
   final String title;
@@ -49,7 +50,7 @@ class _VideoHeaderWidgetState extends State<VideoHeaderWidget> {
             Text('•', style: TextStyle(color: theme.hintColor)),
             SizedBox(width: 8.w),
             Text(
-              _timeAgo(widget.createdAt),
+              widget.createdAt.timeAgo(),
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.hintColor,
               ),
@@ -72,15 +73,5 @@ class _VideoHeaderWidgetState extends State<VideoHeaderWidget> {
         ],
       ],
     );
-  }
-
-  String _timeAgo(DateTime dateTime) {
-    final diff = DateTime.now().difference(dateTime);
-    if (diff.inDays > 365) return '${(diff.inDays / 365).floor()}y ago';
-    if (diff.inDays > 30) return '${(diff.inDays / 30).floor()}mo ago';
-    if (diff.inDays > 0) return '${diff.inDays}d ago';
-    if (diff.inHours > 0) return '${diff.inHours}h ago';
-    if (diff.inMinutes > 0) return '${diff.inMinutes}m ago';
-    return 'Just now';
   }
 }

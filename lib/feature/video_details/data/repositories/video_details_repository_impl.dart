@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import 'package:stream_pro/core/error/failures/failure.dart';
 import 'package:stream_pro/core/error/safe_call/safe_call.dart';
 import 'package:stream_pro/feature/video_details/data/datasources/comments_remote_datasource.dart';
-import 'package:stream_pro/feature/video_details/data/datasources/likes_remote_datasource.dart';
 import 'package:stream_pro/feature/video_details/data/datasources/video_remote_datasource.dart';
 import 'package:stream_pro/feature/video_details/domain/entities/comment_entity.dart';
 import 'package:stream_pro/feature/video_details/domain/entities/comments_paginated_entity.dart';
@@ -11,12 +10,10 @@ import 'package:stream_pro/feature/video_details/domain/repositories/video_detai
 
 class VideoDetailsRepositoryImpl implements VideoDetailsRepository {
   final VideoRemoteDataSource videoRemoteDataSource;
-  final LikesRemoteDataSource likesRemoteDataSource;
   final CommentsRemoteDataSource commentsRemoteDataSource;
 
   VideoDetailsRepositoryImpl({
     required this.videoRemoteDataSource,
-    required this.likesRemoteDataSource,
     required this.commentsRemoteDataSource,
   });
 
@@ -26,16 +23,6 @@ class VideoDetailsRepositoryImpl implements VideoDetailsRepository {
       final model = await videoRemoteDataSource.getVideoDetails(videoId);
       return model.toEntity();
     });
-  }
-
-  @override
-  Future<Either<Failure, void>> likeVideo(String videoId) {
-    return safeCall(() => likesRemoteDataSource.likeVideo(videoId));
-  }
-
-  @override
-  Future<Either<Failure, void>> unlikeVideo(String videoId) {
-    return safeCall(() => likesRemoteDataSource.unlikeVideo(videoId));
   }
 
   @override

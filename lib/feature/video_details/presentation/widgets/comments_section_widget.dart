@@ -44,24 +44,31 @@ class CommentsSectionWidget extends StatelessWidget {
             SizedBox(height: 8.h),
             if (state is VideoCommentsLoading)
               const Center(child: CircularProgressIndicator())
-            else if (state is VideoCommentsSuccess)
-              state.comments.isEmpty
-                  ? Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20.h),
-                      child: const Center(
-                        child: Text('No comments yet. Be the first!'),
-                      ),
-                    )
-                  : ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: state.comments.length,
-                      separatorBuilder: (_, __) => SizedBox(height: 12.h),
-                      itemBuilder: (context, index) {
-                        final comment = state.comments[index];
-                        return _CommentItem(comment: comment, videoId: videoId);
-                      },
-                    ),
+            else if (state is VideoCommentsSuccess) ...[
+              if (state.comments.isEmpty)
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20.h),
+                  child: const Center(
+                    child: Text('No comments yet. Be the first!'),
+                  ),
+                )
+              else ...[
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: state.comments.length,
+                  separatorBuilder: (_, __) => SizedBox(height: 12.h),
+                  itemBuilder: (context, index) {
+                    final comment = state.comments[index];
+                    return _CommentItem(comment: comment, videoId: videoId);
+                  },
+                ),
+                if (state.isLoadingMore) ...[
+                  SizedBox(height: 16.h),
+                  const Center(child: CircularProgressIndicator()),
+                ],
+              ],
+            ],
           ],
         );
       },

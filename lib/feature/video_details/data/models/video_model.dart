@@ -4,11 +4,12 @@ class VideoModel {
   final String videoId;
   final String title;
   final String videoUrl;
+  final String hlsUrl;
   final String thumbnailUrl;
   final String channelId;
   final String channelTitle;
   final String channelImageUrl;
-  final int duration;
+  final int durationSeconds;
   final int views;
   final String description;
   final int commentsCount;
@@ -22,11 +23,12 @@ class VideoModel {
     required this.videoId,
     required this.title,
     required this.videoUrl,
+    required this.hlsUrl,
     required this.thumbnailUrl,
     required this.channelId,
     required this.channelTitle,
     required this.channelImageUrl,
-    required this.duration,
+    required this.durationSeconds,
     required this.views,
     required this.description,
     required this.commentsCount,
@@ -42,11 +44,12 @@ class VideoModel {
       videoId: json['videoId'] ?? '',
       title: json['title'] ?? '',
       videoUrl: json['videoUrl'] ?? '',
+      hlsUrl: json['hlsUrl'] ?? '',
       thumbnailUrl: json['thumbnailUrl'] ?? '',
       channelId: json['channelId'] ?? '',
       channelTitle: json['channelTitle'] ?? '',
       channelImageUrl: json['channelImageUrl'] ?? '',
-      duration: json['duration'] ?? 0,
+      durationSeconds: json['durationSeconds'] ?? 0,
       views: json['views'] ?? 0,
       description: json['description'] ?? '',
       commentsCount: json['commentsCount'] ?? 0,
@@ -63,11 +66,12 @@ class VideoModel {
       videoId: videoId,
       title: title,
       videoUrl: videoUrl,
+      hlsUrl: hlsUrl,
       thumbnailUrl: thumbnailUrl,
       channelId: channelId,
       channelTitle: channelTitle,
       channelImageUrl: channelImageUrl,
-      duration: duration,
+      durationSeconds: durationSeconds,
       views: views,
       description: description,
       commentsCount: commentsCount,

@@ -1,12 +1,16 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_pro/core/routing/app_routes.dart';
+import 'package:stream_pro/core/shared/widgets/app_buttons/subscribe_button.dart';
+import 'package:stream_pro/core/shared/widgets/network_image/app_circle_network_image.dart';
+import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
 
-class ChannelInfoWidget extends StatefulWidget {
+class ChannelInfoWidget extends StatelessWidget {
   final String channelTitle;
   final String channelImageUrl;
   final int subscribersCount;
   final bool isSubscribed;
+  final String channelId;
 
   const ChannelInfoWidget({
     super.key,
@@ -14,20 +18,8 @@ class ChannelInfoWidget extends StatefulWidget {
     required this.channelImageUrl,
     required this.subscribersCount,
     required this.isSubscribed,
+    required this.channelId,
   });
-
-  @override
-  State<ChannelInfoWidget> createState() => _ChannelInfoWidgetState();
-}
-
-class _ChannelInfoWidgetState extends State<ChannelInfoWidget> {
-  late bool isSubscribed;
-
-  @override
-  void initState() {
-    super.initState();
-    isSubscribed = widget.isSubscribed;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +27,11 @@ class _ChannelInfoWidgetState extends State<ChannelInfoWidget> {
 
     return Row(
       children: [
-        CircleAvatar(
-          radius: 20.r,
-          backgroundImage: CachedNetworkImageProvider(widget.channelImageUrl),
+        InkWell(
+          onTap: () {
+            context.navigateTo(AppRoutes.channelDetails, arguments: channelId);
+          },
+          child: AppCircleNetworkImage(radius: 20.r, imageUrl: channelImageUrl),
         ),
         SizedBox(width: 12.w),
         Expanded(
@@ -45,13 +39,13 @@ class _ChannelInfoWidgetState extends State<ChannelInfoWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.channelTitle,
+                channelTitle,
                 style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                '${widget.subscribersCount} subscribers',
+                '$subscribersCount subscribers',
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: theme.hintColor,
                 ),
@@ -59,26 +53,7 @@ class _ChannelInfoWidgetState extends State<ChannelInfoWidget> {
             ],
           ),
         ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: isSubscribed
-                ? theme.colorScheme.surfaceContainerHighest
-                : theme.colorScheme.primary,
-            foregroundColor: isSubscribed
-                ? theme.colorScheme.onSurface
-                : theme.colorScheme.onPrimary,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20.r),
-            ),
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-          ),
-          onPressed: () {
-            setState(() {
-              isSubscribed = !isSubscribed;
-            });
-          },
-          child: Text(isSubscribed ? 'Subscribed' : 'Subscribe'),
-        ),
+        SubscribeButton(channelId: channelId, isSubscribed: isSubscribed),
       ],
     );
   }

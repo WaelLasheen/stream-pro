@@ -6,8 +6,6 @@ import 'package:stream_pro/feature/video_details/domain/entities/video_entity.da
 
 abstract class VideoDetailsRepository {
   Future<Either<Failure, VideoEntity>> getVideoDetails(String videoId);
-  Future<Either<Failure, void>> likeVideo(String videoId);
-  Future<Either<Failure, void>> unlikeVideo(String videoId);
   Future<Either<Failure, CommentsPaginatedEntity>> getComments({
     required String videoId,
     required int page,
