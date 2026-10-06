@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -65,7 +64,7 @@ class MyApp extends StatelessWidget {
                 // Navigation & Routing
                 navigatorKey: navigatorKey,
                 onGenerateRoute: getIt<AppRouter>().onGenerateRoute,
-                initialRoute: AppRoutes.login,
+                initialRoute: AppRoutes.splash,
               );
             },
           ),
