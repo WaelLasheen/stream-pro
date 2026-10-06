@@ -5,4 +5,5 @@ import 'package:stream_pro/feature/auth/data/models/register_request_model.dart'
 abstract class AuthRemoteDataSource {
   Future<AuthDataModel> login(LoginRequestModel request);
   Future<AuthDataModel> register(RegisterRequestModel request);
+  Future<String> refreshToken();
 }

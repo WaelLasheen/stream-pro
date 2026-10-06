@@ -27,4 +27,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     );
     return AuthDataModel.fromJson(response.data['data']);
   }
+
+  @override
+  Future<String> refreshToken() async {
+    final response = await apiService.post(ApiConstants.refresh);
+    return response.data['accessToken'] as String;
+  }
 }

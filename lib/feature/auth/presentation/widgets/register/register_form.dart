@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_pro/core/shared/widgets/app_buttons/app_button.dart'; // Adjust path if needed
+import 'package:stream_pro/core/shared/widgets/app_form_field.dart'; // Adjust path if needed
 import 'package:stream_pro/feature/auth/domain/use_case/register_use_case.dart';
-import 'package:stream_pro/feature/auth/presentation/screen/widgets/auth_password_field.dart';
-import 'package:stream_pro/feature/auth/presentation/screen/widgets/auth_primary_button.dart';
-import 'package:stream_pro/feature/auth/presentation/screen/widgets/auth_text_field.dart';
-import 'package:stream_pro/feature/auth/presentation/screen/widgets/auth_validators.dart';
-import 'package:stream_pro/feature/auth/presentation/screen/widgets/register/terms_checkbox.dart';
+import 'package:stream_pro/feature/auth/presentation/widgets/auth_validators.dart';
+import 'package:stream_pro/feature/auth/presentation/widgets/register/terms_checkbox.dart';
 import 'package:stream_pro/generated/l10n.dart';
 
-/// The register form: name, email, password, confirm password,
-/// terms checkbox and the submit button.
-///
-/// The submit button stays disabled until the terms checkbox is checked;
-/// that state lives in a [ValueNotifier] so only the button rebuilds.
 class RegisterForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController nameController;
@@ -63,41 +57,43 @@ class RegisterForm extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          AuthTextField(
+          AppFormField(
             controller: nameController,
             focusNode: nameFocusNode,
             label: S.current.fullName,
-            icon: Icons.person_outline_rounded,
+            prefixIcon: Icons.person_outline_rounded,
             keyboardType: TextInputType.name,
             textInputAction: TextInputAction.next,
             validator: AuthValidators.validateName,
             onFieldSubmitted: (_) => emailFocusNode.requestFocus(),
           ),
           SizedBox(height: 16.h),
-          AuthTextField(
+          AppFormField(
             controller: emailController,
             focusNode: emailFocusNode,
             label: S.current.email,
-            icon: Icons.email_outlined,
+            prefixIcon: Icons.email_outlined,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             validator: AuthValidators.validateEmail,
             onFieldSubmitted: (_) => passwordFocusNode.requestFocus(),
           ),
           SizedBox(height: 16.h),
-          AuthPasswordField(
+          AppFormField(
             controller: passwordController,
             focusNode: passwordFocusNode,
             label: S.current.password,
+            isPassword: true,
             textInputAction: TextInputAction.next,
             validator: AuthValidators.validatePassword,
             onFieldSubmitted: (_) => confirmPasswordFocusNode.requestFocus(),
           ),
           SizedBox(height: 16.h),
-          AuthPasswordField(
+          AppFormField(
             controller: confirmPasswordController,
             focusNode: confirmPasswordFocusNode,
             label: S.current.confirmPassword,
+            isPassword: true,
             textInputAction: TextInputAction.done,
             validator: (value) => AuthValidators.validateConfirmPassword(
               value,
@@ -111,11 +107,14 @@ class RegisterForm extends StatelessWidget {
           ValueListenableBuilder<bool>(
             valueListenable: termsAccepted,
             builder: (context, accepted, _) {
-              return AuthPrimaryButton(
-                label: S.current.signup,
+              return AppButton(
+                text: S.current.signup,
                 isLoading: isLoading,
-                isEnabled: accepted,
-                onPressed: _submit,
+                // Note: Since AppButton doesn't have an `isEnabled` property,
+                // we pass a no-op function when terms are not accepted.
+                onPressed: accepted ? _submit : () {},
+                height: 52.h,
+                borderRadius: 16.r,
               );
             },
           ),

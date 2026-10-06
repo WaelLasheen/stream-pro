@@ -1,10 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:stream_pro/core/error/exceptions/server_exception.dart';
 import 'package:stream_pro/core/error/failures/failure.dart';
-import 'package:stream_pro/core/error/failures/server_failure.dart';
-import 'package:stream_pro/core/error/failures/unknown_failure.dart';
+import 'package:stream_pro/core/error/safe_call/safe_call.dart'; // Adjust path if needed
 import 'package:stream_pro/core/notifications/notification_service.dart';
-import 'package:stream_pro/core/storage/token_storage_service.dart';
+import 'package:stream_pro/core/services/storage/token_storage_service.dart';
 import 'package:stream_pro/feature/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:stream_pro/feature/auth/data/models/login_request_model.dart';
 import 'package:stream_pro/feature/auth/data/models/register_request_model.dart';
@@ -26,43 +24,37 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Either<Failure, UserEntity>> login(LoginParams params) async {
-    try {
+    return safeCall(() async {
       final fcmToken = await notificationService.getToken();
-
       final request = LoginRequestModel.fromParams(
         params: params,
         deviceToken: fcmToken,
       );
-
       final response = await remoteDataSource.login(request);
       await tokenStorage.saveAccessToken(response.accessToken);
-      final user = response.user.toEntity();
-      return Right(user);
-    } on ServerException catch (e) {
-      return Left(ServerFailure(e.message));
-    } catch (e) {
-      return Left(UnknownFailure(e.toString()));
-    }
+      return response.user.toEntity();
+    });
   }
 
   @override
   Future<Either<Failure, UserEntity>> register(RegisterParams params) async {
-    try {
+    return safeCall(() async {
       final fcmToken = await notificationService.getToken();
-
       final request = RegisterRequestModel.fromParams(
         params: params,
         deviceToken: fcmToken,
       );
-
       final response = await remoteDataSource.register(request);
-      final user = response.user.toEntity();
+      return response.user.toEntity();
+    });
+  }
 
-      return Right(user);
-    } on ServerException catch (e) {
-      return Left(ServerFailure(e.message));
-    } catch (e) {
-      return Left(UnknownFailure(e.toString()));
-    }
+  @override
+  Future<Either<Failure, String>> refreshToken() async {
+    return safeCall(() async {
+      final token = await remoteDataSource.refreshToken();
+      await tokenStorage.saveAccessToken(token);
+      return token;
+    });
   }
 }

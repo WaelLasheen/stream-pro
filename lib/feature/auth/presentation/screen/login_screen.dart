@@ -6,10 +6,10 @@ import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
 import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
 import 'package:stream_pro/feature/auth/domain/use_case/login_use_case.dart';
 import 'package:stream_pro/feature/auth/presentation/controller/auth_cubit/auth_cubit.dart';
-import 'package:stream_pro/feature/auth/presentation/screen/widgets/auth_header.dart';
-import 'package:stream_pro/feature/auth/presentation/screen/widgets/auth_scaffold.dart';
-import 'package:stream_pro/feature/auth/presentation/screen/widgets/auth_switch_footer.dart';
-import 'package:stream_pro/feature/auth/presentation/screen/widgets/login/login_form.dart';
+import 'package:stream_pro/feature/auth/presentation/widgets/auth_header.dart';
+import 'package:stream_pro/feature/auth/presentation/widgets/auth_scaffold.dart';
+import 'package:stream_pro/feature/auth/presentation/widgets/auth_switch_footer.dart';
+import 'package:stream_pro/feature/auth/presentation/widgets/login/login_form.dart';
 import 'package:stream_pro/generated/l10n.dart';
 
 /// Login screen.
@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
       context.showErrorSnackBar(message: state.message);
     } else if (state is AuthSuccess) {
       context.showSuccessSnackBar(message: S.current.loginSuccessfully);
-      context.navigateToAndClearStack(AppRoutes.home);
+      context.navigateToAndClearStack(AppRoutes.main);
     }
   }
 

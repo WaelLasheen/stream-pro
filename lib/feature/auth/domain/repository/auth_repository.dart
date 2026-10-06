@@ -7,4 +7,5 @@ import 'package:stream_pro/feature/auth/domain/use_case/register_use_case.dart';
 abstract class AuthRepository {
   Future<Either<Failure, UserEntity>> login(LoginParams params);
   Future<Either<Failure, UserEntity>> register(RegisterParams params);
+  Future<Either<Failure, String>> refreshToken();
 }

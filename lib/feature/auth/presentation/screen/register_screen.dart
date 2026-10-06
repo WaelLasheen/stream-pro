@@ -5,10 +5,10 @@ import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
 import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
 import 'package:stream_pro/feature/auth/domain/use_case/register_use_case.dart';
 import 'package:stream_pro/feature/auth/presentation/controller/auth_cubit/auth_cubit.dart';
-import 'package:stream_pro/feature/auth/presentation/screen/widgets/auth_header.dart';
-import 'package:stream_pro/feature/auth/presentation/screen/widgets/auth_scaffold.dart';
-import 'package:stream_pro/feature/auth/presentation/screen/widgets/auth_switch_footer.dart';
-import 'package:stream_pro/feature/auth/presentation/screen/widgets/register/register_form.dart';
+import 'package:stream_pro/feature/auth/presentation/widgets/auth_header.dart';
+import 'package:stream_pro/feature/auth/presentation/widgets/auth_scaffold.dart';
+import 'package:stream_pro/feature/auth/presentation/widgets/auth_switch_footer.dart';
+import 'package:stream_pro/feature/auth/presentation/widgets/register/register_form.dart';
 import 'package:stream_pro/generated/l10n.dart';
 
 /// Register screen.
