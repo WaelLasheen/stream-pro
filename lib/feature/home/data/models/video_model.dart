@@ -22,17 +22,13 @@ class VideoModel {
 
   factory VideoModel.fromJson(Map<String, dynamic> json) {
     return VideoModel(
-      id: json['id'] as String? ?? '',
-      title: json['title'] as String? ?? '',
+      id: json['id'],
+      title: json['title'],
       thumbnailUrl: json['thumbnailUrl'] as String? ?? '',
-      duration: (json['duration'] as num?)?.toInt() ?? 0,
-      views: (json['views'] as num?)?.toInt() ?? 0,
-      createdAt: json['createdAt'] != null
-          ? DateTime.parse(json['createdAt'] as String)
-          : DateTime.now(),
-      channel: ChannelModel.fromJson(
-        json['channel'] as Map<String, dynamic>? ?? {},
-      ),
+      duration: json['duration'] ?? 0,
+      views: json['views'] ?? 0,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      channel: ChannelModel.fromJson(json['channel']),
     );
   }
 

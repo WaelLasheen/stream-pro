@@ -22,12 +22,12 @@ class VideoEntity extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        title,
-        thumbnailUrl,
-        duration,
-        views,
-        createdAt,
-        channel,
-      ];
+    id,
+    title,
+    thumbnailUrl,
+    duration,
+    views,
+    createdAt,
+    channel,
+  ];
 }

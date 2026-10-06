@@ -1,11 +1,12 @@
 import 'package:equatable/equatable.dart';
-import '../../../domain/entities/feed_section_entity.dart';
+import '../../../domain/entities/video_entity.dart';
 
-abstract class HomeState extends Equatable {
-  const HomeState();
+sealed class HomeState extends Equatable {
+  final List<VideoEntity> videos;
+  const HomeState({this.videos = const []});
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [videos];
 }
 
 class HomeInitialState extends HomeState {
@@ -17,19 +18,35 @@ class HomeLoadingState extends HomeState {
 }
 
 class HomeLoadedState extends HomeState {
-  final List<FeedSectionEntity> sections;
+  final bool hasReachedMax;
+  final bool isLoadingMore;
 
-  const HomeLoadedState(this.sections);
+  const HomeLoadedState({
+    required super.videos,
+    this.hasReachedMax = false,
+    this.isLoadingMore = false,
+  });
+
+  HomeLoadedState copyWith({
+    List<VideoEntity>? videos,
+    bool? hasReachedMax,
+    bool? isLoadingMore,
+  }) {
+    return HomeLoadedState(
+      videos: videos ?? this.videos,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+      isLoadingMore: isLoadingMore ?? this.isLoadingMore,
+    );
+  }
 
   @override
-  List<Object?> get props => [sections];
+  List<Object?> get props => [videos, hasReachedMax, isLoadingMore];
 }
 
 class HomeErrorState extends HomeState {
   final String message;
-
-  const HomeErrorState(this.message);
+  const HomeErrorState({required super.videos, required this.message});
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [videos, message];
 }

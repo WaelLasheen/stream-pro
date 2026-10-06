@@ -1,6 +1,6 @@
 import 'package:stream_pro/core/networking/api_constants.dart';
 import 'package:stream_pro/core/networking/api_service.dart';
-import '../models/feed_section_model.dart';
+import '../models/video_model.dart';
 import 'home_remote_datasource.dart';
 
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
@@ -9,13 +9,18 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   HomeRemoteDataSourceImpl(this._apiService);
 
   @override
-  Future<List<FeedSectionModel>> getFeed() async {
-    final response = await _apiService.get(ApiConstants.feed);
-    final Map<String, dynamic> data = response.data;
-    final List<dynamic> sections = data['sections'] as List<dynamic>? ?? [];
+  Future<List<VideoModel>> getFeed({List<String> excludeIds = const []}) async {
+    final response = await _apiService.get(
+      ApiConstants.feed,
+      queryParameters: {
+        if (excludeIds.isNotEmpty) 'excludeIds': excludeIds.join(','),
+      },
+    );
 
-    return sections
-        .map((json) => FeedSectionModel.fromJson(json as Map<String, dynamic>))
+    final List<dynamic> videos = response.data as List<dynamic>? ?? [];
+
+    return videos
+        .map((json) => VideoModel.fromJson(json as Map<String, dynamic>))
         .toList();
   }
 }
