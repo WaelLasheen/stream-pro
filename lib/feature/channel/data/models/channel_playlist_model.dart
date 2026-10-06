@@ -4,24 +4,29 @@ class ChannelPlaylistModel {
   final String id;
   final String title;
   final String? description;
-  final String? thumbnailUrl;
+  final List<String> thumbnails;
   final int videosCount;
+  final bool isPublic;
 
   const ChannelPlaylistModel({
     required this.id,
     required this.title,
     this.description,
-    this.thumbnailUrl,
+    required this.thumbnails,
     required this.videosCount,
+    required this.isPublic,
   });
 
   factory ChannelPlaylistModel.fromJson(Map<String, dynamic> json) {
     return ChannelPlaylistModel(
-      id: json['id'] as String? ?? json['playlistId'] as String? ?? '',
-      title: json['title'] as String? ?? '',
+      id: json['id'],
+      title: json['title'],
       description: json['description'] as String?,
-      thumbnailUrl: json['thumbnailUrl'] as String?,
+      thumbnails: (json['thumbnails'] as List<dynamic>)
+          .map((e) => e.toString())
+          .toList(),
       videosCount: (json['videosCount'] as num?)?.toInt() ?? 0,
+      isPublic: json['isPublic'] as bool? ?? false,
     );
   }
 
@@ -30,8 +35,9 @@ class ChannelPlaylistModel {
       id: id,
       title: title,
       description: description,
-      thumbnailUrl: thumbnailUrl ?? "",
+      thumbnails: thumbnails,
       videosCount: videosCount,
+      isPublic: isPublic,
     );
   }
 }

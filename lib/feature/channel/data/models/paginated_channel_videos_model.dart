@@ -1,8 +1,8 @@
-import 'package:stream_pro/feature/home/data/models/video_model.dart';
+import 'package:stream_pro/feature/channel/data/models/channel_video_model.dart';
 import '../../domain/entities/paginated_channel_videos_entity.dart';
 
 class PaginatedChannelVideosModel {
-  final List<VideoModel> items;
+  final List<ChannelVideoModel> items;
   final int pageNumber;
   final int pageSize;
   final int totalCount;
@@ -21,12 +21,14 @@ class PaginatedChannelVideosModel {
   factory PaginatedChannelVideosModel.fromJson(Map<String, dynamic> json) {
     final List<dynamic> itemsJson = json['items'] as List<dynamic>? ?? [];
     return PaginatedChannelVideosModel(
-      items: itemsJson.map((e) => VideoModel.fromJson(e as Map<String, dynamic>)).toList(),
-      pageNumber: (json['pageNumber'] as num?)?.toInt() ?? 1,
-      pageSize: (json['pageSize'] as num?)?.toInt() ?? 10,
-      totalCount: (json['totalCount'] as num?)?.toInt() ?? 0,
-      totalPages: (json['totalPages'] as num?)?.toInt() ?? 0,
-      hasNextPage: json['hasNextPage'] as bool? ?? false,
+      items: itemsJson
+          .map((e) => ChannelVideoModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      pageNumber: json['pageNumber'],
+      pageSize: json['pageSize'],
+      totalCount: json['totalCount'],
+      totalPages: json['totalPages'],
+      hasNextPage: json['hasNextPage'],
     );
   }
 

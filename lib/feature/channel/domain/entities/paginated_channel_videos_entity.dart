@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
-import 'package:stream_pro/feature/home/domain/entities/video_entity.dart';
+import 'package:stream_pro/feature/channel/domain/entities/channel_video_entity.dart';
 
 class PaginatedChannelVideosEntity extends Equatable {
-  final List<VideoEntity> items;
+  final List<ChannelVideoEntity> items;
   final int pageNumber;
   final int pageSize;
   final int totalCount;
@@ -18,6 +18,31 @@ class PaginatedChannelVideosEntity extends Equatable {
     required this.hasNextPage,
   });
 
+  PaginatedChannelVideosEntity copyWith({
+    List<ChannelVideoEntity>? items,
+    int? pageNumber,
+    int? pageSize,
+    int? totalCount,
+    int? totalPages,
+    bool? hasNextPage,
+  }) {
+    return PaginatedChannelVideosEntity(
+      items: items ?? this.items,
+      pageNumber: pageNumber ?? this.pageNumber,
+      pageSize: pageSize ?? this.pageSize,
+      totalCount: totalCount ?? this.totalCount,
+      totalPages: totalPages ?? this.totalPages,
+      hasNextPage: hasNextPage ?? this.hasNextPage,
+    );
+  }
+
   @override
-  List<Object?> get props => [items, pageNumber, pageSize, totalCount, totalPages, hasNextPage];
+  List<Object?> get props => [
+    items,
+    pageNumber,
+    pageSize,
+    totalCount,
+    totalPages,
+    hasNextPage,
+  ];
 }

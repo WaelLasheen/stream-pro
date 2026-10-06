@@ -12,7 +12,6 @@ class ChannelDetailsModel {
   final bool isSubscribed;
   final bool isOwner;
   final DateTime createdAt;
-  final DateTime updatedAt;
 
   const ChannelDetailsModel({
     required this.channelId,
@@ -26,14 +25,13 @@ class ChannelDetailsModel {
     required this.isSubscribed,
     required this.isOwner,
     required this.createdAt,
-    required this.updatedAt,
   });
 
   factory ChannelDetailsModel.fromJson(Map<String, dynamic> json) {
     return ChannelDetailsModel(
-      channelId: json['channelId'] as String? ?? '',
-      title: json['title'] as String? ?? '',
-      description: json['description'] as String?,
+      channelId: json['channelId'],
+      title: json['title'],
+      description: json['description'],
       thumbnailUrl: json['thumbnailUrl'] as String? ?? '',
       channelImageUrl: json['channelImageUrl'] as String? ?? '',
       videosCount: (json['videosCount'] as num?)?.toInt() ?? 0,
@@ -41,11 +39,8 @@ class ChannelDetailsModel {
       totalViews: (json['totalViews'] as num?)?.toInt() ?? 0,
       isSubscribed: json['isSubscribed'] as bool? ?? false,
       isOwner: json['isOwner'] as bool? ?? false,
-      createdAt: json['createdAt'] != null 
+      createdAt: json['createdAt'] != null
           ? DateTime.parse(json['createdAt'] as String)
-          : DateTime.now(),
-      updatedAt: json['updatedAt'] != null 
-          ? DateTime.parse(json['updatedAt'] as String)
           : DateTime.now(),
     );
   }
@@ -63,7 +58,6 @@ class ChannelDetailsModel {
       isSubscribed: isSubscribed,
       isOwner: isOwner,
       createdAt: createdAt,
-      updatedAt: updatedAt,
     );
   }
 }

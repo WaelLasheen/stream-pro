@@ -12,7 +12,6 @@ class ChannelDetailsEntity extends Equatable {
   final bool isSubscribed;
   final bool isOwner;
   final DateTime createdAt;
-  final DateTime updatedAt;
 
   const ChannelDetailsEntity({
     required this.channelId,
@@ -26,22 +25,20 @@ class ChannelDetailsEntity extends Equatable {
     required this.isSubscribed,
     required this.isOwner,
     required this.createdAt,
-    required this.updatedAt,
   });
 
   @override
   List<Object?> get props => [
-        channelId,
-        title,
-        description,
-        thumbnailUrl,
-        channelImageUrl,
-        videosCount,
-        subscriptionsCount,
-        totalViews,
-        isSubscribed,
-        isOwner,
-        createdAt,
-        updatedAt,
-      ];
+    channelId,
+    title,
+    description,
+    thumbnailUrl,
+    channelImageUrl,
+    videosCount,
+    subscriptionsCount,
+    totalViews,
+    isSubscribed,
+    isOwner,
+    createdAt,
+  ];
 }

@@ -21,12 +21,14 @@ class PaginatedChannelPlaylistsModel {
   factory PaginatedChannelPlaylistsModel.fromJson(Map<String, dynamic> json) {
     final List<dynamic> itemsJson = json['items'] as List<dynamic>? ?? [];
     return PaginatedChannelPlaylistsModel(
-      items: itemsJson.map((e) => ChannelPlaylistModel.fromJson(e as Map<String, dynamic>)).toList(),
-      pageNumber: (json['pageNumber'] as num?)?.toInt() ?? 1,
-      pageSize: (json['pageSize'] as num?)?.toInt() ?? 10,
-      totalCount: (json['totalCount'] as num?)?.toInt() ?? 0,
-      totalPages: (json['totalPages'] as num?)?.toInt() ?? 0,
-      hasNextPage: json['hasNextPage'] as bool? ?? false,
+      items: itemsJson
+          .map((e) => ChannelPlaylistModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      pageNumber: json['pageNumber'],
+      pageSize: json['pageSize'],
+      totalCount: json['totalCount'],
+      totalPages: json['totalPages'],
+      hasNextPage: json['hasNextPage'],
     );
   }
 

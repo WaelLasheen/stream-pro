@@ -18,6 +18,31 @@ class PaginatedChannelPlaylistsEntity extends Equatable {
     required this.hasNextPage,
   });
 
+  PaginatedChannelPlaylistsEntity copyWith({
+    List<ChannelPlaylistEntity>? items,
+    int? pageNumber,
+    int? pageSize,
+    int? totalCount,
+    int? totalPages,
+    bool? hasNextPage,
+  }) {
+    return PaginatedChannelPlaylistsEntity(
+      items: items ?? this.items,
+      pageNumber: pageNumber ?? this.pageNumber,
+      pageSize: pageSize ?? this.pageSize,
+      totalCount: totalCount ?? this.totalCount,
+      totalPages: totalPages ?? this.totalPages,
+      hasNextPage: hasNextPage ?? this.hasNextPage,
+    );
+  }
+
   @override
-  List<Object?> get props => [items, pageNumber, pageSize, totalCount, totalPages, hasNextPage];
+  List<Object?> get props => [
+    items,
+    pageNumber,
+    pageSize,
+    totalCount,
+    totalPages,
+    hasNextPage,
+  ];
 }
