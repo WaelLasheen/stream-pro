@@ -8,7 +8,8 @@ import 'package:stream_pro/core/error/exceptions/server_exception.dart';
 import 'package:stream_pro/core/networking/api_service.dart';
 import 'package:stream_pro/core/networking/interceptors/auth_interceptor.dart';
 import 'package:stream_pro/core/networking/interceptors/cookie_logger_interceptor.dart';
-import 'package:stream_pro/core/storage/token_storage_service.dart';
+import 'package:stream_pro/core/networking/interceptors/refresh_interceptor.dart';
+import 'package:stream_pro/core/services/storage/token_storage_service.dart';
 import 'api_constants.dart';
 
 class ApiServiceImpl implements ApiService {
@@ -34,9 +35,16 @@ class ApiServiceImpl implements ApiService {
       ignoreExpires: false, // Respect cookie expiration dates
     );
 
-    // Add cookie manager to handle cookies automatically
+    // 1. Cookie Manager
     _dio.interceptors.add(CookieManager(_cookieJar));
+
+    // 2. Auth Interceptor (Attaches token to requests)
     _dio.interceptors.add(AuthInterceptor(_tokenStorage));
+
+    // 3. Refresh Interceptor (Catches 401, refreshes, and retries)
+    _dio.interceptors.add(
+      RefreshInterceptor(dio: _dio, tokenStorage: _tokenStorage),
+    );
 
     if (kDebugMode) {
       _dio.interceptors.add(
