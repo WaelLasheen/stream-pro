@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/widgets/load_more_listener.dart';
+import 'package:stream_pro/core/shared/widgets/video_player/app_video_player.dart';
+import 'package:stream_pro/core/shared/widgets/video_player/video_player_data.dart';
 import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
 import 'package:stream_pro/feature/video_details/presentation/controllers/video_comments_cubit/video_comments_cubit.dart';
 import 'package:stream_pro/feature/video_details/presentation/controllers/video_details_cubit/video_details_cubit.dart';
@@ -11,7 +13,6 @@ import 'package:stream_pro/feature/video_details/presentation/widgets/comments_s
 import 'package:stream_pro/feature/video_details/presentation/widgets/video_actions_widget.dart';
 import 'package:stream_pro/feature/video_details/presentation/widgets/video_details_shimmer.dart';
 import 'package:stream_pro/feature/video_details/presentation/widgets/video_header_widget.dart';
-import 'package:stream_pro/feature/video_details/presentation/widgets/video_player_widget.dart';
 import 'package:stream_pro/feature/watch_history/presentation/controllers/video_track_cubit/video_track_cubit.dart';
 
 class VideoDetailsScreen extends StatelessWidget {
@@ -74,10 +75,40 @@ class VideoDetailsScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        VideoPlayerWidget(
-                          videoId: video.videoId,
-                          videoUrl: video.hlsUrl,
-                          thumbnailUrl: video.thumbnailUrl,
+                        AppVideoPlayer(
+                          data: VideoPlayerData(
+                            videoUrl: video.hlsUrl,
+                            posterUrl: video.thumbnailUrl,
+                            title: video.title,
+                            autoPlay: true,
+                          ),
+                          onInitialized: () {
+                            // Start tracking once the player is ready
+                            context.read<VideoTrackCubit>().startTracking(
+                              videoId: videoId,
+                              initialWatchedSeconds: 0,
+                            );
+                          },
+                          onPositionChanged: (position) {
+                            // Keep cubit updated with current position continuously
+                            context.read<VideoTrackCubit>().updatePosition(
+                              position.inSeconds,
+                            );
+                          },
+                          onPlayStateChanged: (isPlaying) {
+                            // Sync progress immediately when user pauses
+                            if (!isPlaying) {
+                              context.read<VideoTrackCubit>().syncProgress(
+                                force: true,
+                              );
+                            }
+                          },
+                          onVideoCompleted: () {
+                            // Sync progress immediately when video ends
+                            context.read<VideoTrackCubit>().syncProgress(
+                              force: true,
+                            );
+                          },
                         ),
                         Padding(
                           padding: EdgeInsets.all(16.r),

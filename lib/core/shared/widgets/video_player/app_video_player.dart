@@ -11,11 +11,21 @@ class AppVideoPlayer extends StatefulWidget {
   final double? aspectRatio;
   final double? width;
 
+  // Tracking callbacks
+  final VoidCallback? onInitialized;
+  final ValueChanged<Duration>? onPositionChanged;
+  final ValueChanged<bool>? onPlayStateChanged;
+  final VoidCallback? onVideoCompleted;
+
   const AppVideoPlayer({
     super.key,
     required this.data,
     this.aspectRatio,
     this.width,
+    this.onInitialized,
+    this.onPositionChanged,
+    this.onPlayStateChanged,
+    this.onVideoCompleted,
   });
 
   @override
@@ -26,6 +36,8 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> {
   late final VideoPlayerCubit _cubit;
   AppLifecycleListener? _lifecycleListener;
   bool _wasPlayingBeforePause = false;
+  bool _wasPlaying = false;
+  bool _isInitialized = false;
 
   void _pause() {
     if (_cubit.state is VideoPlayerLoaded) {
@@ -41,11 +53,42 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> {
     }
   }
 
+  // Listener for tracking
+  void _onPlayerStateChanged() {
+    final currentState = _cubit.state;
+    if (!mounted || currentState is! VideoPlayerLoaded) return;
+
+    final position = currentState.videoController.value.position;
+    final isPlaying = currentState.videoController.value.isPlaying;
+    final isCompleted =
+        position >= currentState.videoController.value.duration &&
+        currentState.videoController.value.duration.inSeconds > 0;
+
+    // 1. Trigger initialization callback exactly once
+    if (!_isInitialized) {
+      _isInitialized = true;
+      widget.onInitialized?.call();
+    }
+
+    // 2. Update position
+    widget.onPositionChanged?.call(position);
+
+    // 3. Detect play/pause state change
+    if (_wasPlaying != isPlaying) {
+      widget.onPlayStateChanged?.call(isPlaying);
+      _wasPlaying = isPlaying;
+    }
+
+    // 4. Detect video end
+    if (isCompleted) {
+      widget.onVideoCompleted?.call();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     _cubit = VideoPlayerCubit();
-
     _cubit.initializeVideo(widget.data.videoUrl, widget.data.posterUrl);
 
     _lifecycleListener = AppLifecycleListener(
@@ -53,10 +96,22 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> {
       onInactive: _pause,
       onResume: _resume,
     );
+
+    // Attach listener to the controller once it's loaded
+    _cubit.stream.listen((state) {
+      if (state is VideoPlayerLoaded) {
+        state.videoController.addListener(_onPlayerStateChanged);
+      }
+    });
   }
 
   @override
   void dispose() {
+    // Clean up listener
+    if (_cubit.state is VideoPlayerLoaded) {
+      final loaded = _cubit.state as VideoPlayerLoaded;
+      loaded.videoController.removeListener(_onPlayerStateChanged);
+    }
     _lifecycleListener?.dispose();
     _cubit.close();
     super.dispose();
@@ -89,10 +144,10 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> {
     switch (state) {
       case VideoPlayerInitial() || VideoPlayerLoading():
         return _buildLoadingThumbnail(widget.data.posterUrl);
-        
+
       case VideoPlayerLoaded():
         return Chewie(controller: state.chewieController);
-        
+
       case VideoPlayerError():
         return Center(
           child: Column(
