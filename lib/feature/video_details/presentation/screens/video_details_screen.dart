@@ -88,6 +88,9 @@ class VideoDetailsScreen extends StatelessWidget {
                               videoId: videoId,
                               initialWatchedSeconds: 0,
                             );
+                            context.read<VideoDetailsCubit>().recordVideoView(
+                              videoId,
+                            );
                           },
                           onPositionChanged: (position) {
                             // Keep cubit updated with current position continuously

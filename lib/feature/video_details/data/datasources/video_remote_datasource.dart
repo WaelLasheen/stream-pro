@@ -4,6 +4,7 @@ import 'package:stream_pro/feature/video_details/data/models/video_model.dart';
 
 abstract class VideoRemoteDataSource {
   Future<VideoModel> getVideoDetails(String videoId);
+  Future<void> recordVideoView(String videoId);
 }
 
 class VideoRemoteDataSourceImpl implements VideoRemoteDataSource {
@@ -15,5 +16,10 @@ class VideoRemoteDataSourceImpl implements VideoRemoteDataSource {
   Future<VideoModel> getVideoDetails(String videoId) async {
     final response = await apiService.get(ApiConstants.videoDetails(videoId));
     return VideoModel.fromJson(response.data);
+  }
+
+  @override
+  Future<void> recordVideoView(String videoId) async {
+    await apiService.post(ApiConstants.videoViews(videoId));
   }
 }

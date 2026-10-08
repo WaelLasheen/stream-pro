@@ -11,6 +11,7 @@ import 'package:stream_pro/feature/video_details/domain/repositories/video_detai
 class VideoDetailsRepositoryImpl implements VideoDetailsRepository {
   final VideoRemoteDataSource videoRemoteDataSource;
   final CommentsRemoteDataSource commentsRemoteDataSource;
+  final Set<String> _videoIdsWithViewRecorded = {};
 
   VideoDetailsRepositoryImpl({
     required this.videoRemoteDataSource,
@@ -22,6 +23,17 @@ class VideoDetailsRepositoryImpl implements VideoDetailsRepository {
     return safeCall(() async {
       final model = await videoRemoteDataSource.getVideoDetails(videoId);
       return model.toEntity();
+    });
+  }
+
+  @override
+  Future<Either<Failure, void>> recordVideoView(String videoId) {
+    if (_videoIdsWithViewRecorded.contains(videoId)) {
+      return Future.value(const Right(null));
+    }
+    _videoIdsWithViewRecorded.add(videoId);
+    return safeCall(() async {
+      await videoRemoteDataSource.recordVideoView(videoId);
     });
   }
 

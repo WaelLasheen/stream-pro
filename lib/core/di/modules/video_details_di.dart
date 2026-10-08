@@ -7,6 +7,7 @@ import 'package:stream_pro/feature/video_details/domain/use_cases/add_comment_us
 import 'package:stream_pro/feature/video_details/domain/use_cases/delete_comment_use_case.dart';
 import 'package:stream_pro/feature/video_details/domain/use_cases/get_comments_use_case.dart';
 import 'package:stream_pro/feature/video_details/domain/use_cases/get_video_details_use_case.dart';
+import 'package:stream_pro/feature/video_details/domain/use_cases/record_video_view_use_case.dart';
 import 'package:stream_pro/feature/video_details/domain/use_cases/update_comment_use_case.dart';
 import 'package:stream_pro/feature/video_details/presentation/controllers/video_comments_cubit/video_comments_cubit.dart';
 import 'package:stream_pro/feature/video_details/presentation/controllers/video_details_cubit/video_details_cubit.dart';
@@ -31,6 +32,9 @@ void setUpVideoDetails() {
   getIt.registerLazySingleton(
     () => GetVideoDetailsUseCase(getIt<VideoDetailsRepository>()),
   );
+  getIt.registerLazySingleton(
+    () => RecordVideoViewUseCase(getIt<VideoDetailsRepository>()),
+  );
 
   getIt.registerLazySingleton(
     () => GetCommentsUseCase(getIt<VideoDetailsRepository>()),
@@ -46,7 +50,10 @@ void setUpVideoDetails() {
   );
 
   getIt.registerFactory(
-    () => VideoDetailsCubit(getIt<GetVideoDetailsUseCase>()),
+    () => VideoDetailsCubit(
+      getVideoDetailsUseCase: getIt<GetVideoDetailsUseCase>(),
+      recordVideoViewUseCase: getIt<RecordVideoViewUseCase>(),
+    ),
   );
   getIt.registerFactory(
     () => VideoCommentsCubit(
