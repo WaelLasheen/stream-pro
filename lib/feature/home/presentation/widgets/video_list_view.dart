@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/routing/app_routes.dart';
+import 'package:stream_pro/core/shared/widgets/app_refresh_indicator.dart';
 import 'package:stream_pro/core/shared/widgets/load_more_listener.dart';
 import 'package:stream_pro/core/utils/extensions/app_padding.dart';
 import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
@@ -24,7 +25,7 @@ class VideoListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
+    return AppRefreshIndicator(
       onRefresh: onRefresh,
       child: LoadMoreListener(
         onLoadMore: onLoadMore,

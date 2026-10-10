@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/routing/app_routes.dart';
+import 'package:stream_pro/core/shared/widgets/app_refresh_indicator.dart';
 import 'package:stream_pro/core/theme/font_styles.dart';
 import '../../domain/entities/watch_history_group_entity.dart';
 import '../controllers/watch_history_cubit/watch_history_cubit.dart';
@@ -35,7 +36,7 @@ class WatchHistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return RefreshIndicator(
+    return AppRefreshIndicator(
       onRefresh: () =>
           context.read<WatchHistoryCubit>().fetchWatchHistory(silent: false),
       child: BlocBuilder<WatchHistoryCubit, WatchHistoryState>(

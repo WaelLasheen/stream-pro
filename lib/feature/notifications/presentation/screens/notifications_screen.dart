@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/routing/app_routes.dart';
+import 'package:stream_pro/core/shared/widgets/app_refresh_indicator.dart';
 import 'package:stream_pro/core/shared/widgets/load_more_listener.dart';
 import 'package:stream_pro/core/theme/font_styles.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -98,7 +99,7 @@ class NotificationsScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: RefreshIndicator(
+      body: AppRefreshIndicator(
         onRefresh: () => context.read<NotificationsCubit>().fetchNotifications(
           isRefresh: true,
         ),
