@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
-import 'package:stream_pro/feature/video_details/domain/entities/comment_entity.dart';
-import 'package:stream_pro/feature/video_details/presentation/controllers/video_comments_cubit/video_comments_cubit.dart';
-import 'package:stream_pro/feature/video_details/presentation/controllers/video_comments_cubit/video_comments_state.dart';
+import 'package:stream_pro/feature/comments/domain/entities/comment_entity.dart';
+import 'package:stream_pro/feature/comments/presentation/controllers/comments_cubit/comments_cubit.dart';
+import 'package:stream_pro/feature/comments/presentation/controllers/comments_cubit/comments_state.dart.dart';
+import 'package:stream_pro/feature/comments/presentation/widgets/comment_input_field.dart';
 
 class CommentsSectionWidget extends StatelessWidget {
   final String videoId;
@@ -16,10 +17,10 @@ class CommentsSectionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return BlocConsumer<VideoCommentsCubit, VideoCommentsState>(
+    return BlocConsumer<CommentsCubit, CommentsState>(
       listener: (context, state) {
-        if (state is VideoCommentsFailure) {
-          context.showErrorSnackBar(message: state.errorMessage);
+        if (state is CommentsError) {
+          context.showErrorSnackBar(message: state.message);
         }
       },
       builder: (context, state) {
@@ -37,15 +38,16 @@ class CommentsSectionWidget extends StatelessWidget {
                 ),
                 IconButton(
                   icon: const Icon(Icons.add_comment_outlined),
-                  onPressed: () => _showAddCommentBottomSheet(context, videoId),
+                  // onPressed: () => _showAddCommentBottomSheet(context, videoId),
+                  onPressed: () {},
                 ),
               ],
             ),
             SizedBox(height: 8.h),
-            if (state is VideoCommentsLoading)
+            if (state is CommentsLoading)
               const Center(child: CircularProgressIndicator())
-            else if (state is VideoCommentsSuccess) ...[
-              if (state.comments.isEmpty)
+            else if (state is CommentsLoaded) ...[
+              if (state.comments!.comments.isEmpty)
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 20.h),
                   child: const Center(
@@ -56,10 +58,10 @@ class CommentsSectionWidget extends StatelessWidget {
                 ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: state.comments.length,
+                  itemCount: state.comments!.comments.length,
                   separatorBuilder: (_, __) => SizedBox(height: 12.h),
                   itemBuilder: (context, index) {
-                    final comment = state.comments[index];
+                    final comment = state.comments!.comments[index];
                     return _CommentItem(comment: comment, videoId: videoId);
                   },
                 ),
@@ -69,61 +71,33 @@ class CommentsSectionWidget extends StatelessWidget {
                 ],
               ],
             ],
+            CommentInputField(videoId: videoId),
           ],
         );
       },
     );
   }
 
-  void _showAddCommentBottomSheet(BuildContext context, String videoId) {
-    final textController = TextEditingController();
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
-      ),
-      builder: (bottomSheetContext) {
-        return Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(bottomSheetContext).viewInsets.bottom + 16.h,
-            left: 16.w,
-            right: 16.w,
-            top: 16.h,
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: textController,
-                  autofocus: true,
-                  decoration: const InputDecoration(
-                    hintText: 'Add a comment...',
-                  ),
-                ),
-              ),
-              SizedBox(width: 8.w),
-              IconButton(
-                icon: const Icon(Icons.send),
-                onPressed: () async {
-                  final text = textController.text.trim();
-                  if (text.isNotEmpty) {
-                    final navigator = Navigator.of(bottomSheetContext);
-                    final success = await context
-                        .read<VideoCommentsCubit>()
-                        .addComment(videoId, text);
-                    if (success) {
-                      navigator.pop();
-                    }
-                  }
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
+  // void _showAddCommentBottomSheet(BuildContext context, String videoId) {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     isScrollControlled: true,
+  //     shape: RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
+  //     ),
+  //     builder: (bottomSheetContext) {
+  //       return Padding(
+  //         padding: EdgeInsets.only(
+  //           bottom: MediaQuery.of(bottomSheetContext).viewInsets.bottom + 16.h,
+  //           left: 16.w,
+  //           right: 16.w,
+  //           top: 16.h,
+  //         ),
+  //         child: CommentInputField(videoId: videoId),
+  //       );
+  //     },
+  //   );
+  // }
 }
 
 class _CommentItem extends StatelessWidget {
@@ -162,7 +136,7 @@ class _CommentItem extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 6.w),
-                  if (comment.isEditted)
+                  if (comment.isEdited)
                     Text(
                       '(edited)',
                       style: theme.textTheme.labelSmall?.copyWith(
@@ -180,9 +154,7 @@ class _CommentItem extends StatelessWidget {
           icon: Icon(Icons.more_vert, size: 16.sp, color: theme.hintColor),
           onSelected: (value) {
             if (value == 'delete') {
-              context.read<VideoCommentsCubit>().deleteComment(
-                comment.commentId,
-              );
+              context.read<CommentsCubit>().deleteComment(comment.commentId);
             }
           },
           itemBuilder: (context) => [

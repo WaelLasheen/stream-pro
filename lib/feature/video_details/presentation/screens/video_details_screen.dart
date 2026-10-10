@@ -5,7 +5,7 @@ import 'package:stream_pro/core/shared/widgets/load_more_listener.dart';
 import 'package:stream_pro/core/shared/widgets/video_player/app_video_player.dart';
 import 'package:stream_pro/core/shared/widgets/video_player/video_player_data.dart';
 import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
-import 'package:stream_pro/feature/video_details/presentation/controllers/video_comments_cubit/video_comments_cubit.dart';
+import 'package:stream_pro/feature/comments/presentation/controllers/comments_cubit/comments_cubit.dart';
 import 'package:stream_pro/feature/video_details/presentation/controllers/video_details_cubit/video_details_cubit.dart';
 import 'package:stream_pro/feature/video_details/presentation/controllers/video_details_cubit/video_details_state.dart';
 import 'package:stream_pro/feature/video_details/presentation/widgets/channel_info_widget.dart';
@@ -37,7 +37,7 @@ class VideoDetailsScreen extends StatelessWidget {
               if (state is VideoDetailsFailure) {
                 context.showErrorSnackBar(message: state.errorMessage);
               } else if (state is VideoDetailsSuccess) {
-                context.read<VideoCommentsCubit>().fetchComments(videoId);
+                context.read<CommentsCubit>().fetchComments(videoId);
               }
             },
             builder: (context, state) {
@@ -67,9 +67,7 @@ class VideoDetailsScreen extends StatelessWidget {
 
                 return LoadMoreListener(
                   onLoadMore: () {
-                    context.read<VideoCommentsCubit>().fetchMoreComments(
-                      videoId,
-                    );
+                    context.read<CommentsCubit>().loadMoreComments(videoId);
                   },
                   child: SingleChildScrollView(
                     child: Column(
