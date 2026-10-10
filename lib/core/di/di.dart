@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:stream_pro/core/di/modules/category_di.dart';
+import 'package:stream_pro/core/di/modules/comments_di.dart';
 import 'package:stream_pro/core/di/modules/likes_di.dart';
 import 'package:stream_pro/core/di/modules/notifications_di.dart';
 import 'package:stream_pro/core/di/modules/owner_channel_di.dart';
@@ -36,4 +37,5 @@ Future<void> setUpLocators() async {
   setUpSearch();
   setUpCategory();
   setUpLikes();
+  setUpComments();
 }

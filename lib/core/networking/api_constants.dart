@@ -13,12 +13,17 @@ class ApiConstants {
   // Video Details & Interactions
   static String videoDetails(String videoId) => "videos/$videoId";
   static String videoViews(String videoId) => "videos/$videoId/views";
-  static String comments(String videoId) => "comments/$videoId";
-  static String commentById(String commentId) => "comments/$commentId";
 
   // Like & Liked video
   static String likedVideos = "likes";
   static String likeVideo(String videoId) => "likes/$videoId";
+
+  // comments
+  static String comments = "comments";
+  static String videoComments(String videoId) => "comments/$videoId";
+  static String editComment(String commentId) => "comments/$commentId";
+  static String commentReplies(String commentId) =>
+      "comments/$commentId/replies";
 
   // Owner Channels
   static const String ownerChannels = "owner/channels";

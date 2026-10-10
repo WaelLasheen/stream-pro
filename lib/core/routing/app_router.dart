@@ -17,6 +17,7 @@ import 'package:stream_pro/feature/channel/presentation/controllers/channel_home
 import 'package:stream_pro/feature/channel/presentation/controllers/channel_playlists_cubit/channel_playlists_cubit.dart';
 import 'package:stream_pro/feature/channel/presentation/controllers/channel_videos_cubit/channel_videos_cubit.dart';
 import 'package:stream_pro/feature/channel/presentation/screens/channel_screen.dart';
+import 'package:stream_pro/feature/comments/presentation/controllers/comments_cubit/comments_cubit.dart';
 import 'package:stream_pro/feature/home/presentation/controller/home_cubit/home_cubit.dart';
 import 'package:stream_pro/feature/home/presentation/screen/home_screen.dart';
 import 'package:stream_pro/feature/main/presentation/screen/main_shell_screen.dart';
@@ -33,7 +34,6 @@ import 'package:stream_pro/feature/search/presentation/screens/video_search_scre
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/subscribers_cubit/subscribers_cubit.dart';
 import 'package:stream_pro/feature/subscriptions/presentation/controllers/subscriptions_cubit/subscriptions_cubit.dart';
 import 'package:stream_pro/feature/subscriptions/presentation/screens/subscriptions_screen.dart';
-import 'package:stream_pro/feature/video_details/presentation/controllers/video_comments_cubit/video_comments_cubit.dart';
 import 'package:stream_pro/feature/video_details/presentation/controllers/video_details_cubit/video_details_cubit.dart';
 import 'package:stream_pro/feature/video_details/presentation/screens/video_details_screen.dart';
 import 'package:stream_pro/feature/video_management/presentation/controllers/edit_video_cubit/edit_video_cubit.dart';
@@ -97,7 +97,7 @@ class AppRouter {
               ),
               BlocProvider(
                 create: (_) =>
-                    getIt<VideoCommentsCubit>()..fetchComments(videoId),
+                    getIt<CommentsCubit>()..fetchComments(videoId),
               ),
               BlocProvider(
                 create: (_) =>
