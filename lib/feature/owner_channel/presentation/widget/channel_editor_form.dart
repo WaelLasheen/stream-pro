@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/app_button.dart';
-import 'package:stream_pro/core/shared/widgets/app_form_field.dart';
+import 'package:stream_pro/core/shared/widgets/app_fields/app_form_field.dart';
 import 'package:stream_pro/feature/owner_channel/domain/entities/owner_channel_entity.dart';
 import 'channel_image_picker.dart';
 

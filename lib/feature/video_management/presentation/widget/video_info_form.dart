@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/entity/category_entity.dart';
-import 'package:stream_pro/core/shared/widgets/app_form_field.dart';
+import 'package:stream_pro/core/shared/widgets/app_fields/app_form_field.dart';
 import 'tags_input.dart';
 import 'video_info_form_controller.dart';
 

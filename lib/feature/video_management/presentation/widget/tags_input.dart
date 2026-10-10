@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stream_pro/core/shared/widgets/app_form_field.dart';
+import 'package:stream_pro/core/shared/widgets/app_fields/app_form_field.dart';
 
 class TagsInput extends StatelessWidget {
   final TextEditingController inputController;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/app_button.dart'; // Adjust path if needed
-import 'package:stream_pro/core/shared/widgets/app_form_field.dart'; // Adjust path if needed
+import 'package:stream_pro/core/shared/widgets/app_fields/app_form_field.dart'; // Adjust path if needed
 import 'package:stream_pro/feature/auth/domain/use_case/register_use_case.dart';
 import 'package:stream_pro/feature/auth/presentation/widgets/auth_validators.dart';
 import 'package:stream_pro/feature/auth/presentation/widgets/register/terms_checkbox.dart';

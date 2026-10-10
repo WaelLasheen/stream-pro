@@ -6,7 +6,7 @@ import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
 import 'package:stream_pro/feature/comments/domain/entities/comment_entity.dart';
 import 'package:stream_pro/feature/comments/presentation/controllers/comments_cubit/comments_cubit.dart';
 import 'package:stream_pro/feature/comments/presentation/controllers/comments_cubit/comments_state.dart.dart';
-import 'package:stream_pro/feature/comments/presentation/widgets/comment_input_field.dart';
+import 'package:stream_pro/core/shared/widgets/app_fields/comment_input_field.dart';
 
 class CommentsSectionWidget extends StatelessWidget {
   final String videoId;

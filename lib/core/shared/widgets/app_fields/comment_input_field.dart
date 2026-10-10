@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stream_pro/core/shared/widgets/app_form_field.dart';
+import 'package:stream_pro/core/shared/widgets/app_fields/app_form_field.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
 import 'package:stream_pro/feature/comments/presentation/controllers/comments_cubit/comments_state.dart.dart';
-import '../controllers/comments_cubit/comments_cubit.dart';
+import '../../../../feature/comments/presentation/controllers/comments_cubit/comments_cubit.dart';
 
 class CommentInputField extends StatefulWidget {
   final String videoId;
