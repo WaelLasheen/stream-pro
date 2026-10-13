@@ -21,7 +21,7 @@ class ApiServiceImpl implements ApiService {
     _dio.options = BaseOptions(
       baseUrl: ApiConstants.baseURL,
       connectTimeout: const Duration(seconds: 20),
-      receiveTimeout: const Duration(seconds: 60 * 5),
+      receiveTimeout: const Duration(seconds: 60),
     );
   }
 
