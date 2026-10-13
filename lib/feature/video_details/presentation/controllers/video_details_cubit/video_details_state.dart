@@ -22,10 +22,10 @@ final class VideoDetailsSuccess extends VideoDetailsState {
 }
 
 final class VideoDetailsFailure extends VideoDetailsState {
-  final String errorMessage;
+  final String message;
 
-  const VideoDetailsFailure(this.errorMessage);
+  const VideoDetailsFailure(this.message);
 
   @override
-  List<Object?> get props => [errorMessage];
+  List<Object?> get props => [message];
 }

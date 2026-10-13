@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 class VideoEntity extends Equatable {
   final String videoId;
   final String title;
-  final String videoUrl;
   final String hlsUrl;
   final String thumbnailUrl;
   final String channelId;
@@ -22,7 +21,6 @@ class VideoEntity extends Equatable {
   const VideoEntity({
     required this.videoId,
     required this.title,
-    required this.videoUrl,
     required this.hlsUrl,
     required this.thumbnailUrl,
     required this.channelId,
@@ -39,52 +37,10 @@ class VideoEntity extends Equatable {
     required this.createdAt,
   });
 
-  VideoEntity copyWith({
-    String? videoId,
-    String? title,
-    String? videoUrl,
-    String? hlsUrl,
-    String? thumbnailUrl,
-    String? channelId,
-    String? channelTitle,
-    String? channelImageUrl,
-    int? durationSeconds,
-    int? views,
-    String? description,
-    int? commentsCount,
-    int? likesCount,
-    int? channelSubscribersCount,
-    bool? isSubscribed,
-    bool? isLiked,
-    DateTime? createdAt,
-  }) {
-    return VideoEntity(
-      videoId: videoId ?? this.videoId,
-      title: title ?? this.title,
-      videoUrl: videoUrl ?? this.videoUrl,
-      hlsUrl: hlsUrl ?? this.hlsUrl,
-      thumbnailUrl: thumbnailUrl ?? this.thumbnailUrl,
-      channelId: channelId ?? this.channelId,
-      channelTitle: channelTitle ?? this.channelTitle,
-      channelImageUrl: channelImageUrl ?? this.channelImageUrl,
-      durationSeconds: durationSeconds ?? this.durationSeconds,
-      views: views ?? this.views,
-      description: description ?? this.description,
-      commentsCount: commentsCount ?? this.commentsCount,
-      likesCount: likesCount ?? this.likesCount,
-      channelSubscribersCount:
-          channelSubscribersCount ?? this.channelSubscribersCount,
-      isSubscribed: isSubscribed ?? this.isSubscribed,
-      isLiked: isLiked ?? this.isLiked,
-      createdAt: createdAt ?? this.createdAt,
-    );
-  }
-
   @override
   List<Object?> get props => [
     videoId,
     title,
-    videoUrl,
     hlsUrl,
     thumbnailUrl,
     channelId,

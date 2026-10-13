@@ -3,7 +3,6 @@ import 'package:stream_pro/feature/video_details/domain/entities/video_entity.da
 class VideoModel {
   final String videoId;
   final String title;
-  final String videoUrl;
   final String hlsUrl;
   final String thumbnailUrl;
   final String channelId;
@@ -22,7 +21,6 @@ class VideoModel {
   VideoModel({
     required this.videoId,
     required this.title,
-    required this.videoUrl,
     required this.hlsUrl,
     required this.thumbnailUrl,
     required this.channelId,
@@ -43,7 +41,6 @@ class VideoModel {
     return VideoModel(
       videoId: json['videoId'] ?? '',
       title: json['title'] ?? '',
-      videoUrl: json['videoUrl'] ?? '',
       hlsUrl: json['hlsUrl'] ?? '',
       thumbnailUrl: json['thumbnailUrl'] ?? '',
       channelId: json['channelId'] ?? '',
@@ -65,7 +62,6 @@ class VideoModel {
     return VideoEntity(
       videoId: videoId,
       title: title,
-      videoUrl: videoUrl,
       hlsUrl: hlsUrl,
       thumbnailUrl: thumbnailUrl,
       channelId: channelId,

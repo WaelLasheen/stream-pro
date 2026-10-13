@@ -34,6 +34,7 @@ import 'package:stream_pro/feature/search/presentation/screens/video_search_scre
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/subscribers_cubit/subscribers_cubit.dart';
 import 'package:stream_pro/feature/subscriptions/presentation/controllers/subscriptions_cubit/subscriptions_cubit.dart';
 import 'package:stream_pro/feature/subscriptions/presentation/screens/subscriptions_screen.dart';
+import 'package:stream_pro/feature/video_details/presentation/controllers/related_videos_cubit/related_videos_cubit.dart';
 import 'package:stream_pro/feature/video_details/presentation/controllers/video_details_cubit/video_details_cubit.dart';
 import 'package:stream_pro/feature/video_details/presentation/screens/video_details_screen.dart';
 import 'package:stream_pro/feature/video_management/presentation/controllers/edit_video_cubit/edit_video_cubit.dart';
@@ -96,12 +97,15 @@ class AppRouter {
                     getIt<VideoDetailsCubit>()..loadVideoDetails(videoId),
               ),
               BlocProvider(
-                create: (_) =>
-                    getIt<CommentsCubit>()..fetchComments(videoId),
+                create: (_) => getIt<CommentsCubit>()..fetchComments(videoId),
               ),
               BlocProvider(
                 create: (_) =>
                     getIt<VideoTrackCubit>()..startTracking(videoId: videoId),
+              ),
+              BlocProvider(
+                create: (_) =>
+                    getIt<RelatedVideosCubit>()..fetchRelatedVideos(videoId),
               ),
             ],
             child: VideoDetailsScreen(videoId: videoId),
