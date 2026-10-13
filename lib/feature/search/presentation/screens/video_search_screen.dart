@@ -16,7 +16,7 @@ import 'package:stream_pro/feature/search/presentation/widgets/category_filter_b
 import 'package:stream_pro/feature/search/presentation/widgets/category_shimmer.dart';
 import 'package:stream_pro/feature/search/presentation/controllers/search_cubit/search_cubit.dart';
 import 'package:stream_pro/feature/search/presentation/controllers/search_cubit/search_state.dart';
-import 'package:stream_pro/feature/search/presentation/mapper/owner_video_mapper.dart';
+import 'package:stream_pro/feature/search/presentation/mapper/search_video_mapper.dart';
 
 class VideoSearchScreen extends StatefulWidget {
   const VideoSearchScreen({super.key});

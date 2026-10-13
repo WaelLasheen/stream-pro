@@ -50,7 +50,7 @@ class LikeButton extends StatelessWidget {
               decoration: BoxDecoration(
                 color: isLiked
                     ? appTheme.primaryColor.withValues(alpha: 0.1)
-                    : Colors.transparent,
+                    : appTheme.surfaceColor,
                 borderRadius: BorderRadius.circular(20.r),
               ),
               child: Row(
@@ -72,7 +72,7 @@ class LikeButton extends StatelessWidget {
                     child: Icon(
                       isLiked ? Icons.favorite : Icons.favorite_border,
                       key: ValueKey(isLiked),
-                      color: isLiked ? appTheme.primaryColor : appTheme.grey600,
+                      color: isLiked ? appTheme.primaryColor : appTheme.grey700,
                       size: 22.r,
                     ),
                   ),
@@ -80,7 +80,7 @@ class LikeButton extends StatelessWidget {
                   Text(
                     likesCount.formatCount(),
                     style: theme.textTheme.labelMedium?.copyWith(
-                      color: isLiked ? appTheme.primaryColor : appTheme.grey600,
+                      color: isLiked ? appTheme.primaryColor : appTheme.grey700,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

@@ -11,7 +11,7 @@ import 'package:stream_pro/core/utils/consts/image_path.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/owner_playlists_cubit/owner_playlists_cubit.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/owner_playlists_cubit/owner_playlists_state.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/mappers/owner_playlist_mapper.dart';
-import 'package:stream_pro/feature/owner_channel/presentation/widget/tab_fabs.dart';
+import 'package:stream_pro/core/shared/widgets/app_buttons/tab_fabs.dart';
 
 class OwnerPlaylistsTab extends StatelessWidget {
   final SliverOverlapAbsorberHandle handle;

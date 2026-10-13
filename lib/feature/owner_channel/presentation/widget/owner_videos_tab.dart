@@ -16,7 +16,7 @@ import 'package:stream_pro/feature/owner_channel/domain/entities/owner_video_ent
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/owner_videos_cubit/owner_videos_cubit.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/owner_videos_cubit/owner_videos_state.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/mappers/owner_video_mapper.dart';
-import 'package:stream_pro/feature/owner_channel/presentation/widget/tab_fabs.dart';
+import 'package:stream_pro/core/shared/widgets/app_buttons/tab_fabs.dart';
 
 class OwnerVideosTab extends StatelessWidget {
   final SliverOverlapAbsorberHandle handle;

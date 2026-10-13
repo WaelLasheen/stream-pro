@@ -9,4 +9,5 @@ abstract class ImagePath {
   static const subscriptionsActive = '$_baseUrl/subscriptions_active.svg';
   static const subscriptions = '$_baseUrl/subscriptions.svg';
   static const upload = '$_baseUrl/upload.svg';
+  static const comment = '$_baseUrl/comment.svg';
 }
