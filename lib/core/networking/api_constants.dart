@@ -13,6 +13,8 @@ class ApiConstants {
   // Video Details & Interactions
   static String videoDetails(String videoId) => "videos/$videoId";
   static String videoViews(String videoId) => "videos/$videoId/views";
+  static String relatedVideos(String videoId) => "videos/$videoId/related";
+  static String downloadVideo(String videoId) => 'downloads/$videoId';
 
   // Like & Liked video
   static String likedVideos = "likes";

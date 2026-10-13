@@ -123,4 +123,25 @@ class ApiServiceImpl implements ApiService {
       throw ServerException.fromDioException(e);
     }
   }
+
+  @override
+  Future<Response> download(
+    String path,
+    String savePath, {
+    void Function(int count, int total)? onReceiveProgress,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
+    try {
+      return await _dio.download(
+        path,
+        savePath,
+        onReceiveProgress: onReceiveProgress,
+        queryParameters: queryParameters,
+        options: options,
+      );
+    } on DioException catch (e) {
+      throw ServerException.fromDioException(e);
+    }
+  }
 }

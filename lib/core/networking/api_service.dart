@@ -13,4 +13,11 @@ abstract class ApiService {
   Future<Response> delete(String path, {dynamic data, Options? options});
 
   Future<void> clearCookies();
+  Future<Response> download(
+    String path,
+    String savePath, {
+    void Function(int count, int total)? onReceiveProgress,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  });
 }
