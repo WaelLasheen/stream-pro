@@ -7,8 +7,10 @@ import 'package:stream_pro/feature/comments/domain/repositories/comments_reposit
 import 'package:stream_pro/feature/comments/domain/use_cases/add_comment_use_case.dart';
 import 'package:stream_pro/feature/comments/domain/use_cases/delete_comment_use_case.dart';
 import 'package:stream_pro/feature/comments/domain/use_cases/get_comments_use_case.dart';
+import 'package:stream_pro/feature/comments/domain/use_cases/get_replies_use_case.dart';
 import 'package:stream_pro/feature/comments/domain/use_cases/update_comment_use_case.dart';
 import 'package:stream_pro/feature/comments/presentation/controllers/comments_cubit/comments_cubit.dart';
+import 'package:stream_pro/feature/comments/presentation/controllers/replies_cubit/replies_cubit.dart';
 
 void setUpComments() {
   getIt.registerLazySingleton<CommentsRemoteDataSource>(
@@ -31,9 +33,22 @@ void setUpComments() {
   getIt.registerLazySingleton(
     () => DeleteCommentUseCase(getIt<CommentsRepository>()),
   );
+  getIt.registerLazySingleton(
+    () => GetRepliesUseCase(getIt<CommentsRepository>()),
+  );
+
   getIt.registerFactory(
     () => CommentsCubit(
       getCommentsUseCase: getIt<GetCommentsUseCase>(),
+      addCommentUseCase: getIt<AddCommentUseCase>(),
+      updateCommentUseCase: getIt<UpdateCommentUseCase>(),
+      deleteCommentUseCase: getIt<DeleteCommentUseCase>(),
+    ),
+  );
+
+  getIt.registerFactory(
+    () => RepliesCubit(
+      getRepliesUseCase: getIt<GetRepliesUseCase>(),
       addCommentUseCase: getIt<AddCommentUseCase>(),
       updateCommentUseCase: getIt<UpdateCommentUseCase>(),
       deleteCommentUseCase: getIt<DeleteCommentUseCase>(),

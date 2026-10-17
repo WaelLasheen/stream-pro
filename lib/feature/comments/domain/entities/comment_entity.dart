@@ -43,16 +43,21 @@ class CommentEntity extends Equatable {
     );
   }
 
-  CommentEntity copyWith({String? commentId, String? content, bool? isEdited}) {
+  CommentEntity copyWith({
+    String? commentId,
+    String? content,
+    bool? isEdited,
+    int? replyCount,
+  }) {
     return CommentEntity(
       commentId: commentId ?? this.commentId,
       content: content ?? this.content,
       videoId: videoId,
-      isEdited: isEdited ?? true,
+      isEdited: isEdited ?? this.isEdited,
       userId: userId,
       userName: userName,
       userProfileImage: userProfileImage,
-      replyCount: replyCount,
+      replyCount: replyCount ?? this.replyCount,
       createdAt: createdAt,
     );
   }

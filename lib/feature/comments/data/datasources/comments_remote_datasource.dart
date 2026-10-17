@@ -1,3 +1,4 @@
+import 'package:stream_pro/feature/comments/data/models/comment_model.dart';
 import 'package:stream_pro/feature/comments/data/models/paginated_comments_model.dart';
 
 abstract class CommentsRemoteDataSource {
@@ -6,10 +7,17 @@ abstract class CommentsRemoteDataSource {
     required int page,
     required int limit,
   });
-  Future<String> addComment({required String videoId, required String content});
+  Future<String> addComment({
+    required String videoId,
+    required String content,
+    String? parentId,
+  });
+
   Future<void> updateComment({
     required String commentId,
     required String content,
+    String? parentId,
   });
   Future<void> deleteComment(String commentId);
+  Future<List<CommentModel>> getReplies(String commentId);
 }

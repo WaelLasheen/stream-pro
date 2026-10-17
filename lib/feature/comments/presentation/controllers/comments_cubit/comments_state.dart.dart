@@ -27,18 +27,6 @@ class CommentsLoaded extends CommentsState {
     this.isSubmitting = false,
   });
 
-  CommentsLoaded copyWith({
-    PaginatedCommentsEntity? comments,
-    bool? isLoadingMore,
-    bool? isSubmitting,
-  }) {
-    return CommentsLoaded(
-      comments: comments ?? this.comments!,
-      isLoadingMore: isLoadingMore ?? this.isLoadingMore,
-      isSubmitting: isSubmitting ?? this.isSubmitting,
-    );
-  }
-
   @override
   List<Object?> get props => [comments, isLoadingMore, isSubmitting];
 }

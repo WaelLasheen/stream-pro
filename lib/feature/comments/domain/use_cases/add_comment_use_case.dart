@@ -9,7 +9,12 @@ class AddCommentUseCase {
   Future<Either<Failure, String>> call({
     required String videoId,
     required String content,
+    String? parentId,
   }) {
-    return repository.addComment(videoId: videoId, content: content);
+    return repository.addComment(
+      videoId: videoId,
+      content: content,
+      parentId: parentId,
+    );
   }
 }

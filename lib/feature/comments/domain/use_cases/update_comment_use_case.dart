@@ -10,7 +10,12 @@ class UpdateCommentUseCase {
   Future<Either<Failure, void>> call({
     required String commentId,
     required String content,
+    String? parentId,
   }) {
-    return repository.updateComment(commentId: commentId, content: content);
+    return repository.updateComment(
+      commentId: commentId,
+      content: content,
+      parentId: parentId,
+    );
   }
 }

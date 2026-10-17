@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stream_pro/feature/comments/domain/entities/comment_entity.dart';
 import 'package:stream_pro/feature/comments/domain/use_cases/update_comment_use_case.dart';
 import 'package:stream_pro/feature/comments/presentation/controllers/comments_cubit/comments_state.dart.dart';
+import '../../params/user_params.dart';
 import '../../../domain/use_cases/add_comment_use_case.dart';
 import '../../../domain/use_cases/delete_comment_use_case.dart';
 import '../../../domain/use_cases/get_comments_use_case.dart';
@@ -67,20 +68,19 @@ class CommentsCubit extends Cubit<CommentsState> {
   Future<void> addComment(
     String videoId,
     String content,
-    // UserParams user,
+    UserParams user,
   ) async {
     final currentState = state;
-    if (currentState is! CommentsLoaded) return;
+    final currentComments = state.comments;
+    if (currentComments == null) return;
+    if (currentState is CommentsLoaded && currentState.isSubmitting) return;
 
     final optimisticComment = CommentEntity.temp(
       videoId: videoId,
       content: content,
-      // userId: user.userId,
-      // userName: user.userName,
-      // userProfileImage: user.userProfileImage,
-      userId: '',
-      userName: '',
-      userProfileImage: '',
+      userId: user.userId,
+      userName: user.userName,
+      userProfileImage: user.userProfileImage,
     );
 
     final updatedItems = [
@@ -88,8 +88,8 @@ class CommentsCubit extends Cubit<CommentsState> {
       ...currentState.comments!.comments,
     ];
     emit(
-      currentState.copyWith(
-        comments: currentState.comments!.copyWith(comments: updatedItems),
+      CommentsLoaded(
+        comments: currentComments.copyWith(comments: updatedItems),
         isSubmitting: true,
       ),
     );
@@ -99,23 +99,21 @@ class CommentsCubit extends Cubit<CommentsState> {
 
     result.fold(
       (failure) => emit(
-        currentState.copyWith(
+        CommentsError(
           comments: currentState.comments,
-          isSubmitting: false,
+          message: failure.message,
         ),
       ),
       (commentId) {
         final realUpdatedComments = updatedItems.map((item) {
           return item.commentId.startsWith('temp_')
-              ? item.copyWith(commentId: commentId, isEdited: false)
+              ? item.copyWith(commentId: commentId)
               : item;
         }).toList();
 
         emit(
-          currentState.copyWith(
-            comments: currentState.comments!.copyWith(
-              comments: realUpdatedComments,
-            ),
+          CommentsLoaded(
+            comments: currentComments.copyWith(comments: realUpdatedComments),
             isSubmitting: false,
           ),
         );
@@ -126,16 +124,19 @@ class CommentsCubit extends Cubit<CommentsState> {
   Future<void> updateComment(String commentId, String content) async {
     final currentState = state;
     final currentComments = currentState.comments;
-    if (currentState is! CommentsLoaded || currentComments == null) return;
+    if (currentComments == null) return;
+    if (currentState is CommentsLoaded && currentState.isSubmitting) return;
 
     final optimistic = currentComments.comments
         .map(
-          (c) => (c.commentId == commentId) ? c.copyWith(content: content) : c,
+          (c) => (c.commentId == commentId)
+              ? c.copyWith(content: content, isEdited: true)
+              : c,
         )
         .toList();
 
     emit(
-      currentState.copyWith(
+      CommentsLoaded(
         comments: currentComments.copyWith(comments: optimistic),
         isSubmitting: true,
       ),
@@ -148,9 +149,14 @@ class CommentsCubit extends Cubit<CommentsState> {
     if (isClosed) return;
 
     result.fold(
-      (failure) => emit(currentState),
+      (failure) => emit(
+        CommentsError(
+          comments: currentState.comments,
+          message: failure.message,
+        ),
+      ),
       (updatedComment) => emit(
-        currentState.copyWith(
+        CommentsLoaded(
           comments: currentComments.copyWith(comments: optimistic),
           isSubmitting: false,
         ),
@@ -161,13 +167,14 @@ class CommentsCubit extends Cubit<CommentsState> {
   Future<void> deleteComment(String commentId) async {
     final currentState = state;
     final currentComments = currentState.comments;
-    if (currentState is! CommentsLoaded || currentComments == null) return;
+    if (currentComments == null) return;
+    if (currentState is CommentsLoaded && currentState.isSubmitting) return;
 
     final optimistic = currentComments.comments
         .where((c) => c.commentId != commentId)
         .toList();
     emit(
-      currentState.copyWith(
+      CommentsLoaded(
         comments: currentComments.copyWith(comments: optimistic),
         isSubmitting: true,
       ),
@@ -177,12 +184,52 @@ class CommentsCubit extends Cubit<CommentsState> {
     if (isClosed) return;
 
     result.fold(
-      (failure) => emit(currentState),
+      (failure) => emit(
+        CommentsError(
+          comments: currentState.comments,
+          message: failure.message,
+        ),
+      ),
       (success) => emit(
-        currentState.copyWith(
+        CommentsLoaded(
           comments: currentComments.copyWith(comments: optimistic),
           isSubmitting: false,
         ),
+      ),
+    );
+  }
+
+  void incrementReplyCount(String commentId) {
+    final currentComments = state.comments;
+    if (currentComments == null) return;
+
+    final updatedComments = currentComments.comments.map((c) {
+      if (c.commentId == commentId) {
+        return c.copyWith(replyCount: c.replyCount + 1);
+      }
+      return c;
+    }).toList();
+
+    emit(
+      CommentsLoaded(
+        comments: currentComments.copyWith(comments: updatedComments),
+      ),
+    );
+  }
+
+  void decrementReplyCount(String commentId) {
+    final currentComments = state.comments;
+    if (currentComments == null) return;
+    final updatedComments = currentComments.comments.map((c) {
+      if (c.commentId == commentId && c.replyCount > 0) {
+        return c.copyWith(replyCount: c.replyCount - 1);
+      }
+      return c;
+    }).toList();
+
+    emit(
+      CommentsLoaded(
+        comments: currentComments.copyWith(comments: updatedComments),
       ),
     );
   }
