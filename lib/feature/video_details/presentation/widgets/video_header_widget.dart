@@ -21,7 +21,13 @@ class VideoHeaderWidget extends StatefulWidget {
 }
 
 class _VideoHeaderWidgetState extends State<VideoHeaderWidget> {
-  bool isExpanded = false;
+  final ValueNotifier<bool> _isExpanded = ValueNotifier(false);
+
+  @override
+  void dispose() {
+    _isExpanded.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,14 +66,19 @@ class _VideoHeaderWidgetState extends State<VideoHeaderWidget> {
         if (widget.description.isNotEmpty) ...[
           SizedBox(height: 8.h),
           GestureDetector(
-            onTap: () => setState(() => isExpanded = !isExpanded),
-            child: Text(
-              widget.description,
-              maxLines: isExpanded ? null : 2,
-              overflow: isExpanded
-                  ? TextOverflow.visible
-                  : TextOverflow.ellipsis,
-              style: theme.textTheme.bodyMedium,
+            onTap: () => _isExpanded.value = !_isExpanded.value,
+            child: ValueListenableBuilder<bool>(
+              valueListenable: _isExpanded,
+              builder: (context, isExpanded, _) {
+                return Text(
+                  widget.description,
+                  maxLines: isExpanded ? null : 2,
+                  overflow: isExpanded
+                      ? TextOverflow.visible
+                      : TextOverflow.ellipsis,
+                  style: theme.textTheme.bodyMedium,
+                );
+              },
             ),
           ),
         ],

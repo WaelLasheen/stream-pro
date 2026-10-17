@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/like_button.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
-import 'package:stream_pro/feature/video_details/presentation/widget/download_button.dart';
+import 'package:stream_pro/feature/video_details/presentation/widgets/download_button.dart';
 
 class VideoActionsWidget extends StatelessWidget {
   final String videoId;
