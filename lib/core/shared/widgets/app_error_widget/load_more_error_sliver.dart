@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 
 class LoadMoreErrorSliver extends StatelessWidget {
   final String message;
@@ -9,7 +10,8 @@ class LoadMoreErrorSliver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final appTheme = context.appTheme;
+    final textTheme = context.textTheme;
 
     return SliverToBoxAdapter(
       child: Padding(
@@ -19,13 +21,17 @@ class LoadMoreErrorSliver extends StatelessWidget {
             Text(
               message,
               textAlign: TextAlign.center,
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: theme.colorScheme.error,
-              ),
+              style: textTheme.bodySmall?.copyWith(color: appTheme.errorColor),
             ),
             if (onRetry != null) ...[
               8.verticalSpace,
-              TextButton(onPressed: onRetry, child: const Text('Retry')),
+              TextButton(
+                onPressed: onRetry,
+                child: Text(
+                  'Retry',
+                  style: TextStyle(color: appTheme.primaryColor),
+                ),
+              ),
             ],
           ],
         ),

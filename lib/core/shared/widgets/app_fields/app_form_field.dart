@@ -53,8 +53,6 @@ class AppFormField extends StatefulWidget {
 class _AppFormFieldState extends State<AppFormField> {
   bool _obscureText = true;
 
-  static const _focusColor = Color(0xFF6C5CE7);
-
   OutlineInputBorder _border(Color color, double width) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(16.r),
@@ -127,7 +125,7 @@ class _AppFormFieldState extends State<AppFormField> {
             ),
             border: _border(idleBorder, 1.w),
             enabledBorder: _border(idleBorder, 1.w),
-            focusedBorder: _border(_focusColor, 1.6.w),
+            focusedBorder: _border(appTheme.primaryColor, 1.6.w),
             errorBorder: _border(Colors.red.shade400, 1.w),
             focusedErrorBorder: _border(Colors.red.shade400, 1.6.w),
             prefixIcon:

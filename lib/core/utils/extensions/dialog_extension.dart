@@ -5,9 +5,9 @@ import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 
 extension DialogExtension on BuildContext {
   Future<bool?> showDeleteConfirmationDialog({
-    String title = 'Delete video?',
+    String title = 'Delete?',
     String content =
-        'This permanently removes the video. This can\'t be undone.',
+        'This item will be permanently removed. This can\'t be undone.',
   }) async {
     final theme = Theme.of(this);
     final appTheme = this.appTheme;
@@ -15,6 +15,7 @@ extension DialogExtension on BuildContext {
     return showDialog<bool>(
       context: this,
       builder: (dialogContext) => AlertDialog(
+        backgroundColor: appTheme.surfaceColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.r),
         ),
