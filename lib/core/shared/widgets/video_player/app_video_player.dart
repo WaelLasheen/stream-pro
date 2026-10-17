@@ -2,6 +2,7 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_pro/core/routing/app_route_observer.dart';
 import 'package:stream_pro/core/shared/widgets/video_player/controller/video_player_cubit.dart';
 import 'package:stream_pro/core/shared/widgets/video_player/controller/video_player_state.dart';
 import 'package:stream_pro/core/shared/widgets/video_player/video_player_data.dart';
@@ -32,7 +33,7 @@ class AppVideoPlayer extends StatefulWidget {
   State<AppVideoPlayer> createState() => _AppVideoPlayerState();
 }
 
-class _AppVideoPlayerState extends State<AppVideoPlayer> {
+class _AppVideoPlayerState extends State<AppVideoPlayer> with RouteAware {
   late final VideoPlayerCubit _cubit;
   AppLifecycleListener? _lifecycleListener;
   bool _wasPlayingBeforePause = false;
@@ -53,33 +54,27 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> {
     }
   }
 
-  // Listener for tracking
   void _onPlayerStateChanged() {
     final currentState = _cubit.state;
     if (!mounted || currentState is! VideoPlayerLoaded) return;
-
     final position = currentState.videoController.value.position;
     final isPlaying = currentState.videoController.value.isPlaying;
     final isCompleted =
         position >= currentState.videoController.value.duration &&
         currentState.videoController.value.duration.inSeconds > 0;
 
-    // 1. Trigger initialization callback exactly once
     if (!_isInitialized) {
       _isInitialized = true;
       widget.onInitialized?.call();
     }
 
-    // 2. Update position
     widget.onPositionChanged?.call(position);
 
-    // 3. Detect play/pause state change
     if (_wasPlaying != isPlaying) {
       widget.onPlayStateChanged?.call(isPlaying);
       _wasPlaying = isPlaying;
     }
 
-    // 4. Detect video end
     if (isCompleted) {
       widget.onVideoCompleted?.call();
     }
@@ -97,7 +92,6 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> {
       onResume: _resume,
     );
 
-    // Attach listener to the controller once it's loaded
     _cubit.stream.listen((state) {
       if (state is VideoPlayerLoaded) {
         state.videoController.addListener(_onPlayerStateChanged);
@@ -105,9 +99,21 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> {
     });
   }
 
+  // 2. Subscribe to route changes
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = ModalRoute.of(context);
+    if (route != null) {
+      routeObserver.subscribe(this, route);
+    }
+  }
+
   @override
   void dispose() {
-    // Clean up listener
+    // 3. Unsubscribe from route changes
+    routeObserver.unsubscribe(this);
+
     if (_cubit.state is VideoPlayerLoaded) {
       final loaded = _cubit.state as VideoPlayerLoaded;
       loaded.videoController.removeListener(_onPlayerStateChanged);
@@ -115,6 +121,18 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> {
     _lifecycleListener?.dispose();
     _cubit.close();
     super.dispose();
+  }
+
+  // 4. Called when a new screen is pushed ON TOP of this one
+  @override
+  void didPushNext() {
+    _pause();
+  }
+
+  // 5. Called when the screen on top is popped OFF, revealing this one again
+  @override
+  void didPopNext() {
+    _resume();
   }
 
   @override

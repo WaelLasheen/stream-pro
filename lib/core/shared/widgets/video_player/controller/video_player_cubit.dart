@@ -1,6 +1,7 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stream_pro/core/shared/widgets/video_player/custom_material_controls.dart';
 import 'package:video_player/video_player.dart';
 import 'video_player_state.dart';
 
@@ -25,6 +26,8 @@ class VideoPlayerCubit extends Cubit<VideoPlayerState> {
         autoPlay: false,
         looping: false,
         aspectRatio: aspectRatio,
+        playbackSpeeds: const [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2.0],
+        customControls:  const CustomMaterialControls(), 
         placeholder: Container(
           color: Colors.black,
         ), // <-- FIX: No thumbnail here!

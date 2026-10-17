@@ -7,6 +7,7 @@ import 'package:stream_pro/core/app_config/app_config_cubit.dart';
 import 'package:stream_pro/core/app_config/app_config_state.dart';
 import 'package:stream_pro/core/di/di.dart';
 import 'package:stream_pro/core/live_error_logger/crashlytics_service.dart';
+import 'package:stream_pro/core/routing/app_route_observer.dart';
 import 'package:stream_pro/core/routing/app_router.dart';
 import 'package:stream_pro/core/routing/app_routes.dart';
 import 'package:stream_pro/core/theme/app_themes.dart';
@@ -65,6 +66,7 @@ class MyApp extends StatelessWidget {
                 navigatorKey: navigatorKey,
                 onGenerateRoute: getIt<AppRouter>().onGenerateRoute,
                 initialRoute: AppRoutes.splash,
+                navigatorObservers: [routeObserver],
               );
             },
           ),
