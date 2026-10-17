@@ -18,6 +18,8 @@ import 'package:stream_pro/feature/channel/presentation/controllers/channel_play
 import 'package:stream_pro/feature/channel/presentation/controllers/channel_videos_cubit/channel_videos_cubit.dart';
 import 'package:stream_pro/feature/channel/presentation/screens/channel_screen.dart';
 import 'package:stream_pro/feature/comments/presentation/controllers/comments_cubit/comments_cubit.dart';
+import 'package:stream_pro/feature/comments/presentation/controllers/replies_cubit/replies_cubit.dart';
+import 'package:stream_pro/feature/profile/presentation/controller/profile_cubit/profile_cubit.dart';
 import 'package:stream_pro/feature/home/presentation/controller/home_cubit/home_cubit.dart';
 import 'package:stream_pro/feature/home/presentation/screen/home_screen.dart';
 import 'package:stream_pro/feature/main/presentation/screen/main_shell_screen.dart';
@@ -77,7 +79,12 @@ class AppRouter {
         );
 
       case AppRoutes.main:
-        return MaterialPageRoute(builder: (context) => const MainShellScreen());
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (_) => getIt<ProfileCubit>()..fetchProfile(),
+            child: const MainShellScreen(),
+          ),
+        );
 
       case AppRoutes.home:
         return MaterialPageRoute(
@@ -89,6 +96,7 @@ class AppRouter {
 
       case AppRoutes.videoDetails:
         final videoId = settings.arguments as String;
+        final profileCubit = getIt<ProfileCubit>()..fetchProfile();
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
@@ -99,6 +107,8 @@ class AppRouter {
               BlocProvider(
                 create: (_) => getIt<CommentsCubit>()..fetchComments(videoId),
               ),
+              BlocProvider(create: (_) => getIt<RepliesCubit>()),
+              BlocProvider(create: (_) => profileCubit),
               BlocProvider(
                 create: (_) =>
                     getIt<VideoTrackCubit>()..startTracking(videoId: videoId),

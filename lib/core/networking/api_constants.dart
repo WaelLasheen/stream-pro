@@ -69,4 +69,7 @@ class ApiConstants {
 
   //Playlist
   static const String playlists = "playlists";
+
+  // Profile
+  static const String profileMe = "profile/me";
 }
