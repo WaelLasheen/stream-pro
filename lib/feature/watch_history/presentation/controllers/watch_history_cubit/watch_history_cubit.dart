@@ -8,15 +8,15 @@ class WatchHistoryCubit extends Cubit<WatchHistoryState> {
   WatchHistoryCubit(this.getWatchHistoryUseCase) : super(WatchHistoryInitial());
 
   Future<void> fetchWatchHistory({bool silent = false}) async {
-    // Only emit loading if we are NOT performing a silent background refresh
     if (!silent) {
       emit(WatchHistoryLoading());
     }
 
     final result = await getWatchHistoryUseCase();
+    if (isClosed) return;
+
     result.fold(
       (failure) {
-        // If silent refresh fails, keep existing UI state intact
         if (!silent) {
           emit(WatchHistoryError(failure.message));
         }

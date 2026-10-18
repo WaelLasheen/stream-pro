@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
-import '../../../domain/entities/watch_history_group_entity.dart';
+import '../../../domain/entities/watch_history_entity.dart';
 
-abstract class WatchHistoryState extends Equatable {
+sealed class WatchHistoryState extends Equatable {
   const WatchHistoryState();
 
   @override
@@ -13,7 +13,7 @@ class WatchHistoryInitial extends WatchHistoryState {}
 class WatchHistoryLoading extends WatchHistoryState {}
 
 class WatchHistoryLoaded extends WatchHistoryState {
-  final List<WatchHistoryGroupEntity> groups;
+  final List<WatchHistoryEntity> groups;
 
   const WatchHistoryLoaded(this.groups);
 

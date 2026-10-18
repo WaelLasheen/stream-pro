@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:stream_pro/core/error/failures/failure.dart';
-import '../entities/watch_history_tracked_item_entity.dart';
 import '../repositories/watch_history_repository.dart';
 
 class TrackWatchHistoryUseCase {
@@ -8,7 +7,7 @@ class TrackWatchHistoryUseCase {
 
   TrackWatchHistoryUseCase(this.repository);
 
-  Future<Either<Failure, WatchHistoryTrackedItemEntity>> call({
+  Future<Either<Failure, void>> call({
     required String videoId,
     required int watchedSeconds,
   }) {

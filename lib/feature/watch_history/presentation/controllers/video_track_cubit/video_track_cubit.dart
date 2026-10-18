@@ -35,7 +35,7 @@ class VideoTrackCubit extends Cubit<VideoTrackState> {
   /// Triggered on player events: pause, seek, ended, or screen exit
   Future<void> syncProgress({bool force = false}) async {
     if (_currentVideoId == null) return;
-    
+
     // Skip if unchanged unless forced
     if (!force && _currentWatchedSeconds == _lastSentSeconds) return;
 
@@ -47,6 +47,7 @@ class VideoTrackCubit extends Cubit<VideoTrackState> {
       videoId: videoIdToSync,
       watchedSeconds: secondsToSync,
     );
+    if (isClosed) return;
 
     result.fold(
       (failure) => emit(VideoTrackFailure(failure.message)),

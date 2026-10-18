@@ -1,10 +1,9 @@
-import '../models/watch_history_group_model.dart';
-import '../models/watch_history_tracked_item_model.dart';
+import '../models/watch_history_model.dart';
 
 abstract class WatchHistoryRemoteDataSource {
-  Future<List<WatchHistoryGroupModel>> getWatchHistory();
+  Future<List<WatchHistoryModel>> getWatchHistory();
 
-  Future<WatchHistoryTrackedItemModel> trackWatchHistory({
+  Future<void> trackWatchHistory({
     required String videoId,
     required int watchedSeconds,
   });

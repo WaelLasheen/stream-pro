@@ -1,7 +1,6 @@
 import 'package:stream_pro/core/networking/api_constants.dart';
 import 'package:stream_pro/core/networking/api_service.dart';
-import '../models/watch_history_group_model.dart';
-import '../models/watch_history_tracked_item_model.dart';
+import '../models/watch_history_model.dart';
 import 'watch_history_remote_datasource.dart';
 
 class WatchHistoryRemoteDataSourceImpl implements WatchHistoryRemoteDataSource {
@@ -10,28 +9,24 @@ class WatchHistoryRemoteDataSourceImpl implements WatchHistoryRemoteDataSource {
   WatchHistoryRemoteDataSourceImpl(this._apiService);
 
   @override
-  Future<List<WatchHistoryGroupModel>> getWatchHistory() async {
+  Future<List<WatchHistoryModel>> getWatchHistory() async {
     final response = await _apiService.get(ApiConstants.watchHistory);
     final rawList = response.data as List<dynamic>? ?? [];
     return rawList
-        .map((group) => WatchHistoryGroupModel.fromJson(group as Map<String, dynamic>))
+        .map(
+          (group) => WatchHistoryModel.fromJson(group as Map<String, dynamic>),
+        )
         .toList();
   }
 
   @override
-  Future<WatchHistoryTrackedItemModel> trackWatchHistory({
+  Future<void> trackWatchHistory({
     required String videoId,
     required int watchedSeconds,
   }) async {
-    final response = await _apiService.post(
+    await _apiService.post(
       ApiConstants.trackWatchHistory,
-      data: {
-        'videoId': videoId,
-        'watchedSeconds': watchedSeconds,
-      },
-    );
-    return WatchHistoryTrackedItemModel.fromJson(
-      response.data as Map<String, dynamic>,
+      data: {'videoId': videoId, 'watchedSeconds': watchedSeconds},
     );
   }
 }
