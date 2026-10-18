@@ -12,6 +12,8 @@ class VideoCardWidget extends StatelessWidget {
   final VideoCardVariant variant;
   final VoidCallback? onTap;
   final VoidCallback? onChannelTap;
+  final double? thumbnailWidth;
+  final double? thumbnailHeight;
 
   const VideoCardWidget({
     super.key,
@@ -19,6 +21,8 @@ class VideoCardWidget extends StatelessWidget {
     this.variant = VideoCardVariant.vertical,
     this.onTap,
     this.onChannelTap,
+    this.thumbnailWidth,
+    this.thumbnailHeight,
   });
 
   @override
@@ -45,7 +49,12 @@ class VideoCardWidget extends StatelessWidget {
         ),
         child: variant == VideoCardVariant.vertical
             ? _VerticalVideoCard(video: video, onChannelTap: onChannelTap)
-            : _HorizontalVideoCard(video: video, onChannelTap: onChannelTap),
+            : _HorizontalVideoCard(
+                video: video,
+                onChannelTap: onChannelTap,
+                thumbnailWidth: thumbnailWidth,
+                thumbnailHeight: thumbnailHeight,
+              ),
       ),
     );
   }
@@ -101,9 +110,15 @@ class _VerticalVideoCard extends StatelessWidget {
 class _HorizontalVideoCard extends StatelessWidget {
   final VideoCardData video;
   final VoidCallback? onChannelTap;
+  final double? thumbnailWidth;
+  final double? thumbnailHeight;
 
-  const _HorizontalVideoCard({required this.video, this.onChannelTap});
-
+  const _HorizontalVideoCard({
+    required this.video,
+    this.onChannelTap,
+    this.thumbnailWidth,
+    this.thumbnailHeight,
+  });
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -114,9 +129,10 @@ class _HorizontalVideoCard extends StatelessWidget {
           _VideoThumbnail(
             thumbnailUrl: video.thumbnailUrl,
             duration: video.duration,
-            height: 90.h,
-            width: 140.w,
+            height: thumbnailHeight ?? 90.h,
+            width: thumbnailWidth ?? 140.w,
             borderRadius: BorderRadius.circular(12.r),
+            completionRate: video.completionRate,
           ),
           10.horizontalSpace,
           Expanded(
@@ -127,6 +143,7 @@ class _HorizontalVideoCard extends StatelessWidget {
               views: video.views,
               publishedTime: video.publishedTime,
               onChannelTap: onChannelTap,
+              watchedSeconds: video.watchedSeconds,
             ),
           ),
         ],
@@ -145,6 +162,7 @@ class _VideoThumbnail extends StatelessWidget {
   final double height;
   final double? width;
   final BorderRadius borderRadius;
+  final double? completionRate;
 
   const _VideoThumbnail({
     required this.thumbnailUrl,
@@ -152,6 +170,7 @@ class _VideoThumbnail extends StatelessWidget {
     required this.height,
     this.width,
     required this.borderRadius,
+    this.completionRate,
   });
 
   @override
@@ -187,6 +206,25 @@ class _VideoThumbnail extends StatelessWidget {
             ),
           ),
         ),
+        if (completionRate != null)
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: ClipRRect(
+              borderRadius: BorderRadius.vertical(
+                bottom: borderRadius.bottomLeft,
+              ),
+              child: LinearProgressIndicator(
+                value: completionRate!.clamp(0.0, 1.0),
+                minHeight: 3.h,
+                backgroundColor: Colors.white30,
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  appTheme.primaryColor,
+                ),
+              ),
+            ),
+          ),
       ],
     );
   }
@@ -197,6 +235,7 @@ class _VideoMetaInfo extends StatelessWidget {
   final String? description;
   final String? channelName;
   final int views;
+  final int? watchedSeconds;
   final DateTime? publishedTime;
   final VoidCallback? onChannelTap;
 
@@ -205,6 +244,7 @@ class _VideoMetaInfo extends StatelessWidget {
     this.description,
     this.channelName,
     required this.views,
+    this.watchedSeconds,
     this.publishedTime,
     this.onChannelTap,
   });
@@ -260,21 +300,31 @@ class _VideoMetaInfo extends StatelessWidget {
           spacing: 4.w,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              "${views.formatCount()} views",
-              style: theme.textTheme.labelSmall?.copyWith(
-                color: theme.hintColor,
-                fontSize: 10.sp,
-              ),
-            ),
-            if (publishedTime != null)
+            if (watchedSeconds != null)
               Text(
-                publishedTime!.timeAgo(),
+                '${watchedSeconds!.formatDuration()} watched',
+                style: theme.textTheme.labelSmall?.copyWith(
+                  color: theme.colorScheme.primary,
+                  fontSize: 10.sp,
+                ),
+              )
+            else ...[
+              Text(
+                "${views.formatCount()} views",
                 style: theme.textTheme.labelSmall?.copyWith(
                   color: theme.hintColor,
                   fontSize: 10.sp,
                 ),
               ),
+              if (publishedTime != null)
+                Text(
+                  publishedTime!.timeAgo(),
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: theme.hintColor,
+                    fontSize: 10.sp,
+                  ),
+                ),
+            ],
           ],
         ),
       ],

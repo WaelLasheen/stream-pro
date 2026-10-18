@@ -9,6 +9,8 @@ class VideoCardData {
   final int views;
   final DateTime? publishedTime;
   final ChannelData? channel;
+  final double? completionRate;
+  final int? watchedSeconds;
 
   const VideoCardData({
     required this.id,
@@ -19,6 +21,8 @@ class VideoCardData {
     required this.views,
     this.publishedTime,
     this.channel,
+    this.completionRate,
+    this.watchedSeconds,
   });
 }
 
