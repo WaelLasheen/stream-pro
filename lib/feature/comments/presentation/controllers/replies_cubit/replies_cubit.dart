@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stream_pro/feature/comments/domain/entities/comment_entity.dart';
 import 'package:stream_pro/feature/comments/domain/use_cases/add_comment_use_case.dart';
@@ -31,9 +30,8 @@ class RepliesCubit extends Cubit<RepliesState> {
       expanded.add(parentId);
       emit(state.copyWith(expandedParentIds: expanded));
 
-      // Lazy-fetch on first expand when replies exist but not loaded yet.
       if (replyCount > 0 &&
-          !state.hasData(parentId) &&
+          !state.hasFetched(parentId) &&
           !state.isLoading(parentId)) {
         fetchReplies(parentId);
       }
@@ -42,7 +40,7 @@ class RepliesCubit extends Cubit<RepliesState> {
 
   Future<void> fetchReplies(String parentId, {bool force = false}) async {
     if (state.isLoading(parentId)) return;
-    if (!force && state.hasData(parentId)) return;
+    if (!force && state.hasFetched(parentId)) return;
 
     final loading = {...state.loadingParentIds, parentId};
     final errors = {...state.errorByParent}..remove(parentId);
@@ -70,11 +68,13 @@ class RepliesCubit extends Cubit<RepliesState> {
             .toSet();
         final nextMap = {...state.repliesByParent, parentId: replies};
         final nextErrors = {...state.errorByParent}..remove(parentId);
+        final nextFetched = {...state.fetchedParentIds, parentId};
         emit(
           state.copyWith(
             loadingParentIds: nextLoading,
             repliesByParent: nextMap,
             errorByParent: nextErrors,
+            fetchedParentIds: nextFetched,
           ),
         );
       },

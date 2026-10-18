@@ -10,6 +10,8 @@ class RepliesState extends Equatable {
   final Set<String> mutatingCommentIds;
   final String? lastErrorMessage;
 
+  final Set<String> fetchedParentIds;
+
   const RepliesState({
     this.repliesByParent = const {},
     this.loadingParentIds = const {},
@@ -18,6 +20,7 @@ class RepliesState extends Equatable {
     this.submittingParentIds = const {},
     this.mutatingCommentIds = const {},
     this.lastErrorMessage,
+    this.fetchedParentIds = const {},
   });
 
   // Helpers
@@ -27,6 +30,7 @@ class RepliesState extends Equatable {
   bool isMutating(String commentId) => mutatingCommentIds.contains(commentId);
   bool hasData(String parentId) => repliesByParent.containsKey(parentId);
   bool hasError(String parentId) => errorByParent.containsKey(parentId);
+  bool hasFetched(String parentId) => fetchedParentIds.contains(parentId);
 
   List<CommentEntity> repliesOf(String parentId) =>
       repliesByParent[parentId] ?? const [];
@@ -40,6 +44,7 @@ class RepliesState extends Equatable {
     Set<String>? submittingParentIds,
     Set<String>? mutatingCommentIds,
     String? lastErrorMessage,
+    Set<String>? fetchedParentIds,
   }) {
     return RepliesState(
       repliesByParent: repliesByParent ?? this.repliesByParent,
@@ -49,6 +54,7 @@ class RepliesState extends Equatable {
       submittingParentIds: submittingParentIds ?? this.submittingParentIds,
       mutatingCommentIds: mutatingCommentIds ?? this.mutatingCommentIds,
       lastErrorMessage: lastErrorMessage ?? this.lastErrorMessage,
+      fetchedParentIds: fetchedParentIds ?? this.fetchedParentIds,
     );
   }
 
@@ -61,5 +67,6 @@ class RepliesState extends Equatable {
     submittingParentIds,
     mutatingCommentIds,
     lastErrorMessage,
+    fetchedParentIds,
   ];
 }

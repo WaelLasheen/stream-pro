@@ -202,6 +202,7 @@ class CommentsTab extends StatelessWidget {
                               ),
                             ),
                           ),
+                          SliverToBoxAdapter(child: 32.verticalSpace),
                           if (loadMoreError)
                             LoadMoreErrorSliver(
                               onRetry: () => context
