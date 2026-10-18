@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stream_pro/core/routing/app_routes.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/subscribe_button.dart';
 import 'package:stream_pro/core/shared/widgets/network_image/app_circle_network_image.dart';
-import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
+import 'package:stream_pro/core/utils/extensions/navigation_extension.dart'; // Contains navigateToChannelDetails
 
 class ChannelInfoWidget extends StatelessWidget {
   final String channelTitle;
@@ -21,6 +20,10 @@ class ChannelInfoWidget extends StatelessWidget {
     required this.channelId,
   });
 
+  void _handleChannelTap(BuildContext context) {
+    context.navigateToChannelDetails(channelId);
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -28,9 +31,7 @@ class ChannelInfoWidget extends StatelessWidget {
     return Row(
       children: [
         InkWell(
-          onTap: () {
-            context.navigateTo(AppRoutes.channelDetails, arguments: channelId);
-          },
+          onTap: () => _handleChannelTap(context),
           child: AppCircleNetworkImage(radius: 20.r, imageUrl: channelImageUrl),
         ),
         SizedBox(width: 12.w),
@@ -38,10 +39,13 @@ class ChannelInfoWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                channelTitle,
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
+              InkWell(
+                onTap: () => _handleChannelTap(context),
+                child: Text(
+                  channelTitle,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Text(

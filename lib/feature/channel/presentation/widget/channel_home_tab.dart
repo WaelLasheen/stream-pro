@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_pro/core/routing/app_routes.dart';
 import 'package:stream_pro/core/shared/widgets/app_error_widget/app_error_sliver.dart';
 import 'package:stream_pro/core/shared/widgets/empty_view/app_empty_sliver.dart';
 import 'package:stream_pro/core/shared/widgets/playlist_card/playlist_card_widget.dart';
@@ -8,6 +9,7 @@ import 'package:stream_pro/core/shared/widgets/shimmer_list/sliver_shimmer_list.
 import 'package:stream_pro/core/shared/widgets/video_card/video_card_data.dart';
 import 'package:stream_pro/core/shared/widgets/video_card/video_card_shimmer.dart';
 import 'package:stream_pro/core/shared/widgets/video_card/video_card_widget.dart';
+import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
 import 'package:stream_pro/feature/channel/domain/entities/channel_home_entity.dart';
 import 'package:stream_pro/feature/channel/presentation/controllers/channel_home_tab_cubit/channel_home_tab_cubit.dart';
 import 'package:stream_pro/feature/channel/presentation/controllers/channel_home_tab_cubit/channel_home_tab_state.dart';
@@ -81,7 +83,10 @@ class ChannelHomeSlivers extends StatelessWidget {
                 return VideoCardWidget(
                   video: video.toVideoCardData(),
                   variant: VideoCardVariant.vertical,
-                  onTap: () {},
+                  onTap: () => context.navigateTo(
+                    AppRoutes.videoDetails,
+                    arguments: video.id,
+                  ),
                 );
               }, childCount: home.videos.length),
             ),
