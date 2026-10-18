@@ -6,15 +6,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stream_pro/core/di/di.dart';
 import 'package:stream_pro/core/routing/app_routes.dart';
-import 'package:stream_pro/core/shared/widgets/app_buttons/app_popup_menu.dart';
-import 'package:stream_pro/core/shared/widgets/network_image/app_circle_network_image.dart';
 import 'package:stream_pro/core/utils/consts/image_path.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
 import 'package:stream_pro/feature/home/presentation/controller/home_cubit/home_cubit.dart';
-import 'package:stream_pro/feature/profile/presentation/controller/profile_cubit/profile_cubit.dart';
-import 'package:stream_pro/feature/profile/presentation/controller/profile_cubit/profile_state.dart';
 import 'package:stream_pro/feature/home/presentation/screen/home_screen.dart';
+import 'package:stream_pro/feature/main/presentation/widgets/main_shell_app_bar.dart';
 import 'package:stream_pro/feature/subscriptions/presentation/controllers/subscriptions_cubit/subscriptions_cubit.dart';
 import 'package:stream_pro/feature/subscriptions/presentation/screens/subscriptions_screen.dart';
 import 'package:stream_pro/feature/watch_history/presentation/controllers/watch_history_cubit/watch_history_cubit.dart';
@@ -125,9 +122,6 @@ class _MainShellScreenState extends State<MainShellScreen> {
   @override
   Widget build(BuildContext context) {
     final bottomInset = MediaQuery.of(context).padding.bottom;
-    final appTheme = context.appTheme;
-    final textTheme = context.textTheme;
-
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
@@ -141,110 +135,8 @@ class _MainShellScreenState extends State<MainShellScreen> {
       },
       child: Scaffold(
         extendBody: true,
-        appBar: AppBar(
-          title: Row(
-            children: [
-              Icon(
-                Icons.play_circle_fill_rounded,
-                color: appTheme.primaryColor,
-                size: 32.r,
-              ),
-              8.horizontalSpace,
-              Text(
-                'StreamPro',
-                style: textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.sp,
-                ),
-              ),
-            ],
-          ),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.search, size: 24.r),
-              onPressed: () => context.navigateTo(AppRoutes.search),
-            ),
-            IconButton(
-              icon: Icon(Icons.notifications_active, size: 24.r),
-              onPressed: () => context.navigateTo(AppRoutes.notifications),
-            ),
-            IconButton(
-              icon: Icon(Icons.favorite, size: 24.r),
-              onPressed: () => context.navigateTo(AppRoutes.likedVideo),
-            ),
-            BlocBuilder<ProfileCubit, ProfileState>(
-              builder: (context, state) {
-                final profile = state.profile;
-                return AppPopupMenu<String>(
-                  trigger: AppCircleNetworkImage(
-                    imageUrl: profile?.avatarUrl ?? '',
-                    radius: 24.r,
-                    fallbackText: profile?.name ?? '',
-                  ),
-                  header: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        children: [
-                          AppCircleNetworkImage(
-                            imageUrl: profile?.avatarUrl ?? '',
-                            radius: 24.r,
-                            fallbackText: profile?.name ?? '',
-                          ),
-                          12.horizontalSpace,
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  profile?.name ?? '',
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: textTheme.bodyLarge?.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                    color: appTheme.textPrimary,
-                                  ),
-                                ),
-                                Text(
-                                  profile?.email ?? '',
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: textTheme.bodySmall?.copyWith(
-                                    color: appTheme.textSecondary,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      4.verticalSpace,
-                      Divider(
-                        color: appTheme.boarderPrimary,
-                        indent: 8.w,
-                        endIndent: 8.w,
-                      ),
-                    ],
-                  ),
-                  onSelected: (_) {},
-                  items: const [
-                    AppMenuItem(
-                      value: 'profile',
-                      title: 'Profile',
-                      icon: Icons.person_outline_rounded,
-                    ),
-                    AppMenuItem(
-                      value: 'logout',
-                      title: 'Logout',
-                      icon: Icons.logout_rounded,
-                    ),
-                  ],
-                );
-              },
-            ),
-          ],
-        ),
+        appBar: MainShellAppBar(),
+
         body: NotificationListener<ScrollNotification>(
           onNotification: _handleScroll,
           child: ValueListenableBuilder<int>(
