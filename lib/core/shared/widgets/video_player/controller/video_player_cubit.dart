@@ -23,14 +23,12 @@ class VideoPlayerCubit extends Cubit<VideoPlayerState> {
 
       final chewieController = ChewieController(
         videoPlayerController: videoController,
-        autoPlay: false,
+        autoPlay: true,
         looping: false,
         aspectRatio: aspectRatio,
         playbackSpeeds: const [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2.0],
-        customControls:  const CustomMaterialControls(), 
-        placeholder: Container(
-          color: Colors.black,
-        ), // <-- FIX: No thumbnail here!
+        customControls: const CustomMaterialControls(),
+        placeholder: Container(color: Colors.black),
         errorBuilder: (context, errorMessage) => _buildErrorWidget(),
       );
       if (isClosed) return;

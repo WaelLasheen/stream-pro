@@ -25,7 +25,6 @@ class VideoDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      canPop: true,
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) {
           context.read<VideoTrackCubit>().flushCurrentProgress();

@@ -192,19 +192,25 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
           ),
 
           // 2. Center Play/Pause Button
-          Center(
-            child: AnimatedOpacity(
-              opacity: _hideStuff ? 0.0 : 1.0,
-              duration: const Duration(milliseconds: 300),
-              child: GestureDetector(
-                onTap: _playPause,
-                child: SvgPicture.asset(
-                  isPlaying && !isFinished
-                      ? ImagePath.pauseCircle
-                      : ImagePath.playCircle,
-                  colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                  width: 64,
-                  height: 64,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 36),
+            child: Center(
+              child: AnimatedOpacity(
+                opacity: _hideStuff ? 0.0 : 1.0,
+                duration: const Duration(milliseconds: 300),
+                child: GestureDetector(
+                  onTap: _playPause,
+                  child: SvgPicture.asset(
+                    isPlaying && !isFinished
+                        ? ImagePath.pauseCircle
+                        : ImagePath.playCircle,
+                    colorFilter: ColorFilter.mode(
+                      Colors.white,
+                      BlendMode.srcIn,
+                    ),
+                    width: 64,
+                    height: 64,
+                  ),
                 ),
               ),
             ),
@@ -212,12 +218,10 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
 
           // 3. Bottom Bar
           Positioned(
-            // 🔑 FIX: Positioned is now a DIRECT child of Stack
             left: 0,
             right: 0,
             bottom: 0,
             child: IgnorePointer(
-              // IgnorePointer is now safely INSIDE Positioned
               ignoring: _hideStuff,
               child: AnimatedOpacity(
                 opacity: _hideStuff ? 0.0 : 1.0,
@@ -243,14 +247,14 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
           colors: [Colors.transparent, Colors.black87],
         ),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           // Progress Tracker
           if (!isLive)
             SizedBox(
-              height: 20,
+              height: 4,
               child: MaterialVideoProgressBar(
                 controller,
                 colors:
@@ -261,6 +265,8 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
                       backgroundColor: Colors.white24,
                       bufferedColor: Colors.white12,
                     ),
+                barHeight: 4,
+                handleHeight: 6,
                 onDragStart: () => _hideTimer?.cancel(),
                 onDragEnd: _startHideTimer,
               ),
@@ -303,8 +309,8 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
       icon: SvgPicture.asset(
         _latestValue.isPlaying ? ImagePath.pause : ImagePath.play,
         colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-        width: 26,
-        height: 26,
+        width: 24,
+        height: 24,
       ),
       onPressed: () {
         _cancelAndRestartTimer();
@@ -336,12 +342,12 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
     final selected = _latestValue.playbackSpeed;
 
     return AppPopupMenu<double>(
-      menuWidth: 140,
+      menuWidth: 120,
       trigger: SvgPicture.asset(
         ImagePath.speedChanger,
         colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-        width: 22,
-        height: 22,
+        width: 24,
+        height: 24,
       ),
       onSelected: (speed) {
         controller.setPlaybackSpeed(speed);
@@ -365,8 +371,8 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
             ? ImagePath.quitFullScreen
             : ImagePath.fullScreen,
         colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
-        width: 26,
-        height: 26,
+        width: 22,
+        height: 22,
       ),
       onPressed: () {
         _cancelAndRestartTimer();
