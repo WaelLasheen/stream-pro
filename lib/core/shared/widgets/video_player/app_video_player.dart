@@ -2,7 +2,7 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stream_pro/core/routing/app_route_observer.dart';
+import 'package:stream_pro/core/routing/observers/app_route_observer.dart';
 import 'package:stream_pro/core/shared/widgets/video_player/controller/video_player_cubit.dart';
 import 'package:stream_pro/core/shared/widgets/video_player/controller/video_player_state.dart';
 import 'package:stream_pro/core/shared/widgets/video_player/video_player_data.dart';

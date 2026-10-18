@@ -47,8 +47,6 @@ import 'package:stream_pro/feature/watch_history/presentation/controllers/video_
 import 'package:stream_pro/feature/watch_history/presentation/controllers/watch_history_cubit/watch_history_cubit.dart';
 import 'package:stream_pro/feature/watch_history/presentation/screens/watch_history_screen.dart';
 
-final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
 class AppRouter {
   AppRouter();
 
@@ -56,6 +54,7 @@ class AppRouter {
     switch (settings.name) {
       case AppRoutes.splash:
         return MaterialPageRoute(
+          settings: settings,
           builder: (_) => BlocProvider(
             create: (_) => getIt<SplashCubit>()..start(),
             child: const SplashScreen(),
@@ -64,6 +63,7 @@ class AppRouter {
 
       case AppRoutes.login:
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => BlocProvider(
             create: (context) => getIt<AuthCubit>(),
             child: const LoginScreen(),
@@ -72,6 +72,7 @@ class AppRouter {
 
       case AppRoutes.register:
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => BlocProvider(
             create: (context) => getIt<AuthCubit>(),
             child: const RegisterScreen(),
@@ -80,6 +81,7 @@ class AppRouter {
 
       case AppRoutes.main:
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => BlocProvider(
             create: (_) => getIt<ProfileCubit>()..fetchProfile(),
             child: const MainShellScreen(),
@@ -88,6 +90,7 @@ class AppRouter {
 
       case AppRoutes.home:
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => BlocProvider(
             create: (context) => getIt<HomeCubit>()..fetchFeed(),
             child: const HomeScreen(),
@@ -98,6 +101,7 @@ class AppRouter {
         final videoId = settings.arguments as String;
         final profileCubit = getIt<ProfileCubit>()..fetchProfile();
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => MultiBlocProvider(
             providers: [
               BlocProvider(
@@ -125,6 +129,7 @@ class AppRouter {
       case AppRoutes.channelDetails:
         final channelId = settings.arguments as String;
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => MultiBlocProvider(
             providers: [
               BlocProvider(
@@ -152,6 +157,7 @@ class AppRouter {
 
       case AppRoutes.ownerChannel:
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => MultiBlocProvider(
             providers: [
               BlocProvider(
@@ -171,13 +177,14 @@ class AppRouter {
                     getIt<SubscribersCubit>()..fetchSubscribers(),
               ),
             ],
-            child: OwnerChannelScreen(),
+            child: const OwnerChannelScreen(),
           ),
         );
 
       case AppRoutes.channelEditor:
         final args = settings.arguments as ChannelEditorArgs;
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => BlocProvider.value(
             value: args.cubit,
             child: ChannelEditorScreen(
@@ -189,15 +196,17 @@ class AppRouter {
 
       case AppRoutes.subscriptions:
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => BlocProvider(
             create: (context) =>
                 getIt<SubscriptionsCubit>()..fetchUserSubscriptions(),
-            child: SubscriptionsScreen(),
+            child: const SubscriptionsScreen(),
           ),
         );
 
       case AppRoutes.uploadVideo:
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => MultiBlocProvider(
             providers: [
               BlocProvider(create: (context) => getIt<UploadVideoCubit>()),
@@ -214,6 +223,7 @@ class AppRouter {
       case AppRoutes.editVideo:
         final String videoId = settings.arguments as String;
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => MultiBlocProvider(
             providers: [
               BlocProvider(
@@ -233,6 +243,7 @@ class AppRouter {
 
       case AppRoutes.watchHistory:
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => BlocProvider(
             create: (context) =>
                 getIt<WatchHistoryCubit>()..fetchWatchHistory(),
@@ -242,6 +253,7 @@ class AppRouter {
 
       case AppRoutes.notifications:
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => BlocProvider(
             create: (context) =>
                 getIt<NotificationsCubit>()..fetchNotifications(),
@@ -251,6 +263,7 @@ class AppRouter {
 
       case AppRoutes.search:
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => MultiBlocProvider(
             providers: [
               BlocProvider(create: (context) => getIt<SearchCubit>()),
@@ -264,6 +277,7 @@ class AppRouter {
 
       case AppRoutes.likedVideo:
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => BlocProvider(
             create: (context) => getIt<LikedVideosCubit>()..fetchLikedVideos(),
             child: const LikedVideosScreen(),
@@ -271,7 +285,10 @@ class AppRouter {
         );
 
       default:
-        return MaterialPageRoute(builder: (context) => const PathNotFound());
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) => const PathNotFound(),
+        );
     }
   }
 }
