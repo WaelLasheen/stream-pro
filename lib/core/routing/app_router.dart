@@ -26,6 +26,7 @@ import 'package:stream_pro/feature/main/presentation/screen/main_shell_screen.da
 import 'package:stream_pro/feature/notifications/presentation/controllers/notifications_cubit/notifications_cubit.dart';
 import 'package:stream_pro/feature/notifications/presentation/screens/notifications_screen.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/args/channel_editor_args.dart';
+import 'package:stream_pro/feature/owner_channel/presentation/args/owner_channel_args.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/owner_channel_cubit/owner_channel_cubit.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/owner_playlists_cubit/owner_playlists_cubit.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/owner_videos_cubit/owner_videos_cubit.dart';
@@ -36,6 +37,7 @@ import 'package:stream_pro/feature/search/presentation/screens/video_search_scre
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/subscribers_cubit/subscribers_cubit.dart';
 import 'package:stream_pro/feature/subscriptions/presentation/controllers/subscriptions_cubit/subscriptions_cubit.dart';
 import 'package:stream_pro/feature/subscriptions/presentation/screens/subscriptions_screen.dart';
+import 'package:stream_pro/feature/video_details/presentation/args/video_details_args.dart';
 import 'package:stream_pro/feature/video_details/presentation/controllers/related_videos_cubit/related_videos_cubit.dart';
 import 'package:stream_pro/feature/video_details/presentation/controllers/video_details_cubit/video_details_cubit.dart';
 import 'package:stream_pro/feature/video_details/presentation/screens/video_details_screen.dart';
@@ -98,7 +100,9 @@ class AppRouter {
         );
 
       case AppRoutes.videoDetails:
-        final videoId = settings.arguments as String;
+        final args = settings.arguments as VideoDetailsArgs;
+        final videoId = args.videoId;
+        final initialTabIndex = args.initialTabIndex;
         final profileCubit = getIt<ProfileCubit>()..fetchProfile();
         return MaterialPageRoute(
           settings: settings,
@@ -122,7 +126,10 @@ class AppRouter {
                     getIt<RelatedVideosCubit>()..fetchRelatedVideos(videoId),
               ),
             ],
-            child: VideoDetailsScreen(videoId: videoId),
+            child: VideoDetailsScreen(
+              videoId: videoId,
+              initialTabIndex: initialTabIndex,
+            ),
           ),
         );
 
@@ -156,6 +163,8 @@ class AppRouter {
         );
 
       case AppRoutes.ownerChannel:
+        final args = settings.arguments as OwnerChannelArgs?;
+        final initialTabIndex = args?.initialTabIndex ?? 0;
         return MaterialPageRoute(
           settings: settings,
           builder: (context) => MultiBlocProvider(
@@ -177,7 +186,7 @@ class AppRouter {
                     getIt<SubscribersCubit>()..fetchSubscribers(),
               ),
             ],
-            child: const OwnerChannelScreen(),
+            child: OwnerChannelScreen(initialTabIndex: initialTabIndex),
           ),
         );
 

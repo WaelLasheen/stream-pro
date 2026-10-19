@@ -8,6 +8,7 @@ import 'package:stream_pro/core/shared/widgets/shimmer_list/sliver_shimmer_list.
 import 'package:stream_pro/core/shared/widgets/video_card/video_card_shimmer.dart';
 import 'package:stream_pro/core/shared/widgets/video_card/video_card_widget.dart';
 import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
+import 'package:stream_pro/feature/video_details/presentation/args/video_details_args.dart';
 import 'package:stream_pro/feature/video_details/presentation/controllers/related_videos_cubit/related_videos_cubit.dart';
 import 'package:stream_pro/feature/video_details/presentation/mapper/related_video_mapper.dart';
 
@@ -31,8 +32,7 @@ class RelatedVideosTab extends StatelessWidget {
             switch (state) {
               RelatedVideosInitial() ||
               RelatedVideosLoading() => SliverShimmerList(
-                itemBuilder: (_, __) => const VideoCardShimmer(
-                ),
+                itemBuilder: (_, __) => const VideoCardShimmer(),
                 itemCount: 5,
               ),
               RelatedVideosFailure() => AppErrorSliver(
@@ -60,7 +60,7 @@ class RelatedVideosTab extends StatelessWidget {
                               onTap: () {
                                 context.navigateTo(
                                   AppRoutes.videoDetails,
-                                  arguments: video.videoId,
+                                  arguments: VideoDetailsArgs(video.videoId),
                                 );
                               },
                             );

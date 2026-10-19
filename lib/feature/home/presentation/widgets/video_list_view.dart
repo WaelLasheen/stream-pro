@@ -8,6 +8,7 @@ import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
 import 'package:stream_pro/core/shared/widgets/video_card/video_card_widget.dart';
 import 'package:stream_pro/feature/home/domain/entities/video_entity.dart';
 import 'package:stream_pro/feature/home/presentation/mappers/video_mapper.dart';
+import 'package:stream_pro/feature/video_details/presentation/args/video_details_args.dart';
 
 class VideoListView extends StatelessWidget {
   final List<VideoEntity> videos;
@@ -51,7 +52,7 @@ class VideoListView extends StatelessWidget {
               video: video.toVideoCardData(),
               onTap: () => context.navigateTo(
                 AppRoutes.videoDetails,
-                arguments: video.id,
+                arguments: VideoDetailsArgs(video.id),
               ),
               onChannelTap: () => context.navigateTo(
                 AppRoutes.channelDetails,

@@ -13,6 +13,7 @@ import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
 import 'package:stream_pro/feature/Likes/presentation/controllers/liked_videos_cubit/liked_videos_cubit.dart';
 import 'package:stream_pro/feature/Likes/presentation/controllers/liked_videos_cubit/liked_videos_state.dart';
 import 'package:stream_pro/feature/Likes/presentation/mapper/liked_video_mapper.dart';
+import 'package:stream_pro/feature/video_details/presentation/args/video_details_args.dart';
 
 class LikedVideosScreen extends StatelessWidget {
   const LikedVideosScreen({super.key});
@@ -63,7 +64,7 @@ class LikedVideosScreen extends StatelessWidget {
                       onTap: () {
                         context.navigateTo(
                           AppRoutes.videoDetails,
-                          arguments: item.video.id,
+                          arguments: VideoDetailsArgs(item.video.id),
                         );
                       },
                       onChannelTap: () {

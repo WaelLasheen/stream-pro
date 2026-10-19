@@ -17,6 +17,7 @@ import 'package:stream_pro/feature/search/presentation/widgets/category_shimmer.
 import 'package:stream_pro/feature/search/presentation/controllers/search_cubit/search_cubit.dart';
 import 'package:stream_pro/feature/search/presentation/controllers/search_cubit/search_state.dart';
 import 'package:stream_pro/feature/search/presentation/mapper/search_video_mapper.dart';
+import 'package:stream_pro/feature/video_details/presentation/args/video_details_args.dart';
 
 class VideoSearchScreen extends StatefulWidget {
   const VideoSearchScreen({super.key});
@@ -180,7 +181,7 @@ class _VideoSearchScreenState extends State<VideoSearchScreen> {
                             onTap: () {
                               context.navigateTo(
                                 AppRoutes.videoDetails,
-                                arguments: video.videoId,
+                                arguments: VideoDetailsArgs(video.videoId),
                               );
                             },
                             onChannelTap: () {

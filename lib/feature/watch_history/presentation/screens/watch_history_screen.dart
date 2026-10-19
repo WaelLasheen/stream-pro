@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stream_pro/core/routing/app_routes.dart';
 import 'package:stream_pro/core/shared/widgets/app_refresh_indicator.dart';
+import 'package:stream_pro/feature/video_details/presentation/args/video_details_args.dart';
 import 'package:stream_pro/feature/watch_history/presentation/controllers/watch_history_cubit/watch_history_cubit.dart';
 import 'package:stream_pro/feature/watch_history/presentation/controllers/watch_history_cubit/watch_history_state.dart';
 import 'package:stream_pro/feature/watch_history/presentation/widgets/watch_history_empty_widget.dart';
@@ -16,7 +17,7 @@ class WatchHistoryScreen extends StatelessWidget {
     await Navigator.pushNamed(
       context,
       AppRoutes.videoDetails,
-      arguments: videoId,
+      arguments: VideoDetailsArgs(videoId),
     );
 
     if (context.mounted) {

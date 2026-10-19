@@ -19,8 +19,13 @@ import 'package:stream_pro/feature/watch_history/presentation/controllers/video_
 
 class VideoDetailsScreen extends StatelessWidget {
   final String videoId;
+  final int initialTabIndex;
 
-  const VideoDetailsScreen({super.key, required this.videoId});
+  const VideoDetailsScreen({
+    super.key,
+    required this.videoId,
+    this.initialTabIndex = 0,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +37,7 @@ class VideoDetailsScreen extends StatelessWidget {
       },
       child: DefaultTabController(
         length: 2,
+        initialIndex: initialTabIndex,
         child: Scaffold(
           body: BlocConsumer<VideoDetailsCubit, VideoDetailsState>(
             listener: (context, state) {

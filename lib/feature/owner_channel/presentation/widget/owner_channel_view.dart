@@ -14,13 +14,19 @@ import 'package:stream_pro/feature/owner_channel/presentation/widget/subscribers
 
 class OwnerChannelView extends StatelessWidget {
   final OwnerChannelEntity channel;
+  final int initialTabIndex;
 
-  const OwnerChannelView({super.key, required this.channel});
+  const OwnerChannelView({
+    super.key,
+    required this.channel,
+    this.initialTabIndex = 0,
+  });
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
+      initialIndex: initialTabIndex,
       child: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [

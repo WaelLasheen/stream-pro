@@ -16,6 +16,7 @@ import 'package:stream_pro/feature/channel/presentation/controllers/channel_home
 import 'package:stream_pro/feature/channel/presentation/mappers/playlist_mapper.dart';
 import 'package:stream_pro/feature/channel/presentation/mappers/video_mapper.dart';
 import 'package:stream_pro/core/shared/widgets/channel/common_slivers.dart';
+import 'package:stream_pro/feature/video_details/presentation/args/video_details_args.dart';
 
 class ChannelHomeTab extends StatelessWidget {
   final String channelId;
@@ -85,7 +86,7 @@ class ChannelHomeSlivers extends StatelessWidget {
                   variant: VideoCardVariant.vertical,
                   onTap: () => context.navigateTo(
                     AppRoutes.videoDetails,
-                    arguments: video.id,
+                    arguments: VideoDetailsArgs(video.id),
                   ),
                 );
               }, childCount: home.videos.length),

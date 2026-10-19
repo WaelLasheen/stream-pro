@@ -11,7 +11,9 @@ import 'package:stream_pro/feature/owner_channel/presentation/widget/owner_chann
 import 'package:stream_pro/feature/owner_channel/presentation/widget/no_owner_channel_widget.dart';
 
 class OwnerChannelScreen extends StatelessWidget {
-  const OwnerChannelScreen({super.key});
+  final int initialTabIndex;
+
+  const OwnerChannelScreen({super.key, this.initialTabIndex = 0});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,10 @@ class OwnerChannelScreen extends StatelessWidget {
           }
 
           if (state.channel != null) {
-            return OwnerChannelView(channel: state.channel!);
+            return OwnerChannelView(
+              channel: state.channel!,
+              initialTabIndex: initialTabIndex,
+            );
           }
 
           return const SizedBox.shrink();
