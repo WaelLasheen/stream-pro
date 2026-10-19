@@ -19,12 +19,10 @@ class AppThemes {
     secondaryColor: const Color(0xFFF43F5E), // hot coral pink
     primaryTint: const Color(0xFFEFEAFB), // soft violet wash for chips/badges
     secondaryTint: const Color(0xFFFEECEF), // soft coral wash
-
     // Surfaces
     backgroundColor: const Color(0xFFF7F7FB), // soft off-white canvas
     surfaceColor: Colors.white,
     overlayColor: const Color(0xB318181B), // scrim over thumbnails
-
     // Feedback / status
     redNormalColor: const Color(0xFFEF4444), // destructive actions
     errorColor: const Color(0xFFDC2626), // form & system errors
@@ -32,12 +30,10 @@ class AppThemes {
     warningColor: const Color(0xFFF59E0B), // warnings
     liveColor: const Color(0xFFEF4444), // "LIVE" badges
     starColor: const Color(0xFFFBBF24), // ratings / favorites
-
     // Text
     textPrimary: const Color(0xFF18181B), // near-black slate
     textSecondary: const Color(0xFF52525B), // muted slate
     onPrimary: Colors.white, // text/icons on brand colors
-
     // Neutral scale (cool slate, light → dark)
     grey200: const Color(0xFFE4E4E7),
     grey500: const Color(0xFFD4D4D8),
@@ -74,7 +70,7 @@ class AppThemes {
     return ThemeData(
       useMaterial3: true, // Ensures modern component behaviors
       brightness: Brightness.light,
-      scaffoldBackgroundColor: lightThemeColors.backgroundColor,
+      scaffoldBackgroundColor: lightThemeColors.surfaceColor,
       colorScheme: colorScheme,
       hintColor: lightThemeColors.grey600,
       dividerColor: lightThemeColors.boarderPrimary,
@@ -168,10 +164,7 @@ class AppThemes {
           borderSide: BorderSide(color: lightThemeColors.errorColor),
         ),
         focusedErrorBorder: lightThemeColors.outlineInputBorder.copyWith(
-          borderSide: BorderSide(
-            color: lightThemeColors.errorColor,
-            width: 2,
-          ),
+          borderSide: BorderSide(color: lightThemeColors.errorColor, width: 2),
         ),
         errorStyle: FontStyles.labelSmall.copyWith(
           color: lightThemeColors.errorColor,
