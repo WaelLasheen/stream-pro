@@ -11,10 +11,6 @@ class NotificationsCubit extends Cubit<NotificationsState> {
   final DeleteAllNotificationsUseCase deleteAllNotificationsUseCase;
   final DeleteNotificationUseCase deleteNotificationUseCase;
 
-  int _currentPage = 1;
-  bool _hasNextPage = false;
-  bool _isFetchingMore = false;
-
   NotificationsCubit({
     required this.getNotificationsUseCase,
     required this.markAllNotificationsReadUseCase,
@@ -23,159 +19,183 @@ class NotificationsCubit extends Cubit<NotificationsState> {
     required this.deleteNotificationUseCase,
   }) : super(NotificationsInitial());
 
-  Future<void> fetchNotifications({bool isRefresh = false}) async {
-    _currentPage = 1;
-    _hasNextPage = false;
-    _isFetchingMore = false;
+  Future<void> fetchNotifications() async {
+    emit(NotificationsLoading());
 
-    if (!isRefresh) emit(NotificationsLoading());
-
-    final result = await getNotificationsUseCase(
-      pageNumber: _currentPage,
-      pageSize: 10,
-    );
+    final result = await getNotificationsUseCase();
+    if (isClosed) return;
 
     result.fold(
-      (failure) {
-        if (!isRefresh) emit(NotificationsError(failure.message));
-      },
+      (failure) => emit(NotificationsError(message: failure.message)),
       (data) {
-        _hasNextPage = data.hasNextPage;
         if (data.items.isEmpty) {
           emit(NotificationsEmpty());
         } else {
-          emit(NotificationsLoaded(
-            notifications: data,
-            isFetchingMore: false,
-          ));
+          emit(NotificationsLoaded(notifications: data, isFetchingMore: false));
         }
       },
     );
   }
 
   Future<void> fetchMoreNotifications() async {
-    if (_isFetchingMore || !_hasNextPage) return;
-    if (state is! NotificationsLoaded) return;
+    final currentState = state;
+    final currentNotifications = state.notifications;
+    if (currentNotifications == null ||
+        !currentNotifications.hasNextPage ||
+        (currentState is NotificationsLoaded && currentState.isFetchingMore)) {
+      return;
+    }
 
-    final currentState = state as NotificationsLoaded;
-    _isFetchingMore = true;
-
-    emit(currentState.copyWith(isFetchingMore: true));
-
-    final nextPage = _currentPage + 1;
-    final result = await getNotificationsUseCase(
-      pageNumber: nextPage,
-      pageSize: 10,
+    emit(
+      NotificationsLoaded(
+        notifications: currentNotifications,
+        isFetchingMore: true,
+      ),
     );
 
+    final nextPage = currentNotifications.pageNumber + 1;
+    final result = await getNotificationsUseCase(pageNumber: nextPage);
+    if (isClosed) return;
+
     result.fold(
-      (failure) {
-        _isFetchingMore = false;
-        emit(currentState.copyWith(isFetchingMore: false));
-      },
-      (data) {
-        _currentPage = nextPage;
-        _hasNextPage = data.hasNextPage;
-        _isFetchingMore = false;
-
-        final combinedItems = List.of(currentState.notifications.items)
-          ..addAll(data.items);
-
-        final updatedPaginatedEntity = data.copyWith(items: combinedItems);
-
-        emit(NotificationsLoaded(
-          notifications: updatedPaginatedEntity,
+      (failure) => emit(
+        NotificationsError(
+          message: failure.message,
+          notifications: currentNotifications,
+        ),
+      ),
+      (data) => emit(
+        NotificationsLoaded(
+          notifications: data.copyWith(
+            items: [...currentNotifications.items, ...data.items],
+          ),
           isFetchingMore: false,
-        ));
-      },
+        ),
+      ),
     );
   }
 
   Future<void> markAllAsRead() async {
-    if (state is! NotificationsLoaded) return;
-    final currentState = state as NotificationsLoaded;
+    final currentNotifications = state.notifications;
 
-    final updatedItems = currentState.notifications.items
+    if (currentNotifications == null) return;
+
+    final updatedItems = currentNotifications.items
         .map((item) => item.copyWith(isRead: true))
         .toList();
 
-    emit(currentState.copyWith(
-      notifications: currentState.notifications.copyWith(
-        items: updatedItems,
-        unreadTotal: 0,
+    emit(
+      NotificationsLoaded(
+        notifications: currentNotifications.copyWith(
+          items: updatedItems,
+          unreadTotal: 0,
+        ),
       ),
-    ));
+    );
 
     final result = await markAllNotificationsReadUseCase();
+    if (isClosed) return;
+
     result.fold(
-      (failure) => fetchNotifications(isRefresh: true),
+      (failure) => emit(
+        NotificationsError(
+          message: failure.message,
+          notifications: currentNotifications,
+        ),
+      ),
       (_) {},
     );
   }
 
   Future<void> markAsRead(String id) async {
-    if (state is! NotificationsLoaded) return;
-    final currentState = state as NotificationsLoaded;
+    final currentNotifications = state.notifications;
+    if (currentNotifications == null) return;
+    bool readBefore = false;
 
-    final targetIndex = currentState.notifications.items
-        .indexWhere((item) => item.notificationId == id);
-    if (targetIndex == -1) return;
+    final updatedItems = currentNotifications.items.map((item) {
+      if (item.notificationId == id) {
+        readBefore = item.isRead;
+        return item.copyWith(isRead: true);
+      }
+      return item;
+    }).toList();
 
-    final targetItem = currentState.notifications.items[targetIndex];
-    if (targetItem.isRead) return;
+    if (readBefore) return;
 
-    final updatedItems = List.of(currentState.notifications.items);
-    updatedItems[targetIndex] = targetItem.copyWith(isRead: true);
-
-    final newUnreadTotal =
-        (currentState.notifications.unreadTotal - 1).clamp(0, 999);
-
-    emit(currentState.copyWith(
-      notifications: currentState.notifications.copyWith(
-        items: updatedItems,
-        unreadTotal: newUnreadTotal,
+    emit(
+      NotificationsLoaded(
+        notifications: currentNotifications.copyWith(
+          items: updatedItems,
+          unreadTotal: currentNotifications.unreadTotal - 1,
+        ),
       ),
-    ));
+    );
 
     final result = await markNotificationReadUseCase(id);
+    if (isClosed) return;
+
     result.fold(
-      (failure) => fetchNotifications(isRefresh: true),
+      (failure) => emit(
+        NotificationsError(
+          message: failure.message,
+          notifications: currentNotifications,
+        ),
+      ),
       (_) {},
     );
   }
 
   Future<void> deleteAll() async {
+    final currentNotifications = state.notifications;
+    if (currentNotifications == null) return;
+
     emit(NotificationsEmpty());
 
     final result = await deleteAllNotificationsUseCase();
+    if (isClosed) return;
+
     result.fold(
-      (failure) => fetchNotifications(isRefresh: true),
+      (failure) => emit(
+        NotificationsError(
+          message: failure.message,
+          notifications: currentNotifications,
+        ),
+      ),
       (_) {},
     );
   }
 
   Future<void> deleteNotification(String id) async {
-    if (state is! NotificationsLoaded) return;
-    final currentState = state as NotificationsLoaded;
+    final currentNotifications = state.notifications;
+    if (currentNotifications == null) return;
 
-    final updatedItems = currentState.notifications.items
+    final updatedItems = currentNotifications.items
         .where((item) => item.notificationId != id)
         .toList();
 
     if (updatedItems.isEmpty) {
       emit(NotificationsEmpty());
     } else {
-      emit(currentState.copyWith(
-        notifications: currentState.notifications.copyWith(
-          items: updatedItems,
-          totalCount: currentState.notifications.totalCount - 1,
+      emit(
+        NotificationsLoaded(
+          notifications: currentNotifications.copyWith(
+            items: updatedItems,
+            totalCount: currentNotifications.totalCount - 1,
+          ),
         ),
-      ));
+      );
     }
 
     final result = await deleteNotificationUseCase(id);
+    if (isClosed) return;
+
     result.fold(
-      (failure) => fetchNotifications(isRefresh: true),
+      (failure) => emit(
+        NotificationsError(
+          message: failure.message,
+          notifications: currentNotifications,
+        ),
+      ),
       (_) {},
     );
   }
