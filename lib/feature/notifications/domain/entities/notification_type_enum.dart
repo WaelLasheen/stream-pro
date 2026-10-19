@@ -3,6 +3,7 @@ enum NotificationType {
   comment('COMMENT'),
   playlist('PLAYLIST'),
   subscription('SUBSCRIPTION'),
+  reply('REPLY'),
   unknown('UNKNOWN');
 
   final String value;

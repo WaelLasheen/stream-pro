@@ -5,17 +5,23 @@ class NotificationItemEntity extends Equatable {
   final String notificationId;
   final String actorId;
   final String recipientId;
-  final String contextId;
+  final String videoId;
+  final String commentId;
+  final String channelId;
+  final String playlistId;
   final String message;
   final NotificationType type;
   final bool isRead;
-  final String createdAt;
+  final DateTime createdAt;
 
   const NotificationItemEntity({
     required this.notificationId,
     required this.actorId,
     required this.recipientId,
-    required this.contextId,
+    required this.videoId,
+    required this.commentId,
+    required this.channelId,
+    required this.playlistId,
     required this.message,
     required this.type,
     required this.isRead,
@@ -26,17 +32,23 @@ class NotificationItemEntity extends Equatable {
     String? notificationId,
     String? actorId,
     String? recipientId,
-    String? contextId,
+    String? videoId,
+    String? commentId,
+    String? channelId,
+    String? playlistId,
     String? message,
     NotificationType? type,
     bool? isRead,
-    String? createdAt,
+    DateTime? createdAt,
   }) {
     return NotificationItemEntity(
       notificationId: notificationId ?? this.notificationId,
       actorId: actorId ?? this.actorId,
       recipientId: recipientId ?? this.recipientId,
-      contextId: contextId ?? this.contextId,
+      videoId: videoId ?? this.videoId,
+      commentId: commentId ?? this.commentId,
+      channelId: channelId ?? this.channelId,
+      playlistId: playlistId ?? this.playlistId,
       message: message ?? this.message,
       type: type ?? this.type,
       isRead: isRead ?? this.isRead,
@@ -49,7 +61,10 @@ class NotificationItemEntity extends Equatable {
     notificationId,
     actorId,
     recipientId,
-    contextId,
+    videoId,
+    commentId,
+    channelId,
+    playlistId,
     message,
     type,
     isRead,

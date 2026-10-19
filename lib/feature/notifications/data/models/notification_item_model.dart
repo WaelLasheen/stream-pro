@@ -5,7 +5,10 @@ class NotificationItemModel {
   final String notificationId;
   final String actorId;
   final String recipientId;
-  final String contextId;
+  final String videoId;
+  final String commentId;
+  final String channelId;
+  final String playlistId;
   final String message;
   final NotificationType type;
   final bool isRead;
@@ -15,7 +18,10 @@ class NotificationItemModel {
     required this.notificationId,
     required this.actorId,
     required this.recipientId,
-    required this.contextId,
+    required this.videoId,
+    required this.commentId,
+    required this.channelId,
+    required this.playlistId,
     required this.message,
     required this.type,
     required this.isRead,
@@ -27,7 +33,10 @@ class NotificationItemModel {
       notificationId: json['notificationId'] as String? ?? '',
       actorId: json['actorId'] as String? ?? '',
       recipientId: json['recipientId'] as String? ?? '',
-      contextId: json['contextId'] as String? ?? '',
+      videoId: json['videoId'] as String? ?? '',
+      commentId: json['commentId'] as String? ?? '',
+      channelId: json['channelId'] as String? ?? '',
+      playlistId: json['playlistId'] as String? ?? '',
       message: json['message'] as String? ?? '',
       type: NotificationType.fromString(json['type'] as String?),
       isRead: json['isRead'] as bool? ?? false,
@@ -40,11 +49,14 @@ class NotificationItemModel {
       notificationId: notificationId,
       actorId: actorId,
       recipientId: recipientId,
-      contextId: contextId,
+      videoId: videoId,
+      commentId: commentId,
+      channelId: channelId,
+      playlistId: playlistId,
       message: message,
       type: type,
       isRead: isRead,
-      createdAt: createdAt,
+      createdAt: DateTime.tryParse(createdAt) ?? DateTime.now(),
     );
   }
 }

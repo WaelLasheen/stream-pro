@@ -3,7 +3,8 @@ import 'package:stream_pro/core/networking/api_service.dart';
 import '../models/paginated_notifications_model.dart';
 import 'notifications_remote_datasource.dart';
 
-class NotificationsRemoteDataSourceImpl implements NotificationsRemoteDataSource {
+class NotificationsRemoteDataSourceImpl
+    implements NotificationsRemoteDataSource {
   final ApiService _apiService;
 
   NotificationsRemoteDataSourceImpl(this._apiService);
@@ -15,10 +16,7 @@ class NotificationsRemoteDataSourceImpl implements NotificationsRemoteDataSource
   }) async {
     final response = await _apiService.get(
       ApiConstants.notifications,
-      queryParameters: {
-        'pageNumber': pageNumber,
-        'pageSize': pageSize,
-      },
+      queryParameters: {'pageNumber': pageNumber, 'pageSize': pageSize},
     );
     return PaginatedNotificationsModel.fromJson(
       response.data as Map<String, dynamic>,

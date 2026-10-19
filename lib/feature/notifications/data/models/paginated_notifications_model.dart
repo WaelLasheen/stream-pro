@@ -24,7 +24,10 @@ class PaginatedNotificationsModel {
     final rawItems = json['items'] as List<dynamic>? ?? [];
     return PaginatedNotificationsModel(
       items: rawItems
-          .map((item) => NotificationItemModel.fromJson(item as Map<String, dynamic>))
+          .map(
+            (item) =>
+                NotificationItemModel.fromJson(item as Map<String, dynamic>),
+          )
           .toList(),
       pageSize: json['pageSize'] as int? ?? 10,
       pageNumber: json['pageNumber'] as int? ?? 1,

@@ -42,12 +42,12 @@ class PaginatedNotificationsEntity extends Equatable {
 
   @override
   List<Object?> get props => [
-        items,
-        pageSize,
-        pageNumber,
-        totalPages,
-        totalCount,
-        hasNextPage,
-        unreadTotal,
-      ];
+    items,
+    pageSize,
+    pageNumber,
+    totalPages,
+    totalCount,
+    hasNextPage,
+    unreadTotal,
+  ];
 }
