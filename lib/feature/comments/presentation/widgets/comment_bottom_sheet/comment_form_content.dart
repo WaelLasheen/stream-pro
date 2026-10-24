@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/widgets/app_fields/app_form_field.dart';
+import 'package:stream_pro/core/shared/widgets/drag_handle_widget.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
-import 'package:stream_pro/feature/comments/presentation/widgets/comment_bottom_sheet/drag_handle_widget.dart';
 import 'package:stream_pro/feature/comments/presentation/widgets/comment_bottom_sheet/replying_badge_widget.dart';
 import 'package:stream_pro/feature/comments/presentation/widgets/comment_bottom_sheet/send_button_widget.dart';
 

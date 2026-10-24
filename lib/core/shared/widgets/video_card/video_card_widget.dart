@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_pro/core/shared/widgets/app_buttons/video_actions_popup.dart';
 import 'package:stream_pro/core/shared/widgets/network_image/app_circle_network_image.dart';
 import 'package:stream_pro/core/shared/widgets/network_image/app_network_image.dart';
 import 'package:stream_pro/core/utils/extensions/formatters.dart';
@@ -14,6 +15,8 @@ class VideoCardWidget extends StatelessWidget {
   final VoidCallback? onChannelTap;
   final double? thumbnailWidth;
   final double? thumbnailHeight;
+  final bool showActions;
+  final Widget? trailing;
 
   const VideoCardWidget({
     super.key,
@@ -23,7 +26,15 @@ class VideoCardWidget extends StatelessWidget {
     this.onChannelTap,
     this.thumbnailWidth,
     this.thumbnailHeight,
+    this.showActions = true,
+    this.trailing,
   });
+
+  Widget? get _trailing {
+    if (trailing != null) return trailing;
+    if (!showActions) return null;
+    return VideoActionsPopup(videoId: video.id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +59,17 @@ class VideoCardWidget extends StatelessWidget {
           ],
         ),
         child: variant == VideoCardVariant.vertical
-            ? _VerticalVideoCard(video: video, onChannelTap: onChannelTap)
+            ? _VerticalVideoCard(
+                video: video,
+                onChannelTap: onChannelTap,
+                trailing: _trailing,
+              )
             : _HorizontalVideoCard(
                 video: video,
                 onChannelTap: onChannelTap,
                 thumbnailWidth: thumbnailWidth,
                 thumbnailHeight: thumbnailHeight,
+                trailing: _trailing,
               ),
       ),
     );
@@ -63,8 +79,13 @@ class VideoCardWidget extends StatelessWidget {
 class _VerticalVideoCard extends StatelessWidget {
   final VideoCardData video;
   final VoidCallback? onChannelTap;
+  final Widget? trailing;
 
-  const _VerticalVideoCard({required this.video, this.onChannelTap});
+  const _VerticalVideoCard({
+    required this.video,
+    this.onChannelTap,
+    this.trailing,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +97,7 @@ class _VerticalVideoCard extends StatelessWidget {
           duration: video.duration,
           height: 180.h,
           borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
+          trailing: trailing,
         ),
         Padding(
           padding: EdgeInsets.all(12.r),
@@ -112,12 +134,14 @@ class _HorizontalVideoCard extends StatelessWidget {
   final VoidCallback? onChannelTap;
   final double? thumbnailWidth;
   final double? thumbnailHeight;
+  final Widget? trailing;
 
   const _HorizontalVideoCard({
     required this.video,
     this.onChannelTap,
     this.thumbnailWidth,
     this.thumbnailHeight,
+    this.trailing,
   });
   @override
   Widget build(BuildContext context) {
@@ -136,14 +160,22 @@ class _HorizontalVideoCard extends StatelessWidget {
           ),
           10.horizontalSpace,
           Expanded(
-            child: _VideoMetaInfo(
-              title: video.title,
-              description: video.description,
-              channelName: video.channel?.name,
-              views: video.views,
-              publishedTime: video.publishedTime,
-              onChannelTap: onChannelTap,
-              watchedSeconds: video.watchedSeconds,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: _VideoMetaInfo(
+                    title: video.title,
+                    description: video.description,
+                    channelName: video.channel?.name,
+                    views: video.views,
+                    publishedTime: video.publishedTime,
+                    onChannelTap: onChannelTap,
+                    watchedSeconds: video.watchedSeconds,
+                  ),
+                ),
+                if (trailing != null) trailing!,
+              ],
             ),
           ),
         ],
@@ -163,6 +195,7 @@ class _VideoThumbnail extends StatelessWidget {
   final double? width;
   final BorderRadius borderRadius;
   final double? completionRate;
+  final Widget? trailing;
 
   const _VideoThumbnail({
     required this.thumbnailUrl,
@@ -171,6 +204,7 @@ class _VideoThumbnail extends StatelessWidget {
     this.width,
     required this.borderRadius,
     this.completionRate,
+    this.trailing,
   });
 
   @override
@@ -206,6 +240,12 @@ class _VideoThumbnail extends StatelessWidget {
             ),
           ),
         ),
+        if (trailing != null)
+          Positioned(
+            top: 6.h,
+            right: 6.w,
+            child: trailing!,
+          ),
         if (completionRate != null)
           Positioned(
             left: 0,

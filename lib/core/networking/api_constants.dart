@@ -69,6 +69,13 @@ class ApiConstants {
 
   //Playlist
   static const String playlists = "playlists";
+  static const String ownerPlaylists = "owner/playlists";
+  static String playlistById(String playlistId) => "playlists/$playlistId";
+  static String playlistVideo(String playlistId, String videoId) =>
+      "playlists/$playlistId/videos/$videoId";
+  static String reorderPlaylistVideos(String playlistId) =>
+      "playlists/$playlistId/videos/reorder";
+  static String playlistsForVideo(String videoId) => "playlists/video/$videoId";
 
   // Profile
   static const String profileMe = "profile/me";

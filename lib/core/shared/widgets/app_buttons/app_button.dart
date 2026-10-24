@@ -17,6 +17,7 @@ class AppButton extends StatelessWidget {
   final double? borderRadius;
   final bool isIconTrailing;
   final bool isLoading;
+  final bool isEnabled;
 
   const AppButton({
     super.key,
@@ -34,10 +35,14 @@ class AppButton extends StatelessWidget {
     this.borderRadius,
     this.isIconTrailing = false,
     this.isLoading = false,
+    this.isEnabled = true,
   });
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isInteractive = isEnabled && !isLoading;
+
     Widget buttonContent() {
       if (isLoading) {
         return SizedBox(
@@ -88,6 +93,10 @@ class AppButton extends StatelessWidget {
             foregroundColor: textColor ?? Colors.white,
             elevation: backgroundColor != null ? 0 : null,
             padding: EdgeInsets.zero,
+            disabledBackgroundColor: backgroundColor != null
+                ? backgroundColor!.withValues(alpha: 0.4)
+                : theme.disabledColor.withValues(alpha: 0.4),
+            disabledForegroundColor: theme.disabledColor,
           )
         : OutlinedButton.styleFrom(
             side: border,
@@ -103,6 +112,7 @@ class AppButton extends StatelessWidget {
               fontWeight: FontWeight.w500,
             ),
             padding: EdgeInsets.zero,
+            disabledForegroundColor: theme.disabledColor,
           );
 
     return SizedBox(
@@ -110,12 +120,12 @@ class AppButton extends StatelessWidget {
       height: height?.h ?? 48.h,
       child: isPrimary
           ? ElevatedButton(
-              onPressed: isLoading ? () {} : onPressed,
+              onPressed: isInteractive ? onPressed : () {},
               style: buttonStyle,
               child: buttonContent(),
             )
           : OutlinedButton(
-              onPressed: isLoading ? () {} : onPressed,
+              onPressed: isInteractive ? onPressed : () {},
               style: buttonStyle,
               child: buttonContent(),
             ),

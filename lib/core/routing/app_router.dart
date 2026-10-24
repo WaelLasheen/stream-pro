@@ -35,6 +35,9 @@ import 'package:stream_pro/feature/owner_channel/presentation/screens/owner_chan
 import 'package:stream_pro/feature/search/presentation/controllers/search_cubit/search_cubit.dart';
 import 'package:stream_pro/feature/search/presentation/screens/video_search_screen.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/subscribers_cubit/subscribers_cubit.dart';
+import 'package:stream_pro/feature/playlist/presentation/args/playlist_details_args.dart';
+import 'package:stream_pro/feature/playlist/presentation/controllers/playlist_details_cubit/playlist_details_cubit.dart';
+import 'package:stream_pro/feature/playlist/presentation/screens/playlist_details_screen.dart';
 import 'package:stream_pro/feature/subscriptions/presentation/controllers/subscriptions_cubit/subscriptions_cubit.dart';
 import 'package:stream_pro/feature/subscriptions/presentation/screens/subscriptions_screen.dart';
 import 'package:stream_pro/feature/video_details/presentation/args/video_details_args.dart';
@@ -290,6 +293,17 @@ class AppRouter {
           builder: (context) => BlocProvider(
             create: (context) => getIt<LikedVideosCubit>()..fetchLikedVideos(),
             child: const LikedVideosScreen(),
+          ),
+        );
+
+      case AppRoutes.playlistDetails:
+        final playlistArgs = settings.arguments as PlaylistDetailsArgs;
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) => BlocProvider(
+            create: (_) =>
+                getIt<PlaylistDetailsCubit>()..fetch(playlistArgs.playlistId),
+            child: PlaylistDetailsScreen(args: playlistArgs),
           ),
         );
 

@@ -8,6 +8,7 @@ class DragHandleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTheme = context.appTheme;
+
     return Center(
       child: Container(
         width: 40.w,

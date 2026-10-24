@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_pro/core/routing/app_routes.dart';
 import 'package:stream_pro/core/shared/widgets/app_error_widget/app_error_sliver.dart';
 import 'package:stream_pro/core/shared/widgets/empty_view/app_empty_sliver.dart';
 import 'package:stream_pro/core/shared/widgets/load_more_listener.dart';
 import 'package:stream_pro/core/shared/widgets/playlist_card/playlist_card_shimmer.dart';
 import 'package:stream_pro/core/shared/widgets/playlist_card/playlist_card_widget.dart';
 import 'package:stream_pro/core/shared/widgets/shimmer_list/sliver_shimmer_list.dart';
+import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
 import 'package:stream_pro/feature/channel/domain/entities/channel_playlist_entity.dart';
 import 'package:stream_pro/feature/channel/presentation/controllers/channel_playlists_cubit/channel_playlists_cubit.dart';
 import 'package:stream_pro/feature/channel/presentation/controllers/channel_playlists_cubit/channel_playlists_state.dart';
 import 'package:stream_pro/feature/channel/presentation/mappers/playlist_mapper.dart';
 import 'package:stream_pro/core/shared/widgets/channel/common_slivers.dart';
+import 'package:stream_pro/feature/playlist/presentation/args/playlist_details_args.dart';
 
 class ChannelPlaylistsTab extends StatelessWidget {
   final String channelId;
@@ -83,7 +86,10 @@ class ChannelPlaylistsTab extends StatelessWidget {
 
                         return PlaylistCardWidget(
                           playlist: playlist.toVideoCardData(),
-                          onTap: () {},
+                          onTap: () => context.navigateTo(
+                            AppRoutes.playlistDetails,
+                            arguments: PlaylistDetailsArgs(playlist.id),
+                          ),
                         );
                       }, childCount: items.length),
                     ),

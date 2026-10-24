@@ -4,6 +4,7 @@ import 'package:stream_pro/core/di/modules/comments_di.dart';
 import 'package:stream_pro/core/di/modules/likes_di.dart';
 import 'package:stream_pro/core/di/modules/notifications_di.dart';
 import 'package:stream_pro/core/di/modules/owner_channel_di.dart';
+import 'package:stream_pro/core/di/modules/playlist_di.dart';
 import 'package:stream_pro/core/di/modules/search_di.dart';
 import 'modules/auth_di.dart';
 import 'modules/channel_di.dart';
@@ -40,4 +41,5 @@ Future<void> setUpLocators() async {
   setUpLikes();
   setUpComments();
   setUpProfile();
+  setUpPlaylist();
 }
