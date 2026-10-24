@@ -81,7 +81,7 @@ class OwnerChannelRemoteDataSourceImpl implements OwnerChannelRemoteDataSource {
 
   @override
   Future<List<OwnerPlaylistModel>> getOwnerPlaylists() async {
-    final response = await _apiService.get(ApiConstants.playlists);
+    final response = await _apiService.get(ApiConstants.ownerPlaylists);
     final List<dynamic> data = response.data as List<dynamic>? ?? [];
     return data
         .map((e) => OwnerPlaylistModel.fromJson(e as Map<String, dynamic>))

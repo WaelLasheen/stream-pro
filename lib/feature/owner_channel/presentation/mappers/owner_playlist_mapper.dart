@@ -7,11 +7,11 @@ extension OwnerPlaylistMapper on OwnerPlaylistEntity {
       id: id,
       title: title,
       description: description,
-      thumbnails: thumbnailUrl != null && thumbnailUrl!.isNotEmpty
-          ? [thumbnailUrl!]
-          : const [],
+      thumbnails: thumbnails,
       videosCount: videoCount,
       isPublic: isPublic,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
     );
   }
 }

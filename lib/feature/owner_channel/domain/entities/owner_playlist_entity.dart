@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-/// A playlist as returned by `/api/v1/playlists` (the owner's own playlists).
 class OwnerPlaylistEntity extends Equatable {
   final String id;
   final String title;
@@ -9,8 +8,7 @@ class OwnerPlaylistEntity extends Equatable {
   final DateTime createdAt;
   final DateTime updatedAt;
   final int videoCount;
-  final String? thumbnailUrl;
-  final String? firstVideoId;
+  final List<String> thumbnails;
 
   const OwnerPlaylistEntity({
     required this.id,
@@ -19,9 +17,8 @@ class OwnerPlaylistEntity extends Equatable {
     required this.isPublic,
     required this.createdAt,
     required this.updatedAt,
-    required this.videoCount,
-    this.thumbnailUrl,
-    this.firstVideoId,
+    this.videoCount = 0,
+    this.thumbnails = const [],
   });
 
   @override
@@ -33,7 +30,6 @@ class OwnerPlaylistEntity extends Equatable {
     createdAt,
     updatedAt,
     videoCount,
-    thumbnailUrl,
-    firstVideoId,
+    thumbnails,
   ];
 }

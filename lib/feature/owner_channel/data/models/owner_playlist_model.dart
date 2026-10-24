@@ -8,8 +8,7 @@ class OwnerPlaylistModel {
   final DateTime createdAt;
   final DateTime updatedAt;
   final int videoCount;
-  final String? thumbnailUrl;
-  final String? firstVideoId;
+  final List<String> thumbnails;
 
   const OwnerPlaylistModel({
     required this.id,
@@ -18,27 +17,38 @@ class OwnerPlaylistModel {
     required this.isPublic,
     required this.createdAt,
     required this.updatedAt,
-    required this.videoCount,
-    this.thumbnailUrl,
-    this.firstVideoId,
+    this.videoCount = 0,
+    this.thumbnails = const [],
   });
 
   factory OwnerPlaylistModel.fromJson(Map<String, dynamic> json) {
     return OwnerPlaylistModel(
-      id: json['playlistId'] as String,
-      title: json['title'] as String,
+      id: json['id'] as String,
+      title: json['title'] ?? '',
       description: json['description'] as String?,
       isPublic: json['isPublic'] as bool? ?? false,
-      createdAt: json['createdAt'] != null
-          ? DateTime.parse(json['createdAt'] as String)
-          : DateTime.now(),
-      updatedAt: json['updatedAt'] != null
-          ? DateTime.parse(json['updatedAt'] as String)
-          : DateTime.now(),
-      videoCount: (json['videoCount'] as num?)?.toInt() ?? 0,
-      thumbnailUrl: json['thumbnailUrl'] as String?,
-      firstVideoId: json['firstVideoId'] as String?,
+      createdAt: _parseDate(json['createdAt']),
+      updatedAt: _parseDate(json['updatedAt']),
+      videoCount: json['videoCount'] ?? 0,
+      thumbnails: _parseThumbnails(json['videos']),
     );
+  }
+
+  static DateTime _parseDate(dynamic value) {
+    if (value is! String || value.isEmpty) return DateTime.now();
+    return DateTime.tryParse(value) ?? DateTime.now();
+  }
+
+  static List<String> _parseThumbnails(dynamic videos) {
+    if (videos is! List) return const [];
+
+    final thumbnails = <String>[];
+    for (final video in videos) {
+      if (video is! Map) continue;
+      final url = video['thumbnailUrl'];
+      if (url is String && url.isNotEmpty) thumbnails.add(url);
+    }
+    return thumbnails;
   }
 
   OwnerPlaylistEntity toEntity() {
@@ -50,8 +60,7 @@ class OwnerPlaylistModel {
       createdAt: createdAt,
       updatedAt: updatedAt,
       videoCount: videoCount,
-      thumbnailUrl: thumbnailUrl,
-      firstVideoId: firstVideoId,
+      thumbnails: thumbnails,
     );
   }
 }
