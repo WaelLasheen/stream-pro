@@ -55,13 +55,20 @@ class OwnerPlaylistsTab extends StatelessWidget {
                       return PlaylistCardWidget(
                         playlist: playlist.toVideoCardData(),
                         variant: PlaylistCardVariant.horizontal,
-                        onTap: () => context.navigateTo(
-                          AppRoutes.playlistDetails,
-                          arguments: PlaylistDetailsArgs(
-                            playlist.id,
-                            isOwner: true,
-                          ),
-                        ),
+                        onTap: () async {
+                          final deleted = await context.navigateTo<bool>(
+                            AppRoutes.playlistDetails,
+                            arguments: PlaylistDetailsArgs(
+                              playlist.id,
+                              isOwner: true,
+                            ),
+                          );
+                          if (deleted != true || !context.mounted) return;
+
+                          context
+                              .read<OwnerPlaylistsCubit>()
+                              .fetchOwnerPlaylists(showLoading: false);
+                        },
                       );
                     }, childCount: state.playlists.length),
                   ),

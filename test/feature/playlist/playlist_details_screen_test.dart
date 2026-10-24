@@ -67,6 +67,54 @@ Future<void> _collapseHeader(WidgetTester tester) async {
   await tester.pumpAndSettle();
 }
 
+/// Pushes the screen as a route so its pop result can be observed.
+Future<({PlaylistDetailsCubit cubit, Future<bool?> result})> _pushScreen(
+  WidgetTester tester, {
+  required FakePlaylistRepository repo,
+}) async {
+  final cubit = buildPlaylistDetailsCubit(repo);
+  await cubit.fetch('p1');
+
+  late Future<bool?> result;
+
+  await tester.pumpWidget(
+    ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, _) => MaterialApp(
+        theme: AppThemes().lightTheme,
+        home: Builder(
+          builder: (context) => Scaffold(
+            body: Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  result = Navigator.of(context).push<bool>(
+                    MaterialPageRoute(
+                      builder: (_) => BlocProvider.value(
+                        value: cubit,
+                        child: PlaylistDetailsScreen(
+                          args: PlaylistDetailsArgs('p1', isOwner: true),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                child: const Text('open'),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+
+  await tester.tap(find.text('open'));
+  await tester.pumpAndSettle();
+
+  return (cubit: cubit, result: result);
+}
+
 void main() {
   testWidgets('renders the header and the videos of the playlist', (
     tester,
@@ -273,5 +321,20 @@ void main() {
     expect(find.byType(PlaylistHeaderShimmer), findsOneWidget);
 
     await cubit.close();
+  });
+
+  testWidgets('pops with true and confirms the deletion', (tester) async {
+    final repo = FakePlaylistRepository()
+      ..playlist = details(videos: [testVideo('v1')]);
+
+    final pushed = await _pushScreen(tester, repo: repo);
+
+    await pushed.cubit.deletePlaylist();
+    await tester.pumpAndSettle();
+
+    expect(await pushed.result, isTrue);
+    expect(find.text('Playlist deleted.'), findsOneWidget);
+
+    await pushed.cubit.close();
   });
 }

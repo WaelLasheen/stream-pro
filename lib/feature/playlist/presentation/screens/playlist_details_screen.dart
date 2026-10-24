@@ -47,7 +47,8 @@ class PlaylistDetailsScreen extends StatelessWidget {
       body: BlocListener<PlaylistDetailsCubit, PlaylistDetailsState>(
         listener: (context, state) {
           if (state is PlaylistDetailsDeleted) {
-            context.navigateBack();
+            context.showSuccessSnackBar(message: 'Playlist deleted.');
+            context.navigateBack(true);
             return;
           }
           if (state is PlaylistDetailsFailure) {

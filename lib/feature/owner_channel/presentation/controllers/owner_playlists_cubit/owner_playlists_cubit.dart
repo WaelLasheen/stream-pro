@@ -8,8 +8,8 @@ class OwnerPlaylistsCubit extends Cubit<OwnerPlaylistsState> {
   OwnerPlaylistsCubit({required this.getOwnerPlaylistsUseCase})
     : super(const OwnerPlaylistsInitialState());
 
-  Future<void> fetchOwnerPlaylists() async {
-    emit(const OwnerPlaylistsLoadingState());
+  Future<void> fetchOwnerPlaylists({bool showLoading = true}) async {
+    if (showLoading) emit(const OwnerPlaylistsLoadingState());
 
     final result = await getOwnerPlaylistsUseCase();
     if (isClosed) return;
