@@ -51,6 +51,8 @@ import 'package:stream_pro/feature/video_management/presentation/screens/upload_
 import 'package:stream_pro/feature/watch_history/presentation/controllers/video_track_cubit/video_track_cubit.dart';
 import 'package:stream_pro/feature/watch_history/presentation/controllers/watch_history_cubit/watch_history_cubit.dart';
 import 'package:stream_pro/feature/watch_history/presentation/screens/watch_history_screen.dart';
+import 'package:stream_pro/feature/watch_later/presentation/controllers/watch_later_cubit/watch_later_cubit.dart';
+import 'package:stream_pro/feature/watch_later/presentation/screens/watch_later_screen.dart';
 
 class AppRouter {
   AppRouter();
@@ -293,6 +295,15 @@ class AppRouter {
           builder: (context) => BlocProvider(
             create: (context) => getIt<LikedVideosCubit>()..fetchLikedVideos(),
             child: const LikedVideosScreen(),
+          ),
+        );
+
+      case AppRoutes.watchLater:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<WatchLaterCubit>()..fetchWatchLater(),
+            child: const WatchLaterScreen(),
           ),
         );
 

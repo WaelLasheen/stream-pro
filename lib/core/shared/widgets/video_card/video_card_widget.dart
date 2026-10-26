@@ -17,6 +17,8 @@ class VideoCardWidget extends StatelessWidget {
   final double? thumbnailHeight;
   final bool showActions;
   final Widget? trailing;
+  final ValueChanged<bool>? onWatchLaterToggled;
+  final WatchLaterCardAction watchLaterAction;
 
   const VideoCardWidget({
     super.key,
@@ -28,12 +30,18 @@ class VideoCardWidget extends StatelessWidget {
     this.thumbnailHeight,
     this.showActions = true,
     this.trailing,
+    this.onWatchLaterToggled,
+    this.watchLaterAction = WatchLaterCardAction.add,
   });
 
   Widget? get _trailing {
     if (trailing != null) return trailing;
     if (!showActions) return null;
-    return VideoActionsPopup(videoId: video.id);
+    return VideoActionsPopup(
+      videoId: video.id,
+      onWatchLaterToggled: onWatchLaterToggled,
+      watchLaterAction: watchLaterAction,
+    );
   }
 
   @override
@@ -241,11 +249,7 @@ class _VideoThumbnail extends StatelessWidget {
           ),
         ),
         if (trailing != null)
-          Positioned(
-            top: 6.h,
-            right: 6.w,
-            child: trailing!,
-          ),
+          Positioned(top: 6.h, right: 6.w, child: trailing!),
         if (completionRate != null)
           Positioned(
             left: 0,

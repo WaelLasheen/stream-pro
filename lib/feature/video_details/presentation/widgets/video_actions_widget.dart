@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/like_button.dart';
-import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
 import 'package:stream_pro/feature/playlist/presentation/widgets/playlist_selector_sheet.dart';
+import 'package:stream_pro/feature/video_details/presentation/widgets/action_button.dart';
 import 'package:stream_pro/feature/video_details/presentation/widgets/download_button.dart';
+import 'package:stream_pro/feature/video_details/presentation/widgets/watch_later_button.dart';
 
 class VideoActionsWidget extends StatelessWidget {
   final String videoId;
@@ -56,50 +57,10 @@ class VideoActionsWidget extends StatelessWidget {
             },
           ),
           SizedBox(width: 12.w),
+          WatchLaterButton(videoId: videoId),
+          SizedBox(width: 12.w),
           DownloadButton(videoId: videoId),
         ],
-      ),
-    );
-  }
-}
-
-// Renamed from _ActionButton to ActionButton to allow cross-file usage
-class ActionButton extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final VoidCallback onTap;
-
-  const ActionButton({
-    super.key,
-    required this.icon,
-    required this.label,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final appTheme = context.appTheme;
-    final textTheme = context.textTheme;
-
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(20.r),
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 8.h),
-        decoration: BoxDecoration(
-          color: appTheme.surfaceColor,
-          borderRadius: BorderRadius.circular(20.r),
-        ),
-        child: Row(
-          children: [
-            Icon(icon, size: 18.sp, color: appTheme.grey700),
-            SizedBox(width: 6.w),
-            Text(
-              label,
-              style: textTheme.labelMedium?.copyWith(color: appTheme.grey700),
-            ),
-          ],
-        ),
       ),
     );
   }

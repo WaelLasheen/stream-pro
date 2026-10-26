@@ -15,6 +15,7 @@ import 'modules/subscriptions_di.dart';
 import 'modules/video_details_di.dart';
 import 'modules/video_management_di.dart';
 import 'modules/watch_history_di.dart';
+import 'modules/watch_later_di.dart';
 
 final getIt = GetIt.instance;
 Future<void> setUpLocators() async {
@@ -36,6 +37,7 @@ Future<void> setUpLocators() async {
   setUpSubscriptions();
   setUpVideoManagement();
   setUpWatchHistory();
+  setUpWatchLater();
   setUpNotifications();
   setUpSearch();
   setUpCategory();

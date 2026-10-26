@@ -63,6 +63,12 @@ class ApiConstants {
   static const String watchHistory = "watch-history";
   static const String trackWatchHistory = "watch-history/track";
 
+  // Watch Later
+  static const String watchLaters = "watchlaters";
+  static String watchLaterStatus(String videoId) =>
+      "watchlaters/$videoId/status";
+  static String watchLaterById(String videoId) => "watchlaters/$videoId";
+
   // Notifications ذ
   static const String notifications = "notifications";
   static String notificationById(String id) => "notifications/$id";
@@ -79,4 +85,5 @@ class ApiConstants {
 
   // Profile
   static const String profileMe = "profile/me";
+
 }

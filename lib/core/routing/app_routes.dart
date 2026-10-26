@@ -17,5 +17,6 @@ abstract class AppRoutes {
   static const String notifications = "/notifications";
   static const String search = "/search";
   static const String likedVideo = "/liked-videos";
+  static const String watchLater = "/watch-later";
   static const String playlistDetails = "/playlist-details";
 }
