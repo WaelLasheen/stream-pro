@@ -6,13 +6,13 @@ import 'package:stream_pro/core/routing/observers/app_route_observer.dart';
 import 'package:stream_pro/core/shared/widgets/video_player/controller/video_player_cubit.dart';
 import 'package:stream_pro/core/shared/widgets/video_player/controller/video_player_state.dart';
 import 'package:stream_pro/core/shared/widgets/video_player/video_player_data.dart';
+import 'package:video_player/video_player.dart';
 
 class AppVideoPlayer extends StatefulWidget {
   final VideoPlayerData data;
   final double? aspectRatio;
   final double? width;
 
-  // Tracking callbacks
   final VoidCallback? onInitialized;
   final ValueChanged<Duration>? onPositionChanged;
   final ValueChanged<bool>? onPlayStateChanged;
@@ -40,10 +40,12 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> with RouteAware {
   bool _wasPlaying = false;
   bool _isInitialized = false;
 
+  VideoPlayerController? _activeController;
+
   void _pause() {
-    if (_cubit.state is VideoPlayerLoaded) {
-      final loaded = _cubit.state as VideoPlayerLoaded;
-      _wasPlayingBeforePause = loaded.videoController.value.isPlaying;
+    final controller = _cubit.state.videoController;
+    if (controller != null) {
+      _wasPlayingBeforePause = controller.value.isPlaying;
     }
     _cubit.pauseVideo();
   }
@@ -55,13 +57,16 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> with RouteAware {
   }
 
   void _onPlayerStateChanged() {
-    final currentState = _cubit.state;
-    if (!mounted || currentState is! VideoPlayerLoaded) return;
-    final position = currentState.videoController.value.position;
-    final isPlaying = currentState.videoController.value.isPlaying;
+    if (!mounted) return;
+
+    final controller = _cubit.state.videoController;
+    if (controller == null) return;
+
+    final position = controller.value.position;
+    final isPlaying = controller.value.isPlaying;
     final isCompleted =
-        position >= currentState.videoController.value.duration &&
-        currentState.videoController.value.duration.inSeconds > 0;
+        position >= controller.value.duration &&
+        controller.value.duration.inSeconds > 0;
 
     if (!_isInitialized) {
       _isInitialized = true;
@@ -91,15 +96,8 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> with RouteAware {
       onInactive: _pause,
       onResume: _resume,
     );
-
-    _cubit.stream.listen((state) {
-      if (state is VideoPlayerLoaded) {
-        state.videoController.addListener(_onPlayerStateChanged);
-      }
-    });
   }
 
-  // 2. Subscribe to route changes
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -111,25 +109,20 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> with RouteAware {
 
   @override
   void dispose() {
-    // 3. Unsubscribe from route changes
     routeObserver.unsubscribe(this);
 
-    if (_cubit.state is VideoPlayerLoaded) {
-      final loaded = _cubit.state as VideoPlayerLoaded;
-      loaded.videoController.removeListener(_onPlayerStateChanged);
-    }
+    _activeController?.removeListener(_onPlayerStateChanged);
+
     _lifecycleListener?.dispose();
     _cubit.close();
     super.dispose();
   }
 
-  // 4. Called when a new screen is pushed ON TOP of this one
   @override
   void didPushNext() {
     _pause();
   }
 
-  // 5. Called when the screen on top is popped OFF, revealing this one again
   @override
   void didPopNext() {
     _resume();
@@ -139,7 +132,16 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> with RouteAware {
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: _cubit,
-      child: BlocBuilder<VideoPlayerCubit, VideoPlayerState>(
+      child: BlocConsumer<VideoPlayerCubit, VideoPlayerState>(
+        listener: (context, state) {
+          final newController = state.videoController;
+
+          if (_activeController != newController) {
+            _activeController?.removeListener(_onPlayerStateChanged);
+            _activeController = newController;
+            _activeController?.addListener(_onPlayerStateChanged);
+          }
+        },
         builder: (context, state) {
           final aspectRatio = widget.aspectRatio ?? 16 / 9;
 
@@ -164,7 +166,7 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> with RouteAware {
         return _buildLoadingThumbnail(widget.data.posterUrl);
 
       case VideoPlayerLoaded():
-        return Chewie(controller: state.chewieController);
+        return Chewie(controller: state.chewieController!);
 
       case VideoPlayerError():
         return Center(

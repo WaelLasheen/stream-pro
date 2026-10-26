@@ -11,17 +11,23 @@ class VideoPlayerCubit extends Cubit<VideoPlayerState> {
   Future<void> initializeVideo(String videoUrl, String? posterUrl) async {
     emit(const VideoPlayerLoading());
 
+    VideoPlayerController? videoController;
+    ChewieController? chewieController;
+
     try {
-      final videoController = VideoPlayerController.networkUrl(
-        Uri.parse(videoUrl),
-      );
+      videoController = VideoPlayerController.networkUrl(Uri.parse(videoUrl));
       await videoController.initialize();
+
+      if (isClosed) {
+        await videoController.dispose();
+        return;
+      }
 
       final aspectRatio = videoController.value.aspectRatio > 0
           ? videoController.value.aspectRatio
           : 16 / 9;
 
-      final chewieController = ChewieController(
+      chewieController = ChewieController(
         videoPlayerController: videoController,
         autoPlay: true,
         looping: false,
@@ -31,7 +37,13 @@ class VideoPlayerCubit extends Cubit<VideoPlayerState> {
         placeholder: Container(color: Colors.black),
         errorBuilder: (context, errorMessage) => _buildErrorWidget(),
       );
-      if (isClosed) return;
+
+      if (isClosed) {
+        chewieController.dispose();
+        await videoController.dispose();
+        return;
+      }
+
       emit(
         VideoPlayerLoaded(
           videoController: videoController,
@@ -39,6 +51,11 @@ class VideoPlayerCubit extends Cubit<VideoPlayerState> {
         ),
       );
     } catch (e) {
+      if (videoController != null) {
+        try {
+          await videoController.dispose();
+        } catch (_) {}
+      }
       if (isClosed) return;
       emit(VideoPlayerError(e.toString()));
     }
@@ -64,26 +81,18 @@ class VideoPlayerCubit extends Cubit<VideoPlayerState> {
   }
 
   void pauseVideo() {
-    if (state is VideoPlayerLoaded) {
-      final loaded = state as VideoPlayerLoaded;
-      loaded.videoController.pause();
-    }
+    state.videoController?.pause();
   }
 
   void resumeVideo() {
-    if (state is VideoPlayerLoaded) {
-      final loaded = state as VideoPlayerLoaded;
-      loaded.videoController.play();
-    }
+    state.videoController?.play();
   }
 
   @override
-  Future<void> close() {
-    if (state is VideoPlayerLoaded) {
-      final loaded = state as VideoPlayerLoaded;
-      loaded.chewieController.dispose();
-      loaded.videoController.dispose();
-    }
+  Future<void> close() async {
+    state.chewieController?.dispose();
+    await state.videoController?.dispose();
+
     return super.close();
   }
 }

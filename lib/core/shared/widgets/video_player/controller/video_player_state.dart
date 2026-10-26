@@ -3,10 +3,13 @@ import 'package:equatable/equatable.dart';
 import 'package:video_player/video_player.dart';
 
 sealed class VideoPlayerState extends Equatable {
-  const VideoPlayerState();
+  final VideoPlayerController? videoController;
+  final ChewieController? chewieController;
+
+  const VideoPlayerState({this.videoController, this.chewieController});
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [videoController, chewieController];
 }
 
 class VideoPlayerInitial extends VideoPlayerState {
@@ -18,13 +21,13 @@ class VideoPlayerLoading extends VideoPlayerState {
 }
 
 class VideoPlayerLoaded extends VideoPlayerState {
-  final VideoPlayerController videoController;
-  final ChewieController chewieController;
-
   const VideoPlayerLoaded({
-    required this.videoController,
-    required this.chewieController,
-  });
+    required VideoPlayerController videoController,
+    required ChewieController chewieController,
+  }) : super(
+         videoController: videoController,
+         chewieController: chewieController,
+       ); 
 
   @override
   List<Object?> get props => [videoController, chewieController];
