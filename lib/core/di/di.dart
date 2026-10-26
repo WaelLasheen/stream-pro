@@ -17,13 +17,14 @@ import 'modules/video_management_di.dart';
 import 'modules/watch_history_di.dart';
 
 final getIt = GetIt.instance;
-
 Future<void> setUpLocators() async {
   setUpBlocObserver();
-  await setUpStorage();
-  await setUpApiService();
-  await setupErrorLoggerService();
-  await setUpNotificationService();
+  await Future.wait([setUpStorage(), firebaseInitializeApp()]);
+  await Future.wait([
+    setUpApiService(),
+    setupErrorLoggerService(),
+    setUpNotificationService(),
+  ]);
   setUpConfig();
   setUpFilePicker();
   setUpRouter();

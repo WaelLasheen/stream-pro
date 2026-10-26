@@ -63,8 +63,11 @@ Future<void> setUpApiService() async {
   );
 }
 
-Future<void> setupErrorLoggerService() async {
+Future<void> firebaseInitializeApp() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+}
+
+Future<void> setupErrorLoggerService() async {
   getIt.registerLazySingleton<CrashlyticsService>(
     () => CrashlyticsServiceImpl(),
   );
