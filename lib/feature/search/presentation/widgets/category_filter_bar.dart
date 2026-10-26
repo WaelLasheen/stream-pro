@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/entity/category_entity.dart';
+import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 
 class CategoryFilterBar extends StatelessWidget {
   final List<CategoryEntity> categories;
-  final ValueNotifier<String?> selectedCategoryIdNotifier;
+  final ValueNotifier<String?> selectedCategoryNotifier;
 
   const CategoryFilterBar({
     super.key,
     required this.categories,
-    required this.selectedCategoryIdNotifier,
+    required this.selectedCategoryNotifier,
   });
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = context.appTheme;
     final theme = Theme.of(context);
 
     return ValueListenableBuilder<String?>(
-      valueListenable: selectedCategoryIdNotifier,
-      builder: (context, selectedId, _) {
+      valueListenable: selectedCategoryNotifier,
+      builder: (context, selectedCategory, _) {
         return SizedBox(
           height: 40.h,
           child: ListView.separated(
@@ -30,20 +32,20 @@ class CategoryFilterBar extends StatelessWidget {
               final isAllChip = index == 0;
               final category = isAllChip ? null : categories[index - 1];
               final isSelected = isAllChip
-                  ? selectedId == null
-                  : selectedId == category?.id;
+                  ? selectedCategory == null
+                  : selectedCategory == category?.name;
               final label = isAllChip ? "All" : category?.name ?? '';
 
               return ChoiceChip(
                 label: Text(label),
                 selected: isSelected,
                 onSelected: (_) {
-                  selectedCategoryIdNotifier.value = isAllChip
+                  selectedCategoryNotifier.value = isAllChip
                       ? null
-                      : category?.id;
+                      : category?.name;
                 },
-                selectedColor: theme.colorScheme.primary,
-                backgroundColor: theme.colorScheme.surfaceContainerHighest,
+                selectedColor: appTheme.primaryColor,
+                backgroundColor: appTheme.surfaceColor,
                 labelStyle: theme.textTheme.labelMedium?.copyWith(
                   color: isSelected
                       ? theme.colorScheme.onPrimary
@@ -56,6 +58,8 @@ class CategoryFilterBar extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20.r),
                 ),
                 showCheckmark: false,
+                shadowColor: appTheme.grey800,
+                selectedShadowColor: appTheme.grey800,
               );
             },
           ),

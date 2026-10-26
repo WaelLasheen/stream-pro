@@ -5,13 +5,13 @@ import '../repositories/search_repository.dart';
 
 class SearchVideosParams {
   final String query;
-  final String? categoryId;
+  final String? category;
   final int pageNumber;
   final int pageSize;
 
   const SearchVideosParams({
     required this.query,
-    this.categoryId,
+    this.category,
     this.pageNumber = 1,
     this.pageSize = 10,
   });
@@ -25,7 +25,7 @@ class SearchVideosUseCase {
   Future<Either<Failure, PaginatedSearchResultEntity>> call(SearchVideosParams params) {
     return repository.searchVideos(
       query: params.query,
-      categoryId: params.categoryId,
+      category: params.category,
       pageNumber: params.pageNumber,
       pageSize: params.pageSize,
     );

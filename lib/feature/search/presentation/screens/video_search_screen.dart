@@ -16,7 +16,9 @@ import 'package:stream_pro/feature/search/presentation/widgets/category_filter_b
 import 'package:stream_pro/feature/search/presentation/widgets/category_shimmer.dart';
 import 'package:stream_pro/feature/search/presentation/controllers/search_cubit/search_cubit.dart';
 import 'package:stream_pro/feature/search/presentation/controllers/search_cubit/search_state.dart';
+import 'package:stream_pro/feature/search/presentation/controllers/search_suggestions_cubit/search_suggestions_cubit.dart';
 import 'package:stream_pro/feature/search/presentation/mapper/search_video_mapper.dart';
+import 'package:stream_pro/feature/search/presentation/widgets/search_suggestions_view.dart';
 import 'package:stream_pro/feature/video_details/presentation/args/video_details_args.dart';
 
 class VideoSearchScreen extends StatefulWidget {
@@ -28,12 +30,13 @@ class VideoSearchScreen extends StatefulWidget {
 
 class _VideoSearchScreenState extends State<VideoSearchScreen> {
   final _searchController = TextEditingController();
-  final _selectedCategoryIdNotifier = ValueNotifier<String?>(null);
+  final _selectedCategoryNotifier = ValueNotifier<String?>(null);
+  final _showSuggestionsNotifier = ValueNotifier<bool>(false);
 
   @override
   void initState() {
     super.initState();
-    _selectedCategoryIdNotifier.addListener(() {
+    _selectedCategoryNotifier.addListener(() {
       _onCategoryChanged();
     });
   }
@@ -41,28 +44,51 @@ class _VideoSearchScreenState extends State<VideoSearchScreen> {
   @override
   void dispose() {
     _searchController.dispose();
-    _selectedCategoryIdNotifier.dispose();
+    _selectedCategoryNotifier.dispose();
+    _showSuggestionsNotifier.dispose();
     super.dispose();
   }
 
   void _onQueryChanged(String query) {
-    context.read<SearchCubit>().onQueryChanged(
+    final canSuggest =
+        query.trim().length >= SearchSuggestionsCubit.minQueryLength;
+    _showSuggestionsNotifier.value = canSuggest;
+    context.read<SearchSuggestionsCubit>().onQueryChanged(query);
+    if (!canSuggest) context.read<SearchCubit>().clearSearch();
+  }
+
+  void _onSubmitted(String query) {
+    if (query.trim().isEmpty) return;
+    FocusScope.of(context).unfocus();
+    _showSuggestionsNotifier.value = false;
+    context.read<SearchCubit>().search(
       query: query,
-      categoryId: _selectedCategoryIdNotifier.value,
+      category: _selectedCategoryNotifier.value,
     );
   }
 
   void _onCategoryChanged() {
-    context.read<SearchCubit>().onQueryChanged(
-      query: _searchController.text,
-      categoryId: _selectedCategoryIdNotifier.value,
+    final query = _searchController.text;
+    if (query.trim().isEmpty) return;
+    _showSuggestionsNotifier.value = false;
+    context.read<SearchCubit>().search(
+      query: query,
+      category: _selectedCategoryNotifier.value,
+    );
+  }
+
+  void _openVideo(String videoId) {
+    FocusScope.of(context).unfocus();
+    context.navigateTo(
+      AppRoutes.videoDetails,
+      arguments: VideoDetailsArgs(videoId),
     );
   }
 
   void _loadMore() {
     context.read<SearchCubit>().loadMore(
       query: _searchController.text,
-      categoryId: _selectedCategoryIdNotifier.value,
+      category: _selectedCategoryNotifier.value,
     );
   }
 
@@ -83,6 +109,7 @@ class _VideoSearchScreenState extends State<VideoSearchScreen> {
                 hint: 'Search videos...',
                 prefixIcon: Icons.search,
                 onChanged: _onQueryChanged,
+                onFieldSubmitted: _onSubmitted,
                 textInputAction: TextInputAction.search,
               ),
             ),
@@ -96,11 +123,11 @@ class _VideoSearchScreenState extends State<VideoSearchScreen> {
 
                 if (state is CategoryLoaded) {
                   return ValueListenableBuilder<String?>(
-                    valueListenable: _selectedCategoryIdNotifier,
+                    valueListenable: _selectedCategoryNotifier,
                     builder: (context, _, __) {
                       return CategoryFilterBar(
                         categories: state.categories,
-                        selectedCategoryIdNotifier: _selectedCategoryIdNotifier,
+                        selectedCategoryNotifier: _selectedCategoryNotifier,
                       );
                     },
                   );
@@ -113,90 +140,107 @@ class _VideoSearchScreenState extends State<VideoSearchScreen> {
 
             // Search Results
             Expanded(
-              child: BlocBuilder<SearchCubit, SearchState>(
-                builder: (context, state) {
-                  if (state is SearchInitial) {
-                    return AppEmptyWidget(
-                      message: 'Type to search videos...',
-                      icon: Icons.play_circle_outline_rounded,
+              child: ValueListenableBuilder<bool>(
+                valueListenable: _showSuggestionsNotifier,
+                builder: (context, showSuggestions, _) {
+                  if (showSuggestions) {
+                    return SearchSuggestionsView(
+                      onSuggestionTap: _openVideo,
+                      onRetry: () =>
+                          context.read<SearchSuggestionsCubit>().retry(),
                     );
                   }
+                  return BlocBuilder<SearchCubit, SearchState>(
+                    builder: (context, state) {
+                      if (state is SearchInitial) {
+                        return AppEmptyWidget(
+                          message: 'Type to search videos...',
+                          icon: Icons.play_circle_outline_rounded,
+                        );
+                      }
 
-                  if (state is SearchLoading) {
-                    return ShimmerList(
-                      itemBuilder: (_, _) => VideoCardShimmer(),
-                    );
-                  }
+                      if (state is SearchLoading) {
+                        return ShimmerList(
+                          itemBuilder: (_, _) => VideoCardShimmer(),
+                        );
+                      }
 
-                  if (state is SearchFailure && state.searchResult == null) {
-                    return AppErrorWidget(
-                      message: state.message,
-                      onRetry: () => _onQueryChanged(_searchController.text),
-                    );
-                  }
+                      if (state is SearchFailure &&
+                          state.searchResult == null) {
+                        return AppErrorWidget(
+                          message: state.message,
+                          onRetry: () => _onSubmitted(_searchController.text),
+                        );
+                      }
 
-                  if (state.searchResult != null) {
-                    final items = state.searchResult?.items ?? [];
+                      if (state.searchResult != null) {
+                        final items = state.searchResult?.items ?? [];
 
-                    if (items.isEmpty) {
-                      return AppEmptyWidget(
-                        message:
-                            'No videos found for "${_searchController.text}"',
-                        icon: Icons.search_off_rounded,
-                      );
-                    }
-
-                    return LoadMoreListener(
-                      onLoadMore: () {
-                        if (state is SearchLoaded) {
-                          _loadMore();
-                        }
-                      },
-                      child: ListView.builder(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w),
-                        itemCount: items.length + 1,
-                        key: const PageStorageKey('search_videos'),
-                        itemBuilder: (context, index) {
-                          if (index == items.length) {
-                            if (state is SearchFailure) {
-                              return AppErrorWidget(
-                                message: state.message,
-                                onRetry: () => _loadMore(),
-                              );
-                            }
-                            if (state is SearchLoaded && state.isLoadingMore) {
-                              return Padding(
-                                padding: EdgeInsets.symmetric(vertical: 16.h),
-                                child: const Center(
-                                  child: CircularProgressIndicator.adaptive(),
-                                ),
-                              );
-                            }
-                            return SizedBox.shrink();
-                          }
-
-                          final video = items[index];
-                          return VideoCardWidget(
-                            video: video.toVideoCardData(),
-                            onTap: () {
-                              context.navigateTo(
-                                AppRoutes.videoDetails,
-                                arguments: VideoDetailsArgs(video.videoId),
-                              );
-                            },
-                            onChannelTap: () {
-                              context.navigateTo(
-                                AppRoutes.channelDetails,
-                                arguments: video.channelId,
-                              );
-                            },
+                        if (items.isEmpty) {
+                          return AppEmptyWidget(
+                            message:
+                                'No videos found for "${_searchController.text}"',
+                            icon: Icons.search_off_rounded,
                           );
-                        },
-                      ),
-                    );
-                  }
+                        }
 
-                  return const SizedBox.shrink();
+                        return LoadMoreListener(
+                          onLoadMore: () {
+                            if (state is SearchLoaded) {
+                              _loadMore();
+                            }
+                          },
+                          child: ListView.builder(
+                            padding: EdgeInsets.symmetric(horizontal: 16.w),
+                            itemCount: items.length + 1,
+                            key: const PageStorageKey('search_videos'),
+                            itemBuilder: (context, index) {
+                              if (index == items.length) {
+                                if (state is SearchFailure) {
+                                  return AppErrorWidget(
+                                    message: state.message,
+                                    onRetry: () => _loadMore(),
+                                  );
+                                }
+                                if (state is SearchLoaded &&
+                                    state.isLoadingMore) {
+                                  return Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 16.h,
+                                    ),
+                                    child: const Center(
+                                      child:
+                                          CircularProgressIndicator.adaptive(),
+                                    ),
+                                  );
+                                }
+                                return SizedBox.shrink();
+                              }
+
+                              final video = items[index];
+                              return VideoCardWidget(
+                                video: video.toVideoCardData(),
+                                onTap: () {
+                                  context.navigateTo(
+                                    AppRoutes.videoDetails,
+                                    arguments: VideoDetailsArgs(video.videoId),
+                                  );
+                                },
+                                onChannelTap: () {
+                                  context.navigateTo(
+                                    AppRoutes.channelDetails,
+                                    arguments: video.channelId,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        );
+                      }
+
+                      return const SizedBox.shrink();
+                    },
+                  );
                 },
               ),
             ),

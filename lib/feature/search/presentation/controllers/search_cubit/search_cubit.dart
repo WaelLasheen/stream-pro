@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../domain/use_cases/search_videos_use_case.dart';
 import 'search_state.dart';
@@ -6,31 +5,23 @@ import 'search_state.dart';
 class SearchCubit extends Cubit<SearchState> {
   final SearchVideosUseCase searchVideosUseCase;
 
-  Timer? _debounceTimer;
-
   SearchCubit({required this.searchVideosUseCase})
     : super(const SearchInitial());
 
-  void onQueryChanged({required String query, required String? categoryId}) {
-    _debounceTimer?.cancel();
-    _debounceTimer = Timer(const Duration(milliseconds: 500), () {
-      _search(query: query, categoryId: categoryId);
-    });
-  }
-
-  Future<void> _search({required String query, String? categoryId}) async {
+  Future<void> search({required String query, String? category}) async {
     String currentQuery = query.trim();
 
     if (currentQuery.isEmpty) {
-      emit(SearchInitial());
+      emit(const SearchInitial());
       return;
     }
 
-    emit(SearchLoading());
+    emit(const SearchLoading());
 
     final result = await searchVideosUseCase(
-      SearchVideosParams(query: currentQuery, categoryId: categoryId),
+      SearchVideosParams(query: currentQuery, category: category),
     );
+
     if (isClosed) return;
 
     result.fold(
@@ -39,9 +30,10 @@ class SearchCubit extends Cubit<SearchState> {
     );
   }
 
-  Future<void> loadMore({required String query, String? categoryId}) async {
+  Future<void> loadMore({required String query, String? category}) async {
     final currentState = state;
     final currentSearchResult = state.searchResult;
+
     if (currentSearchResult == null || !currentSearchResult.hasNextPage) return;
     if (currentState is SearchLoaded && currentState.isLoadingMore) return;
 
@@ -51,10 +43,11 @@ class SearchCubit extends Cubit<SearchState> {
     final result = await searchVideosUseCase(
       SearchVideosParams(
         query: query.trim(),
-        categoryId: categoryId,
+        category: category,
         pageNumber: nextPage,
       ),
     );
+
     if (isClosed) return;
 
     result.fold(
@@ -76,12 +69,6 @@ class SearchCubit extends Cubit<SearchState> {
   }
 
   void clearSearch() {
-    emit(SearchInitial());
-  }
-
-  @override
-  Future<void> close() {
-    _debounceTimer?.cancel();
-    return super.close();
+    emit(const SearchInitial());
   }
 }

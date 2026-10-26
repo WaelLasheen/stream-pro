@@ -33,6 +33,7 @@ import 'package:stream_pro/feature/owner_channel/presentation/controllers/owner_
 import 'package:stream_pro/feature/owner_channel/presentation/screens/channel_editor_screen.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/screens/owner_channel_screen.dart';
 import 'package:stream_pro/feature/search/presentation/controllers/search_cubit/search_cubit.dart';
+import 'package:stream_pro/feature/search/presentation/controllers/search_suggestions_cubit/search_suggestions_cubit.dart';
 import 'package:stream_pro/feature/search/presentation/screens/video_search_screen.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/subscribers_cubit/subscribers_cubit.dart';
 import 'package:stream_pro/feature/playlist/presentation/args/playlist_details_args.dart';
@@ -280,7 +281,8 @@ class AppRouter {
           settings: settings,
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider(create: (context) => getIt<SearchCubit>()),
+              BlocProvider(create: (_) => getIt<SearchCubit>()),
+              BlocProvider(create: (_) => getIt<SearchSuggestionsCubit>()),
               BlocProvider(
                 create: (context) => getIt<CategoryCubit>()..fetchCategories(),
               ),

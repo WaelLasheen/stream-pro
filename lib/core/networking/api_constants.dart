@@ -86,4 +86,10 @@ class ApiConstants {
   // Profile
   static const String profileMe = "profile/me";
 
+  // Search
+  static const String videoSearch = "videos/search";
+  static const String searchSuggestions = "search/term-suggestions";
+
+  // Category
+  static const String categories = "categories";
 }
