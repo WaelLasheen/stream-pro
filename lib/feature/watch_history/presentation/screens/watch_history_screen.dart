@@ -27,25 +27,28 @@ class WatchHistoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppRefreshIndicator(
-      onRefresh: () => context.read<WatchHistoryCubit>().fetchWatchHistory(),
-      child: BlocBuilder<WatchHistoryCubit, WatchHistoryState>(
-        builder: (context, state) {
-          return switch (state) {
-            WatchHistoryInitial() ||
-            WatchHistoryLoading() => const WatchHistoryLoadingWidget(),
-            WatchHistoryEmpty() => const WatchHistoryEmptyWidget(),
-            WatchHistoryError() => WatchHistoryErrorWidget(
-              message: state.message,
-              onRetry: () =>
-                  context.read<WatchHistoryCubit>().fetchWatchHistory(),
-            ),
-            WatchHistoryLoaded() => WatchHistoryLoadedWidget(
-              groups: state.groups,
-              onVideoTap: _openVideo,
-            ),
-          };
-        },
+    return Scaffold(
+      appBar: AppBar(title: const Text('Watch History'), centerTitle: true),
+      body: AppRefreshIndicator(
+        onRefresh: () => context.read<WatchHistoryCubit>().fetchWatchHistory(),
+        child: BlocBuilder<WatchHistoryCubit, WatchHistoryState>(
+          builder: (context, state) {
+            return switch (state) {
+              WatchHistoryInitial() ||
+              WatchHistoryLoading() => const WatchHistoryLoadingWidget(),
+              WatchHistoryEmpty() => const WatchHistoryEmptyWidget(),
+              WatchHistoryError() => WatchHistoryErrorWidget(
+                message: state.message,
+                onRetry: () =>
+                    context.read<WatchHistoryCubit>().fetchWatchHistory(),
+              ),
+              WatchHistoryLoaded() => WatchHistoryLoadedWidget(
+                groups: state.groups,
+                onVideoTap: _openVideo,
+              ),
+            };
+          },
+        ),
       ),
     );
   }

@@ -9,13 +9,15 @@ import 'package:stream_pro/core/routing/app_routes.dart';
 import 'package:stream_pro/core/utils/consts/image_path.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
+import 'package:stream_pro/feature/Likes/presentation/controllers/liked_videos_cubit/liked_videos_cubit.dart';
 import 'package:stream_pro/feature/home/presentation/controller/home_cubit/home_cubit.dart';
 import 'package:stream_pro/feature/home/presentation/screen/home_screen.dart';
+import 'package:stream_pro/feature/library/presentation/screen/library_screen.dart';
 import 'package:stream_pro/feature/main/presentation/widgets/main_shell_app_bar.dart';
 import 'package:stream_pro/feature/subscriptions/presentation/controllers/subscriptions_cubit/subscriptions_cubit.dart';
 import 'package:stream_pro/feature/subscriptions/presentation/screens/subscriptions_screen.dart';
 import 'package:stream_pro/feature/watch_history/presentation/controllers/watch_history_cubit/watch_history_cubit.dart';
-import 'package:stream_pro/feature/watch_history/presentation/screens/watch_history_screen.dart';
+import 'package:stream_pro/feature/watch_later/presentation/controllers/watch_later_cubit/watch_later_cubit.dart';
 
 class MainShellScreen extends StatefulWidget {
   const MainShellScreen({super.key});
@@ -65,9 +67,19 @@ class _MainShellScreenState extends State<MainShellScreen> {
           child: const SubscriptionsScreen(),
         );
       case 3:
-        return BlocProvider(
-          create: (_) => getIt<WatchHistoryCubit>()..fetchWatchHistory(),
-          child: const WatchHistoryScreen(),
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (_) => getIt<WatchHistoryCubit>()..fetchWatchHistory(),
+            ),
+            BlocProvider(
+              create: (_) => getIt<WatchLaterCubit>()..fetchWatchLater(),
+            ),
+            BlocProvider(
+              create: (_) => getIt<LikedVideosCubit>()..fetchLikedVideos(),
+            ),
+          ],
+          child: const LibraryScreen(),
         );
       case 0:
       default:

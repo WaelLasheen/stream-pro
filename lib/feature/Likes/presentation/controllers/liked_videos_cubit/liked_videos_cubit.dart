@@ -8,8 +8,8 @@ class LikedVideosCubit extends Cubit<LikedVideosState> {
   LikedVideosCubit(this.getLikedVideosUseCase)
     : super(const LikedVideosInitial());
 
-  Future<void> fetchLikedVideos() async {
-    emit(const LikedVideosLoading());
+  Future<void> fetchLikedVideos({bool showLoading = true}) async {
+    if (showLoading) emit(const LikedVideosLoading());
 
     final result = await getLikedVideosUseCase();
     if (isClosed) return;

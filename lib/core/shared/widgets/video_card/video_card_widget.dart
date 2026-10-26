@@ -19,6 +19,7 @@ class VideoCardWidget extends StatelessWidget {
   final Widget? trailing;
   final ValueChanged<bool>? onWatchLaterToggled;
   final WatchLaterCardAction watchLaterAction;
+  final bool compact;
 
   const VideoCardWidget({
     super.key,
@@ -32,7 +33,25 @@ class VideoCardWidget extends StatelessWidget {
     this.trailing,
     this.onWatchLaterToggled,
     this.watchLaterAction = WatchLaterCardAction.add,
+    this.compact = false,
   });
+
+  const VideoCardWidget.compact({
+    super.key,
+    required this.video,
+    this.onTap,
+    this.onChannelTap,
+    this.thumbnailWidth,
+    this.thumbnailHeight,
+    this.showActions = false,
+    this.trailing,
+    this.onWatchLaterToggled,
+    this.watchLaterAction = WatchLaterCardAction.add,
+  }) : variant = VideoCardVariant.vertical,
+       compact = true;
+
+  static double get compactWidth => 172.w;
+  static double get compactThumbnailHeight => 97.h;
 
   Widget? get _trailing {
     if (trailing != null) return trailing;
@@ -46,6 +65,17 @@ class VideoCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (compact) {
+      return _CompactVideoCard(
+        video: video,
+        onTap: onTap,
+        onChannelTap: onChannelTap,
+        width: thumbnailWidth ?? compactWidth,
+        thumbnailHeight: thumbnailHeight ?? compactThumbnailHeight,
+        trailing: _trailing,
+      );
+    }
+
     final theme = Theme.of(context);
     final appTheme = context.appTheme;
 
@@ -372,6 +402,168 @@ class _VideoMetaInfo extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+}
+
+// =============================================================================
+// COMPACT VARIANT (rails). Private on purpose: it has its own thumbnail/meta so
+// the vertical & horizontal cards above are not touched.
+// =============================================================================
+
+class _CompactVideoCard extends StatelessWidget {
+  final VideoCardData video;
+  final VoidCallback? onTap;
+  final VoidCallback? onChannelTap;
+  final double width;
+  final double thumbnailHeight;
+  final Widget? trailing;
+
+  const _CompactVideoCard({
+    required this.video,
+    required this.width,
+    required this.thumbnailHeight,
+    this.onTap,
+    this.onChannelTap,
+    this.trailing,
+  });
+
+  String _meta() {
+    if (video.watchedSeconds != null) {
+      return '${video.watchedSeconds!.formatDuration()} watched';
+    }
+    final views = '${video.views.formatCount()} views';
+    final time = video.publishedTime;
+    return time == null ? views : '$views • ${time.timeAgo()}';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final appTheme = context.appTheme;
+    final completion = video.completionRate;
+
+    return SizedBox(
+      width: width,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(14.r),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                AppNetworkImage(
+                  imageUrl: video.thumbnailUrl,
+                  width: width,
+                  height: thumbnailHeight,
+                  borderRadius: BorderRadius.circular(14.r),
+                  errorIcon: Icons.movie_outlined,
+                ),
+                // subtle bottom gradient so the badge/progress stay readable
+                Positioned.fill(
+                  child: IgnorePointer(
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14.r),
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          stops: const [0.6, 1],
+                          colors: [
+                            Colors.transparent,
+                            Colors.black.withValues(alpha: 0.45),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  right: 6.w,
+                  bottom: completion != null ? 9.h : 6.h,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 6.w,
+                      vertical: 2.h,
+                    ),
+                    decoration: BoxDecoration(
+                      color: appTheme.overlayColor,
+                      borderRadius: BorderRadius.circular(6.r),
+                    ),
+                    child: Text(
+                      video.duration.formatDuration(),
+                      style: theme.textTheme.labelSmall?.copyWith(
+                        color: appTheme.onPrimary,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 10.sp,
+                      ),
+                    ),
+                  ),
+                ),
+                if (trailing != null)
+                  Positioned(top: 6.h, right: 6.w, child: trailing!),
+                if (completion != null)
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.vertical(
+                        bottom: Radius.circular(14.r),
+                      ),
+                      child: LinearProgressIndicator(
+                        value: completion.clamp(0.0, 1.0),
+                        minHeight: 3.5.h,
+                        backgroundColor: Colors.white30,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          appTheme.primaryColor,
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+            8.verticalSpace,
+            Text(
+              video.title,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w700,
+                fontSize: 12.sp,
+                height: 1.25,
+              ),
+            ),
+            4.verticalSpace,
+            if (video.channel != null)
+              InkWell(
+                onTap: onChannelTap,
+                child: Text(
+                  video.channel!.name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.hintColor,
+                    fontSize: 11.sp,
+                  ),
+                ),
+              ),
+            2.verticalSpace,
+            Text(
+              _meta(),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: video.watchedSeconds != null
+                    ? appTheme.primaryColor
+                    : theme.hintColor,
+                fontSize: 10.sp,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

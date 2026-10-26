@@ -34,6 +34,7 @@ class MainShellAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
       ),
+
       actions: [
         IconButton(
           icon: Icon(Icons.search, size: 24.r),
@@ -43,10 +44,14 @@ class MainShellAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: Icon(Icons.notifications_active, size: 24.r),
           onPressed: () => context.navigateTo(AppRoutes.notifications),
         ),
-        IconButton(
-          icon: Icon(Icons.favorite, size: 24.r),
-          onPressed: () => context.navigateTo(AppRoutes.likedVideo),
-        ),
+        // IconButton(
+        //   icon: Icon(Icons.favorite, size: 24.r),
+        //   onPressed: () => context.navigateTo(AppRoutes.likedVideo),
+        // ),
+        // IconButton(
+        //   icon: Icon(Icons.watch_later_outlined, size: 24.r),
+        //   onPressed: () => context.navigateTo(AppRoutes.watchLater),
+        // ),
         const ProfileMenu(),
       ],
     );

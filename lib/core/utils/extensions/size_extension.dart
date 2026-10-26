@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 extension SizeExtension on BuildContext {
   double get screenWidth => MediaQuery.of(this).size.width;
   double get screenHeight => MediaQuery.of(this).size.height;
 
   double get shortestSide => MediaQuery.of(this).size.shortestSide;
+
+  double get libraryRailHeight => 188.h;
 }
