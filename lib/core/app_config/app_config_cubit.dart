@@ -6,8 +6,8 @@ import 'app_config_state.dart';
 class AppConfigCubit extends Cubit<AppConfigState> {
   final LocalStorageService _storageService;
 
-  static const String _localeKey = 'app_locale';
-  static const String _themeKey = 'app_theme_mode';
+  static const String localeKey = 'app_locale';
+  static const String themeKey = 'app_theme_mode';
 
   AppConfigCubit(this._storageService)
     : super(
@@ -17,8 +17,8 @@ class AppConfigCubit extends Cubit<AppConfigState> {
   }
 
   Future<void> _loadSavedConfig() async {
-    final savedLang = await _storageService.readString(key: _localeKey);
-    final savedTheme = await _storageService.readString(key: _themeKey);
+    final savedLang = await _storageService.readString(key: localeKey);
+    final savedTheme = await _storageService.readString(key: themeKey);
 
     final locale = Locale(savedLang ?? 'en');
     final themeMode = _parseThemeMode(savedTheme);
@@ -29,14 +29,14 @@ class AppConfigCubit extends Cubit<AppConfigState> {
   Future<void> changeLanguage(String langCode) async {
     if (state.locale.languageCode == langCode) return;
 
-    await _storageService.writeString(key: _localeKey, value: langCode);
+    await _storageService.writeString(key: localeKey, value: langCode);
     emit(state.copyWith(locale: Locale(langCode)));
   }
 
   Future<void> changeTheme(ThemeMode themeMode) async {
     if (state.themeMode == themeMode) return;
 
-    await _storageService.writeString(key: _themeKey, value: themeMode.name);
+    await _storageService.writeString(key: themeKey, value: themeMode.name);
     emit(state.copyWith(themeMode: themeMode));
   }
 

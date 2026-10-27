@@ -11,6 +11,7 @@ import 'modules/channel_di.dart';
 import 'modules/core_di.dart';
 import 'modules/home_di.dart';
 import 'modules/profile_di.dart';
+import 'modules/session_di.dart';
 import 'modules/subscriptions_di.dart';
 import 'modules/video_details_di.dart';
 import 'modules/video_management_di.dart';
@@ -29,6 +30,7 @@ Future<void> setUpLocators() async {
   setUpConfig();
   setUpFilePicker();
   setUpRouter();
+  setUpSession();
   setUpAuth();
   setUpHome();
   setUpVideoDetails();

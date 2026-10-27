@@ -1,15 +1,21 @@
 import 'package:dartz/dartz.dart';
 import 'package:stream_pro/core/error/failures/failure.dart';
 import 'package:stream_pro/core/error/safe_call/safe_call.dart';
+import 'package:stream_pro/core/services/session/session_cache.dart';
 import 'package:stream_pro/feature/watch_later/data/datasources/watch_later_remote_datasource.dart';
 import 'package:stream_pro/feature/watch_later/domain/entities/watch_later_feed_entity.dart';
 import 'package:stream_pro/feature/watch_later/domain/repositories/watch_later_repository.dart';
 
-class WatchLaterRepositoryImpl implements WatchLaterRepository {
+class WatchLaterRepositoryImpl implements WatchLaterRepository, SessionCache {
   final WatchLaterRemoteDataSource remoteDataSource;
   final Map<String, bool> _statusCache = {};
 
   WatchLaterRepositoryImpl({required this.remoteDataSource});
+
+  @override
+  void clearSessionCache() {
+    _statusCache.clear();
+  }
 
   @override
   Future<Either<Failure, WatchLaterFeedEntity>> getWatchLater() {

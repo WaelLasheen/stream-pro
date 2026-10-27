@@ -1,4 +1,5 @@
 import 'package:stream_pro/core/networking/api_service.dart';
+import 'package:stream_pro/core/services/session/session_cache_registry.dart';
 import 'package:stream_pro/core/services/storage/gallery_service.dart';
 import 'package:stream_pro/core/services/storage/gallery_service_impl.dart';
 import 'package:stream_pro/feature/video_details/data/datasources/video_remote_datasource.dart';
@@ -20,12 +21,14 @@ void setUpVideoDetails() {
 
   getIt.registerLazySingleton<GalleryService>(() => const GalleryServiceImpl());
 
-  getIt.registerLazySingleton<VideoDetailsRepository>(
-    () => VideoDetailsRepositoryImpl(
+  getIt.registerLazySingleton<VideoDetailsRepository>(() {
+    final repository = VideoDetailsRepositoryImpl(
       videoRemoteDataSource: getIt<VideoRemoteDataSource>(),
       galleryService: getIt<GalleryService>(),
-    ),
-  );
+    );
+    getIt<SessionCacheRegistry>().register(repository);
+    return repository;
+  });
 
   getIt.registerLazySingleton(
     () => GetVideoDetailsUseCase(getIt<VideoDetailsRepository>()),

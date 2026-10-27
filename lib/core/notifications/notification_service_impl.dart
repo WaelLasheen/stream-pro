@@ -225,6 +225,15 @@ class NotificationServiceImpl implements NotificationService {
   Future<String?> getToken() async => _fcmToken;
 
   @override
+  Future<void> cancelAllNotifications() async {
+    try {
+      await _localNotifications.cancelAll();
+    } finally {
+      _pendingInitialPayload = null;
+    }
+  }
+
+  @override
   Stream<String> get onTokenRefresh => _fcm.onTokenRefresh;
 
   @override

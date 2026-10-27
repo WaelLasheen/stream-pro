@@ -1,4 +1,5 @@
 import 'package:stream_pro/core/networking/api_service.dart';
+import 'package:stream_pro/core/services/session/session_cache_registry.dart';
 import 'package:stream_pro/feature/watch_later/data/datasources/watch_later_remote_datasource.dart';
 import 'package:stream_pro/feature/watch_later/data/datasources/watch_later_remote_datasource_impl.dart';
 import 'package:stream_pro/feature/watch_later/data/repositories/watch_later_repository_impl.dart';
@@ -15,11 +16,13 @@ void setUpWatchLater() {
   getIt.registerLazySingleton<WatchLaterRemoteDataSource>(
     () => WatchLaterRemoteDataSourceImpl(getIt<ApiService>()),
   );
-  getIt.registerLazySingleton<WatchLaterRepository>(
-    () => WatchLaterRepositoryImpl(
+  getIt.registerLazySingleton<WatchLaterRepository>(() {
+    final repository = WatchLaterRepositoryImpl(
       remoteDataSource: getIt<WatchLaterRemoteDataSource>(),
-    ),
-  );
+    );
+    getIt<SessionCacheRegistry>().register(repository);
+    return repository;
+  });
 
   getIt.registerLazySingleton<GetWatchLaterUseCase>(
     () => GetWatchLaterUseCase(getIt<WatchLaterRepository>()),
