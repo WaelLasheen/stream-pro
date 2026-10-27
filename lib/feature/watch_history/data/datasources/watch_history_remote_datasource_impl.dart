@@ -9,8 +9,13 @@ class WatchHistoryRemoteDataSourceImpl implements WatchHistoryRemoteDataSource {
   WatchHistoryRemoteDataSourceImpl(this._apiService);
 
   @override
-  Future<List<WatchHistoryModel>> getWatchHistory() async {
-    final response = await _apiService.get(ApiConstants.watchHistory);
+  Future<List<WatchHistoryModel>> getWatchHistory({String? cursor}) async {
+    final response = await _apiService.get(
+      ApiConstants.watchHistory,
+      queryParameters: {
+        if (cursor != null && cursor.isNotEmpty) 'cursor': cursor,
+      },
+    );
     final rawList = response.data as List<dynamic>? ?? [];
     return rawList
         .map(

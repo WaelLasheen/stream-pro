@@ -11,9 +11,11 @@ class WatchHistoryRepositoryImpl implements WatchHistoryRepository {
   WatchHistoryRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, List<WatchHistoryEntity>>> getWatchHistory() {
+  Future<Either<Failure, List<WatchHistoryEntity>>> getWatchHistory({
+    String? cursor,
+  }) {
     return safeCall(() async {
-      final models = await remoteDataSource.getWatchHistory();
+      final models = await remoteDataSource.getWatchHistory(cursor: cursor);
       return models.map((e) => e.toEntity()).toList();
     });
   }

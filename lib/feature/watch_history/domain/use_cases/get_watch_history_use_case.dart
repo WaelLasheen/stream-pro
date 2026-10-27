@@ -8,7 +8,7 @@ class GetWatchHistoryUseCase {
 
   GetWatchHistoryUseCase(this.repository);
 
-  Future<Either<Failure, List<WatchHistoryEntity>>> call() {
-    return repository.getWatchHistory();
+  Future<Either<Failure, List<WatchHistoryEntity>>> call({String? cursor}) {
+    return repository.getWatchHistory(cursor: cursor);
   }
 }

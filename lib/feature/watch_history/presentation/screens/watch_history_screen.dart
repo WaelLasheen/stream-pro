@@ -33,20 +33,42 @@ class WatchHistoryScreen extends StatelessWidget {
         onRefresh: () => context.read<WatchHistoryCubit>().fetchWatchHistory(),
         child: BlocBuilder<WatchHistoryCubit, WatchHistoryState>(
           builder: (context, state) {
-            return switch (state) {
-              WatchHistoryInitial() ||
-              WatchHistoryLoading() => const WatchHistoryLoadingWidget(),
-              WatchHistoryEmpty() => const WatchHistoryEmptyWidget(),
-              WatchHistoryError() => WatchHistoryErrorWidget(
+            final groups = state.groups;
+            final initialLoading =
+                state is WatchHistoryInitial || state is WatchHistoryLoading;
+            final initialError = state is WatchHistoryError && groups.isEmpty;
+            final loadMoreError =
+                state is WatchHistoryError && groups.isNotEmpty;
+            final isLoadingMore =
+                state is WatchHistoryLoaded && state.isLoadingMore;
+
+            if (initialLoading) {
+              return const WatchHistoryLoadingWidget();
+            }
+            if (initialError) {
+              return WatchHistoryErrorWidget(
                 message: state.message,
                 onRetry: () =>
                     context.read<WatchHistoryCubit>().fetchWatchHistory(),
-              ),
-              WatchHistoryLoaded() => WatchHistoryLoadedWidget(
-                groups: state.groups,
-                onVideoTap: _openVideo,
-              ),
-            };
+              );
+            }
+            if (state is WatchHistoryEmpty) {
+              return const WatchHistoryEmptyWidget();
+            }
+
+            return WatchHistoryLoadedWidget(
+              groups: state.groups,
+              isLoadingMore: isLoadingMore,
+              loadMoreError: loadMoreError ? state.message : null,
+              onLoadMore: () {
+                if (state is WatchHistoryLoaded) {
+                  context.read<WatchHistoryCubit>().fetchMore();
+                }
+              },
+              onLoadMoreError: () =>
+                  context.read<WatchHistoryCubit>().fetchMore(),
+              onVideoTap: _openVideo,
+            );
           },
         ),
       ),
