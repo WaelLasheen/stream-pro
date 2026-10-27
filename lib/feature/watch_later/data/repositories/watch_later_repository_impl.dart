@@ -18,9 +18,11 @@ class WatchLaterRepositoryImpl implements WatchLaterRepository, SessionCache {
   }
 
   @override
-  Future<Either<Failure, WatchLaterFeedEntity>> getWatchLater() {
+  Future<Either<Failure, WatchLaterFeedEntity>> getWatchLater({
+    String? cursor,
+  }) {
     return safeCall(() async {
-      final model = await remoteDataSource.getWatchLater();
+      final model = await remoteDataSource.getWatchLater(cursor: cursor);
       final feed = model.toEntity();
 
       for (final item in feed.items) {

@@ -9,8 +9,13 @@ class WatchLaterRemoteDataSourceImpl implements WatchLaterRemoteDataSource {
   WatchLaterRemoteDataSourceImpl(this.apiService);
 
   @override
-  Future<WatchLaterFeedModel> getWatchLater() async {
-    final response = await apiService.get(ApiConstants.watchLaters);
+  Future<WatchLaterFeedModel> getWatchLater({String? cursor}) async {
+    final response = await apiService.get(
+      ApiConstants.watchLaters,
+      queryParameters: {
+        if (cursor != null && cursor.isNotEmpty) 'cursor': cursor,
+      },
+    );
     return WatchLaterFeedModel.fromJson(response.data as Map<String, dynamic>);
   }
 

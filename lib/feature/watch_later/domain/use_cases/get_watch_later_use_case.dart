@@ -8,7 +8,7 @@ class GetWatchLaterUseCase {
 
   GetWatchLaterUseCase(this.repository);
 
-  Future<Either<Failure, WatchLaterFeedEntity>> call() {
-    return repository.getWatchLater();
+  Future<Either<Failure, WatchLaterFeedEntity>> call({String? cursor}) {
+    return repository.getWatchLater(cursor: cursor);
   }
 }

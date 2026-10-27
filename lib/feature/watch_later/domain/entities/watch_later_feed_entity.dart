@@ -7,6 +7,8 @@ class WatchLaterFeedEntity extends Equatable {
 
   const WatchLaterFeedEntity({required this.items, required this.videoCount});
 
+  bool get hasMore => items.length < videoCount;
+
   WatchLaterFeedEntity copyWith({
     List<WatchLaterItemEntity>? items,
     int? videoCount,

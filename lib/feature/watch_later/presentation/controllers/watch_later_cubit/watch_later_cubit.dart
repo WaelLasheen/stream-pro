@@ -16,23 +16,25 @@ class WatchLaterCubit extends Cubit<WatchLaterState> {
 
     result.fold(
       (failure) {
-        if (showLoading) emit(WatchLaterError(failure.message));
+        if (showLoading) emit(WatchLaterError(message: failure.message));
       },
       (feed) => emit(
-        feed.items.isEmpty ? const WatchLaterEmpty() : WatchLaterLoaded(feed),
+        feed.items.isEmpty
+            ? const WatchLaterEmpty()
+            : WatchLaterLoaded(feed: feed),
       ),
     );
   }
 
   void removeLocally(String videoId) {
-    final currentState = state;
-    if (currentState is! WatchLaterLoaded) return;
+    final currentFeed = state.feed;
+    if (currentFeed == null) return;
 
-    final items = currentState.feed.items
+    final items = currentFeed.items
         .where((item) => item.video.id != videoId)
         .toList();
 
-    if (items.length == currentState.feed.items.length) return;
+    if (items.length == currentFeed.items.length) return;
 
     if (items.isEmpty) {
       emit(const WatchLaterEmpty());
@@ -41,15 +43,39 @@ class WatchLaterCubit extends Cubit<WatchLaterState> {
 
     emit(
       WatchLaterLoaded(
-        currentState.feed.copyWith(
-          items: items,
-          videoCount: currentState.feed.videoCount > 0
-              ? currentState.feed.videoCount - 1
-              : 0,
-        ),
+        feed: currentFeed.copyWith(items: items, videoCount: items.length),
       ),
     );
   }
 
-  Future<void> fetchMore() async {}
+  Future<void> fetchMore() async {
+    final currentState = state;
+    final currentFeed = currentState.feed;
+
+    if (currentFeed == null ||
+        currentState is WatchLaterEmpty ||
+        !currentFeed.hasMore ||
+        (currentState is WatchLaterLoaded && currentState.isLoadingMore)) {
+      return;
+    }
+
+    final cursor = currentFeed.items.last.id;
+    emit(WatchLaterLoaded(feed: currentFeed, isLoadingMore: true));
+
+    final result = await getWatchLaterUseCase(cursor: cursor);
+    if (isClosed) return;
+
+    result.fold(
+      (failure) =>
+          emit(WatchLaterError(message: failure.message, feed: currentFeed)),
+      (feed) => emit(
+        WatchLaterLoaded(
+          feed: currentFeed.copyWith(
+            items: [...currentFeed.items, ...feed.items],
+            videoCount: feed.videoCount,
+          ),
+        ),
+      ),
+    );
+  }
 }
