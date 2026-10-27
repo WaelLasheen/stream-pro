@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "account": MessageLookupByLibrary.simpleMessage("الحساب"),
+    "accountActions": MessageLookupByLibrary.simpleMessage("الحساب"),
     "accountControl": MessageLookupByLibrary.simpleMessage("التحكم في الحساب"),
     "accountCreatedSuccessFully": MessageLookupByLibrary.simpleMessage(
       "تم إنشاء الحساب بنجاح",
@@ -65,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "changePasswordInstruction": MessageLookupByLibrary.simpleMessage(
       "أدخل كلمة مرور جديدة لحسابك.",
     ),
+    "changePhoto": MessageLookupByLibrary.simpleMessage("تغيير الصورة"),
     "choosePackage": MessageLookupByLibrary.simpleMessage(
       "اختر الباقة المناسبة لنمو تسويقك",
     ),
@@ -100,6 +102,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "deactivateAccount": MessageLookupByLibrary.simpleMessage("تعطيل الحساب"),
     "delete": MessageLookupByLibrary.simpleMessage("حذف"),
     "deleteAccount": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
+    "deleteAccountMessage": MessageLookupByLibrary.simpleMessage(
+      "سيؤدي هذا إلى حذف حسابك وجميع البيانات المرتبطة به نهائيًا. لا يمكن التراجع عن هذا الإجراء.",
+    ),
     "deleteAccountWarning": MessageLookupByLibrary.simpleMessage(
       "تتم مراجعة طلبات حذف الحساب من قبل المسؤول ومعالجتها في غضون 14 يومل . هذا الإجراء نهائي سيؤدي إلي حذف جميع سجلات الخدمة",
     ),
@@ -176,6 +181,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "معلومات الاتصال بماركيفا",
     ),
     "mediumPassword": MessageLookupByLibrary.simpleMessage("متوسط"),
+    "memberSince": MessageLookupByLibrary.simpleMessage("عضو منذ"),
     "newPassword": MessageLookupByLibrary.simpleMessage("كلمة المرور الجديدة"),
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
     "noCommentsYet": MessageLookupByLibrary.simpleMessage(
@@ -243,6 +249,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "postalCode": MessageLookupByLibrary.simpleMessage("الرمز البريدي"),
     "prices": MessageLookupByLibrary.simpleMessage("الاسعار"),
     "privacy": MessageLookupByLibrary.simpleMessage("الخصوصية"),
+    "profileTitle": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
+    "profileUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "تم تحديث الملف الشخصي بنجاح",
+    ),
     "receiveTimeout": MessageLookupByLibrary.simpleMessage(
       "انتهى وقت الاستقبال",
     ),
@@ -302,6 +312,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "termsAndConditions": MessageLookupByLibrary.simpleMessage(
       "أوافق على الشروط والاحكام وسياسة الخصوصية",
     ),
+    "totalViewsLabel": MessageLookupByLibrary.simpleMessage("إجمالي المشاهدات"),
     "unauthorizedNotVisible": MessageLookupByLibrary.simpleMessage(
       "لن تكون معلماتك مرئية للموظفين الغير مصرح لهم.",
     ),
@@ -313,6 +324,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "videoLoadError": MessageLookupByLibrary.simpleMessage(
       "تعذر تحميل الفيديو. يرجى التحقق من اتصالك بالإنترنت.",
     ),
+    "videosLabel": MessageLookupByLibrary.simpleMessage("الفيديوهات"),
     "viewDetails": MessageLookupByLibrary.simpleMessage("عرض التفاصيل"),
     "visibilityControl": MessageLookupByLibrary.simpleMessage(
       "التحكم في الظهور",

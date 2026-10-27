@@ -66,7 +66,8 @@ class RefreshInterceptor extends Interceptor {
     // Prevent refresh loops on auth endpoints
     return options.path.contains(ApiConstants.refresh) ||
         options.path.contains(ApiConstants.login) ||
-        options.path.contains(ApiConstants.register);
+        options.path.contains(ApiConstants.register) ||
+        options.path.contains(ApiConstants.logout);
   }
 
   Future<void> _refreshToken() async {

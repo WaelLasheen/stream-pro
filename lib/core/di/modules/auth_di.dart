@@ -6,6 +6,7 @@ import 'package:stream_pro/feature/auth/data/datasources/auth_remote_datasource_
 import 'package:stream_pro/feature/auth/data/repositories/auth_repository_impl.dart';
 import 'package:stream_pro/feature/auth/domain/repository/auth_repository.dart';
 import 'package:stream_pro/feature/auth/domain/use_case/login_use_case.dart';
+import 'package:stream_pro/feature/auth/domain/use_case/logout_use_case.dart';
 import 'package:stream_pro/feature/auth/domain/use_case/refresh_token_use_case.dart';
 import 'package:stream_pro/feature/auth/domain/use_case/register_use_case.dart';
 import 'package:stream_pro/feature/auth/presentation/controller/auth_cubit/auth_cubit.dart';
@@ -31,6 +32,9 @@ void setUpAuth() {
   );
   getIt.registerLazySingleton<RefreshTokenUseCase>(
     () => RefreshTokenUseCase(getIt<AuthRepository>()),
+  );
+  getIt.registerLazySingleton<LogoutUseCase>(
+    () => LogoutUseCase(getIt<AuthRepository>()),
   );
   getIt.registerFactory<AuthCubit>(
     () => AuthCubit(

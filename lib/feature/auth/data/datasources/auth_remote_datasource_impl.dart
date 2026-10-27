@@ -33,4 +33,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     final response = await apiService.post(ApiConstants.refresh);
     return response.data['accessToken'] as String;
   }
+
+  @override
+  Future<void> logout() async {
+    await apiService.post(ApiConstants.logout);
+  }
 }

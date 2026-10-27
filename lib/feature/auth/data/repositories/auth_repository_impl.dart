@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:stream_pro/core/error/failures/failure.dart';
-import 'package:stream_pro/core/error/safe_call/safe_call.dart'; // Adjust path if needed
+import 'package:stream_pro/core/error/safe_call/safe_call.dart';
 import 'package:stream_pro/core/notifications/notification_service.dart';
 import 'package:stream_pro/core/services/storage/token_storage_service.dart';
 import 'package:stream_pro/feature/auth/data/datasources/auth_remote_datasource.dart';
@@ -56,5 +56,10 @@ class AuthRepositoryImpl implements AuthRepository {
       await tokenStorage.saveAccessToken(token);
       return token;
     });
+  }
+
+  @override
+  Future<Either<Failure, void>> logout() {
+    return safeCall(() => remoteDataSource.logout());
   }
 }

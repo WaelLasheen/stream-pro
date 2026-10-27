@@ -1,22 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:stream_pro/core/error/failures/failure.dart';
 import 'package:stream_pro/core/error/safe_call/safe_call.dart';
-import 'package:stream_pro/core/networking/api_service.dart';
-import 'package:stream_pro/core/services/storage/token_storage_service.dart';
 import '../../domain/entities/profile_entity.dart';
 import '../../domain/repositories/profile_repository.dart';
 import '../datasources/profile_remote_datasource.dart';
 
 class ProfileRepositoryImpl implements ProfileRepository {
   final ProfileRemoteDataSource remoteDataSource;
-  final ApiService apiService;
-  final TokenStorageService tokenStorageService;
 
-  ProfileRepositoryImpl({
-    required this.remoteDataSource,
-    required this.apiService,
-    required this.tokenStorageService,
-  });
+  ProfileRepositoryImpl({required this.remoteDataSource});
 
   @override
   Future<Either<Failure, ProfileEntity>> getProfile() {
@@ -42,10 +34,6 @@ class ProfileRepositoryImpl implements ProfileRepository {
 
   @override
   Future<Either<Failure, void>> deleteProfile() {
-    return safeCall(() async {
-      await remoteDataSource.deleteProfile();
-      await apiService.clearCookies();
-      await tokenStorageService.clearToken();
-    });
+    return safeCall(() => remoteDataSource.deleteProfile());
   }
 }

@@ -1,5 +1,6 @@
 import 'package:stream_pro/core/networking/api_service.dart';
-import 'package:stream_pro/core/services/storage/token_storage_service.dart';
+import 'package:stream_pro/core/services/session/session_cleanup_service.dart';
+import 'package:stream_pro/feature/auth/domain/use_case/logout_use_case.dart';
 import 'package:stream_pro/feature/profile/data/datasources/profile_remote_datasource.dart';
 import 'package:stream_pro/feature/profile/data/datasources/profile_remote_datasource_impl.dart';
 import 'package:stream_pro/feature/profile/data/repositories/profile_repository_impl.dart';
@@ -17,8 +18,6 @@ void setUpProfile() {
   getIt.registerLazySingleton<ProfileRepository>(
     () => ProfileRepositoryImpl(
       remoteDataSource: getIt<ProfileRemoteDataSource>(),
-      apiService: getIt<ApiService>(),
-      tokenStorageService: getIt<TokenStorageService>(),
     ),
   );
   getIt.registerLazySingleton(
@@ -35,6 +34,8 @@ void setUpProfile() {
       getProfileUseCase: getIt<GetProfileUseCase>(),
       updateProfileUseCase: getIt<UpdateProfileUseCase>(),
       deleteProfileUseCase: getIt<DeleteProfileUseCase>(),
+      logoutUseCase: getIt<LogoutUseCase>(),
+      sessionCleanupService: getIt<SessionCleanupService>(),
     ),
   );
 }

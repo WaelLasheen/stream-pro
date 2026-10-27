@@ -20,27 +20,31 @@ class ProfileLoading extends ProfileState {
 class ProfileLoaded extends ProfileState {
   final bool isSaving;
   final bool isDeleting;
+  final bool isLoggingOut;
 
   const ProfileLoaded({
     required ProfileEntity super.profile,
     this.isSaving = false,
     this.isDeleting = false,
+    this.isLoggingOut = false,
   });
 
   ProfileLoaded copyWith({
     ProfileEntity? profile,
     bool? isSaving,
     bool? isDeleting,
+    bool? isLoggingOut,
   }) {
     return ProfileLoaded(
       profile: profile ?? this.profile!,
       isSaving: isSaving ?? this.isSaving,
       isDeleting: isDeleting ?? this.isDeleting,
+      isLoggingOut: isLoggingOut ?? this.isLoggingOut,
     );
   }
 
   @override
-  List<Object?> get props => [profile, isSaving, isDeleting];
+  List<Object?> get props => [profile, isSaving, isDeleting, isLoggingOut];
 }
 
 class ProfileError extends ProfileState {
@@ -53,4 +57,8 @@ class ProfileError extends ProfileState {
 
 class ProfileDeleted extends ProfileState {
   const ProfileDeleted();
+}
+
+class ProfileLoggedOut extends ProfileState {
+  const ProfileLoggedOut();
 }

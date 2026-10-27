@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/routing/app_routes.dart';
+import 'package:stream_pro/core/shared/widgets/stream_pro_logo.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
 import 'package:stream_pro/feature/main/presentation/widgets/profile_menu.dart';
@@ -13,17 +14,14 @@ class MainShellAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appTheme = context.appTheme;
     final textTheme = context.textTheme;
 
     return AppBar(
+      centerTitle: false,
+      titleSpacing: 4,
       title: Row(
         children: [
-          Icon(
-            Icons.play_circle_fill_rounded,
-            color: appTheme.primaryColor,
-            size: 32.r,
-          ),
+          StreamProLogo(size: 32.r),
           8.horizontalSpace,
           Text(
             'StreamPro',
@@ -34,7 +32,6 @@ class MainShellAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
       ),
-
       actions: [
         IconButton(
           icon: Icon(Icons.search, size: 24.r),
@@ -44,15 +41,11 @@ class MainShellAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: Icon(Icons.notifications_active, size: 24.r),
           onPressed: () => context.navigateTo(AppRoutes.notifications),
         ),
-        // IconButton(
-        //   icon: Icon(Icons.favorite, size: 24.r),
-        //   onPressed: () => context.navigateTo(AppRoutes.likedVideo),
-        // ),
-        // IconButton(
-        //   icon: Icon(Icons.watch_later_outlined, size: 24.r),
-        //   onPressed: () => context.navigateTo(AppRoutes.watchLater),
-        // ),
-        const ProfileMenu(),
+
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 12.w),
+          child: const ProfileMenu(),
+        ),
       ],
     );
   }

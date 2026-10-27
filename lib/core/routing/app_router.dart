@@ -20,6 +20,7 @@ import 'package:stream_pro/feature/channel/presentation/screens/channel_screen.d
 import 'package:stream_pro/feature/comments/presentation/controllers/comments_cubit/comments_cubit.dart';
 import 'package:stream_pro/feature/comments/presentation/controllers/replies_cubit/replies_cubit.dart';
 import 'package:stream_pro/feature/profile/presentation/controller/profile_cubit/profile_cubit.dart';
+import 'package:stream_pro/feature/profile/presentation/screens/profile_screen.dart';
 import 'package:stream_pro/feature/home/presentation/controller/home_cubit/home_cubit.dart';
 import 'package:stream_pro/feature/home/presentation/screen/home_screen.dart';
 import 'package:stream_pro/feature/main/presentation/screen/main_shell_screen.dart';
@@ -317,6 +318,15 @@ class AppRouter {
             create: (_) =>
                 getIt<PlaylistDetailsCubit>()..fetch(playlistArgs.playlistId),
             child: PlaylistDetailsScreen(args: playlistArgs),
+          ),
+        );
+
+      case AppRoutes.profile:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) => BlocProvider(
+            create: (_) => getIt<ProfileCubit>()..fetchProfile(),
+            child: ProfileScreen(filePickerService: getIt<FilePickerService>()),
           ),
         );
 

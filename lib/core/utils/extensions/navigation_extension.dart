@@ -23,6 +23,15 @@ extension NavigationExtension on BuildContext {
     ).pushNamedAndRemoveUntil(route, (route) => false, arguments: arguments);
   }
 
+  void pushAndClearStack(String route, {Object? arguments}) {
+    final navigator = navigatorKey.currentState ?? Navigator.of(this);
+    navigator.pushNamedAndRemoveUntil(
+      route,
+      (route) => false,
+      arguments: arguments,
+    );
+  }
+
   void navigateToAndClearUntil(String route, {Object? arguments}) {
     Navigator.of(this).pushNamedAndRemoveUntil(
       route,

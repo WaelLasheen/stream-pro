@@ -165,5 +165,13 @@
     "videoLoadError": "تعذر تحميل الفيديو. يرجى التحقق من اتصالك بالإنترنت.",
     "retry": "إعادة المحاولة",
     "share": "مشاركة",
-    "shareCopied": "تم نسخ الرابط إلى الحافظة!"
+    "shareCopied": "تم نسخ الرابط إلى الحافظة!",
+    "profileTitle": "الملف الشخصي",
+    "videosLabel": "الفيديوهات",
+    "totalViewsLabel": "إجمالي المشاهدات",
+    "memberSince": "عضو منذ",
+    "changePhoto": "تغيير الصورة",
+    "profileUpdatedSuccessfully": "تم تحديث الملف الشخصي بنجاح",
+    "accountActions": "الحساب",
+    "deleteAccountMessage": "سيؤدي هذا إلى حذف حسابك وجميع البيانات المرتبطة به نهائيًا. لا يمكن التراجع عن هذا الإجراء."
 }

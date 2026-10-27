@@ -165,5 +165,13 @@
     "videoLoadError": "Failed to load video. Please check your internet connection.",
     "retry": "Retry",
     "share": "Share",
-    "shareCopied": "Link copied to clipboard!"
+    "shareCopied": "Link copied to clipboard!",
+    "profileTitle": "Profile",
+    "videosLabel": "Videos",
+    "totalViewsLabel": "Total Views",
+    "memberSince": "Member since",
+    "changePhoto": "Change photo",
+    "profileUpdatedSuccessfully": "Profile updated successfully",
+    "accountActions": "Account",
+    "deleteAccountMessage": "This permanently deletes your account and all associated data. This action cannot be undone."
 }

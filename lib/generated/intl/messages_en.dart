@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "account": MessageLookupByLibrary.simpleMessage("Account"),
+    "accountActions": MessageLookupByLibrary.simpleMessage("Account"),
     "accountControl": MessageLookupByLibrary.simpleMessage("Account Control"),
     "accountCreatedSuccessFully": MessageLookupByLibrary.simpleMessage(
       "Account Created Successfully",
@@ -67,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "changePasswordInstruction": MessageLookupByLibrary.simpleMessage(
       "Enter a new password for your account.",
     ),
+    "changePhoto": MessageLookupByLibrary.simpleMessage("Change photo"),
     "choosePackage": MessageLookupByLibrary.simpleMessage(
       "Choose package for your marketing campaign",
     ),
@@ -104,6 +106,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete Account"),
+    "deleteAccountMessage": MessageLookupByLibrary.simpleMessage(
+      "This permanently deletes your account and all associated data. This action cannot be undone.",
+    ),
     "deleteAccountWarning": MessageLookupByLibrary.simpleMessage(
       "Account deletion requests are reviewed by the admin and processed within 14 days. This action is final and will delete all service records",
     ),
@@ -178,6 +183,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Markiva Contact Information",
     ),
     "mediumPassword": MessageLookupByLibrary.simpleMessage("Medium"),
+    "memberSince": MessageLookupByLibrary.simpleMessage("Member since"),
     "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
     "next": MessageLookupByLibrary.simpleMessage("next"),
     "noCommentsYet": MessageLookupByLibrary.simpleMessage(
@@ -247,6 +253,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "postalCode": MessageLookupByLibrary.simpleMessage("Postal Code"),
     "prices": MessageLookupByLibrary.simpleMessage("Prices"),
     "privacy": MessageLookupByLibrary.simpleMessage("Privacy"),
+    "profileTitle": MessageLookupByLibrary.simpleMessage("Profile"),
+    "profileUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Profile updated successfully",
+    ),
     "receiveTimeout": MessageLookupByLibrary.simpleMessage("Receive timeout"),
     "registerNow": MessageLookupByLibrary.simpleMessage("Register Now"),
     "requestCanceled": MessageLookupByLibrary.simpleMessage(
@@ -308,6 +318,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "termsAndConditions": MessageLookupByLibrary.simpleMessage(
       "I agree to the terms and conditions and privacy policy",
     ),
+    "totalViewsLabel": MessageLookupByLibrary.simpleMessage("Total Views"),
     "unauthorizedNotVisible": MessageLookupByLibrary.simpleMessage(
       "Your parameters will not be visible to unauthorized employees.",
     ),
@@ -319,6 +330,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "videoLoadError": MessageLookupByLibrary.simpleMessage(
       "Failed to load video. Please check your internet connection.",
     ),
+    "videosLabel": MessageLookupByLibrary.simpleMessage("Videos"),
     "viewDetails": MessageLookupByLibrary.simpleMessage("View Details"),
     "visibilityControl": MessageLookupByLibrary.simpleMessage(
       "Visibility Control",

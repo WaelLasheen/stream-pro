@@ -1463,6 +1463,71 @@ class S {
       args: [],
     );
   }
+
+  /// `Profile`
+  String get profileTitle {
+    return Intl.message('Profile', name: 'profileTitle', desc: '', args: []);
+  }
+
+  /// `Videos`
+  String get videosLabel {
+    return Intl.message('Videos', name: 'videosLabel', desc: '', args: []);
+  }
+
+  /// `Total Views`
+  String get totalViewsLabel {
+    return Intl.message(
+      'Total Views',
+      name: 'totalViewsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Member since`
+  String get memberSince {
+    return Intl.message(
+      'Member since',
+      name: 'memberSince',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change photo`
+  String get changePhoto {
+    return Intl.message(
+      'Change photo',
+      name: 'changePhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile updated successfully`
+  String get profileUpdatedSuccessfully {
+    return Intl.message(
+      'Profile updated successfully',
+      name: 'profileUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get accountActions {
+    return Intl.message('Account', name: 'accountActions', desc: '', args: []);
+  }
+
+  /// `This permanently deletes your account and all associated data. This action cannot be undone.`
+  String get deleteAccountMessage {
+    return Intl.message(
+      'This permanently deletes your account and all associated data. This action cannot be undone.',
+      name: 'deleteAccountMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
