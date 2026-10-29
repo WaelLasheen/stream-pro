@@ -18,6 +18,7 @@ import 'package:stream_pro/feature/profile/presentation/widgets/profile_edit_she
 import 'package:stream_pro/feature/profile/presentation/widgets/profile_header_card.dart';
 import 'package:stream_pro/feature/profile/presentation/widgets/profile_shimmer.dart';
 import 'package:stream_pro/feature/profile/presentation/widgets/profile_stat_card.dart';
+import 'package:stream_pro/feature/sessions/presentation/widgets/sessions_view.dart';
 import 'package:stream_pro/generated/l10n.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -67,99 +68,108 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final appTheme = context.appTheme;
 
-    return BlocConsumer<ProfileCubit, ProfileState>(
-      listenWhen: (previous, current) =>
-          current is ProfileDeleted ||
-          current is ProfileLoggedOut ||
-          (current is ProfileError && current.profile != null),
-      listener: (context, state) {
-        if (state is ProfileDeleted || state is ProfileLoggedOut) {
-          context.pushAndClearStack(AppRoutes.login);
-          return;
-        }
-        if (state is ProfileError) {
-          context.showErrorSnackBar(message: state.message);
-        }
-      },
-      builder: (context, state) {
-        final profile = state.profile;
+    return DefaultTabController(
+      length: 2,
+      child: BlocConsumer<ProfileCubit, ProfileState>(
+        listenWhen: (previous, current) =>
+            current is ProfileDeleted ||
+            current is ProfileLoggedOut ||
+            (current is ProfileError && current.profile != null),
+        listener: (context, state) {
+          if (state is ProfileDeleted || state is ProfileLoggedOut) {
+            context.pushAndClearStack(AppRoutes.login);
+            return;
+          }
+          if (state is ProfileError) {
+            context.showErrorSnackBar(message: state.message);
+          }
+        },
+        builder: (context, state) {
+          final profile = state.profile;
 
-        Widget body;
-        if (state is ProfileError && profile == null) {
-          body = AppErrorWidget(
-            message: state.message,
-            onRetry: () => context.read<ProfileCubit>().fetchProfile(),
-            icon: Icons.wifi_off_rounded,
-            iconSize: 56.r,
-          );
-        } else if (profile == null) {
-          body = const ProfileShimmer();
-        } else {
-          final isSaving = state is ProfileLoaded && state.isSaving;
-          final isDeleting = state is ProfileLoaded && state.isDeleting;
-          final isLoggingOut = state is ProfileLoaded && state.isLoggingOut;
+          Widget overviewBody;
+          if (state is ProfileError && profile == null) {
+            overviewBody = AppErrorWidget(
+              message: state.message,
+              onRetry: () => context.read<ProfileCubit>().fetchProfile(),
+              icon: Icons.wifi_off_rounded,
+              iconSize: 56.r,
+            );
+          } else if (profile == null) {
+            overviewBody = const ProfileShimmer();
+          } else {
+            final isSaving = state is ProfileLoaded && state.isSaving;
+            final isDeleting = state is ProfileLoaded && state.isDeleting;
+            final isLoggingOut = state is ProfileLoaded && state.isLoggingOut;
 
-          body = AppRefreshIndicator(
-            onRefresh: () => context.read<ProfileCubit>().fetchProfile(),
-            child: ListView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              padding: EdgeInsets.all(16.r),
-              children: [
-                ProfileHeaderCard(
-                  profile: profile,
-                  isSaving: isSaving,
-                  onAvatarTap: () => _openEditSheet(context, profile),
-                ),
-                16.verticalSpace,
-                Row(
-                  children: [
-                    Expanded(
-                      child: ProfileStatCard(
-                        icon: Icons.video_library_outlined,
-                        value: profile.videoCount.formatCount(),
-                        label: S.current.videosLabel,
-                        color: appTheme.primaryColor,
+            overviewBody = AppRefreshIndicator(
+              onRefresh: () => context.read<ProfileCubit>().fetchProfile(),
+              child: ListView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                padding: EdgeInsets.all(16.r),
+                children: [
+                  ProfileHeaderCard(
+                    profile: profile,
+                    isSaving: isSaving,
+                    onAvatarTap: () => _openEditSheet(context, profile),
+                  ),
+                  16.verticalSpace,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ProfileStatCard(
+                          icon: Icons.video_library_outlined,
+                          value: profile.videoCount.formatCount(),
+                          label: S.current.videosLabel,
+                          color: appTheme.primaryColor,
+                        ),
                       ),
-                    ),
-                    12.horizontalSpace,
-                    Expanded(
-                      child: ProfileStatCard(
-                        icon: Icons.visibility_outlined,
-                        value: profile.totalViews.formatCount(),
-                        label: S.current.totalViewsLabel,
-                        color: appTheme.secondaryColor,
+                      12.horizontalSpace,
+                      Expanded(
+                        child: ProfileStatCard(
+                          icon: Icons.visibility_outlined,
+                          value: profile.totalViews.formatCount(),
+                          label: S.current.totalViewsLabel,
+                          color: appTheme.secondaryColor,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                24.verticalSpace,
-                ProfileAccountActionsCard(
-                  isLoggingOut: isLoggingOut,
-                  isDeleting: isDeleting,
-                  onLogout: () => _confirmLogout(context),
-                  onDeleteAccount: () => _confirmDeleteAccount(context),
-                ),
+                    ],
+                  ),
+                  24.verticalSpace,
+                  ProfileAccountActionsCard(
+                    isLoggingOut: isLoggingOut,
+                    isDeleting: isDeleting,
+                    onLogout: () => _confirmLogout(context),
+                    onDeleteAccount: () => _confirmDeleteAccount(context),
+                  ),
+                ],
+              ),
+            );
+          }
+
+          return Scaffold(
+            backgroundColor: appTheme.backgroundColor,
+            appBar: AppBar(
+              title: Text(S.current.profileTitle),
+              actions: [
+                if (profile != null)
+                  IconButton(
+                    tooltip: S.current.editProfilePage,
+                    icon: const Icon(Icons.edit_outlined),
+                    onPressed: () => _openEditSheet(context, profile),
+                  ),
               ],
+              bottom: TabBar(
+                tabs: [
+                  Tab(text: S.current.profileTitle),
+                  Tab(text: S.current.sessionsTab),
+                ],
+              ),
             ),
+            body: TabBarView(children: [overviewBody, const SessionsView()]),
           );
-        }
-
-        return Scaffold(
-          backgroundColor: appTheme.backgroundColor,
-          appBar: AppBar(
-            title: Text(S.current.profileTitle),
-            actions: [
-              if (profile != null)
-                IconButton(
-                  tooltip: S.current.editProfilePage,
-                  icon: const Icon(Icons.edit_outlined),
-                  onPressed: () => _openEditSheet(context, profile),
-                ),
-            ],
-          ),
-          body: body,
-        );
-      },
+        },
+      ),
     );
   }
 }

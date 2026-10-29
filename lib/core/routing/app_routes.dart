@@ -3,7 +3,6 @@ abstract class AppRoutes {
   static const String onboarding = "/onboarding";
   static const String register = "/register";
   static const String login = "/login";
-  static const String signup = "/signup";
   static const String main = "/main";
   static const String home = "/home";
   static const String videoDetails = "/video-details";
@@ -20,4 +19,5 @@ abstract class AppRoutes {
   static const String watchLater = "/watch-later";
   static const String playlistDetails = "/playlist-details";
   static const String profile = "/profile";
+  static const String sessions = "/sessions";
 }

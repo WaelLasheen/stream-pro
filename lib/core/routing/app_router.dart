@@ -36,6 +36,8 @@ import 'package:stream_pro/feature/owner_channel/presentation/screens/owner_chan
 import 'package:stream_pro/feature/search/presentation/controllers/search_cubit/search_cubit.dart';
 import 'package:stream_pro/feature/search/presentation/controllers/search_suggestions_cubit/search_suggestions_cubit.dart';
 import 'package:stream_pro/feature/search/presentation/screens/video_search_screen.dart';
+import 'package:stream_pro/feature/sessions/presentation/controllers/sessions_cubit/sessions_cubit.dart';
+import 'package:stream_pro/feature/sessions/presentation/screens/sessions_screen.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/subscribers_cubit/subscribers_cubit.dart';
 import 'package:stream_pro/feature/playlist/presentation/args/playlist_details_args.dart';
 import 'package:stream_pro/feature/playlist/presentation/controllers/playlist_details_cubit/playlist_details_cubit.dart';
@@ -324,9 +326,25 @@ class AppRouter {
       case AppRoutes.profile:
         return MaterialPageRoute(
           settings: settings,
-          builder: (context) => BlocProvider(
-            create: (_) => getIt<ProfileCubit>()..fetchProfile(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) => getIt<ProfileCubit>()..fetchProfile(),
+              ),
+              BlocProvider(
+                create: (_) => getIt<SessionsCubit>()..fetchSessions(),
+              ),
+            ],
             child: ProfileScreen(filePickerService: getIt<FilePickerService>()),
+          ),
+        );
+
+      case AppRoutes.sessions:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (context) => BlocProvider(
+            create: (_) => getIt<SessionsCubit>()..fetchSessions(),
+            child: const SessionsScreen(),
           ),
         );
 

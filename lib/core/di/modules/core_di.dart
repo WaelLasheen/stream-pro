@@ -12,7 +12,10 @@ import 'package:stream_pro/core/notifications/notification_service.dart';
 import 'package:stream_pro/core/notifications/notification_service_impl.dart';
 import 'package:stream_pro/core/routing/app_router.dart';
 import 'package:stream_pro/core/routing/notification_router.dart';
+import 'package:stream_pro/core/services/device/device_info_service.dart';
 import 'package:stream_pro/core/services/file_picker/file_picker_service_impl.dart';
+import 'package:stream_pro/core/services/google_auth/google_auth_service.dart';
+import 'package:stream_pro/core/services/google_auth/google_auth_service_impl.dart';
 import 'package:stream_pro/core/services/file_picker/file_picker_service.dart';
 import 'package:stream_pro/core/services/storage/local_storage_service.dart';
 import 'package:stream_pro/core/services/storage/local_storage_service_impl.dart';
@@ -96,4 +99,12 @@ void setUpRouter() {
 
 void setUpFilePicker() {
   getIt.registerLazySingleton<FilePickerService>(() => FilePickerServiceImpl());
+}
+
+void setUpDeviceInfo() {
+  getIt.registerLazySingleton<DeviceInfoService>(() => DeviceInfoServiceImpl());
+}
+
+void setUpGoogleAuth() {
+  getIt.registerLazySingleton<GoogleAuthService>(() => GoogleAuthServiceImpl());
 }

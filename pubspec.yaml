@@ -65,11 +65,15 @@ dependencies:
   flutter_svg: ^2.2.3
   curved_navigation_bar: ^1.0.6
   gal: ^2.3.3
+  country_flags: ^4.1.2
+  device_info_plus: ^12.4.0
+  package_info_plus: ^9.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   intl_utils: ^2.8.14
+  flutter_launcher_icons: ^0.14.4
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -80,6 +84,14 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: false             
+  image_path: "assets/images/app_icon.png" 
+  
+  adaptive_icon_background: "#FFFFFF" 
+  adaptive_icon_foreground: "assets/images/app_icon.png" 
 
 # The following section is specific to Flutter packages.
 flutter:

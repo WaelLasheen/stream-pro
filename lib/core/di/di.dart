@@ -12,6 +12,7 @@ import 'modules/core_di.dart';
 import 'modules/home_di.dart';
 import 'modules/profile_di.dart';
 import 'modules/session_di.dart';
+import 'modules/sessions_di.dart';
 import 'modules/subscriptions_di.dart';
 import 'modules/video_details_di.dart';
 import 'modules/video_management_di.dart';
@@ -29,6 +30,8 @@ Future<void> setUpLocators() async {
   ]);
   setUpConfig();
   setUpFilePicker();
+  setUpDeviceInfo();
+  setUpGoogleAuth();
   setUpRouter();
   setUpSession();
   setUpAuth();
@@ -46,5 +49,6 @@ Future<void> setUpLocators() async {
   setUpLikes();
   setUpComments();
   setUpProfile();
+  setUpSessions();
   setUpPlaylist();
 }
