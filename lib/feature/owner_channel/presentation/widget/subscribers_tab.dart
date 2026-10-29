@@ -14,6 +14,7 @@ import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/subscribers_cubit/subscribers_cubit.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/subscribers_cubit/subscribers_state.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/mappers/subscriber_mapper.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class SubscribersTab extends StatelessWidget {
   final SliverOverlapAbsorberHandle handle;
@@ -62,7 +63,7 @@ class SubscribersTab extends StatelessWidget {
                 )
               else if (initialError)
                 AppErrorSliver(
-                  message: errorMessage ?? 'Failed to load subscribers',
+                  message: errorMessage ?? S.current.failedToLoadSubscribers,
                   onRetry: () =>
                       context.read<SubscribersCubit>().fetchSubscribers(),
                   iconSize: 42.r,
@@ -85,14 +86,14 @@ class SubscribersTab extends StatelessWidget {
                     ),
                   )
                 else if (state is SubscribersLoadedState)
-                  const AppEmptySliver(message: 'No subscribers yet'),
-
+                  AppEmptySliver(message: S.current.noSubscribersYet),
                 // Footer Slivers (cleanly separated from the main list)
                 if (isLoadingMore)
                   const SliverLoadMoreLoader()
                 else if (loadMoreError)
                   SliverLoadMoreError(
-                    message: errorMessage ?? 'Failed to load more subscribers',
+                    message:
+                        errorMessage ?? S.current.failedToLoadMoreSubscribers,
                     onRetry: () => context.read<SubscribersCubit>().loadMore(),
                   ),
               ],

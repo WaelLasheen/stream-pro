@@ -7,6 +7,7 @@ import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
 import 'package:stream_pro/feature/playlist/presentation/widgets/playlist_selector_sheet.dart';
 import 'package:stream_pro/feature/watch_later/domain/use_cases/is_in_watch_later_use_case.dart';
 import 'package:stream_pro/feature/watch_later/domain/use_cases/toggle_watch_later_use_case.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 enum VideoAction { saveToPlaylist, watchLater, share }
 
@@ -32,19 +33,21 @@ class VideoActionsPopup extends StatelessWidget {
       trigger: _Trigger(),
       menuWidth: 210.w,
       items: [
-        const AppMenuItem(
+        AppMenuItem(
           value: VideoAction.saveToPlaylist,
-          title: 'Save to playlist',
+          title: S.current.saveToPlaylist,
           icon: Icons.playlist_add_outlined,
         ),
         AppMenuItem(
           value: VideoAction.watchLater,
-          title: _isRemoving ? 'Remove from Watch later' : 'Add to Watch later',
+          title: _isRemoving
+              ? S.current.removeFromWatchLater
+              : S.current.addToWatchLater,
           icon: _isRemoving ? Icons.watch_later : Icons.watch_later_outlined,
         ),
-        const AppMenuItem(
+        AppMenuItem(
           value: VideoAction.share,
-          title: 'Share',
+          title: S.current.share,
           icon: Icons.share_outlined,
         ),
       ],
@@ -61,14 +64,13 @@ class VideoActionsPopup extends StatelessWidget {
         await _handleWatchLater(context);
         break;
       case VideoAction.share:
-        context.showSuccessSnackBar(message: 'Share is coming soon.');
+        context.showSuccessSnackBar(message: S.current.shareComingSoon);
         break;
     }
   }
 
   Future<void> _handleWatchLater(BuildContext context) async {
     final desiredIsInWatchLater = !_isRemoving;
-
     final statusResult = await getIt<IsInWatchLaterUseCase>()(videoId: videoId);
     if (!context.mounted) return;
 
@@ -76,13 +78,14 @@ class VideoActionsPopup extends StatelessWidget {
       context.showErrorSnackBar(message: failure.message);
       return null;
     }, (isInWatchLater) => isInWatchLater);
+
     if (currentStatus == null) return;
 
     if (currentStatus == desiredIsInWatchLater) {
       context.showSuccessSnackBar(
         message: desiredIsInWatchLater
-            ? 'Already in Watch later.'
-            : 'Already removed from Watch later.',
+            ? S.current.alreadyInWatchLater
+            : S.current.alreadyRemovedFromWatchLater,
       );
       return;
     }
@@ -96,8 +99,8 @@ class VideoActionsPopup extends StatelessWidget {
         onWatchLaterToggled?.call(isInWatchLater);
         context.showSuccessSnackBar(
           message: isInWatchLater
-              ? 'Added to Watch later.'
-              : 'Removed from Watch later.',
+              ? S.current.addedToWatchLater
+              : S.current.removedFromWatchLater,
         );
       },
     );

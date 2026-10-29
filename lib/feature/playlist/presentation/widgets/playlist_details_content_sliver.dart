@@ -9,6 +9,7 @@ import 'package:stream_pro/feature/playlist/presentation/controllers/playlist_de
 import 'package:stream_pro/feature/playlist/presentation/view_models/playlist_details_view.dart';
 import 'package:stream_pro/feature/playlist/presentation/widgets/playlist_video_list_sliver.dart';
 import 'package:stream_pro/feature/playlist/presentation/widgets/reorderable_playlist_videos_sliver.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class PlaylistDetailsContentSliver extends StatelessWidget {
   final PlaylistDetailsView view;
@@ -33,15 +34,15 @@ class PlaylistDetailsContentSliver extends StatelessWidget {
 
     if (view.hasFatalError) {
       return AppErrorSliver(
-        message: view.errorMessage ?? 'Failed to load the playlist',
+        message: view.errorMessage ?? S.current.failedToLoadPlaylist,
         onRetry: () => context.read<PlaylistDetailsCubit>().fetch(playlistId),
         iconSize: 42.r,
       );
     }
 
     if (view.videos.isEmpty) {
-      return const AppEmptySliver(
-        message: 'This playlist has no videos yet.',
+      return AppEmptySliver(
+        message: S.current.playlistHasNoVideosYet,
         icon: Icons.playlist_play_outlined,
       );
     }

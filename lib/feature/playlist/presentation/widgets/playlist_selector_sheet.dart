@@ -11,6 +11,7 @@ import 'package:stream_pro/feature/playlist/presentation/widgets/create_playlist
 import 'package:stream_pro/feature/playlist/presentation/widgets/create_playlist_tile.dart';
 import 'package:stream_pro/feature/playlist/presentation/widgets/playlist_selector_body.dart';
 import 'package:stream_pro/feature/playlist/presentation/widgets/playlist_sheet_header.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class PlaylistSelectorSheet extends StatelessWidget {
   final String videoId;
@@ -55,7 +56,7 @@ class PlaylistSelectorSheet extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const PlaylistSheetHeader(title: 'Save to playlist'),
+            PlaylistSheetHeader(title: S.current.saveToPlaylist),
             16.verticalSpace,
             CreatePlaylistTile(onTap: () => _createPlaylist(context)),
             Divider(color: appTheme.boarderPrimary, height: 1.h),

@@ -5,6 +5,7 @@ import 'package:stream_pro/core/routing/app_routes.dart';
 import 'package:stream_pro/core/shared/widgets/stream_pro_logo.dart';
 import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
 import 'package:stream_pro/feature/auth/presentation/controller/splash_cubit/splash_cubit.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -112,7 +113,7 @@ class _SplashScreenState extends State<SplashScreen>
                         ],
                       ).createShader(rect),
                       child: Text(
-                        'StreamPro',
+                        S.current.streamPro,
                         style: TextStyle(
                           fontSize: 36.sp,
                           fontWeight: FontWeight.w800,

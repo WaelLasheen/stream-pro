@@ -17,6 +17,7 @@ import 'package:stream_pro/feature/channel/presentation/mappers/playlist_mapper.
 import 'package:stream_pro/feature/channel/presentation/mappers/video_mapper.dart';
 import 'package:stream_pro/core/shared/widgets/channel/common_slivers.dart';
 import 'package:stream_pro/feature/video_details/presentation/args/video_details_args.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class ChannelHomeTab extends StatelessWidget {
   final String channelId;
@@ -68,14 +69,14 @@ class ChannelHomeSlivers extends StatelessWidget {
   Widget build(BuildContext context) {
     if (home.videos.isEmpty && home.playlists.isEmpty) {
       return AppEmptySliver(
-        message: 'No content available in this channel yet',
+        message: S.current.noContentAvailableInThisChannelYet,
       );
     }
 
     return SliverMainAxisGroup(
       slivers: [
         if (home.videos.isNotEmpty) ...[
-          const SliverSectionHeader(title: 'Latest videos'),
+          SliverSectionHeader(title: S.current.latestVideos),
           SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: 12.w),
             sliver: SliverList(
@@ -94,7 +95,7 @@ class ChannelHomeSlivers extends StatelessWidget {
           ),
         ],
         if (home.playlists.isNotEmpty) ...[
-          const SliverSectionHeader(title: 'Playlists'),
+          SliverSectionHeader(title: S.current.playlists),
           SliverPadding(
             padding: EdgeInsets.symmetric(horizontal: 12.w),
             sliver: SliverList(

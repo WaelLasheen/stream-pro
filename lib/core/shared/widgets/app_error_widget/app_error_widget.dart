@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stream_pro/core/shared/widgets/app_buttons/app_button.dart'; // <-- Import AppButton
+import 'package:stream_pro/core/shared/widgets/app_buttons/app_button.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class AppErrorWidget extends StatelessWidget {
   final String message;
@@ -10,7 +11,7 @@ class AppErrorWidget extends StatelessWidget {
   final Color? iconColor;
   final TextStyle? messageStyle;
   final EdgeInsetsGeometry? padding;
-  final String retryLabel;
+  final String? retryLabel;
   final IconData? retryIcon;
 
   const AppErrorWidget({
@@ -22,14 +23,13 @@ class AppErrorWidget extends StatelessWidget {
     this.iconColor,
     this.messageStyle,
     this.padding,
-    this.retryLabel = 'Retry',
+    this.retryLabel,
     this.retryIcon,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     return Center(
       child: Padding(
         padding:
@@ -51,12 +51,11 @@ class AppErrorWidget extends StatelessWidget {
             ),
             if (onRetry != null) ...[
               16.verticalSpace,
-              // Changed from ElevatedButton to your custom AppButton
               AppButton(
-                text: retryLabel,
+                text: retryLabel ?? S.current.retry,
                 onPressed: onRetry!,
                 icon: retryIcon != null ? Icon(retryIcon, size: 18.r) : null,
-                width: 140.w, // Matches your original width
+                width: 140.w,
               ),
             ],
           ],

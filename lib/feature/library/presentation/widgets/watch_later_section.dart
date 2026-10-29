@@ -10,6 +10,7 @@ import 'package:stream_pro/feature/library/presentation/widgets/library_rail_shi
 import 'package:stream_pro/feature/watch_later/presentation/controllers/watch_later_cubit/watch_later_cubit.dart';
 import 'package:stream_pro/feature/watch_later/presentation/controllers/watch_later_cubit/watch_later_state.dart';
 import 'package:stream_pro/feature/watch_later/presentation/mapper/watch_later_mapper.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class WatchLaterSection extends StatelessWidget {
   final int previewCount;
@@ -36,10 +37,10 @@ class WatchLaterSection extends StatelessWidget {
           case WatchLaterInitial() || WatchLaterLoading():
             content = const LibraryRailShimmer(key: ValueKey('loading'));
           case WatchLaterEmpty():
-            content = const LibraryEmptyCard(
+            content = LibraryEmptyCard(
               key: ValueKey('empty'),
               icon: Icons.watch_later_outlined,
-              message: 'Videos you save for later will appear here.',
+              message: S.current.watchLaterEmptyMessage,
             );
           case WatchLaterError():
             content = LibraryErrorCard(
@@ -63,7 +64,7 @@ class WatchLaterSection extends StatelessWidget {
         return LibrarySection(
           icon: Icons.watch_later_rounded,
           accent: appTheme.warningColor,
-          title: 'Watch Later',
+          title: S.current.watchLater,
           count: count,
           onSeeAll: onSeeAll,
           child: content,

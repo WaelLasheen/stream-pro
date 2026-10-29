@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/app_button.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 extension DialogExtension on BuildContext {
   Future<bool?> showConfirmationDialog({
     required String title,
     required String message,
     required String confirmLabel,
-    String cancelLabel = 'Cancel',
+    String? cancelLabel,
     bool isDestructive = false,
   }) {
     final theme = Theme.of(this);
     final appTheme = this.appTheme;
-
     return showDialog<bool>(
       context: this,
       builder: (dialogContext) => AlertDialog(
@@ -40,7 +40,7 @@ extension DialogExtension on BuildContext {
             children: [
               Expanded(
                 child: AppButton(
-                  text: cancelLabel,
+                  text: cancelLabel ?? S.current.cancel,
                   isPrimary: false,
                   isFullWidth: false,
                   width: double.infinity,
@@ -73,13 +73,11 @@ extension DialogExtension on BuildContext {
   }
 
   Future<bool?> showDeleteConfirmationDialog({
-    String title = 'Delete?',
-    String content =
-        'This item will be permanently removed. This can\'t be undone.',
+    String? title,
+    String? content,
   }) async {
     final theme = Theme.of(this);
     final appTheme = this.appTheme;
-
     return showDialog<bool>(
       context: this,
       builder: (dialogContext) => AlertDialog(
@@ -88,14 +86,14 @@ extension DialogExtension on BuildContext {
           borderRadius: BorderRadius.circular(20.r),
         ),
         title: Text(
-          title,
+          title ?? S.current.delete,
           style: theme.textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.bold,
             color: appTheme.textPrimary,
           ),
         ),
         content: Text(
-          content,
+          content ?? S.current.deleteConfirmationMessage,
           style: theme.textTheme.bodyMedium?.copyWith(
             color: appTheme.textSecondary,
           ),
@@ -104,10 +102,9 @@ extension DialogExtension on BuildContext {
         actions: [
           Row(
             children: [
-              // Cancel Button (Outlined)
               Expanded(
                 child: AppButton(
-                  text: 'Cancel',
+                  text: S.current.cancel,
                   isPrimary: false,
                   isFullWidth: false,
                   width: double.infinity,
@@ -118,10 +115,9 @@ extension DialogExtension on BuildContext {
                 ),
               ),
               12.horizontalSpace,
-              // Delete Button (Primary, Red)
               Expanded(
                 child: AppButton(
-                  text: 'Delete',
+                  text: S.current.delete,
                   isPrimary: true,
                   isFullWidth: false,
                   width: double.infinity,

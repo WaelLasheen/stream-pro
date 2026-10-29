@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
-class OwnerChannelTabBar extends StatelessWidget implements PreferredSizeWidget {
+class OwnerChannelTabBar extends StatelessWidget
+    implements PreferredSizeWidget {
   const OwnerChannelTabBar({super.key});
 
   @override
@@ -11,12 +13,12 @@ class OwnerChannelTabBar extends StatelessWidget implements PreferredSizeWidget 
   Widget build(BuildContext context) {
     return Material(
       color: Theme.of(context).scaffoldBackgroundColor,
-      child: const TabBar(
+      child: TabBar(
         indicatorSize: TabBarIndicatorSize.tab,
         tabs: [
-          Tab(text: 'Videos'),
-          Tab(text: 'Playlists'),
-          Tab(text: 'Subscribers'),
+          Tab(text: S.current.videos),
+          Tab(text: S.current.playlists),
+          Tab(text: S.current.subscribers),
         ],
       ),
     );

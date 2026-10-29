@@ -15,6 +15,7 @@ import 'package:stream_pro/feature/channel/presentation/controllers/channel_play
 import 'package:stream_pro/feature/channel/presentation/mappers/playlist_mapper.dart';
 import 'package:stream_pro/core/shared/widgets/channel/common_slivers.dart';
 import 'package:stream_pro/feature/playlist/presentation/args/playlist_details_args.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class ChannelPlaylistsTab extends StatelessWidget {
   final String channelId;
@@ -68,7 +69,8 @@ class ChannelPlaylistsTab extends StatelessWidget {
                 )
               else if (initialError)
                 AppErrorSliver(
-                  message: errorMessage ?? 'Failed to load channel playlists',
+                  message:
+                      errorMessage ?? S.current.failedToLoadChannelPlaylists,
                   onRetry: () {
                     context.read<ChannelPlaylistsCubit>().fetchChannelPlaylists(
                       channelId,
@@ -95,13 +97,13 @@ class ChannelPlaylistsTab extends StatelessWidget {
                     ),
                   )
                 else if (state is ChannelPlaylistsLoadedState)
-                  const AppEmptySliver(message: 'No playlists found'),
-
+                  AppEmptySliver(message: S.current.noPlaylistsFound),
                 if (isLoadingMore)
                   const SliverLoadMoreLoader()
                 else if (loadMoreError)
                   SliverLoadMoreError(
-                    message: errorMessage ?? 'Failed to load more playlists',
+                    message:
+                        errorMessage ?? S.current.failedToLoadMorePlaylists,
                     onRetry: () {
                       context.read<ChannelPlaylistsCubit>().loadMorePlaylists(
                         channelId,

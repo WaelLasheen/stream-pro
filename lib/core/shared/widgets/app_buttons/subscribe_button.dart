@@ -6,6 +6,7 @@ import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
 import 'package:stream_pro/feature/subscriptions/presentation/controllers/toggle_subscription_cubit/toggle_subscription_cubit.dart';
 import 'package:stream_pro/feature/subscriptions/presentation/controllers/toggle_subscription_cubit/toggle_subscription_state.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class SubscribeButton extends StatelessWidget {
   final String channelId;
@@ -94,7 +95,7 @@ class SubscribeButton extends StatelessWidget {
                     vertical: 8.h,
                   ),
                   child: Row(
-                    mainAxisSize: MainAxisSize.min, 
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       if (currentIsSubscribed) ...[
                         Icon(
@@ -105,7 +106,9 @@ class SubscribeButton extends StatelessWidget {
                         SizedBox(width: 6.w),
                       ],
                       Text(
-                        currentIsSubscribed ? 'Subscribed' : 'Subscribe',
+                        currentIsSubscribed
+                            ? S.current.subscribed
+                            : S.current.subscribe,
                         style: TextStyle(
                           color: targetTextColor,
                           fontSize: 14.sp,

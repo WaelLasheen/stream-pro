@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/app_popup_menu.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class MoreMenu extends StatelessWidget {
   final VoidCallback onEdit;
@@ -36,13 +37,13 @@ class MoreMenu extends StatelessWidget {
         if (showEdit)
           AppMenuItem(
             value: 'edit',
-            title: 'Edit',
+            title: S.current.edit,
             icon: Icons.edit_outlined,
             iconColor: appTheme.textSecondary,
           ),
         AppMenuItem(
           value: 'delete',
-          title: 'Delete',
+          title: S.current.delete,
           icon: Icons.delete_outline_rounded,
           iconColor: appTheme.errorColor,
           titleColor: appTheme.errorColor,

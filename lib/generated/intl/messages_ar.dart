@@ -20,189 +20,229 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(amount) => "الميزانية : ${amount}";
+  static String m0(query) => "لا توجد اقتراحات لـ \"${query}\"";
 
-  static String m1(name) => "الموظف: ${name}";
+  static String m1(query) => "لم يتم العثور على فيديوهات لـ \"${query}\"";
+
+  static String m2(userName) => "رد على @${userName}";
+
+  static String m3(count) => "عرض ${count} رد";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-    "account": MessageLookupByLibrary.simpleMessage("الحساب"),
-    "accountActions": MessageLookupByLibrary.simpleMessage("الحساب"),
-    "accountControl": MessageLookupByLibrary.simpleMessage("التحكم في الحساب"),
+    "accountActions": MessageLookupByLibrary.simpleMessage("إجراءات الحساب"),
     "accountCreatedSuccessFully": MessageLookupByLibrary.simpleMessage(
-      "تم إنشاء الحساب بنجاح",
+      "تم إنشاء الحساب بنجاح!",
     ),
-    "actionButton": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
     "activeNow": MessageLookupByLibrary.simpleMessage("نشط الآن"),
-    "activeSessionsLabel": MessageLookupByLibrary.simpleMessage(
-      "الجلسات النشطة",
+    "addAPublicComment": MessageLookupByLibrary.simpleMessage(
+      "إضافة تعليق عام",
     ),
-    "addCard": MessageLookupByLibrary.simpleMessage("اضافة بطاقة"),
-    "addComment": MessageLookupByLibrary.simpleMessage("أضف تعليقًا..."),
-    "addPaymentMethod": MessageLookupByLibrary.simpleMessage("إضافة وسيلة دفع"),
-    "address": MessageLookupByLibrary.simpleMessage("العنوان"),
-    "alertNewLogin": MessageLookupByLibrary.simpleMessage(
-      "تنبيه عند تسجيل دخول جديد",
+    "addTagAndPressDone": MessageLookupByLibrary.simpleMessage(
+      "أضف وسماً واضغط تم",
     ),
-    "alertStatusChange": MessageLookupByLibrary.simpleMessage(
-      "تنبيه عند تغيير حالة الطلب",
+    "addToWatchLater": MessageLookupByLibrary.simpleMessage(
+      "إضافة إلى المشاهدة لاحقاً",
+    ),
+    "added": MessageLookupByLibrary.simpleMessage("تمت الإضافة"),
+    "addedToWatchLater": MessageLookupByLibrary.simpleMessage(
+      "تمت الإضافة إلى المشاهدة لاحقاً.",
     ),
     "all": MessageLookupByLibrary.simpleMessage("الكل"),
-    "allowDataImproveService": MessageLookupByLibrary.simpleMessage(
-      "السماح باستخدام البيانات لتحسين الخدمة",
-    ),
     "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
       "لديك حساب بالفعل؟",
     ),
-    "appTitle": MessageLookupByLibrary.simpleMessage("يومي"),
+    "alreadyInWatchLater": MessageLookupByLibrary.simpleMessage(
+      "موجود بالفعل في المشاهدة لاحقاً.",
+    ),
+    "alreadyRemovedFromWatchLater": MessageLookupByLibrary.simpleMessage(
+      "تمت إزالته بالفعل من المشاهدة لاحقاً.",
+    ),
+    "anyoneCanWatchThisPlaylist": MessageLookupByLibrary.simpleMessage(
+      "يمكن لأي شخص مشاهدة هذه القائمة",
+    ),
+    "appTitle": MessageLookupByLibrary.simpleMessage("StreamPro"),
     "appVersionLabel": MessageLookupByLibrary.simpleMessage("إصدار التطبيق"),
-    "approved": MessageLookupByLibrary.simpleMessage("تمت الموافقة"),
-    "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
-    "assignedTeam": MessageLookupByLibrary.simpleMessage("فريق الخدمة المعين"),
     "badCertificate": MessageLookupByLibrary.simpleMessage("شهادة غير صالحة"),
-    "budget": MessageLookupByLibrary.simpleMessage("الميزانية"),
-    "budgetLabel": m0,
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
-    "cardHolder": MessageLookupByLibrary.simpleMessage("حامل البطاقة"),
-    "cardHolderName": MessageLookupByLibrary.simpleMessage("اسم حامل البطاقة"),
-    "cardNumber": MessageLookupByLibrary.simpleMessage("رقم البطاقة"),
-    "changeLanguage": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
-    "changePassword": MessageLookupByLibrary.simpleMessage("تغيير كلمة المرور"),
-    "changePasswordInstruction": MessageLookupByLibrary.simpleMessage(
-      "أدخل كلمة مرور جديدة لحسابك.",
-    ),
+    "categoryIsRequired": MessageLookupByLibrary.simpleMessage("الفئة مطلوبة"),
+    "categoryRequired": MessageLookupByLibrary.simpleMessage("الفئة *"),
     "changePhoto": MessageLookupByLibrary.simpleMessage("تغيير الصورة"),
-    "choosePackage": MessageLookupByLibrary.simpleMessage(
-      "اختر الباقة المناسبة لنمو تسويقك",
+    "changeThumbnail": MessageLookupByLibrary.simpleMessage(
+      "تغيير الصورة المصغرة",
     ),
-    "chooseSubject": MessageLookupByLibrary.simpleMessage(
-      "اختيار موضوع التواصل",
+    "channelCreatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "تم إنشاء القناة بنجاح",
+    ),
+    "channelTitle": MessageLookupByLibrary.simpleMessage("عنوان القناة"),
+    "channelUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "تم تحديث القناة بنجاح",
+    ),
+    "clearAllNotifications": MessageLookupByLibrary.simpleMessage(
+      "مسح جميع الإشعارات",
     ),
     "comments": MessageLookupByLibrary.simpleMessage("التعليقات"),
-    "companyName": MessageLookupByLibrary.simpleMessage("اسم الشركة"),
-    "companyNameReq": MessageLookupByLibrary.simpleMessage("اسم الشركة مطلوب"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "تأكيد كلمة المرور",
     ),
     "confirmPasswordMismatch": MessageLookupByLibrary.simpleMessage(
-      "كلمتا المرور غير متطابقتين",
+      "كلمات المرور غير متطابقة",
     ),
     "confirmPasswordReq": MessageLookupByLibrary.simpleMessage(
-      "تأكيد كلمة المرور مطلوب",
+      "يرجى تأكيد كلمة المرور",
     ),
     "connectionTimeout": MessageLookupByLibrary.simpleMessage(
-      "انتهى وقت الاتصال",
+      "انتهت مهلة الاتصال",
     ),
-    "contactInfo": MessageLookupByLibrary.simpleMessage("معلومات التواصل"),
-    "contactUs": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
-    "continuePayment": MessageLookupByLibrary.simpleMessage("متابعة الدفع"),
     "continueWithGoogle": MessageLookupByLibrary.simpleMessage(
       "المتابعة باستخدام جوجل",
     ),
-    "createCompany": MessageLookupByLibrary.simpleMessage("إنشاء شركتك"),
-    "createCompanySubtitle": MessageLookupByLibrary.simpleMessage(
-      "ابدأ ببناء حضور شركتك على المنصة من خلال إدخال بياناتها .",
-    ),
-    "currentPassword": MessageLookupByLibrary.simpleMessage(
-      "كلمة المرور الحالية",
+    "create": MessageLookupByLibrary.simpleMessage("إنشاء"),
+    "createChannel": MessageLookupByLibrary.simpleMessage("إنشاء قناة"),
+    "createNewPlaylist": MessageLookupByLibrary.simpleMessage(
+      "إنشاء قائمة تشغيل جديدة",
     ),
     "currentSessionsSubtitle": MessageLookupByLibrary.simpleMessage(
-      "الأجهزة التي تم تسجيل الدخول إلى حسابك منها حاليًا.",
+      "هذه هي الأجهزة المسجلة الدخول حالياً إلى حسابك.",
     ),
     "currentSessionsTitle": MessageLookupByLibrary.simpleMessage(
       "الجلسات الحالية",
     ),
-    "dataUsage": MessageLookupByLibrary.simpleMessage("استخدام البيانات"),
-    "deactivateAccount": MessageLookupByLibrary.simpleMessage("تعطيل الحساب"),
+    "daysAgo": MessageLookupByLibrary.simpleMessage(" يوم"),
     "delete": MessageLookupByLibrary.simpleMessage("حذف"),
     "deleteAccount": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
     "deleteAccountMessage": MessageLookupByLibrary.simpleMessage(
-      "سيؤدي هذا إلى حذف حسابك وجميع البيانات المرتبطة به نهائيًا. لا يمكن التراجع عن هذا الإجراء.",
+      "هل أنت متأكد من حذف حسابك؟ لا يمكن التراجع عن هذا الإجراء.",
     ),
-    "deleteAccountWarning": MessageLookupByLibrary.simpleMessage(
-      "تتم مراجعة طلبات حذف الحساب من قبل المسؤول ومعالجتها في غضون 14 يومل . هذا الإجراء نهائي سيؤدي إلي حذف جميع سجلات الخدمة",
+    "deleteCommentMessage": MessageLookupByLibrary.simpleMessage(
+      "سيتم حذف هذا التعليق نهائياً. لا يمكن التراجع عن هذا.",
     ),
+    "deleteCommentTitle": MessageLookupByLibrary.simpleMessage("حذف التعليق؟"),
+    "deleteConfirmationMessage": MessageLookupByLibrary.simpleMessage(
+      "سيتم حذف هذا العنصر نهائياً. لا يمكن التراجع عن هذا.",
+    ),
+    "deletePlaylistMessage": MessageLookupByLibrary.simpleMessage(
+      "سيتم حذف هذه القائمة وفيديوهاتها نهائياً. لا يمكن التراجع عن هذا.",
+    ),
+    "deletePlaylistTitle": MessageLookupByLibrary.simpleMessage(
+      "حذف قائمة التشغيل؟",
+    ),
+    "deleteReplyMessage": MessageLookupByLibrary.simpleMessage(
+      "سيتم حذف هذا الرد نهائياً. لا يمكن التراجع عن هذا.",
+    ),
+    "deleteReplyTitle": MessageLookupByLibrary.simpleMessage("حذف الرد؟"),
+    "deleteVideoTooltip": MessageLookupByLibrary.simpleMessage("حذف الفيديو"),
+    "description": MessageLookupByLibrary.simpleMessage("الوصف"),
+    "descriptionIsRequired": MessageLookupByLibrary.simpleMessage(
+      "الوصف مطلوب",
+    ),
+    "descriptionOptional": MessageLookupByLibrary.simpleMessage(
+      "الوصف (اختياري)",
+    ),
+    "descriptionRequired": MessageLookupByLibrary.simpleMessage("الوصف *"),
     "dontHaveAccount": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
-    "downloadData": MessageLookupByLibrary.simpleMessage("تنزيل البيانات"),
+    "download": MessageLookupByLibrary.simpleMessage("تنزيل"),
+    "draft": MessageLookupByLibrary.simpleMessage("مسودة"),
     "edit": MessageLookupByLibrary.simpleMessage("تعديل"),
     "editComment": MessageLookupByLibrary.simpleMessage("تعديل التعليق"),
-    "editProfileChangePassword": MessageLookupByLibrary.simpleMessage(
-      "تغيير كلمة المرور",
-    ),
-    "editProfileContacts": MessageLookupByLibrary.simpleMessage(
-      "تعديل معلومات الاتصال",
-    ),
+    "editPlaylist": MessageLookupByLibrary.simpleMessage("تعديل القائمة"),
     "editProfilePage": MessageLookupByLibrary.simpleMessage(
       "تعديل الملف الشخصي",
     ),
-    "email": MessageLookupByLibrary.simpleMessage("البريد الالكتروني"),
+    "editVideo": MessageLookupByLibrary.simpleMessage("تعديل الفيديو"),
+    "editYourComment": MessageLookupByLibrary.simpleMessage("عدّل تعليقك…"),
+    "edited": MessageLookupByLibrary.simpleMessage("تم التعديل"),
+    "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
     "emailReq": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني مطلوب"),
-    "emailVerified": MessageLookupByLibrary.simpleMessage(
-      "البريد الالكتروني تم التحقق منه",
+    "enterCatchyTitle": MessageLookupByLibrary.simpleMessage(
+      "أدخل عنواناً جذاباً",
     ),
-    "employeeLabel": m1,
-    "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
-    "enterStrongPasswordToProtectYourAccount":
-        MessageLookupByLibrary.simpleMessage(
-          "أدخل كلمة مرور قوية لحماية حسابك",
-        ),
+    "enterYourChannelName": MessageLookupByLibrary.simpleMessage(
+      "أدخل اسم قناتك",
+    ),
     "expiresAtLabel": MessageLookupByLibrary.simpleMessage("تنتهي في"),
-    "expiresIn": MessageLookupByLibrary.simpleMessage("تنتهي في"),
-    "expiryDate": MessageLookupByLibrary.simpleMessage("تاريخ الإنتهاء"),
-    "faqs": MessageLookupByLibrary.simpleMessage("الأسئلة الشائعة"),
-    "flexiblePackages": MessageLookupByLibrary.simpleMessage(
-      "باقات مرنة تناسب حجم نشاطك وأهدافك التسويقية",
+    "failedToLoadChannelPlaylists": MessageLookupByLibrary.simpleMessage(
+      "فشل تحميل قوائم تشغيل القناة",
     ),
-    "forgotPassword": MessageLookupByLibrary.simpleMessage(
-      "إعادة تعيين كلمة المرور",
+    "failedToLoadChannelVideos": MessageLookupByLibrary.simpleMessage(
+      "فشل تحميل فيديوهات القناة",
     ),
-    "forgotPasswordSubtitle": MessageLookupByLibrary.simpleMessage(
-      "أدخل بريدك الالكتروني الذي تستخدمه لاختيار كلمة مرور جديدة.",
+    "failedToLoadMoreComments": MessageLookupByLibrary.simpleMessage(
+      "فشل تحميل المزيد من التعليقات",
     ),
-    "forgotPasswordTitle": MessageLookupByLibrary.simpleMessage(
-      "نسيت كلمة المرور؟",
+    "failedToLoadMorePlaylists": MessageLookupByLibrary.simpleMessage(
+      "فشل تحميل المزيد من قوائم التشغيل",
     ),
-    "fullName": MessageLookupByLibrary.simpleMessage("الأسم كامل"),
+    "failedToLoadMoreSubscribers": MessageLookupByLibrary.simpleMessage(
+      "فشل تحميل المزيد من المشتركين",
+    ),
+    "failedToLoadMoreVideos": MessageLookupByLibrary.simpleMessage(
+      "فشل تحميل المزيد من الفيديوهات",
+    ),
+    "failedToLoadPlaylist": MessageLookupByLibrary.simpleMessage(
+      "فشل تحميل قائمة التشغيل",
+    ),
+    "failedToLoadSubscribers": MessageLookupByLibrary.simpleMessage(
+      "فشل تحميل المشتركين",
+    ),
+    "failedToLoadYourVideos": MessageLookupByLibrary.simpleMessage(
+      "فشل تحميل فيديوهاتك",
+    ),
+    "failedToSaveVideoToGallery": MessageLookupByLibrary.simpleMessage(
+      "فشل حفظ الفيديو في المعرض",
+    ),
+    "fullName": MessageLookupByLibrary.simpleMessage("الاسم الكامل"),
     "fullNameReq": MessageLookupByLibrary.simpleMessage("الاسم الكامل مطلوب"),
     "googleSignInConfigError": MessageLookupByLibrary.simpleMessage(
-      "لم يتم إعداد تسجيل الدخول باستخدام جوجل بشكل صحيح. يرجى التحقق من إعدادات التطبيق.",
+      "لم يتم إعداد تسجيل الدخول بجوجل بشكل صحيح. يرجى التحقق من إعدادات التطبيق.",
     ),
     "googleSignInError": MessageLookupByLibrary.simpleMessage(
-      "تعذر تسجيل الدخول باستخدام جوجل. يرجى المحاولة مرة أخرى.",
+      "فشل تسجيل الدخول بجوجل. يرجى المحاولة مرة أخرى.",
     ),
-    "hello": MessageLookupByLibrary.simpleMessage("مرحباً بالعالم!"),
+    "hideReplies": MessageLookupByLibrary.simpleMessage("إخفاء الردود"),
+    "history": MessageLookupByLibrary.simpleMessage("السجل"),
+    "historyEmptyMessage": MessageLookupByLibrary.simpleMessage(
+      "الفيديوهات التي تشاهدها ستظهر هنا.",
+    ),
     "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
-    "industry": MessageLookupByLibrary.simpleMessage("مجال العمل"),
+    "hoursAgo": MessageLookupByLibrary.simpleMessage(" ساعة"),
     "internalServerError": MessageLookupByLibrary.simpleMessage(
       "خطأ في الخادم الداخلي، يرجى المحاولة لاحقاً",
     ),
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
-      "يرجى إدخال بريد إلكتروني صحيح",
+      "يرجى إدخال بريد إلكتروني صالح",
     ),
     "invalidPassword": MessageLookupByLibrary.simpleMessage(
       "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
     ),
     "ipAddressLabel": MessageLookupByLibrary.simpleMessage("عنوان IP"),
+    "justNow": MessageLookupByLibrary.simpleMessage("الآن"),
     "lastActive": MessageLookupByLibrary.simpleMessage("آخر نشاط"),
-    "late": MessageLookupByLibrary.simpleMessage("متأخر"),
+    "latestVideos": MessageLookupByLibrary.simpleMessage("أحدث الفيديوهات"),
+    "library": MessageLookupByLibrary.simpleMessage("المكتبة"),
+    "librarySubtitle": MessageLookupByLibrary.simpleMessage(
+      "كل ما شاهدته، حفظته، وأحببته",
+    ),
+    "likedVideos": MessageLookupByLibrary.simpleMessage(
+      "الفيديوهات المعجب بها",
+    ),
+    "live": MessageLookupByLibrary.simpleMessage("مباشر"),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "loginMethodApple": MessageLookupByLibrary.simpleMessage("آبل"),
     "loginMethodGoogle": MessageLookupByLibrary.simpleMessage("جوجل"),
-    "loginMethodLocal": MessageLookupByLibrary.simpleMessage(
-      "البريد الإلكتروني وكلمة المرور",
-    ),
+    "loginMethodLocal": MessageLookupByLibrary.simpleMessage("محلي"),
     "loginSubtitle": MessageLookupByLibrary.simpleMessage(
-      "سجل الدخول لإدارة معارض الكتب والفعاليات الثقافية",
+      "مرحباً بعودتك! يرجى إدخال بياناتك.",
     ),
     "loginSuccessfully": MessageLookupByLibrary.simpleMessage(
-      "تم تسجيل الدخول بنجاح",
+      "تم تسجيل الدخول بنجاح!",
     ),
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "logoutAllConfirmMessage": MessageLookupByLibrary.simpleMessage(
-      "سيؤدي هذا إلى تسجيل الخروج من كل جهاز، بما في ذلك هذا الجهاز. ستحتاج إلى تسجيل الدخول مرة أخرى.",
+      "هل أنت متأكد من تسجيل الخروج من جميع الأجهزة الأخرى؟ ستبقى مسجل الدخول على هذا الجهاز.",
     ),
     "logoutAllConfirmTitle": MessageLookupByLibrary.simpleMessage(
-      "تسجيل الخروج من جميع الأجهزة؟",
+      "تسجيل الخروج من جميع الأجهزة",
     ),
     "logoutAllDevices": MessageLookupByLibrary.simpleMessage(
       "تسجيل الخروج من جميع الأجهزة",
@@ -212,181 +252,241 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "logoutSession": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "logoutSessionConfirmMessage": MessageLookupByLibrary.simpleMessage(
-      "سيحتاج هذا الجهاز إلى تسجيل الدخول مرة أخرى للوصول إلى حسابك.",
+      "هل أنت متأكد من تسجيل الخروج من هذه الجلسة؟",
     ),
     "logoutSessionConfirmTitle": MessageLookupByLibrary.simpleMessage(
-      "تسجيل الخروج من هذه الجلسة؟",
+      "تسجيل الخروج من الجلسة",
     ),
-    "managerOnly": MessageLookupByLibrary.simpleMessage("المدير فقط"),
-    "markevaDescription": MessageLookupByLibrary.simpleMessage(
-      "برنامج لإدارة التسويق يجمع تنظيم الفرق، متابعة المهام، وتحليل الأداء في منصة واحدة.",
+    "markAllAsRead": MessageLookupByLibrary.simpleMessage("تحديد الكل كمقروء"),
+    "mediaStoragePermissionDenied": MessageLookupByLibrary.simpleMessage(
+      "تم رفض إذن الوصول إلى الوسائط",
     ),
-    "markivaContactInfo": MessageLookupByLibrary.simpleMessage(
-      "معلومات الاتصال بماركيفا",
-    ),
-    "mediumPassword": MessageLookupByLibrary.simpleMessage("متوسط"),
     "memberSince": MessageLookupByLibrary.simpleMessage("عضو منذ"),
-    "newPassword": MessageLookupByLibrary.simpleMessage("كلمة المرور الجديدة"),
-    "next": MessageLookupByLibrary.simpleMessage("التالي"),
-    "noActiveSessions": MessageLookupByLibrary.simpleMessage(
-      "لا توجد جلسات نشطة",
+    "million": MessageLookupByLibrary.simpleMessage(" مليون"),
+    "minutesAgo": MessageLookupByLibrary.simpleMessage(" دقيقة"),
+    "monthsAgo": MessageLookupByLibrary.simpleMessage(" شهر"),
+    "myPlaylistHint": MessageLookupByLibrary.simpleMessage(
+      "قائمة التشغيل الخاصة بي",
     ),
+    "name": MessageLookupByLibrary.simpleMessage("الاسم"),
     "noActiveSessionsMessage": MessageLookupByLibrary.simpleMessage(
-      "حسابك غير مسجل الدخول على أي أجهزة أخرى.",
+      "لا توجد جلسات نشطة.",
+    ),
+    "noChannelFound": MessageLookupByLibrary.simpleMessage(
+      "لم يتم العثور على قناة",
+    ),
+    "noChannelFoundMessage": MessageLookupByLibrary.simpleMessage(
+      "ليس لديك قناة بعد. أنشئ واحدة الآن لبدء مشاركة المحتوى مع جمهورك.",
     ),
     "noCommentsYet": MessageLookupByLibrary.simpleMessage(
-      "لا توجد تعليقات بعد. كن أول من يعلّق!",
+      "لا توجد تعليقات بعد. كن الأول!",
     ),
-    "noFaqsAvailable": MessageLookupByLibrary.simpleMessage(
-      "لا توجد أسئلة شائعة حالياً.",
+    "noContentAvailableInThisChannelYet": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد محتوى متاح في هذه القناة بعد",
+    ),
+    "noDataAvailable": MessageLookupByLibrary.simpleMessage(
+      "لا توجد بيانات متاحة حالياً.",
+    ),
+    "noFeedsAvailableAtTheMoment": MessageLookupByLibrary.simpleMessage(
+      "لا توجد محتوى متاح حالياً.",
     ),
     "noInternetConnection": MessageLookupByLibrary.simpleMessage(
       "لا يوجد اتصال بالإنترنت",
     ),
-    "noNotificationsCurrently": MessageLookupByLibrary.simpleMessage(
-      "لا توجد إشعارات حالياً",
+    "noMoreItems": MessageLookupByLibrary.simpleMessage("لا توجد عناصر أخرى"),
+    "noNotificationsYet": MessageLookupByLibrary.simpleMessage(
+      "لا توجد إشعارات بعد",
     ),
-    "noOrders": MessageLookupByLibrary.simpleMessage("لا توجد طلبات"),
-    "noServicesAvailable": MessageLookupByLibrary.simpleMessage(
-      "لا توجد خدمات متاحة",
+    "noPlaylistsFound": MessageLookupByLibrary.simpleMessage(
+      "لم يتم العثور على قوائم تشغيل",
     ),
+    "noPlaylistsYet": MessageLookupByLibrary.simpleMessage(
+      "لا توجد قوائم تشغيل بعد",
+    ),
+    "noRelatedVideosFound": MessageLookupByLibrary.simpleMessage(
+      "لا توجد فيديوهات مشابهة",
+    ),
+    "noRepliesYet": MessageLookupByLibrary.simpleMessage("لا توجد ردود بعد."),
+    "noSubscribersYet": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد مشتركون بعد",
+    ),
+    "noSubscriptionsYet": MessageLookupByLibrary.simpleMessage(
+      "لا توجد اشتراكات بعد",
+    ),
+    "noSuggestionsFor": m0,
+    "noVideosFound": MessageLookupByLibrary.simpleMessage(
+      "لم يتم العثور على فيديوهات",
+    ),
+    "noVideosFoundFor": m1,
+    "noVideosYet": MessageLookupByLibrary.simpleMessage("لا توجد فيديوهات بعد"),
+    "noWatchHistoryFoundMessage": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد سجل مشاهدة\nابدأ بمشاهدة الفيديوهات لبناء سجلك",
+    ),
+    "normal": MessageLookupByLibrary.simpleMessage("عادي"),
     "notifications": MessageLookupByLibrary.simpleMessage("الإشعارات"),
+    "onlyYouCanSeeThisVideo": MessageLookupByLibrary.simpleMessage(
+      "أنت فقط يمكنك رؤية هذا الفيديو",
+    ),
+    "onlyYouCanWatchThisPlaylist": MessageLookupByLibrary.simpleMessage(
+      "أنت فقط يمكنك مشاهدة هذه القائمة",
+    ),
     "oopsError": MessageLookupByLibrary.simpleMessage(
       "عذراً! حدث خطأ، يرجى المحاولة مرة أخرى",
     ),
     "or": MessageLookupByLibrary.simpleMessage("أو"),
-    "orders": MessageLookupByLibrary.simpleMessage("الطلبات"),
-    "otherPaymentMethods": MessageLookupByLibrary.simpleMessage(
-      "وسائل دفع أخري",
-    ),
-    "otpEntryInstruction": MessageLookupByLibrary.simpleMessage(
-      "أرسلنا رمز مكون من 6أرقام الى البريد الإلكتروني",
-    ),
-    "otpInvalidError": MessageLookupByLibrary.simpleMessage(
-      "رمز التحقق غير صحيح .يرجى المحاولة مرة اخرى.",
-    ),
-    "otpSubtitle": MessageLookupByLibrary.simpleMessage(
-      "أدخل رمز التحقق الذي أرسلناه إلى بريدك الإلكتروني.",
-    ),
-    "otpTitle": MessageLookupByLibrary.simpleMessage("أدخل رمز التحقق"),
     "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
-    "passwordCaseAndNumbers": MessageLookupByLibrary.simpleMessage(
-      "يُفضل استخدام حروف كبيرة وصغيرة و أرقام .",
-    ),
-    "passwordChangedSuccess": MessageLookupByLibrary.simpleMessage(
-      "تم تغيير كلمة المرور بنجاح",
-    ),
-    "passwordDoesntMatch": MessageLookupByLibrary.simpleMessage(
-      "تأكيد كلمة المرور لا يطابق كلمة المرور الجديدة",
-    ),
-    "passwordLength": MessageLookupByLibrary.simpleMessage(
-      "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل.",
-    ),
-    "passwordNotPersonal": MessageLookupByLibrary.simpleMessage(
-      "يُرجى عدم استخدام معلومات شخصية أو كلمات شائعة.",
-    ),
     "passwordReq": MessageLookupByLibrary.simpleMessage("كلمة المرور مطلوبة"),
-    "passwordSecurity": MessageLookupByLibrary.simpleMessage(
-      "تأمين كلمة المرور",
-    ),
-    "passwordStrength": MessageLookupByLibrary.simpleMessage("كلمة مرور قوية"),
     "pathNotFound": MessageLookupByLibrary.simpleMessage("المسار غير موجود"),
-    "paymentMethods": MessageLookupByLibrary.simpleMessage("وسائل الدفع"),
-    "pending": MessageLookupByLibrary.simpleMessage("قيد الإنتظار"),
-    "phone": MessageLookupByLibrary.simpleMessage("الهاتف"),
-    "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
-    "phoneReq": MessageLookupByLibrary.simpleMessage("رقم الهاتف مطلوب"),
-    "postalCode": MessageLookupByLibrary.simpleMessage("الرمز البريدي"),
-    "prices": MessageLookupByLibrary.simpleMessage("الاسعار"),
-    "privacy": MessageLookupByLibrary.simpleMessage("الخصوصية"),
+    "playlistDeleted": MessageLookupByLibrary.simpleMessage("تم حذف القائمة."),
+    "playlistHasNoVideosYet": MessageLookupByLibrary.simpleMessage(
+      "لا تحتوي هذه القائمة على فيديوهات بعد.",
+    ),
+    "playlists": MessageLookupByLibrary.simpleMessage("قوائم التشغيل"),
+    "pleaseEnterPlaylistName": MessageLookupByLibrary.simpleMessage(
+      "يرجى إدخال اسم قائمة التشغيل.",
+    ),
+    "pleaseSelectThumbnailImage": MessageLookupByLibrary.simpleMessage(
+      "يرجى اختيار صورة مصغرة",
+    ),
+    "pleaseSelectVideoFile": MessageLookupByLibrary.simpleMessage(
+      "يرجى اختيار ملف فيديو",
+    ),
+    "postingReply": MessageLookupByLibrary.simpleMessage("جارٍ نشر الرد…"),
+    "private": MessageLookupByLibrary.simpleMessage("خاص"),
+    "profileIsStillLoading": MessageLookupByLibrary.simpleMessage(
+      "الملف الشخصي لا يزال قيد التحميل.",
+    ),
     "profileTitle": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
     "profileUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
       "تم تحديث الملف الشخصي بنجاح",
     ),
+    "public": MessageLookupByLibrary.simpleMessage("عام"),
+    "published": MessageLookupByLibrary.simpleMessage("منشور"),
     "receiveTimeout": MessageLookupByLibrary.simpleMessage(
-      "انتهى وقت الاستقبال",
+      "انتهت مهلة الاستقبال",
     ),
     "registerNow": MessageLookupByLibrary.simpleMessage("سجل الآن"),
+    "relatedVideos": MessageLookupByLibrary.simpleMessage("فيديوهات مشابهة"),
+    "removeFromWatchLater": MessageLookupByLibrary.simpleMessage(
+      "إزالة من المشاهدة لاحقاً",
+    ),
+    "removedFromWatchLater": MessageLookupByLibrary.simpleMessage(
+      "تمت الإزالة من المشاهدة لاحقاً.",
+    ),
+    "reply": MessageLookupByLibrary.simpleMessage("رد"),
+    "replyingTo": m2,
     "requestCanceled": MessageLookupByLibrary.simpleMessage("تم إلغاء الطلب"),
-    "resendCode": MessageLookupByLibrary.simpleMessage("إعادة إرسال الرمز"),
-    "resetPassword": MessageLookupByLibrary.simpleMessage(
-      "اعادة تعيين كلمة المرور",
-    ),
-    "resetPasswordInstruction": MessageLookupByLibrary.simpleMessage(
-      "أدخل كلمة مرور قوية لحماية حسابك",
-    ),
     "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "save": MessageLookupByLibrary.simpleMessage("حفظ"),
     "saveChanges": MessageLookupByLibrary.simpleMessage("حفظ التغييرات"),
-    "savePaymentForLater": MessageLookupByLibrary.simpleMessage(
-      "حفظ وسيلة الدفع للاستخدام لاحقًا",
+    "saveToPlaylist": MessageLookupByLibrary.simpleMessage(
+      "حفظ إلى قائمة التشغيل",
     ),
-    "savePaymentMethod": MessageLookupByLibrary.simpleMessage(
-      "حفظ وسيلة الدفع",
+    "saved": MessageLookupByLibrary.simpleMessage("تم الحفظ"),
+    "searchVideosHint": MessageLookupByLibrary.simpleMessage(
+      "ابحث عن فيديوهات...",
     ),
-    "searchHint": MessageLookupByLibrary.simpleMessage("ابحث عن خدمة..."),
-    "searchLocation": MessageLookupByLibrary.simpleMessage("ابحث عن موقع..."),
-    "searchOrderHint": MessageLookupByLibrary.simpleMessage(
-      "ابحث باسم الخدمة أو رقم طلب...",
-    ),
-    "securityAlerts": MessageLookupByLibrary.simpleMessage("تنبيهات الأمان"),
-    "securityCode": MessageLookupByLibrary.simpleMessage("رمز الأمان"),
-    "selectedPlan": MessageLookupByLibrary.simpleMessage("الخطة المختارة"),
-    "sendCode": MessageLookupByLibrary.simpleMessage("ارسال رمز للتحقق"),
-    "sendMessage": MessageLookupByLibrary.simpleMessage("إرسال الرسالة"),
-    "sendTimeout": MessageLookupByLibrary.simpleMessage("انتهى وقت الإرسال"),
-    "serviceRegister": MessageLookupByLibrary.simpleMessage("سجل الخدمات"),
-    "services": MessageLookupByLibrary.simpleMessage("الخدمات"),
+    "seeAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
+    "sendTimeout": MessageLookupByLibrary.simpleMessage("انتهت مهلة الإرسال"),
     "sessionsTab": MessageLookupByLibrary.simpleMessage("الجلسات"),
-    "setDefaultPayment": MessageLookupByLibrary.simpleMessage(
-      "تعيين كبطاقة الدفع الافتراضية",
-    ),
     "share": MessageLookupByLibrary.simpleMessage("مشاركة"),
-    "shareCopied": MessageLookupByLibrary.simpleMessage(
-      "تم نسخ الرابط إلى الحافظة!",
-    ),
-    "shareDataTeamOnly": MessageLookupByLibrary.simpleMessage(
-      "مشاركة بيانات الطلب مع فريق الخدمة المعين فقط",
-    ),
-    "showDetails": MessageLookupByLibrary.simpleMessage("عرض التفاصيل"),
-    "signInMethod": MessageLookupByLibrary.simpleMessage("طريقة تسجيل الدخول"),
-    "signedInAt": MessageLookupByLibrary.simpleMessage("تم تسجيل الدخول"),
-    "signup": MessageLookupByLibrary.simpleMessage("إنشاء حساب جديد"),
+    "shareComingSoon": MessageLookupByLibrary.simpleMessage("المشاركة قريباً."),
+    "shareLinkCopied": MessageLookupByLibrary.simpleMessage("تم نسخ الرابط!"),
+    "signedInAt": MessageLookupByLibrary.simpleMessage("تم تسجيل الدخول في"),
+    "signup": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
     "signupSubtitle": MessageLookupByLibrary.simpleMessage(
-      "أنشئ حسابك لادارة حملاتك التسويقية بذكاء خلال دقائق",
+      "أنشئ حساباً للبدء.",
     ),
-    "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
-    "splashTagLine": MessageLookupByLibrary.simpleMessage(
-      "منصة ذكية لإدارة التسويق",
+    "somethingWentWrong": MessageLookupByLibrary.simpleMessage("حدث خطأ ما"),
+    "startUpload": MessageLookupByLibrary.simpleMessage("بدء الرفع"),
+    "streamPro": MessageLookupByLibrary.simpleMessage("StreamPro"),
+    "subscribe": MessageLookupByLibrary.simpleMessage("اشتراك"),
+    "subscribed": MessageLookupByLibrary.simpleMessage("مشترك"),
+    "subscribers": MessageLookupByLibrary.simpleMessage("مشترك"),
+    "tags": MessageLookupByLibrary.simpleMessage("الوسوم"),
+    "tapToSelectThumbnail": MessageLookupByLibrary.simpleMessage(
+      "اضغط لاختيار صورة مصغرة",
     ),
-    "startNow": MessageLookupByLibrary.simpleMessage("أبدأ الآن"),
-    "strongPassword": MessageLookupByLibrary.simpleMessage("قوي"),
-    "subject": MessageLookupByLibrary.simpleMessage("الموضوع"),
+    "tapToSelectVideo": MessageLookupByLibrary.simpleMessage(
+      "اضغط لاختيار فيديو",
+    ),
+    "tellViewersAboutYourChannel": MessageLookupByLibrary.simpleMessage(
+      "أخبر المشاهدين عن قناتك",
+    ),
     "termsAndConditions": MessageLookupByLibrary.simpleMessage(
-      "أوافق على الشروط والاحكام وسياسة الخصوصية",
+      "أوافق على الشروط والأحكام وسياسة الخصوصية",
     ),
+    "thousand": MessageLookupByLibrary.simpleMessage(" ألف"),
+    "thumbnailImageFormats": MessageLookupByLibrary.simpleMessage(
+      "JPG, PNG (يُنصح بـ 16:9)",
+    ),
+    "thumbnailImageRequired": MessageLookupByLibrary.simpleMessage(
+      "الصورة المصغرة *",
+    ),
+    "titleIsRequired": MessageLookupByLibrary.simpleMessage("العنوان مطلوب"),
     "totalViewsLabel": MessageLookupByLibrary.simpleMessage("إجمالي المشاهدات"),
-    "unauthorizedNotVisible": MessageLookupByLibrary.simpleMessage(
-      "لن تكون معلماتك مرئية للموظفين الغير مصرح لهم.",
+    "typeToSearchVideos": MessageLookupByLibrary.simpleMessage(
+      "اكتب للبحث عن فيديوهات...",
+    ),
+    "unableToPlayVideo": MessageLookupByLibrary.simpleMessage(
+      "تعذر تشغيل الفيديو",
     ),
     "unexpectedError": MessageLookupByLibrary.simpleMessage(
       "خطأ غير متوقع، يرجى المحاولة مرة أخرى!",
     ),
     "unknownDevice": MessageLookupByLibrary.simpleMessage("جهاز غير معروف"),
     "unknownLocation": MessageLookupByLibrary.simpleMessage("موقع غير معروف"),
-    "userMessage": MessageLookupByLibrary.simpleMessage("رسالة المستخدم"),
-    "verifyCode": MessageLookupByLibrary.simpleMessage("تأكيد رمز التحقق"),
-    "videoLoadError": MessageLookupByLibrary.simpleMessage(
-      "تعذر تحميل الفيديو. يرجى التحقق من اتصالك بالإنترنت.",
+    "updateChannel": MessageLookupByLibrary.simpleMessage("تحديث القناة"),
+    "uploadVideo": MessageLookupByLibrary.simpleMessage("رفع فيديو"),
+    "uploading": MessageLookupByLibrary.simpleMessage("جارٍ الرفع..."),
+    "user": MessageLookupByLibrary.simpleMessage("مستخدم"),
+    "videoDeletedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "تم حذف الفيديو بنجاح",
     ),
+    "videoFileFormats": MessageLookupByLibrary.simpleMessage(
+      "MP4, MOV, MKV حتى 500 ميجابايت",
+    ),
+    "videoFileRequired": MessageLookupByLibrary.simpleMessage("ملف الفيديو *"),
+    "videoSavedToGallery": MessageLookupByLibrary.simpleMessage(
+      "تم حفظ الفيديو في المعرض!",
+    ),
+    "videoTitleRequired": MessageLookupByLibrary.simpleMessage(
+      "عنوان الفيديو *",
+    ),
+    "videoUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "تم تحديث الفيديو بنجاح",
+    ),
+    "videoUploadedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "تم رفع الفيديو بنجاح!",
+    ),
+    "videos": MessageLookupByLibrary.simpleMessage("فيديو"),
     "videosLabel": MessageLookupByLibrary.simpleMessage("الفيديوهات"),
-    "viewDetails": MessageLookupByLibrary.simpleMessage("عرض التفاصيل"),
-    "visibilityControl": MessageLookupByLibrary.simpleMessage(
-      "التحكم في الظهور",
+    "viewReplies": m3,
+    "views": MessageLookupByLibrary.simpleMessage("مشاهدة"),
+    "visibleToEveryone": MessageLookupByLibrary.simpleMessage("مرئي للجميع"),
+    "watchHistory": MessageLookupByLibrary.simpleMessage("سجل المشاهدة"),
+    "watchLater": MessageLookupByLibrary.simpleMessage("المشاهدة لاحقاً"),
+    "watchLaterEmptyMessage": MessageLookupByLibrary.simpleMessage(
+      "الفيديوهات التي تحفظها للمشاهدة لاحقاً ستظهر هنا.",
     ),
-    "weekPassword": MessageLookupByLibrary.simpleMessage("ضعيف"),
-    "welcomeMessage": MessageLookupByLibrary.simpleMessage("مرحباً بك في يومي"),
-    "welcomeTo": MessageLookupByLibrary.simpleMessage("أهلاً بك في"),
-    "writeMessageHere": MessageLookupByLibrary.simpleMessage("اكتب رسالتك هنا"),
+    "watched": MessageLookupByLibrary.simpleMessage("تمت مشاهدته"),
+    "welcomeTo": MessageLookupByLibrary.simpleMessage("مرحباً بك في"),
+    "whatAreYourThoughts": MessageLookupByLibrary.simpleMessage("ما رأيك؟"),
+    "whatIsThisPlaylistAbout": MessageLookupByLibrary.simpleMessage(
+      "عمّا تدور هذه القائمة؟",
+    ),
+    "whatIsThisVideoAbout": MessageLookupByLibrary.simpleMessage(
+      "عمّا يتحدث هذا الفيديو؟",
+    ),
+    "writeAReply": MessageLookupByLibrary.simpleMessage("اكتب رداً…"),
+    "yearsAgo": MessageLookupByLibrary.simpleMessage(" سنة"),
+    "you": MessageLookupByLibrary.simpleMessage("أنت"),
+    "youHaveNoPlaylistsYet": MessageLookupByLibrary.simpleMessage(
+      "ليس لديك أي قوائم تشغيل بعد.",
+    ),
+    "youHaventLikedAnyVideosYet": MessageLookupByLibrary.simpleMessage(
+      "لم تعجب بأي فيديوهات بعد.",
+    ),
+    "yourChannel": MessageLookupByLibrary.simpleMessage("قناتك"),
   };
 }

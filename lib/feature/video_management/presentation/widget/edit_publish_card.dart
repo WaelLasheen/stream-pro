@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class EditPublishCard extends StatelessWidget {
   final bool isPublished;
@@ -24,11 +25,13 @@ class EditPublishCard extends StatelessWidget {
       child: SwitchListTile(
         value: isPublished,
         onChanged: enabled ? (_) => onToggle() : null,
-        title: Text(isPublished ? 'Published' : 'Private'),
-        subtitle: Text(
+        title: Text(
           isPublished
-              ? 'Visible to everyone'
-              : 'Only you can see this video',
+              ? S.current.visibleToEveryone
+              : S.current.onlyYouCanSeeThisVideo,
+        ),
+        subtitle: Text(
+          isPublished ? 'Visible to everyone' : 'Only you can see this video',
         ),
         secondary: isChanging
             ? SizedBox(

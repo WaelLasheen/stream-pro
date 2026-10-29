@@ -13,6 +13,7 @@ import 'package:stream_pro/feature/library/presentation/widgets/watch_later_sect
 import 'package:stream_pro/feature/video_details/presentation/args/video_details_args.dart';
 import 'package:stream_pro/feature/watch_history/presentation/controllers/watch_history_cubit/watch_history_cubit.dart';
 import 'package:stream_pro/feature/watch_later/presentation/controllers/watch_later_cubit/watch_later_cubit.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class LibraryScreen extends StatelessWidget {
   const LibraryScreen({super.key});
@@ -59,7 +60,7 @@ class LibraryScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Text(
-              'Library',
+              S.current.library,
               style: Theme.of(
                 context,
               ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
@@ -68,7 +69,7 @@ class LibraryScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.fromLTRB(16.w, 2.h, 16.w, 20.h),
             child: Text(
-              'Everything you watched, saved and loved',
+              S.current.librarySubtitle,
               style: Theme.of(
                 context,
               ).textTheme.bodyMedium?.copyWith(color: appTheme.textSecondary),

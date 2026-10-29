@@ -10,6 +10,7 @@ import 'package:stream_pro/feature/library/presentation/widgets/library_empty_ca
 import 'package:stream_pro/feature/library/presentation/widgets/library_error_card.dart';
 import 'package:stream_pro/feature/library/presentation/widgets/library_rail.dart';
 import 'package:stream_pro/feature/library/presentation/widgets/library_rail_shimmer.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class LikedSection extends StatelessWidget {
   final int previewCount;
@@ -46,10 +47,10 @@ class LikedSection extends StatelessWidget {
             final items = state.feed.items;
             count = state.feed.videoCount;
             content = items.isEmpty
-                ? const LibraryEmptyCard(
+                ? LibraryEmptyCard(
                     key: ValueKey('empty'),
                     icon: Icons.favorite_border_rounded,
-                    message: "You haven't liked any videos yet.",
+                    message: S.current.youHaventLikedAnyVideosYet,
                   )
                 : LibraryRail(
                     key: const ValueKey('loaded'),
@@ -65,7 +66,7 @@ class LikedSection extends StatelessWidget {
         return LibrarySection(
           icon: Icons.favorite_rounded,
           accent: appTheme.redNormalColor,
-          title: 'Liked videos',
+          title: S.current.likedVideos,
           count: count,
           onSeeAll: onSeeAll,
           child: content,

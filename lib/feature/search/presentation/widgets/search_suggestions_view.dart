@@ -6,6 +6,7 @@ import 'package:stream_pro/feature/search/presentation/controllers/search_sugges
 import 'package:stream_pro/feature/search/presentation/controllers/search_suggestions_cubit/search_suggestions_state.dart';
 import 'package:stream_pro/feature/search/presentation/widgets/search_suggestion_tile.dart';
 import 'package:stream_pro/feature/search/presentation/widgets/search_suggestions_shimmer.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class SearchSuggestionsView extends StatelessWidget {
   final ValueChanged<String> onSuggestionTap;
@@ -30,7 +31,7 @@ class SearchSuggestionsView extends StatelessWidget {
           ),
           SearchSuggestionsLoaded() when state.suggestions.isEmpty =>
             AppEmptyWidget(
-              message: 'No suggestions for "${state.query}"',
+              message: S.current.noSuggestionsFor(state.query),
               icon: Icons.search_off_rounded,
             ),
           SearchSuggestionsLoaded() => ListView.builder(

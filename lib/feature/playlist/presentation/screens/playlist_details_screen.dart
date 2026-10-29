@@ -10,6 +10,7 @@ import 'package:stream_pro/feature/playlist/presentation/view_models/playlist_de
 import 'package:stream_pro/feature/playlist/presentation/widgets/edit_playlist_sheet.dart';
 import 'package:stream_pro/feature/playlist/presentation/widgets/playlist_details_content_sliver.dart';
 import 'package:stream_pro/feature/playlist/presentation/widgets/playlist_details_sliver_app_bar.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class PlaylistDetailsScreen extends StatelessWidget {
   final PlaylistDetailsArgs args;
@@ -32,9 +33,8 @@ class PlaylistDetailsScreen extends StatelessWidget {
 
   Future<void> _deletePlaylist(BuildContext context) async {
     final confirmed = await context.showDeleteConfirmationDialog(
-      title: 'Delete playlist?',
-      content:
-          'This playlist and its videos will be permanently removed. This can\'t be undone.',
+      title: S.current.deletePlaylistTitle,
+      content: S.current.deletePlaylistMessage,
     );
     if (confirmed != true || !context.mounted) return;
 
@@ -47,7 +47,7 @@ class PlaylistDetailsScreen extends StatelessWidget {
       body: BlocListener<PlaylistDetailsCubit, PlaylistDetailsState>(
         listener: (context, state) {
           if (state is PlaylistDetailsDeleted) {
-            context.showSuccessSnackBar(message: 'Playlist deleted.');
+            context.showSuccessSnackBar(message: S.current.playlistDeleted);
             context.navigateBack(true);
             return;
           }

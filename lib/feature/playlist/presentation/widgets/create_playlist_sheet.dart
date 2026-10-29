@@ -12,6 +12,7 @@ import 'package:stream_pro/feature/playlist/presentation/controllers/create_play
 import 'package:stream_pro/feature/playlist/presentation/controllers/create_playlist_cubit/create_playlist_state.dart';
 import 'package:stream_pro/feature/playlist/presentation/widgets/playlist_sheet_header.dart';
 import 'package:stream_pro/feature/playlist/presentation/widgets/playlist_visibility_tile.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class CreatePlaylistSheet extends StatefulWidget {
   final String videoId;
@@ -62,7 +63,7 @@ class _CreatePlaylistSheetState extends State<CreatePlaylistSheet> {
   void _submit() {
     final title = _titleController.text.trim();
     if (title.isEmpty) {
-      context.showErrorSnackBar(message: 'Please enter a playlist name.');
+      context.showErrorSnackBar(message: S.current.pleaseEnterPlaylistName);
       return;
     }
 
@@ -110,15 +111,15 @@ class _CreatePlaylistSheetState extends State<CreatePlaylistSheet> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const PlaylistSheetHeader(
-                    title: 'Create new playlist',
+                  PlaylistSheetHeader(
+                    title: S.current.createNewPlaylist,
                     titleSpacing: 20,
                   ),
                   20.verticalSpace,
                   AppFormField(
                     controller: _titleController,
-                    label: 'Name',
-                    hint: 'My playlist',
+                    label: S.current.name,
+                    hint: S.current.myPlaylistHint,
                     prefixIcon: Icons.playlist_add_outlined,
                     textInputAction: TextInputAction.next,
                     onChanged: (value) => _title.value = value,
@@ -127,8 +128,8 @@ class _CreatePlaylistSheetState extends State<CreatePlaylistSheet> {
                   16.verticalSpace,
                   AppFormField(
                     controller: _descriptionController,
-                    label: 'Description (optional)',
-                    hint: 'What is this playlist about?',
+                    label: S.current.descriptionOptional,
+                    hint: S.current.whatIsThisPlaylistAbout,
                     prefixIcon: Icons.notes_outlined,
                     maxLines: 3,
                     minLines: 2,
@@ -141,7 +142,7 @@ class _CreatePlaylistSheetState extends State<CreatePlaylistSheet> {
                   ValueListenableBuilder<String>(
                     valueListenable: _title,
                     builder: (context, title, _) => AppButton(
-                      text: 'Create',
+                      text: S.current.create,
                       isLoading: isLoading,
                       isEnabled: title.trim().isNotEmpty,
                       onPressed: _submit,

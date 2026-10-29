@@ -12,6 +12,7 @@ import 'package:stream_pro/feature/video_management/presentation/controllers/edi
 import 'package:stream_pro/feature/video_management/presentation/widget/edit_loading_or_error_state.dart';
 import 'package:stream_pro/feature/video_management/presentation/widget/edit_video_content.dart';
 import 'package:stream_pro/feature/video_management/presentation/widget/video_info_form_controller.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class EditVideoScreen extends StatefulWidget {
   final String videoId;
@@ -51,10 +52,10 @@ class _EditVideoScreenState extends State<EditVideoScreen> {
     if (state is EditVideoError) {
       context.showErrorSnackBar(message: state.message);
     } else if (state is EditVideoDeleted) {
-      context.showSuccessSnackBar(message: 'Video deleted successfully');
+      context.showSuccessSnackBar(message: S.current.videoDeletedSuccessfully);
       context.navigateBack(true);
     } else if (state is EditVideoUpdated) {
-      context.showSuccessSnackBar(message: 'Video updated successfully');
+      context.showSuccessSnackBar(message: S.current.videoUpdatedSuccessfully);
       context.navigateBack(true);
     }
   }
@@ -100,11 +101,11 @@ class _EditVideoScreenState extends State<EditVideoScreen> {
 
         return Scaffold(
           appBar: AppBar(
-            title: Text('Edit Video', style: FontStyles.titleLarge),
+            title: Text(S.current.editVideo, style: FontStyles.titleLarge), 
             centerTitle: true,
             actions: [
               IconButton(
-                tooltip: 'Delete video',
+                tooltip: S.current.deleteVideoTooltip,
                 icon: const Icon(Icons.delete_outline),
                 onPressed: (video == null || isBusy) ? null : _confirmDelete,
               ),

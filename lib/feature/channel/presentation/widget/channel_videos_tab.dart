@@ -16,6 +16,7 @@ import 'package:stream_pro/feature/channel/presentation/controllers/channel_vide
 import 'package:stream_pro/feature/channel/presentation/mappers/video_mapper.dart';
 import 'package:stream_pro/core/shared/widgets/channel/common_slivers.dart';
 import 'package:stream_pro/feature/video_details/presentation/args/video_details_args.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class ChannelVideosTab extends StatelessWidget {
   final String channelId;
@@ -64,7 +65,7 @@ class ChannelVideosTab extends StatelessWidget {
                 )
               else if (initialError)
                 AppErrorSliver(
-                  message: errorMessage ?? 'Failed to load channel videos',
+                  message: errorMessage ?? S.current.failedToLoadChannelVideos,
                   onRetry: () {
                     context.read<ChannelVideosCubit>().fetchChannelVideos(
                       channelId,
@@ -92,13 +93,13 @@ class ChannelVideosTab extends StatelessWidget {
                     ),
                   )
                 else if (state is ChannelVideosLoadedState)
-                  const AppEmptySliver(message: 'No videos found'),
+                  AppEmptySliver(message: S.current.noVideosFound),
 
                 if (isLoadingMore)
                   const SliverLoadMoreLoader()
                 else if (loadMoreError)
                   SliverLoadMoreError(
-                    message: errorMessage ?? 'Failed to load more videos',
+                    message: errorMessage ?? S.current.failedToLoadMoreVideos,
                     onRetry: () {
                       context.read<ChannelVideosCubit>().loadMoreVideos(
                         channelId,

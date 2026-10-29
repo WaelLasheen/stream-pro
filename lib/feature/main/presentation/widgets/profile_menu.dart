@@ -42,7 +42,7 @@ class ProfileMenu extends StatelessWidget {
           trigger: AppCircleNetworkImage(
             imageUrl: profile?.avatarUrl ?? '',
             radius: 16.r,
-            fallbackText: profile?.name ?? 'U',
+            fallbackText: profile?.name ?? S.current.user,
           ),
           header: Column(
             mainAxisSize: MainAxisSize.min,
@@ -52,7 +52,7 @@ class ProfileMenu extends StatelessWidget {
                   AppCircleNetworkImage(
                     imageUrl: profile?.avatarUrl ?? '',
                     radius: 24.r,
-                    fallbackText: profile?.name ?? 'U',
+                    fallbackText: profile?.name ?? S.current.user,
                   ),
                   12.horizontalSpace,
                   Expanded(
@@ -61,7 +61,7 @@ class ProfileMenu extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          profile?.name ?? 'User',
+                          profile?.name ?? S.current.user,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: textTheme.bodyLarge?.copyWith(
@@ -109,9 +109,9 @@ class ProfileMenu extends StatelessWidget {
               title: S.current.profileTitle,
               icon: Icons.person_outline_rounded,
             ),
-            const AppMenuItem(
+            AppMenuItem(
               value: 'owner_channel',
-              title: 'Your Channel',
+              title: S.current.yourChannel,
               icon: Icons.smart_display_outlined,
             ),
             AppMenuItem(

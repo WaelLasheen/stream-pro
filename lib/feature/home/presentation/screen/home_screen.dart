@@ -7,6 +7,7 @@ import 'package:stream_pro/core/shared/widgets/shimmer_list/shimmer_list.dart';
 import 'package:stream_pro/core/shared/widgets/video_card/video_card_shimmer.dart';
 import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
 import 'package:stream_pro/feature/home/presentation/widgets/video_list_view.dart';
+import 'package:stream_pro/generated/l10n.dart';
 import '../controller/home_cubit/home_cubit.dart';
 import '../controller/home_cubit/home_state.dart';
 
@@ -29,8 +30,8 @@ class HomeScreen extends StatelessWidget {
 
           case HomeLoadedState():
             if (state.videos.isEmpty) {
-              return const AppEmptyWidget(
-                message: 'No feeds available at the moment.',
+              return AppEmptyWidget(
+                message: S.current.noFeedsAvailableAtTheMoment,
               );
             }
             return VideoListView(

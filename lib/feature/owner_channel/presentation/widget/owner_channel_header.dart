@@ -4,6 +4,7 @@ import 'package:stream_pro/core/shared/widgets/network_image/app_circle_network_
 import 'package:stream_pro/core/shared/widgets/network_image/app_network_image.dart';
 import 'package:stream_pro/core/utils/extensions/formatters.dart';
 import 'package:stream_pro/feature/owner_channel/domain/entities/owner_channel_entity.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class OwnerChannelHeader extends StatelessWidget {
   final OwnerChannelEntity channel;
@@ -84,9 +85,9 @@ class OwnerChannelHeader extends StatelessWidget {
                           ),
                           4.verticalSpace,
                           Text(
-                            '${channel.subscriptionsCount.formatCount()} subscribers • '
-                            '${channel.videosCount.formatCount()} videos • '
-                            '${channel.totalViews.formatCount()} views',
+                            '${channel.subscriptionsCount.formatCount()} ${S.current.subscribers} • '
+                            '${channel.videosCount.formatCount()} ${S.current.videos} • '
+                            '${channel.totalViews.formatCount()} ${S.current.views}',
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: theme.textTheme.bodySmall?.copyWith(

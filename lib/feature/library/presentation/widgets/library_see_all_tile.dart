@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/widgets/video_card/video_card_widget.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class LibrarySeeAllTile extends StatelessWidget {
   final VoidCallback onTap;
@@ -42,7 +43,7 @@ class LibrarySeeAllTile extends StatelessWidget {
               ),
               6.verticalSpace,
               Text(
-                'See all',
+                S.current.seeAll,
                 style: theme.textTheme.labelMedium?.copyWith(
                   color: appTheme.primaryColor,
                   fontWeight: FontWeight.w700,

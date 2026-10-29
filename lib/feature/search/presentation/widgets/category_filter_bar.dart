@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/entity/category_entity.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class CategoryFilterBar extends StatelessWidget {
   final List<CategoryEntity> categories;
@@ -34,7 +35,7 @@ class CategoryFilterBar extends StatelessWidget {
               final isSelected = isAllChip
                   ? selectedCategory == null
                   : selectedCategory == category?.name;
-              final label = isAllChip ? "All" : category?.name ?? '';
+              final label = isAllChip ? S.current.all : category?.name ?? '';
 
               return ChoiceChip(
                 label: Text(label),

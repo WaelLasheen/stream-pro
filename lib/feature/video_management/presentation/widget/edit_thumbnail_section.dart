@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/app_button.dart';
 import 'package:stream_pro/core/shared/widgets/network_image/app_network_image.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class EditThumbnailSection extends StatelessWidget {
-  final String networkUrl; 
-  final ValueNotifier<String?> pendingThumbnailPathNotifier; 
+  final String networkUrl;
+  final ValueNotifier<String?> pendingThumbnailPathNotifier;
   final bool isUploading;
   final bool enabled;
   final VoidCallback onChange;
@@ -14,7 +15,7 @@ class EditThumbnailSection extends StatelessWidget {
   const EditThumbnailSection({
     super.key,
     required this.networkUrl,
-    required this.pendingThumbnailPathNotifier, 
+    required this.pendingThumbnailPathNotifier,
     required this.isUploading,
     required this.enabled,
     required this.onChange,
@@ -58,7 +59,9 @@ class EditThumbnailSection extends StatelessWidget {
             SizedBox(width: 12.w),
             Expanded(
               child: AppButton(
-                text: isUploading ? 'Uploading...' : 'Change thumbnail',
+                text: isUploading
+                    ? S.current.uploading
+                    : S.current.changeThumbnail,
                 onPressed: enabled ? onChange : () {},
                 isLoading: isUploading,
                 isPrimary: false,

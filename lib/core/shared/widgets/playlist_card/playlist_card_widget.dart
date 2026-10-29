@@ -4,6 +4,7 @@ import 'package:stream_pro/core/shared/widgets/network_image/app_network_image.d
 import 'package:stream_pro/core/shared/widgets/playlist_card/playlist_card_data.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/core/utils/extensions/size_extension.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class PlaylistCardWidget extends StatelessWidget {
   final PlaylistCardData playlist;
@@ -232,7 +233,7 @@ class _PlaylistMetaInfo extends StatelessWidget {
             ),
             4.horizontalSpace,
             Text(
-              isPublic ? 'Public' : 'Private',
+              isPublic ? S.current.public : S.current.private,
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.hintColor,
                 fontSize: 11.sp,

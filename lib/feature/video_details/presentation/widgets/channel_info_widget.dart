@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/subscribe_button.dart';
 import 'package:stream_pro/core/shared/widgets/network_image/app_circle_network_image.dart';
-import 'package:stream_pro/core/utils/extensions/navigation_extension.dart'; // Contains navigateToChannelDetails
+import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
+import 'package:stream_pro/generated/l10n.dart'; 
 
 class ChannelInfoWidget extends StatelessWidget {
   final String channelTitle;
@@ -49,7 +50,7 @@ class ChannelInfoWidget extends StatelessWidget {
                 ),
               ),
               Text(
-                '$subscribersCount subscribers',
+                '$subscribersCount ${S.current.subscribers}',
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: theme.hintColor,
                 ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/utils/extensions/formatters.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class VideoHeaderWidget extends StatefulWidget {
   final String title;
@@ -47,7 +48,7 @@ class _VideoHeaderWidgetState extends State<VideoHeaderWidget> {
         Row(
           children: [
             Text(
-              '${widget.views} views',
+              '${widget.views} ${S.current.views}',
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.hintColor,
               ),

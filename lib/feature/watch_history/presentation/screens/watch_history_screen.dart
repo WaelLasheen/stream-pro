@@ -9,6 +9,7 @@ import 'package:stream_pro/feature/watch_history/presentation/widgets/watch_hist
 import 'package:stream_pro/feature/watch_history/presentation/widgets/watch_history_error_widget.dart';
 import 'package:stream_pro/feature/watch_history/presentation/widgets/watch_history_loaded_widget.dart';
 import 'package:stream_pro/feature/watch_history/presentation/widgets/watch_history_loading_widget.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class WatchHistoryScreen extends StatelessWidget {
   const WatchHistoryScreen({super.key});
@@ -28,7 +29,7 @@ class WatchHistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Watch History'), centerTitle: true),
+      appBar: AppBar(title: Text(S.current.watchHistory), centerTitle: true),
       body: AppRefreshIndicator(
         onRefresh: () => context.read<WatchHistoryCubit>().fetchWatchHistory(),
         child: BlocBuilder<WatchHistoryCubit, WatchHistoryState>(

@@ -20,6 +20,7 @@ import 'package:stream_pro/feature/comments/presentation/widgets/comment_shimmer
 import 'package:stream_pro/feature/profile/presentation/controller/profile_cubit/profile_cubit.dart';
 import 'package:stream_pro/feature/profile/presentation/controller/profile_cubit/profile_state.dart';
 import 'package:stream_pro/feature/comments/presentation/widgets/comment_bottom_sheet/comments_bottom_sheet.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class CommentsTab extends StatelessWidget {
   final String videoId;
@@ -160,9 +161,7 @@ class CommentsTab extends StatelessWidget {
                                 .fetchComments(videoId),
                           )
                         else if (items.isEmpty && !isLoadingMore)
-                          const AppEmptySliver(
-                            message: 'No comments yet. Be the first!',
-                          )
+                          AppEmptySliver(message: S.current.noCommentsYet)
                         else ...[
                           SliverPadding(
                             padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -208,7 +207,7 @@ class CommentsTab extends StatelessWidget {
                               onRetry: () => context
                                   .read<CommentsCubit>()
                                   .loadMoreComments(videoId),
-                              message: 'Failed to load more comments',
+                              message: S.current.failedToLoadMoreComments,
                             ),
                         ],
                       ],

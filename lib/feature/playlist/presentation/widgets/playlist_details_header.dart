@@ -4,6 +4,7 @@ import 'package:stream_pro/core/shared/widgets/network_image/app_circle_network_
 import 'package:stream_pro/core/shared/widgets/network_image/app_network_image.dart';
 import 'package:stream_pro/core/utils/extensions/formatters.dart';
 import 'package:stream_pro/feature/playlist/domain/entities/playlist_details_entity.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class PlaylistDetailsHeader extends StatelessWidget {
   final PlaylistDetailsEntity playlist;
@@ -108,14 +109,16 @@ class PlaylistDetailsHeader extends StatelessWidget {
                               ),
                               4.horizontalSpace,
                               Text(
-                                playlist.isPublic ? 'Public' : 'Private',
+                                playlist.isPublic
+                                    ? S.current.public
+                                    : S.current.private,
                                 style: theme.textTheme.bodySmall?.copyWith(
                                   color: Colors.white70,
                                 ),
                               ),
                               8.horizontalSpace,
                               Text(
-                                '• ${playlist.videos.length.formatCount()} videos',
+                                '• ${playlist.videos.length.formatCount()} ${S.current.videos}',
                                 style: theme.textTheme.bodySmall?.copyWith(
                                   color: Colors.white70,
                                 ),

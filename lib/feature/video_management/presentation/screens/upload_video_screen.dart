@@ -10,6 +10,7 @@ import 'package:stream_pro/feature/video_management/presentation/controllers/upl
 import 'package:stream_pro/feature/video_management/presentation/controllers/upload_video_cubit/upload_video_state.dart';
 import 'package:stream_pro/feature/video_management/presentation/widget/upload_video_content.dart';
 import 'package:stream_pro/feature/video_management/presentation/widget/video_info_form_controller.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class UploadVideoScreen extends StatefulWidget {
   final FilePickerService filePickerService;
@@ -61,13 +62,13 @@ class _UploadVideoScreenState extends State<UploadVideoScreen> {
 
     final videoPath = _form.selectedVideoFile.value?.path;
     if (videoPath == null) {
-      context.showErrorSnackBar(message: 'Please select a video file');
+      context.showErrorSnackBar(message: S.current.pleaseSelectVideoFile);
       return;
     }
 
     final thumbnailPath = _form.selectedThumbnailFile.value?.path;
     if (thumbnailPath == null) {
-      context.showErrorSnackBar(message: 'Please select a thumbnail image');
+      context.showErrorSnackBar(message: S.current.pleaseSelectThumbnailImage);
       return;
     }
 
@@ -85,7 +86,9 @@ class _UploadVideoScreenState extends State<UploadVideoScreen> {
     return BlocConsumer<UploadVideoCubit, UploadVideoState>(
       listener: (context, state) {
         if (state is UploadVideoSuccess) {
-          context.showSuccessSnackBar(message: 'Video uploaded successfully!');
+          context.showSuccessSnackBar(
+            message: S.current.videoUploadedSuccessfully,
+          );
           Navigator.pop(context, true);
         } else if (state is UploadVideoError) {
           context.showErrorSnackBar(message: state.message);
@@ -96,7 +99,7 @@ class _UploadVideoScreenState extends State<UploadVideoScreen> {
 
         return Scaffold(
           appBar: AppBar(
-            title: Text('Upload Video', style: FontStyles.titleLarge),
+            title: Text(S.current.uploadVideo, style: FontStyles.titleLarge),
             centerTitle: true,
           ),
           body: UploadVideoContent(

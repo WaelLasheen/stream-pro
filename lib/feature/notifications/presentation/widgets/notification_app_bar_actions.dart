@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/app_popup_menu.dart';
+import 'package:stream_pro/generated/l10n.dart';
 import '../controllers/notifications_cubit/notifications_cubit.dart';
 
 class NotificationAppBarActions extends StatelessWidget {
@@ -22,15 +23,15 @@ class NotificationAppBarActions extends StatelessWidget {
             break;
         }
       },
-      items: const [
+      items:  [
         AppMenuItem(
           value: 'mark_all',
-          title: 'Mark all as read',
+          title: S.current.markAllAsRead,
           icon: Icons.done_all,
         ),
         AppMenuItem(
           value: 'clear_all',
-          title: 'Clear all notifications',
+          title: S.current.clearAllNotifications,
           icon: Icons.delete_outline,
         ),
       ],

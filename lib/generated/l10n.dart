@@ -54,51 +54,1911 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Day I`
+  /// `Videos you save for later will appear here.`
+  String get watchLaterEmptyMessage {
+    return Intl.message(
+      'Videos you save for later will appear here.',
+      name: 'watchLaterEmptyMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Watch History`
+  String get watchHistory {
+    return Intl.message(
+      'Watch History',
+      name: 'watchHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No watch history found \nStart watching videos to build your history`
+  String get noWatchHistoryFoundMessage {
+    return Intl.message(
+      'No watch history found \nStart watching videos to build your history',
+      name: 'noWatchHistoryFoundMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Video`
+  String get editVideo {
+    return Intl.message('Edit Video', name: 'editVideo', desc: '', args: []);
+  }
+
+  /// `Delete video`
+  String get deleteVideoTooltip {
+    return Intl.message(
+      'Delete video',
+      name: 'deleteVideoTooltip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video deleted successfully`
+  String get videoDeletedSuccessfully {
+    return Intl.message(
+      'Video deleted successfully',
+      name: 'videoDeletedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video updated successfully`
+  String get videoUpdatedSuccessfully {
+    return Intl.message(
+      'Video updated successfully',
+      name: 'videoUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a video file`
+  String get pleaseSelectVideoFile {
+    return Intl.message(
+      'Please select a video file',
+      name: 'pleaseSelectVideoFile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a thumbnail image`
+  String get pleaseSelectThumbnailImage {
+    return Intl.message(
+      'Please select a thumbnail image',
+      name: 'pleaseSelectThumbnailImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video uploaded successfully!`
+  String get videoUploadedSuccessfully {
+    return Intl.message(
+      'Video uploaded successfully!',
+      name: 'videoUploadedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload Video`
+  String get uploadVideo {
+    return Intl.message(
+      'Upload Video',
+      name: 'uploadVideo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Published`
+  String get published {
+    return Intl.message('Published', name: 'published', desc: '', args: []);
+  }
+
+  /// `Private`
+  String get private {
+    return Intl.message('Private', name: 'private', desc: '', args: []);
+  }
+
+  /// `Visible to everyone`
+  String get visibleToEveryone {
+    return Intl.message(
+      'Visible to everyone',
+      name: 'visibleToEveryone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Only you can see this video`
+  String get onlyYouCanSeeThisVideo {
+    return Intl.message(
+      'Only you can see this video',
+      name: 'onlyYouCanSeeThisVideo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Uploading...`
+  String get uploading {
+    return Intl.message('Uploading...', name: 'uploading', desc: '', args: []);
+  }
+
+  /// `Change thumbnail`
+  String get changeThumbnail {
+    return Intl.message(
+      'Change thumbnail',
+      name: 'changeThumbnail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save changes`
+  String get saveChanges {
+    return Intl.message(
+      'Save changes',
+      name: 'saveChanges',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video File *`
+  String get videoFileRequired {
+    return Intl.message(
+      'Video File *',
+      name: 'videoFileRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap to select video`
+  String get tapToSelectVideo {
+    return Intl.message(
+      'Tap to select video',
+      name: 'tapToSelectVideo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `MP4, MOV, MKV up to 500MB`
+  String get videoFileFormats {
+    return Intl.message(
+      'MP4, MOV, MKV up to 500MB',
+      name: 'videoFileFormats',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Thumbnail Image *`
+  String get thumbnailImageRequired {
+    return Intl.message(
+      'Thumbnail Image *',
+      name: 'thumbnailImageRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap to select thumbnail`
+  String get tapToSelectThumbnail {
+    return Intl.message(
+      'Tap to select thumbnail',
+      name: 'tapToSelectThumbnail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `JPG, PNG (16:9 recommended)`
+  String get thumbnailImageFormats {
+    return Intl.message(
+      'JPG, PNG (16:9 recommended)',
+      name: 'thumbnailImageFormats',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Upload`
+  String get startUpload {
+    return Intl.message(
+      'Start Upload',
+      name: 'startUpload',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tags`
+  String get tags {
+    return Intl.message('Tags', name: 'tags', desc: '', args: []);
+  }
+
+  /// `Add a tag and press done`
+  String get addTagAndPressDone {
+    return Intl.message(
+      'Add a tag and press done',
+      name: 'addTagAndPressDone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video Title *`
+  String get videoTitleRequired {
+    return Intl.message(
+      'Video Title *',
+      name: 'videoTitleRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a catchy title`
+  String get enterCatchyTitle {
+    return Intl.message(
+      'Enter a catchy title',
+      name: 'enterCatchyTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Title is required`
+  String get titleIsRequired {
+    return Intl.message(
+      'Title is required',
+      name: 'titleIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description *`
+  String get descriptionRequired {
+    return Intl.message(
+      'Description *',
+      name: 'descriptionRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What is this video about?`
+  String get whatIsThisVideoAbout {
+    return Intl.message(
+      'What is this video about?',
+      name: 'whatIsThisVideoAbout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description is required`
+  String get descriptionIsRequired {
+    return Intl.message(
+      'Description is required',
+      name: 'descriptionIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category *`
+  String get categoryRequired {
+    return Intl.message(
+      'Category *',
+      name: 'categoryRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category is required`
+  String get categoryIsRequired {
+    return Intl.message(
+      'Category is required',
+      name: 'categoryIsRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video saved to gallery!`
+  String get videoSavedToGallery {
+    return Intl.message(
+      'Video saved to gallery!',
+      name: 'videoSavedToGallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Download`
+  String get download {
+    return Intl.message('Download', name: 'download', desc: '', args: []);
+  }
+
+  /// `Saved`
+  String get saved {
+    return Intl.message('Saved', name: 'saved', desc: '', args: []);
+  }
+
+  /// `Added`
+  String get added {
+    return Intl.message('Added', name: 'added', desc: '', args: []);
+  }
+
+  /// `Watch later`
+  String get watchLater {
+    return Intl.message('Watch later', name: 'watchLater', desc: '', args: []);
+  }
+
+  /// `Added to Watch later.`
+  String get addedToWatchLater {
+    return Intl.message(
+      'Added to Watch later.',
+      name: 'addedToWatchLater',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Removed from Watch later.`
+  String get removedFromWatchLater {
+    return Intl.message(
+      'Removed from Watch later.',
+      name: 'removedFromWatchLater',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No related videos found`
+  String get noRelatedVideosFound {
+    return Intl.message(
+      'No related videos found',
+      name: 'noRelatedVideosFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `subscribers`
+  String get subscribers {
+    return Intl.message('subscribers', name: 'subscribers', desc: '', args: []);
+  }
+
+  /// `views`
+  String get views {
+    return Intl.message('views', name: 'views', desc: '', args: []);
+  }
+
+  /// `Share`
+  String get share {
+    return Intl.message('Share', name: 'share', desc: '', args: []);
+  }
+
+  /// `Share link copied!`
+  String get shareLinkCopied {
+    return Intl.message(
+      'Share link copied!',
+      name: 'shareLinkCopied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message('Save', name: 'save', desc: '', args: []);
+  }
+
+  /// `Related Videos`
+  String get relatedVideos {
+    return Intl.message(
+      'Related Videos',
+      name: 'relatedVideos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comments`
+  String get comments {
+    return Intl.message('Comments', name: 'comments', desc: '', args: []);
+  }
+
+  /// `There are no subscriptions yet`
+  String get noSubscriptionsYet {
+    return Intl.message(
+      'There are no subscriptions yet',
+      name: 'noSubscriptionsYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknown device`
+  String get unknownDevice {
+    return Intl.message(
+      'Unknown device',
+      name: 'unknownDevice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Local`
+  String get loginMethodLocal {
+    return Intl.message('Local', name: 'loginMethodLocal', desc: '', args: []);
+  }
+
+  /// `Google`
+  String get loginMethodGoogle {
+    return Intl.message(
+      'Google',
+      name: 'loginMethodGoogle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apple`
+  String get loginMethodApple {
+    return Intl.message('Apple', name: 'loginMethodApple', desc: '', args: []);
+  }
+
+  /// `Active now`
+  String get activeNow {
+    return Intl.message('Active now', name: 'activeNow', desc: '', args: []);
+  }
+
+  /// `Current Sessions`
+  String get currentSessionsTitle {
+    return Intl.message(
+      'Current Sessions',
+      name: 'currentSessionsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknown location`
+  String get unknownLocation {
+    return Intl.message(
+      'Unknown location',
+      name: 'unknownLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last active`
+  String get lastActive {
+    return Intl.message('Last active', name: 'lastActive', desc: '', args: []);
+  }
+
+  /// `Signed in at`
+  String get signedInAt {
+    return Intl.message('Signed in at', name: 'signedInAt', desc: '', args: []);
+  }
+
+  /// `Expires at`
+  String get expiresAtLabel {
+    return Intl.message(
+      'Expires at',
+      name: 'expiresAtLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `IP address`
+  String get ipAddressLabel {
+    return Intl.message(
+      'IP address',
+      name: 'ipAddressLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `App version`
+  String get appVersionLabel {
+    return Intl.message(
+      'App version',
+      name: 'appVersionLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logoutSession {
+    return Intl.message('Logout', name: 'logoutSession', desc: '', args: []);
+  }
+
+  /// `Logout Session`
+  String get logoutSessionConfirmTitle {
+    return Intl.message(
+      'Logout Session',
+      name: 'logoutSessionConfirmTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to logout this session?`
+  String get logoutSessionConfirmMessage {
+    return Intl.message(
+      'Are you sure you want to logout this session?',
+      name: 'logoutSessionConfirmMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message('Logout', name: 'logout', desc: '', args: []);
+  }
+
+  /// `These are the devices currently logged into your account.`
+  String get currentSessionsSubtitle {
+    return Intl.message(
+      'These are the devices currently logged into your account.',
+      name: 'currentSessionsSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No active sessions found.`
+  String get noActiveSessionsMessage {
+    return Intl.message(
+      'No active sessions found.',
+      name: 'noActiveSessionsMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout from all devices`
+  String get logoutAllDevices {
+    return Intl.message(
+      'Logout from all devices',
+      name: 'logoutAllDevices',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout All Devices`
+  String get logoutAllConfirmTitle {
+    return Intl.message(
+      'Logout All Devices',
+      name: 'logoutAllConfirmTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to logout from all other devices? You will remain logged in on this device.`
+  String get logoutAllConfirmMessage {
+    return Intl.message(
+      'Are you sure you want to logout from all other devices? You will remain logged in on this device.',
+      name: 'logoutAllConfirmMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get all {
+    return Intl.message('All', name: 'all', desc: '', args: []);
+  }
+
+  /// `No suggestions for "{query}"`
+  String noSuggestionsFor(Object query) {
+    return Intl.message(
+      'No suggestions for "$query"',
+      name: 'noSuggestionsFor',
+      desc: '',
+      args: [query],
+    );
+  }
+
+  /// `Search videos...`
+  String get searchVideosHint {
+    return Intl.message(
+      'Search videos...',
+      name: 'searchVideosHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type to search videos...`
+  String get typeToSearchVideos {
+    return Intl.message(
+      'Type to search videos...',
+      name: 'typeToSearchVideos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No videos found for "{query}"`
+  String noVideosFoundFor(Object query) {
+    return Intl.message(
+      'No videos found for "$query"',
+      name: 'noVideosFoundFor',
+      desc: '',
+      args: [query],
+    );
+  }
+
+  /// `Account Actions`
+  String get accountActions {
+    return Intl.message(
+      'Account Actions',
+      name: 'accountActions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Account`
+  String get deleteAccount {
+    return Intl.message(
+      'Delete Account',
+      name: 'deleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile updated successfully`
+  String get profileUpdatedSuccessfully {
+    return Intl.message(
+      'Profile updated successfully',
+      name: 'profileUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Profile`
+  String get editProfilePage {
+    return Intl.message(
+      'Edit Profile',
+      name: 'editProfilePage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Photo`
+  String get changePhoto {
+    return Intl.message(
+      'Change Photo',
+      name: 'changePhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full Name`
+  String get fullName {
+    return Intl.message('Full Name', name: 'fullName', desc: '', args: []);
+  }
+
+  /// `Full name is required`
+  String get fullNameReq {
+    return Intl.message(
+      'Full name is required',
+      name: 'fullNameReq',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
+  }
+
+  /// `Member since`
+  String get memberSince {
+    return Intl.message(
+      'Member since',
+      name: 'memberSince',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to logout?`
+  String get logoutConfirm {
+    return Intl.message(
+      'Are you sure you want to logout?',
+      name: 'logoutConfirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete your account? This action cannot be undone.`
+  String get deleteAccountMessage {
+    return Intl.message(
+      'Are you sure you want to delete your account? This action cannot be undone.',
+      name: 'deleteAccountMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message('Delete', name: 'delete', desc: '', args: []);
+  }
+
+  /// `Videos`
+  String get videosLabel {
+    return Intl.message('Videos', name: 'videosLabel', desc: '', args: []);
+  }
+
+  /// `Total Views`
+  String get totalViewsLabel {
+    return Intl.message(
+      'Total Views',
+      name: 'totalViewsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get profileTitle {
+    return Intl.message('Profile', name: 'profileTitle', desc: '', args: []);
+  }
+
+  /// `Sessions`
+  String get sessionsTab {
+    return Intl.message('Sessions', name: 'sessionsTab', desc: '', args: []);
+  }
+
+  /// `Please enter a playlist name.`
+  String get pleaseEnterPlaylistName {
+    return Intl.message(
+      'Please enter a playlist name.',
+      name: 'pleaseEnterPlaylistName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create new playlist`
+  String get createNewPlaylist {
+    return Intl.message(
+      'Create new playlist',
+      name: 'createNewPlaylist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message('Name', name: 'name', desc: '', args: []);
+  }
+
+  /// `My playlist`
+  String get myPlaylistHint {
+    return Intl.message(
+      'My playlist',
+      name: 'myPlaylistHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description (optional)`
+  String get descriptionOptional {
+    return Intl.message(
+      'Description (optional)',
+      name: 'descriptionOptional',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What is this playlist about?`
+  String get whatIsThisPlaylistAbout {
+    return Intl.message(
+      'What is this playlist about?',
+      name: 'whatIsThisPlaylistAbout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create`
+  String get create {
+    return Intl.message('Create', name: 'create', desc: '', args: []);
+  }
+
+  /// `Edit playlist`
+  String get editPlaylist {
+    return Intl.message(
+      'Edit playlist',
+      name: 'editPlaylist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load the playlist`
+  String get failedToLoadPlaylist {
+    return Intl.message(
+      'Failed to load the playlist',
+      name: 'failedToLoadPlaylist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This playlist has no videos yet.`
+  String get playlistHasNoVideosYet {
+    return Intl.message(
+      'This playlist has no videos yet.',
+      name: 'playlistHasNoVideosYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Public`
+  String get public {
+    return Intl.message('Public', name: 'public', desc: '', args: []);
+  }
+
+  /// `videos`
+  String get videos {
+    return Intl.message('videos', name: 'videos', desc: '', args: []);
+  }
+
+  /// `Something went wrong`
+  String get somethingWentWrong {
+    return Intl.message(
+      'Something went wrong',
+      name: 'somethingWentWrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have no playlists yet.`
+  String get youHaveNoPlaylistsYet {
+    return Intl.message(
+      'You have no playlists yet.',
+      name: 'youHaveNoPlaylistsYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save to playlist`
+  String get saveToPlaylist {
+    return Intl.message(
+      'Save to playlist',
+      name: 'saveToPlaylist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Anyone can watch this playlist`
+  String get anyoneCanWatchThisPlaylist {
+    return Intl.message(
+      'Anyone can watch this playlist',
+      name: 'anyoneCanWatchThisPlaylist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Only you can watch this playlist`
+  String get onlyYouCanWatchThisPlaylist {
+    return Intl.message(
+      'Only you can watch this playlist',
+      name: 'onlyYouCanWatchThisPlaylist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete playlist?`
+  String get deletePlaylistTitle {
+    return Intl.message(
+      'Delete playlist?',
+      name: 'deletePlaylistTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This playlist and its videos will be permanently removed. This can't be undone.`
+  String get deletePlaylistMessage {
+    return Intl.message(
+      'This playlist and its videos will be permanently removed. This can\'t be undone.',
+      name: 'deletePlaylistMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Playlist deleted.`
+  String get playlistDeleted {
+    return Intl.message(
+      'Playlist deleted.',
+      name: 'playlistDeleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Channel updated successfully`
+  String get channelUpdatedSuccessfully {
+    return Intl.message(
+      'Channel updated successfully',
+      name: 'channelUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Channel created successfully`
+  String get channelCreatedSuccessfully {
+    return Intl.message(
+      'Channel created successfully',
+      name: 'channelCreatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Channel Found`
+  String get noChannelFound {
+    return Intl.message(
+      'No Channel Found',
+      name: 'noChannelFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have a channel yet. Create one now to start sharing content with your audience.`
+  String get noChannelFoundMessage {
+    return Intl.message(
+      'You don\'t have a channel yet. Create one now to start sharing content with your audience.',
+      name: 'noChannelFoundMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Channel`
+  String get createChannel {
+    return Intl.message(
+      'Create Channel',
+      name: 'createChannel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Playlists`
+  String get playlists {
+    return Intl.message('Playlists', name: 'playlists', desc: '', args: []);
+  }
+
+  /// `Channel Title`
+  String get channelTitle {
+    return Intl.message(
+      'Channel Title',
+      name: 'channelTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your channel name`
+  String get enterYourChannelName {
+    return Intl.message(
+      'Enter your channel name',
+      name: 'enterYourChannelName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message('Description', name: 'description', desc: '', args: []);
+  }
+
+  /// `Tell viewers about your channel`
+  String get tellViewersAboutYourChannel {
+    return Intl.message(
+      'Tell viewers about your channel',
+      name: 'tellViewersAboutYourChannel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update Channel`
+  String get updateChannel {
+    return Intl.message(
+      'Update Channel',
+      name: 'updateChannel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load your videos`
+  String get failedToLoadYourVideos {
+    return Intl.message(
+      'Failed to load your videos',
+      name: 'failedToLoadYourVideos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Draft`
+  String get draft {
+    return Intl.message('Draft', name: 'draft', desc: '', args: []);
+  }
+
+  /// `No videos yet`
+  String get noVideosYet {
+    return Intl.message(
+      'No videos yet',
+      name: 'noVideosYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load more videos`
+  String get failedToLoadMoreVideos {
+    return Intl.message(
+      'Failed to load more videos',
+      name: 'failedToLoadMoreVideos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load subscribers`
+  String get failedToLoadSubscribers {
+    return Intl.message(
+      'Failed to load subscribers',
+      name: 'failedToLoadSubscribers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No subscribers yet`
+  String get noSubscribersYet {
+    return Intl.message(
+      'No subscribers yet',
+      name: 'noSubscribersYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load more subscribers`
+  String get failedToLoadMoreSubscribers {
+    return Intl.message(
+      'Failed to load more subscribers',
+      name: 'failedToLoadMoreSubscribers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No playlists yet`
+  String get noPlaylistsYet {
+    return Intl.message(
+      'No playlists yet',
+      name: 'noPlaylistsYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mark all as read`
+  String get markAllAsRead {
+    return Intl.message(
+      'Mark all as read',
+      name: 'markAllAsRead',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear all notifications`
+  String get clearAllNotifications {
+    return Intl.message(
+      'Clear all notifications',
+      name: 'clearAllNotifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notifications {
+    return Intl.message(
+      'Notifications',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No notifications yet`
+  String get noNotificationsYet {
+    return Intl.message(
+      'No notifications yet',
+      name: 'noNotificationsYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User`
+  String get user {
+    return Intl.message('User', name: 'user', desc: '', args: []);
+  }
+
+  /// `Your Channel`
+  String get yourChannel {
+    return Intl.message(
+      'Your Channel',
+      name: 'yourChannel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `StreamPro`
+  String get streamPro {
+    return Intl.message('StreamPro', name: 'streamPro', desc: '', args: []);
+  }
+
+  /// `Liked Videos`
+  String get likedVideos {
+    return Intl.message(
+      'Liked Videos',
+      name: 'likedVideos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You haven't liked any videos yet.`
+  String get youHaventLikedAnyVideosYet {
+    return Intl.message(
+      'You haven\'t liked any videos yet.',
+      name: 'youHaventLikedAnyVideosYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Library`
+  String get library {
+    return Intl.message('Library', name: 'library', desc: '', args: []);
+  }
+
+  /// `Everything you watched, saved and loved`
+  String get librarySubtitle {
+    return Intl.message(
+      'Everything you watched, saved and loved',
+      name: 'librarySubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Videos you watch will show up here.`
+  String get historyEmptyMessage {
+    return Intl.message(
+      'Videos you watch will show up here.',
+      name: 'historyEmptyMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `History`
+  String get history {
+    return Intl.message('History', name: 'history', desc: '', args: []);
+  }
+
+  /// `Retry`
+  String get retry {
+    return Intl.message('Retry', name: 'retry', desc: '', args: []);
+  }
+
+  /// `See all`
+  String get seeAll {
+    return Intl.message('See all', name: 'seeAll', desc: '', args: []);
+  }
+
+  /// `No feeds available at the moment.`
+  String get noFeedsAvailableAtTheMoment {
+    return Intl.message(
+      'No feeds available at the moment.',
+      name: 'noFeedsAvailableAtTheMoment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile is still loading.`
+  String get profileIsStillLoading {
+    return Intl.message(
+      'Profile is still loading.',
+      name: 'profileIsStillLoading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit comment`
+  String get editComment {
+    return Intl.message(
+      'Edit comment',
+      name: 'editComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reply`
+  String get reply {
+    return Intl.message('Reply', name: 'reply', desc: '', args: []);
+  }
+
+  /// `Add a public comment`
+  String get addAPublicComment {
+    return Intl.message(
+      'Add a public comment',
+      name: 'addAPublicComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit your comment…`
+  String get editYourComment {
+    return Intl.message(
+      'Edit your comment…',
+      name: 'editYourComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Write a reply…`
+  String get writeAReply {
+    return Intl.message(
+      'Write a reply…',
+      name: 'writeAReply',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What are your thoughts?`
+  String get whatAreYourThoughts {
+    return Intl.message(
+      'What are your thoughts?',
+      name: 'whatAreYourThoughts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Replying to @{userName}`
+  String replyingTo(Object userName) {
+    return Intl.message(
+      'Replying to @$userName',
+      name: 'replyingTo',
+      desc: '',
+      args: [userName],
+    );
+  }
+
+  /// `You`
+  String get you {
+    return Intl.message('You', name: 'you', desc: '', args: []);
+  }
+
+  /// `Delete reply?`
+  String get deleteReplyTitle {
+    return Intl.message(
+      'Delete reply?',
+      name: 'deleteReplyTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete comment?`
+  String get deleteCommentTitle {
+    return Intl.message(
+      'Delete comment?',
+      name: 'deleteCommentTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This reply will be permanently removed. This can't be undone.`
+  String get deleteReplyMessage {
+    return Intl.message(
+      'This reply will be permanently removed. This can\'t be undone.',
+      name: 'deleteReplyMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This comment will be permanently removed. This can't be undone.`
+  String get deleteCommentMessage {
+    return Intl.message(
+      'This comment will be permanently removed. This can\'t be undone.',
+      name: 'deleteCommentMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `edited`
+  String get edited {
+    return Intl.message('edited', name: 'edited', desc: '', args: []);
+  }
+
+  /// `Edit`
+  String get edit {
+    return Intl.message('Edit', name: 'edit', desc: '', args: []);
+  }
+
+  /// `Posting reply…`
+  String get postingReply {
+    return Intl.message(
+      'Posting reply…',
+      name: 'postingReply',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No replies yet.`
+  String get noRepliesYet {
+    return Intl.message(
+      'No replies yet.',
+      name: 'noRepliesYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hide replies`
+  String get hideReplies {
+    return Intl.message(
+      'Hide replies',
+      name: 'hideReplies',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View {count} replies`
+  String viewReplies(Object count) {
+    return Intl.message(
+      'View $count replies',
+      name: 'viewReplies',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `No comments yet. Be the first!`
+  String get noCommentsYet {
+    return Intl.message(
+      'No comments yet. Be the first!',
+      name: 'noCommentsYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load more comments`
+  String get failedToLoadMoreComments {
+    return Intl.message(
+      'Failed to load more comments',
+      name: 'failedToLoadMoreComments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get home {
+    return Intl.message('Home', name: 'home', desc: '', args: []);
+  }
+
+  /// `Failed to load channel playlists`
+  String get failedToLoadChannelPlaylists {
+    return Intl.message(
+      'Failed to load channel playlists',
+      name: 'failedToLoadChannelPlaylists',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No playlists found`
+  String get noPlaylistsFound {
+    return Intl.message(
+      'No playlists found',
+      name: 'noPlaylistsFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load more playlists`
+  String get failedToLoadMorePlaylists {
+    return Intl.message(
+      'Failed to load more playlists',
+      name: 'failedToLoadMorePlaylists',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No content available in this channel yet`
+  String get noContentAvailableInThisChannelYet {
+    return Intl.message(
+      'No content available in this channel yet',
+      name: 'noContentAvailableInThisChannelYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Latest videos`
+  String get latestVideos {
+    return Intl.message(
+      'Latest videos',
+      name: 'latestVideos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load channel videos`
+  String get failedToLoadChannelVideos {
+    return Intl.message(
+      'Failed to load channel videos',
+      name: 'failedToLoadChannelVideos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No videos found`
+  String get noVideosFound {
+    return Intl.message(
+      'No videos found',
+      name: 'noVideosFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terms and conditions`
+  String get termsAndConditions {
+    return Intl.message(
+      'Terms and conditions',
+      name: 'termsAndConditions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Or`
+  String get or {
+    return Intl.message('Or', name: 'or', desc: '', args: []);
+  }
+
+  /// `Welcome to`
+  String get welcomeTo {
+    return Intl.message('Welcome to', name: 'welcomeTo', desc: '', args: []);
+  }
+
+  /// `StreamPro`
   String get appTitle {
-    return Intl.message('Day I', name: 'appTitle', desc: '', args: []);
+    return Intl.message('StreamPro', name: 'appTitle', desc: '', args: []);
   }
 
-  /// `Hello World!`
-  String get hello {
-    return Intl.message('Hello World!', name: 'hello', desc: '', args: []);
-  }
-
-  /// `Welcome to Day I`
-  String get welcomeMessage {
+  /// `Email is required`
+  String get emailReq {
     return Intl.message(
-      'Welcome to Day I',
-      name: 'welcomeMessage',
+      'Email is required',
+      name: 'emailReq',
       desc: '',
       args: [],
     );
   }
 
-  /// `Change Language`
-  String get changeLanguage {
+  /// `Please enter a valid email address`
+  String get invalidEmail {
     return Intl.message(
-      'Change Language',
-      name: 'changeLanguage',
+      'Please enter a valid email address',
+      name: 'invalidEmail',
       desc: '',
       args: [],
     );
   }
 
-  /// `Arabic`
-  String get arabic {
-    return Intl.message('Arabic', name: 'arabic', desc: '', args: []);
-  }
-
-  /// `English`
-  String get english {
-    return Intl.message('English', name: 'english', desc: '', args: []);
-  }
-
-  /// `Path Not Found`
-  String get pathNotFound {
+  /// `Password is required`
+  String get passwordReq {
     return Intl.message(
-      'Path Not Found',
-      name: 'pathNotFound',
+      'Password is required',
+      name: 'passwordReq',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must be at least 8 characters`
+  String get invalidPassword {
+    return Intl.message(
+      'Password must be at least 8 characters',
+      name: 'invalidPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please confirm your password`
+  String get confirmPasswordReq {
+    return Intl.message(
+      'Please confirm your password',
+      name: 'confirmPasswordReq',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passwords do not match`
+  String get confirmPasswordMismatch {
+    return Intl.message(
+      'Passwords do not match',
+      name: 'confirmPasswordMismatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue with Google`
+  String get continueWithGoogle {
+    return Intl.message(
+      'Continue with Google',
+      name: 'continueWithGoogle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account created successfully!`
+  String get accountCreatedSuccessFully {
+    return Intl.message(
+      'Account created successfully!',
+      name: 'accountCreatedSuccessFully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logged in successfully!`
+  String get loginSuccessfully {
+    return Intl.message(
+      'Logged in successfully!',
+      name: 'loginSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get login {
+    return Intl.message('Login', name: 'login', desc: '', args: []);
+  }
+
+  /// `Welcome back! Please enter your details.`
+  String get loginSubtitle {
+    return Intl.message(
+      'Welcome back! Please enter your details.',
+      name: 'loginSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have an account?`
+  String get dontHaveAccount {
+    return Intl.message(
+      'Don\'t have an account?',
+      name: 'dontHaveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register Now`
+  String get registerNow {
+    return Intl.message(
+      'Register Now',
+      name: 'registerNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Up`
+  String get signup {
+    return Intl.message('Sign Up', name: 'signup', desc: '', args: []);
+  }
+
+  /// `Create an account to get started.`
+  String get signupSubtitle {
+    return Intl.message(
+      'Create an account to get started.',
+      name: 'signupSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already have an account?`
+  String get alreadyHaveAccount {
+    return Intl.message(
+      'Already have an account?',
+      name: 'alreadyHaveAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message('Email', name: 'email', desc: '', args: []);
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message('Password', name: 'password', desc: '', args: []);
+  }
+
+  /// `Confirm Password`
+  String get confirmPassword {
+    return Intl.message(
+      'Confirm Password',
+      name: 'confirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No more items`
+  String get noMoreItems {
+    return Intl.message(
+      'No more items',
+      name: 'noMoreItems',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No data available at the moment.`
+  String get noDataAvailable {
+    return Intl.message(
+      'No data available at the moment.',
+      name: 'noDataAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `LIVE`
+  String get live {
+    return Intl.message('LIVE', name: 'live', desc: '', args: []);
+  }
+
+  /// `Normal`
+  String get normal {
+    return Intl.message('Normal', name: 'normal', desc: '', args: []);
+  }
+
+  /// `Unable to play video`
+  String get unableToPlayVideo {
+    return Intl.message(
+      'Unable to play video',
+      name: 'unableToPlayVideo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove from Watch later`
+  String get removeFromWatchLater {
+    return Intl.message(
+      'Remove from Watch later',
+      name: 'removeFromWatchLater',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add to Watch later`
+  String get addToWatchLater {
+    return Intl.message(
+      'Add to Watch later',
+      name: 'addToWatchLater',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share is coming soon.`
+  String get shareComingSoon {
+    return Intl.message(
+      'Share is coming soon.',
+      name: 'shareComingSoon',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already in Watch later.`
+  String get alreadyInWatchLater {
+    return Intl.message(
+      'Already in Watch later.',
+      name: 'alreadyInWatchLater',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already removed from Watch later.`
+  String get alreadyRemovedFromWatchLater {
+    return Intl.message(
+      'Already removed from Watch later.',
+      name: 'alreadyRemovedFromWatchLater',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This item will be permanently removed. This can't be undone.`
+  String get deleteConfirmationMessage {
+    return Intl.message(
+      'This item will be permanently removed. This can\'t be undone.',
+      name: 'deleteConfirmationMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `watched`
+  String get watched {
+    return Intl.message('watched', name: 'watched', desc: '', args: []);
+  }
+
+  /// `Subscribed`
+  String get subscribed {
+    return Intl.message('Subscribed', name: 'subscribed', desc: '', args: []);
+  }
+
+  /// `Subscribe`
+  String get subscribe {
+    return Intl.message('Subscribe', name: 'subscribe', desc: '', args: []);
+  }
+
+  /// `M`
+  String get million {
+    return Intl.message('M', name: 'million', desc: '', args: []);
+  }
+
+  /// `K`
+  String get thousand {
+    return Intl.message('K', name: 'thousand', desc: '', args: []);
+  }
+
+  /// `y ago`
+  String get yearsAgo {
+    return Intl.message('y ago', name: 'yearsAgo', desc: '', args: []);
+  }
+
+  /// `mo ago`
+  String get monthsAgo {
+    return Intl.message('mo ago', name: 'monthsAgo', desc: '', args: []);
+  }
+
+  /// `d ago`
+  String get daysAgo {
+    return Intl.message('d ago', name: 'daysAgo', desc: '', args: []);
+  }
+
+  /// `h ago`
+  String get hoursAgo {
+    return Intl.message('h ago', name: 'hoursAgo', desc: '', args: []);
+  }
+
+  /// `m ago`
+  String get minutesAgo {
+    return Intl.message('m ago', name: 'minutesAgo', desc: '', args: []);
+  }
+
+  /// `Just now`
+  String get justNow {
+    return Intl.message('Just now', name: 'justNow', desc: '', args: []);
+  }
+
+  /// `Failed to save video to gallery`
+  String get failedToSaveVideoToGallery {
+    return Intl.message(
+      'Failed to save video to gallery',
+      name: 'failedToSaveVideoToGallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Media storage permission denied`
+  String get mediaStoragePermissionDenied {
+    return Intl.message(
+      'Media storage permission denied',
+      name: 'mediaStoragePermissionDenied',
       desc: '',
       args: [],
     );
@@ -194,91 +2054,6 @@ class S {
     );
   }
 
-  /// `Login`
-  String get login {
-    return Intl.message('Login', name: 'login', desc: '', args: []);
-  }
-
-  /// `Login to manage book fairs and cultural events`
-  String get loginSubtitle {
-    return Intl.message(
-      'Login to manage book fairs and cultural events',
-      name: 'loginSubtitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Create New Account`
-  String get signup {
-    return Intl.message(
-      'Create New Account',
-      name: 'signup',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Create your account to manage your marketing campaigns smartly within minutes`
-  String get signupSubtitle {
-    return Intl.message(
-      'Create your account to manage your marketing campaigns smartly within minutes',
-      name: 'signupSubtitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Full Name`
-  String get fullName {
-    return Intl.message('Full Name', name: 'fullName', desc: '', args: []);
-  }
-
-  /// `Email Address`
-  String get email {
-    return Intl.message('Email Address', name: 'email', desc: '', args: []);
-  }
-
-  /// `Password`
-  String get password {
-    return Intl.message('Password', name: 'password', desc: '', args: []);
-  }
-
-  /// `Confirm Password`
-  String get confirmPassword {
-    return Intl.message(
-      'Confirm Password',
-      name: 'confirmPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `I agree to the terms and conditions and privacy policy`
-  String get termsAndConditions {
-    return Intl.message(
-      'I agree to the terms and conditions and privacy policy',
-      name: 'termsAndConditions',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `OR`
-  String get or {
-    return Intl.message('OR', name: 'or', desc: '', args: []);
-  }
-
-  /// `Continue with Google`
-  String get continueWithGoogle {
-    return Intl.message(
-      'Continue with Google',
-      name: 'continueWithGoogle',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Google sign-in failed. Please try again.`
   String get googleSignInError {
     return Intl.message(
@@ -299,1466 +2074,11 @@ class S {
     );
   }
 
-  /// `Don't have an account?`
-  String get dontHaveAccount {
-    return Intl.message(
-      'Don\'t have an account?',
-      name: 'dontHaveAccount',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Already have an account?`
-  String get alreadyHaveAccount {
-    return Intl.message(
-      'Already have an account?',
-      name: 'alreadyHaveAccount',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Register Now`
-  String get registerNow {
-    return Intl.message(
-      'Register Now',
-      name: 'registerNow',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Forgot Password?`
-  String get forgotPasswordTitle {
-    return Intl.message(
-      'Forgot Password?',
-      name: 'forgotPasswordTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Enter your email address to reset your password.`
-  String get forgotPasswordSubtitle {
-    return Intl.message(
-      'Enter your email address to reset your password.',
-      name: 'forgotPasswordSubtitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Send Verification Code`
-  String get sendCode {
-    return Intl.message(
-      'Send Verification Code',
-      name: 'sendCode',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Enter Verification Code`
-  String get otpTitle {
-    return Intl.message(
-      'Enter Verification Code',
-      name: 'otpTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Enter the verification code we sent to your email.`
-  String get otpSubtitle {
-    return Intl.message(
-      'Enter the verification code we sent to your email.',
-      name: 'otpSubtitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `We sent a 6-digit code to the email`
-  String get otpEntryInstruction {
-    return Intl.message(
-      'We sent a 6-digit code to the email',
-      name: 'otpEntryInstruction',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Verify Code`
-  String get verifyCode {
-    return Intl.message('Verify Code', name: 'verifyCode', desc: '', args: []);
-  }
-
-  /// `Resend Code`
-  String get resendCode {
-    return Intl.message('Resend Code', name: 'resendCode', desc: '', args: []);
-  }
-
-  /// `Invalid verification code. Please try again.`
-  String get otpInvalidError {
-    return Intl.message(
-      'Invalid verification code. Please try again.',
-      name: 'otpInvalidError',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Email is required`
-  String get emailReq {
-    return Intl.message(
-      'Email is required',
-      name: 'emailReq',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Please enter a valid email`
-  String get invalidEmail {
-    return Intl.message(
-      'Please enter a valid email',
-      name: 'invalidEmail',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Password is required`
-  String get passwordReq {
-    return Intl.message(
-      'Password is required',
-      name: 'passwordReq',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Password must be at least 8 characters`
-  String get invalidPassword {
-    return Intl.message(
-      'Password must be at least 8 characters',
-      name: 'invalidPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Full Name is required`
-  String get fullNameReq {
-    return Intl.message(
-      'Full Name is required',
-      name: 'fullNameReq',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Phone number is required`
-  String get phoneReq {
-    return Intl.message(
-      'Phone number is required',
-      name: 'phoneReq',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Confirm password is required`
-  String get confirmPasswordReq {
-    return Intl.message(
-      'Confirm password is required',
-      name: 'confirmPasswordReq',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Passwords do not match`
-  String get confirmPasswordMismatch {
-    return Intl.message(
-      'Passwords do not match',
-      name: 'confirmPasswordMismatch',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Looking for a service...`
-  String get searchHint {
-    return Intl.message(
-      'Looking for a service...',
-      name: 'searchHint',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Home`
-  String get home {
-    return Intl.message('Home', name: 'home', desc: '', args: []);
-  }
-
-  /// `Services`
-  String get services {
-    return Intl.message('Services', name: 'services', desc: '', args: []);
-  }
-
-  /// `Orders`
-  String get orders {
-    return Intl.message('Orders', name: 'orders', desc: '', args: []);
-  }
-
-  /// `Account`
-  String get account {
-    return Intl.message('Account', name: 'account', desc: '', args: []);
-  }
-
-  /// `Prices`
-  String get prices {
-    return Intl.message('Prices', name: 'prices', desc: '', args: []);
-  }
-
-  /// `Choose package for your marketing campaign`
-  String get choosePackage {
-    return Intl.message(
-      'Choose package for your marketing campaign',
-      name: 'choosePackage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Forgot password`
-  String get forgotPassword {
-    return Intl.message(
-      'Forgot password',
-      name: 'forgotPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Enter a strong password to protect your account.`
-  String get resetPasswordInstruction {
-    return Intl.message(
-      'Enter a strong password to protect your account.',
-      name: 'resetPasswordInstruction',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Password changed successfully`
-  String get passwordChangedSuccess {
-    return Intl.message(
-      'Password changed successfully',
-      name: 'passwordChangedSuccess',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Reset Password`
-  String get resetPassword {
-    return Intl.message(
-      'Reset Password',
-      name: 'resetPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Flexible packages to suit your business size and marketing goals`
-  String get flexiblePackages {
-    return Intl.message(
-      'Flexible packages to suit your business size and marketing goals',
-      name: 'flexiblePackages',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Show details`
-  String get showDetails {
-    return Intl.message(
-      'Show details',
-      name: 'showDetails',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Start Now`
-  String get startNow {
-    return Intl.message('Start Now', name: 'startNow', desc: '', args: []);
-  }
-
-  /// `Create Your Company`
-  String get createCompany {
-    return Intl.message(
-      'Create Your Company',
-      name: 'createCompany',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Start building your company's presence on the platform by entering its data.`
-  String get createCompanySubtitle {
-    return Intl.message(
-      'Start building your company\'s presence on the platform by entering its data.',
-      name: 'createCompanySubtitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Company Name`
-  String get companyName {
-    return Intl.message(
-      'Company Name',
-      name: 'companyName',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Company Name is required`
-  String get companyNameReq {
-    return Intl.message(
-      'Company Name is required',
-      name: 'companyNameReq',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Phone Number`
-  String get phoneNumber {
-    return Intl.message(
-      'Phone Number',
-      name: 'phoneNumber',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Industry`
-  String get industry {
-    return Intl.message('Industry', name: 'industry', desc: '', args: []);
-  }
-
-  /// `Selected Plan`
-  String get selectedPlan {
-    return Intl.message(
-      'Selected Plan',
-      name: 'selectedPlan',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Create Account`
-  String get actionButton {
-    return Intl.message(
-      'Create Account',
-      name: 'actionButton',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Contact Information`
-  String get contactInfo {
-    return Intl.message(
-      'Contact Information',
-      name: 'contactInfo',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Contact Us`
-  String get contactUs {
-    return Intl.message('Contact Us', name: 'contactUs', desc: '', args: []);
-  }
-
-  /// `FAQs`
-  String get faqs {
-    return Intl.message('FAQs', name: 'faqs', desc: '', args: []);
-  }
-
-  /// `Subject`
-  String get subject {
-    return Intl.message('Subject', name: 'subject', desc: '', args: []);
-  }
-
-  /// `Choose contact subject`
-  String get chooseSubject {
-    return Intl.message(
-      'Choose contact subject',
-      name: 'chooseSubject',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `User Message`
-  String get userMessage {
-    return Intl.message(
-      'User Message',
-      name: 'userMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Write your message here`
-  String get writeMessageHere {
-    return Intl.message(
-      'Write your message here',
-      name: 'writeMessageHere',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Send Message`
-  String get sendMessage {
-    return Intl.message(
-      'Send Message',
-      name: 'sendMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Markiva Contact Information`
-  String get markivaContactInfo {
-    return Intl.message(
-      'Markiva Contact Information',
-      name: 'markivaContactInfo',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Address`
-  String get address {
-    return Intl.message('Address', name: 'address', desc: '', args: []);
-  }
-
-  /// `Login Successfully`
-  String get loginSuccessfully {
-    return Intl.message(
-      'Login Successfully',
-      name: 'loginSuccessfully',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Account Created Successfully`
-  String get accountCreatedSuccessFully {
-    return Intl.message(
-      'Account Created Successfully',
-      name: 'accountCreatedSuccessFully',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Search Location...`
-  String get searchLocation {
-    return Intl.message(
-      'Search Location...',
-      name: 'searchLocation',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Logout`
-  String get logout {
-    return Intl.message('Logout', name: 'logout', desc: '', args: []);
-  }
-
-  /// `Are you sure of logout?`
-  String get logoutConfirm {
-    return Intl.message(
-      'Are you sure of logout?',
-      name: 'logoutConfirm',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Cancel`
-  String get cancel {
-    return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
-  }
-
-  /// `No services available`
-  String get noServicesAvailable {
-    return Intl.message(
-      'No services available',
-      name: 'noServicesAvailable',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Phone`
-  String get phone {
-    return Intl.message('Phone', name: 'phone', desc: '', args: []);
-  }
-
-  /// `Confirm password does not match the new password`
-  String get passwordDoesntMatch {
-    return Intl.message(
-      'Confirm password does not match the new password',
-      name: 'passwordDoesntMatch',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Strong Password`
-  String get passwordStrength {
-    return Intl.message(
-      'Strong Password',
-      name: 'passwordStrength',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Weak`
-  String get weekPassword {
-    return Intl.message('Weak', name: 'weekPassword', desc: '', args: []);
-  }
-
-  /// `Medium`
-  String get mediumPassword {
-    return Intl.message('Medium', name: 'mediumPassword', desc: '', args: []);
-  }
-
-  /// `Strong`
-  String get strongPassword {
-    return Intl.message('Strong', name: 'strongPassword', desc: '', args: []);
-  }
-
-  /// `Edit Contact Information`
-  String get editProfileContacts {
-    return Intl.message(
-      'Edit Contact Information',
-      name: 'editProfileContacts',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Password Security`
-  String get passwordSecurity {
-    return Intl.message(
-      'Password Security',
-      name: 'passwordSecurity',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Change Password`
-  String get editProfileChangePassword {
-    return Intl.message(
-      'Change Password',
-      name: 'editProfileChangePassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Change Password`
-  String get changePassword {
-    return Intl.message(
-      'Change Password',
-      name: 'changePassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Enter a new password for your account.`
-  String get changePasswordInstruction {
-    return Intl.message(
-      'Enter a new password for your account.',
-      name: 'changePasswordInstruction',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Password must be at least 8 characters.`
-  String get passwordLength {
-    return Intl.message(
-      'Password must be at least 8 characters.',
-      name: 'passwordLength',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Please do not use personal information or common words.`
-  String get passwordNotPersonal {
-    return Intl.message(
-      'Please do not use personal information or common words.',
-      name: 'passwordNotPersonal',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `It is recommended to use uppercase and lowercase letters and numbers.`
-  String get passwordCaseAndNumbers {
-    return Intl.message(
-      'It is recommended to use uppercase and lowercase letters and numbers.',
-      name: 'passwordCaseAndNumbers',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Edit Profile`
-  String get editProfilePage {
-    return Intl.message(
-      'Edit Profile',
-      name: 'editProfilePage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Current Password`
-  String get currentPassword {
-    return Intl.message(
-      'Current Password',
-      name: 'currentPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `New Password`
-  String get newPassword {
-    return Intl.message(
-      'New Password',
-      name: 'newPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Save Changes`
-  String get saveChanges {
-    return Intl.message(
-      'Save Changes',
-      name: 'saveChanges',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Email Verified`
-  String get emailVerified {
-    return Intl.message(
-      'Email Verified',
-      name: 'emailVerified',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Enter a strong password to protect your account`
-  String get enterStrongPasswordToProtectYourAccount {
-    return Intl.message(
-      'Enter a strong password to protect your account',
-      name: 'enterStrongPasswordToProtectYourAccount',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Privacy`
-  String get privacy {
-    return Intl.message('Privacy', name: 'privacy', desc: '', args: []);
-  }
-
-  /// `Data Usage`
-  String get dataUsage {
-    return Intl.message('Data Usage', name: 'dataUsage', desc: '', args: []);
-  }
-
-  /// `Share order data with assigned service team only`
-  String get shareDataTeamOnly {
-    return Intl.message(
-      'Share order data with assigned service team only',
-      name: 'shareDataTeamOnly',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Allow using data to improve service`
-  String get allowDataImproveService {
-    return Intl.message(
-      'Allow using data to improve service',
-      name: 'allowDataImproveService',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Visibility Control`
-  String get visibilityControl {
-    return Intl.message(
-      'Visibility Control',
-      name: 'visibilityControl',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Manager only`
-  String get managerOnly {
-    return Intl.message(
-      'Manager only',
-      name: 'managerOnly',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Assigned service team`
-  String get assignedTeam {
-    return Intl.message(
-      'Assigned service team',
-      name: 'assignedTeam',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Your parameters will not be visible to unauthorized employees.`
-  String get unauthorizedNotVisible {
-    return Intl.message(
-      'Your parameters will not be visible to unauthorized employees.',
-      name: 'unauthorizedNotVisible',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Security Alerts`
-  String get securityAlerts {
-    return Intl.message(
-      'Security Alerts',
-      name: 'securityAlerts',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Alert on new login`
-  String get alertNewLogin {
-    return Intl.message(
-      'Alert on new login',
-      name: 'alertNewLogin',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Alert on order status change`
-  String get alertStatusChange {
-    return Intl.message(
-      'Alert on order status change',
-      name: 'alertStatusChange',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Account Control`
-  String get accountControl {
-    return Intl.message(
-      'Account Control',
-      name: 'accountControl',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Download Data`
-  String get downloadData {
-    return Intl.message(
-      'Download Data',
-      name: 'downloadData',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Deactivate Account`
-  String get deactivateAccount {
-    return Intl.message(
-      'Deactivate Account',
-      name: 'deactivateAccount',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Delete Account`
-  String get deleteAccount {
-    return Intl.message(
-      'Delete Account',
-      name: 'deleteAccount',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Account deletion requests are reviewed by the admin and processed within 14 days. This action is final and will delete all service records`
-  String get deleteAccountWarning {
-    return Intl.message(
-      'Account deletion requests are reviewed by the admin and processed within 14 days. This action is final and will delete all service records',
-      name: 'deleteAccountWarning',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `No FAQs currently available.`
-  String get noFaqsAvailable {
-    return Intl.message(
-      'No FAQs currently available.',
-      name: 'noFaqsAvailable',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Service Register`
-  String get serviceRegister {
-    return Intl.message(
-      'Service Register',
-      name: 'serviceRegister',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Search by service name or request number...`
-  String get searchOrderHint {
-    return Intl.message(
-      'Search by service name or request number...',
-      name: 'searchOrderHint',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `All`
-  String get all {
-    return Intl.message('All', name: 'all', desc: '', args: []);
-  }
-
-  /// `Pending`
-  String get pending {
-    return Intl.message('Pending', name: 'pending', desc: '', args: []);
-  }
-
-  /// `Approved`
-  String get approved {
-    return Intl.message('Approved', name: 'approved', desc: '', args: []);
-  }
-
-  /// `Late`
-  String get late {
-    return Intl.message('Late', name: 'late', desc: '', args: []);
-  }
-
-  /// `Budget: {amount}`
-  String budgetLabel(Object amount) {
-    return Intl.message(
-      'Budget: $amount',
-      name: 'budgetLabel',
-      desc: '',
-      args: [amount],
-    );
-  }
-
-  /// `View Details`
-  String get viewDetails {
-    return Intl.message(
-      'View Details',
-      name: 'viewDetails',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `No orders found`
-  String get noOrders {
-    return Intl.message(
-      'No orders found',
-      name: 'noOrders',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Employee: {name}`
-  String employeeLabel(Object name) {
-    return Intl.message(
-      'Employee: $name',
-      name: 'employeeLabel',
-      desc: '',
-      args: [name],
-    );
-  }
-
-  /// `Budget`
-  String get budget {
-    return Intl.message('Budget', name: 'budget', desc: '', args: []);
-  }
-
-  /// `A smart platform for managing marketing`
-  String get splashTagLine {
-    return Intl.message(
-      'A smart platform for managing marketing',
-      name: 'splashTagLine',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `next`
-  String get next {
-    return Intl.message('next', name: 'next', desc: '', args: []);
-  }
-
-  /// `skip`
-  String get skip {
-    return Intl.message('skip', name: 'skip', desc: '', args: []);
-  }
-
-  /// `Notifications`
-  String get notifications {
-    return Intl.message(
-      'Notifications',
-      name: 'notifications',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `No notifications currently`
-  String get noNotificationsCurrently {
-    return Intl.message(
-      'No notifications currently',
-      name: 'noNotificationsCurrently',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Add Payment Method`
-  String get addPaymentMethod {
-    return Intl.message(
-      'Add Payment Method',
-      name: 'addPaymentMethod',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Cardholder Name`
-  String get cardHolderName {
-    return Intl.message(
-      'Cardholder Name',
-      name: 'cardHolderName',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Card Number`
-  String get cardNumber {
-    return Intl.message('Card Number', name: 'cardNumber', desc: '', args: []);
-  }
-
-  /// `Expiry Date`
-  String get expiryDate {
-    return Intl.message('Expiry Date', name: 'expiryDate', desc: '', args: []);
-  }
-
-  /// `Security Code`
-  String get securityCode {
-    return Intl.message(
-      'Security Code',
-      name: 'securityCode',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Postal Code`
-  String get postalCode {
-    return Intl.message('Postal Code', name: 'postalCode', desc: '', args: []);
-  }
-
-  /// `Set as default payment card`
-  String get setDefaultPayment {
-    return Intl.message(
-      'Set as default payment card',
-      name: 'setDefaultPayment',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Save payment method for later use`
-  String get savePaymentForLater {
-    return Intl.message(
-      'Save payment method for later use',
-      name: 'savePaymentForLater',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Save Payment Method`
-  String get savePaymentMethod {
-    return Intl.message(
-      'Save Payment Method',
-      name: 'savePaymentMethod',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Payment Methods`
-  String get paymentMethods {
-    return Intl.message(
-      'Payment Methods',
-      name: 'paymentMethods',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Other payment methods`
-  String get otherPaymentMethods {
-    return Intl.message(
-      'Other payment methods',
-      name: 'otherPaymentMethods',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Add card`
-  String get addCard {
-    return Intl.message('Add card', name: 'addCard', desc: '', args: []);
-  }
-
-  /// `Continue Payment`
-  String get continuePayment {
-    return Intl.message(
-      'Continue Payment',
-      name: 'continuePayment',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Card Holder`
-  String get cardHolder {
-    return Intl.message('Card Holder', name: 'cardHolder', desc: '', args: []);
-  }
-
-  /// `Expires in`
-  String get expiresIn {
-    return Intl.message('Expires in', name: 'expiresIn', desc: '', args: []);
-  }
-
-  /// `Welcome to`
-  String get welcomeTo {
-    return Intl.message('Welcome to', name: 'welcomeTo', desc: '', args: []);
-  }
-
-  /// `A marketing management platform that combines team collaboration, task tracking, and performance analytics into a single interface.`
-  String get markevaDescription {
-    return Intl.message(
-      'A marketing management platform that combines team collaboration, task tracking, and performance analytics into a single interface.',
-      name: 'markevaDescription',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Comments`
-  String get comments {
-    return Intl.message('Comments', name: 'comments', desc: '', args: []);
-  }
-
-  /// `Add a comment...`
-  String get addComment {
-    return Intl.message(
-      'Add a comment...',
-      name: 'addComment',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `No comments yet. Be the first!`
-  String get noCommentsYet {
-    return Intl.message(
-      'No comments yet. Be the first!',
-      name: 'noCommentsYet',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Edit`
-  String get edit {
-    return Intl.message('Edit', name: 'edit', desc: '', args: []);
-  }
-
-  /// `Delete`
-  String get delete {
-    return Intl.message('Delete', name: 'delete', desc: '', args: []);
-  }
-
-  /// `Edit Comment`
-  String get editComment {
-    return Intl.message(
-      'Edit Comment',
-      name: 'editComment',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Save`
-  String get save {
-    return Intl.message('Save', name: 'save', desc: '', args: []);
-  }
-
-  /// `Failed to load video. Please check your internet connection.`
-  String get videoLoadError {
-    return Intl.message(
-      'Failed to load video. Please check your internet connection.',
-      name: 'videoLoadError',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Retry`
-  String get retry {
-    return Intl.message('Retry', name: 'retry', desc: '', args: []);
-  }
-
-  /// `Share`
-  String get share {
-    return Intl.message('Share', name: 'share', desc: '', args: []);
-  }
-
-  /// `Link copied to clipboard!`
-  String get shareCopied {
-    return Intl.message(
-      'Link copied to clipboard!',
-      name: 'shareCopied',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Profile`
-  String get profileTitle {
-    return Intl.message('Profile', name: 'profileTitle', desc: '', args: []);
-  }
-
-  /// `Videos`
-  String get videosLabel {
-    return Intl.message('Videos', name: 'videosLabel', desc: '', args: []);
-  }
-
-  /// `Total Views`
-  String get totalViewsLabel {
-    return Intl.message(
-      'Total Views',
-      name: 'totalViewsLabel',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Member since`
-  String get memberSince {
-    return Intl.message(
-      'Member since',
-      name: 'memberSince',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Change photo`
-  String get changePhoto {
-    return Intl.message(
-      'Change photo',
-      name: 'changePhoto',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Profile updated successfully`
-  String get profileUpdatedSuccessfully {
-    return Intl.message(
-      'Profile updated successfully',
-      name: 'profileUpdatedSuccessfully',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Account`
-  String get accountActions {
-    return Intl.message('Account', name: 'accountActions', desc: '', args: []);
-  }
-
-  /// `This permanently deletes your account and all associated data. This action cannot be undone.`
-  String get deleteAccountMessage {
-    return Intl.message(
-      'This permanently deletes your account and all associated data. This action cannot be undone.',
-      name: 'deleteAccountMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Sessions`
-  String get sessionsTab {
-    return Intl.message('Sessions', name: 'sessionsTab', desc: '', args: []);
-  }
-
-  /// `Current sessions`
-  String get currentSessionsTitle {
-    return Intl.message(
-      'Current sessions',
-      name: 'currentSessionsTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Devices where your account is currently signed in.`
-  String get currentSessionsSubtitle {
-    return Intl.message(
-      'Devices where your account is currently signed in.',
-      name: 'currentSessionsSubtitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Active sessions`
-  String get activeSessionsLabel {
-    return Intl.message(
-      'Active sessions',
-      name: 'activeSessionsLabel',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `No active sessions`
-  String get noActiveSessions {
-    return Intl.message(
-      'No active sessions',
-      name: 'noActiveSessions',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Your account is not signed in on any other devices.`
-  String get noActiveSessionsMessage {
-    return Intl.message(
-      'Your account is not signed in on any other devices.',
-      name: 'noActiveSessionsMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Log out all devices`
-  String get logoutAllDevices {
-    return Intl.message(
-      'Log out all devices',
-      name: 'logoutAllDevices',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Log out all devices?`
-  String get logoutAllConfirmTitle {
-    return Intl.message(
-      'Log out all devices?',
-      name: 'logoutAllConfirmTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `This will sign out every device, including this one. You will need to sign in again.`
-  String get logoutAllConfirmMessage {
-    return Intl.message(
-      'This will sign out every device, including this one. You will need to sign in again.',
-      name: 'logoutAllConfirmMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Log out`
-  String get logoutSession {
-    return Intl.message('Log out', name: 'logoutSession', desc: '', args: []);
-  }
-
-  /// `Log out this session?`
-  String get logoutSessionConfirmTitle {
-    return Intl.message(
-      'Log out this session?',
-      name: 'logoutSessionConfirmTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `This device will need to sign in again to access your account.`
-  String get logoutSessionConfirmMessage {
-    return Intl.message(
-      'This device will need to sign in again to access your account.',
-      name: 'logoutSessionConfirmMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Last active`
-  String get lastActive {
-    return Intl.message('Last active', name: 'lastActive', desc: '', args: []);
-  }
-
-  /// `Active now`
-  String get activeNow {
-    return Intl.message('Active now', name: 'activeNow', desc: '', args: []);
-  }
-
-  /// `Signed in`
-  String get signedInAt {
-    return Intl.message('Signed in', name: 'signedInAt', desc: '', args: []);
-  }
-
-  /// `Expires`
-  String get expiresAtLabel {
-    return Intl.message('Expires', name: 'expiresAtLabel', desc: '', args: []);
-  }
-
-  /// `IP address`
-  String get ipAddressLabel {
-    return Intl.message(
-      'IP address',
-      name: 'ipAddressLabel',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Sign-in method`
-  String get signInMethod {
-    return Intl.message(
-      'Sign-in method',
-      name: 'signInMethod',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `App version`
-  String get appVersionLabel {
-    return Intl.message(
-      'App version',
-      name: 'appVersionLabel',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Email & password`
-  String get loginMethodLocal {
-    return Intl.message(
-      'Email & password',
-      name: 'loginMethodLocal',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Google`
-  String get loginMethodGoogle {
-    return Intl.message(
-      'Google',
-      name: 'loginMethodGoogle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Apple`
-  String get loginMethodApple {
-    return Intl.message('Apple', name: 'loginMethodApple', desc: '', args: []);
-  }
-
-  /// `Unknown device`
-  String get unknownDevice {
-    return Intl.message(
-      'Unknown device',
-      name: 'unknownDevice',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Unknown location`
-  String get unknownLocation {
-    return Intl.message(
-      'Unknown location',
-      name: 'unknownLocation',
+  /// `Path Not Found`
+  String get pathNotFound {
+    return Intl.message(
+      'Path Not Found',
+      name: 'pathNotFound',
       desc: '',
       args: [],
     );

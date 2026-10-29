@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class LoadMoreErrorWidget extends StatelessWidget {
   final String message;
@@ -24,7 +25,7 @@ class LoadMoreErrorWidget extends StatelessWidget {
           ),
           if (onRetry != null) ...[
             8.verticalSpace,
-            TextButton(onPressed: onRetry, child: const Text('Retry')),
+            TextButton(onPressed: onRetry, child: Text(S.current.retry)),
           ],
         ],
       ),

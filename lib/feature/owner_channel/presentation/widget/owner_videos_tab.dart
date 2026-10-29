@@ -17,6 +17,7 @@ import 'package:stream_pro/feature/owner_channel/presentation/controllers/owner_
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/owner_videos_cubit/owner_videos_state.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/mappers/owner_video_mapper.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/tab_fabs.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class OwnerVideosTab extends StatelessWidget {
   final SliverOverlapAbsorberHandle handle;
@@ -64,7 +65,7 @@ class OwnerVideosTab extends StatelessWidget {
                     )
                   else if (initialError)
                     AppErrorSliver(
-                      message: errorMessage ?? 'Failed to load your videos',
+                      message: errorMessage ?? S.current.failedToLoadYourVideos,
                       onRetry: () =>
                           context.read<OwnerVideosCubit>().fetchOwnerVideos(),
                       iconSize: 42.r,
@@ -116,7 +117,7 @@ class OwnerVideosTab extends StatelessWidget {
                                         ),
                                       ),
                                       child: Text(
-                                        'Draft',
+                                        S.current.draft,
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 11.sp,
@@ -131,13 +132,14 @@ class OwnerVideosTab extends StatelessWidget {
                         ),
                       )
                     else if (state is OwnerVideosLoadedState)
-                      const AppEmptySliver(message: 'No videos yet'),
+                      AppEmptySliver(message: S.current.noVideosYet),
 
                     if (isLoadingMore)
                       const SliverLoadMoreLoader()
                     else if (loadMoreError)
                       SliverLoadMoreError(
-                        message: errorMessage ?? 'Failed to load more videos',
+                        message:
+                            errorMessage ?? S.current.failedToLoadMoreVideos,
                         onRetry: () =>
                             context.read<OwnerVideosCubit>().loadMoreVideos(),
                       ),

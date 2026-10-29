@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/widgets/app_fields/app_form_field.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class TagsInput extends StatelessWidget {
   final TextEditingController inputController;
@@ -40,8 +41,8 @@ class TagsInput extends StatelessWidget {
       children: [
         AppFormField(
           controller: inputController,
-          label: 'Tags',
-          hint: 'Add a tag and press done',
+          label: S.current.tags,
+          hint: S.current.addTagAndPressDone,
           prefixIcon: Icons.sell_outlined,
           enabled: enabled,
           textInputAction: TextInputAction.done,

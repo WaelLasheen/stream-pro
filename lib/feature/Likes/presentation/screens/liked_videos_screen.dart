@@ -14,6 +14,7 @@ import 'package:stream_pro/feature/Likes/presentation/controllers/liked_videos_c
 import 'package:stream_pro/feature/Likes/presentation/controllers/liked_videos_cubit/liked_videos_state.dart';
 import 'package:stream_pro/feature/Likes/presentation/mapper/liked_video_mapper.dart';
 import 'package:stream_pro/feature/video_details/presentation/args/video_details_args.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class LikedVideosScreen extends StatelessWidget {
   const LikedVideosScreen({super.key});
@@ -21,7 +22,7 @@ class LikedVideosScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Liked Videos'), centerTitle: true),
+      appBar: AppBar(title: Text(S.current.likedVideos), centerTitle: true),
       body: BlocBuilder<LikedVideosCubit, LikedVideosState>(
         builder: (context, state) {
           switch (state) {
@@ -44,8 +45,8 @@ class LikedVideosScreen extends StatelessWidget {
               final items = state.feed.items;
 
               if (items.isEmpty) {
-                return const AppEmptyWidget(
-                  message: 'You haven\'t liked any videos yet.',
+                return AppEmptyWidget(
+                  message: S.current.youHaventLikedAnyVideosYet,
                   icon: Icons.favorite_border,
                 );
               }

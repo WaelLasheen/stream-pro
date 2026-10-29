@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class LibrarySection extends StatelessWidget {
   final IconData icon;
@@ -75,7 +76,7 @@ class LibrarySection extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        'See all',
+                        S.current.seeAll,
                         style: theme.textTheme.labelLarge?.copyWith(
                           color: appTheme.primaryColor,
                           fontWeight: FontWeight.w700,

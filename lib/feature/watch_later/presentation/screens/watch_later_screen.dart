@@ -17,6 +17,7 @@ import 'package:stream_pro/feature/video_details/presentation/args/video_details
 import 'package:stream_pro/feature/watch_later/presentation/controllers/watch_later_cubit/watch_later_cubit.dart';
 import 'package:stream_pro/feature/watch_later/presentation/controllers/watch_later_cubit/watch_later_state.dart';
 import 'package:stream_pro/feature/watch_later/presentation/mapper/watch_later_mapper.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class WatchLaterScreen extends StatelessWidget {
   const WatchLaterScreen({super.key});
@@ -24,7 +25,7 @@ class WatchLaterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Watch Later'), centerTitle: true),
+      appBar: AppBar(title: Text(S.current.watchLater), centerTitle: true),
       body: BlocBuilder<WatchLaterCubit, WatchLaterState>(
         builder: (context, state) {
           final items = state.feed?.items ?? [];
@@ -50,9 +51,10 @@ class WatchLaterScreen extends StatelessWidget {
             );
           }
           if (state is WatchLaterEmpty) {
-            return const AppEmptyWidget(
+            // Removed 'const' because S.current is evaluated at runtime
+            return AppEmptyWidget(
               icon: Icons.watch_later_outlined,
-              message: 'Videos you save for later will appear here.',
+              message: S.current.watchLaterEmptyMessage,
             );
           }
           return AppRefreshIndicator(

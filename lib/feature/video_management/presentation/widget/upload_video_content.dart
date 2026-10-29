@@ -8,6 +8,7 @@ import 'package:stream_pro/feature/category/presentation/controllers/category_cu
 import 'package:stream_pro/feature/video_management/presentation/widget/file_picker_section.dart';
 import 'package:stream_pro/feature/video_management/presentation/widget/video_info_form.dart';
 import 'package:stream_pro/feature/video_management/presentation/widget/video_info_form_controller.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class UploadVideoContent extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -55,12 +56,12 @@ class UploadVideoContent extends StatelessWidget {
 
           // 2. Video File Picker
           FilePickerSection(
-            title: 'Video File *',
+            title: S.current.videoFileRequired,
             fileNotifier: form.selectedVideoFile,
             isImage: false,
             icon: Icons.video_call_outlined,
-            emptyTitle: 'Tap to select video',
-            emptySubtitle: 'MP4, MOV, MKV up to 500MB',
+            emptyTitle: S.current.tapToSelectVideo,
+            emptySubtitle: S.current.videoFileFormats,
             enabled: !isLoading,
             onPick: onPickVideo,
             onClear: () => form.selectedVideoFile.value = null,
@@ -70,12 +71,12 @@ class UploadVideoContent extends StatelessWidget {
 
           // 3. Thumbnail File Picker
           FilePickerSection(
-            title: 'Thumbnail Image *',
+            title: S.current.thumbnailImageRequired,
             fileNotifier: form.selectedThumbnailFile,
             isImage: true,
             icon: Icons.add_photo_alternate_outlined,
-            emptyTitle: 'Tap to select thumbnail',
-            emptySubtitle: 'JPG, PNG (16:9 recommended)',
+            emptyTitle: S.current.tapToSelectThumbnail,
+            emptySubtitle: S.current.thumbnailImageFormats,
             enabled: !isLoading,
             onPick: onPickThumbnail,
             onClear: () => form.selectedThumbnailFile.value = null,
@@ -85,7 +86,7 @@ class UploadVideoContent extends StatelessWidget {
 
           // 4. Submit Button
           AppButton(
-            text: 'Start Upload',
+            text: S.current.startUpload,
             isLoading: isLoading,
             onPressed: isLoading ? () {} : onSubmit,
             height: 48.h,

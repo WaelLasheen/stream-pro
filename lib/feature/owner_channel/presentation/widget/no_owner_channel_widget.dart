@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/app_button.dart';
 import 'package:stream_pro/core/utils/extensions/size_extension.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class NoOwnerChannelWidget extends StatelessWidget {
   final VoidCallback onCreatePressed;
@@ -30,14 +31,14 @@ class NoOwnerChannelWidget extends StatelessWidget {
             ),
             SizedBox(height: 16.h),
             Text(
-              'No Channel Found',
+              S.current.noChannelFound,
               style: theme.textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 8.h),
             Text(
-              'You don\'t have a channel yet. Create one now to start sharing content with your audience.',
+              S.current.noChannelFoundMessage,
               textAlign: TextAlign.center,
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.textTheme.bodySmall?.color,
@@ -45,7 +46,7 @@ class NoOwnerChannelWidget extends StatelessWidget {
             ),
             SizedBox(height: 24.h),
             AppButton(
-              text: 'Create Channel',
+              text: S.current.createChannel,
               onPressed: onCreatePressed,
               icon: Icon(Icons.add, size: 20.sp),
               width: context.screenWidth * .65,

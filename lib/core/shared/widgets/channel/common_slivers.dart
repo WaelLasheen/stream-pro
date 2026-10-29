@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class SliverSectionHeader extends StatelessWidget {
   final String title;
@@ -73,7 +74,7 @@ class SliverLoadMoreError extends StatelessWidget {
             ),
             if (onRetry != null) ...[
               8.verticalSpace,
-              TextButton(onPressed: onRetry, child: const Text('Retry')),
+              TextButton(onPressed: onRetry, child: Text(S.current.retry)),
             ],
           ],
         ),
@@ -83,9 +84,9 @@ class SliverLoadMoreError extends StatelessWidget {
 }
 
 class SliverEndOfList extends StatelessWidget {
-  final String message;
+  final String? message;
 
-  const SliverEndOfList({super.key, this.message = 'No more items'});
+  const SliverEndOfList({super.key, this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +94,10 @@ class SliverEndOfList extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 16.h),
         child: Center(
-          child: Text(message, style: Theme.of(context).textTheme.labelSmall),
+          child: Text(
+            message ?? S.current.noMoreItems,
+            style: Theme.of(context).textTheme.labelSmall,
+          ),
         ),
       ),
     );

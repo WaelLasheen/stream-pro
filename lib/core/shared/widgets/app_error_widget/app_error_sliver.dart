@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stream_pro/core/shared/widgets/app_error_widget/app_error_widget.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class AppErrorSliver extends StatelessWidget {
   final bool hasScrollBody;
@@ -10,7 +11,7 @@ class AppErrorSliver extends StatelessWidget {
   final Color? iconColor;
   final TextStyle? messageStyle;
   final EdgeInsetsGeometry? padding;
-  final String retryLabel;
+  final String? retryLabel;
   final IconData? retryIcon;
 
   const AppErrorSliver({
@@ -23,7 +24,7 @@ class AppErrorSliver extends StatelessWidget {
     this.iconColor,
     this.messageStyle,
     this.padding,
-    this.retryLabel = 'Retry',
+    this.retryLabel,
     this.retryIcon,
   });
 
@@ -40,7 +41,7 @@ class AppErrorSliver extends StatelessWidget {
         onRetry: onRetry,
         padding: padding,
         retryIcon: retryIcon,
-        retryLabel: retryLabel,
+        retryLabel: retryLabel ?? S.current.retry,
       ),
     );
   }

@@ -7,6 +7,7 @@ import 'package:stream_pro/core/utils/extensions/formatters.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/core/utils/extensions/size_extension.dart';
 import 'package:stream_pro/core/shared/widgets/video_card/video_card_data.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class VideoCardWidget extends StatelessWidget {
   final VideoCardData video;
@@ -376,7 +377,7 @@ class _VideoMetaInfo extends StatelessWidget {
           children: [
             if (watchedSeconds != null)
               Text(
-                '${watchedSeconds!.formatDuration()} watched',
+                '${watchedSeconds!.formatDuration()} ${S.current.watched}',
                 style: theme.textTheme.labelSmall?.copyWith(
                   color: theme.colorScheme.primary,
                   fontSize: 10.sp,
@@ -384,7 +385,7 @@ class _VideoMetaInfo extends StatelessWidget {
               )
             else ...[
               Text(
-                "${views.formatCount()} views",
+                '${views.formatCount()} ${S.current.views}',
                 style: theme.textTheme.labelSmall?.copyWith(
                   color: theme.hintColor,
                   fontSize: 10.sp,
@@ -392,7 +393,7 @@ class _VideoMetaInfo extends StatelessWidget {
               ),
               if (publishedTime != null)
                 Text(
-                  publishedTime!.timeAgo(),
+                  '• ${publishedTime!.timeAgo()}',
                   style: theme.textTheme.labelSmall?.copyWith(
                     color: theme.hintColor,
                     fontSize: 10.sp,
@@ -430,9 +431,9 @@ class _CompactVideoCard extends StatelessWidget {
 
   String _meta() {
     if (video.watchedSeconds != null) {
-      return '${video.watchedSeconds!.formatDuration()} watched';
+      return '${video.watchedSeconds!.formatDuration()} ${S.current.watched}';
     }
-    final views = '${video.views.formatCount()} views';
+    final views = '${video.views.formatCount()} ${S.current.views}';
     final time = video.publishedTime;
     return time == null ? views : '$views • ${time.timeAgo()}';
   }

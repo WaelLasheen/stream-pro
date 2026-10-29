@@ -7,6 +7,7 @@ import 'package:stream_pro/core/theme/font_styles.dart';
 import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/args/owner_channel_args.dart';
 import 'package:stream_pro/feature/video_details/presentation/args/video_details_args.dart';
+import 'package:stream_pro/generated/l10n.dart';
 import '../../domain/entities/notification_item_entity.dart';
 import '../../domain/entities/notification_type_enum.dart';
 import '../controllers/notifications_cubit/notifications_cubit.dart';
@@ -58,7 +59,7 @@ class NotificationsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Notifications', style: FontStyles.titleLarge),
+        title: Text(S.current.notifications, style: FontStyles.titleLarge),
         actions: const [NotificationAppBarActions()],
       ),
       body: BlocBuilder<NotificationsCubit, NotificationsState>(
@@ -69,9 +70,9 @@ class NotificationsScreen extends StatelessWidget {
               return const NotificationLoadingView();
 
             case NotificationsEmpty():
-              return const AppEmptyWidget(
+              return AppEmptyWidget(
                 icon: Icons.notifications_off_outlined,
-                message: 'No notifications yet',
+                message: S.current.noNotificationsYet,
               );
 
             case NotificationsLoaded():

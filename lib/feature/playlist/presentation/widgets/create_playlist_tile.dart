@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class CreatePlaylistTile extends StatelessWidget {
   final VoidCallback onTap;
@@ -24,7 +25,7 @@ class CreatePlaylistTile extends StatelessWidget {
             ),
             12.horizontalSpace,
             Text(
-              'Create new playlist',
+              S.current.createNewPlaylist,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 fontWeight: FontWeight.w600,
                 color: appTheme.primaryColor,

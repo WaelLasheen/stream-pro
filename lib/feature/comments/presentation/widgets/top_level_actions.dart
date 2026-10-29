@@ -5,6 +5,7 @@ import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/feature/comments/domain/entities/comment_entity.dart';
 import 'package:stream_pro/feature/comments/presentation/controllers/replies_cubit/replies_cubit.dart';
 import 'package:stream_pro/feature/comments/presentation/controllers/replies_cubit/replies_state.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class TopLevelActions extends StatelessWidget {
   final CommentEntity comment;
@@ -53,8 +54,8 @@ class TopLevelActions extends StatelessWidget {
                       else ...[
                         Text(
                           expanded
-                              ? 'Hide replies'
-                              : 'View ${comment.replyCount} ${comment.replyCount == 1 ? 'reply' : 'replies'}',
+                              ? S.current.hideReplies
+                              : S.current.viewReplies(comment.replyCount),
                           style: actionStyle,
                         ),
                         SizedBox(width: 2.w),
@@ -88,7 +89,7 @@ class TopLevelActions extends StatelessWidget {
                     color: appTheme.grey600,
                   ),
                   SizedBox(width: 4.w),
-                  Text('Reply', style: actionStyle),
+                  Text(S.current.reply, style: actionStyle),
                 ],
               ),
             ),

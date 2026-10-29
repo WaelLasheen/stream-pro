@@ -5,6 +5,7 @@ import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
 import 'package:stream_pro/feature/video_details/presentation/widgets/action_button.dart';
 import 'package:stream_pro/feature/watch_later/presentation/controllers/watch_later_button_cubit/watch_later_button_cubit.dart';
 import 'package:stream_pro/feature/watch_later/presentation/controllers/watch_later_button_cubit/watch_later_button_state.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class WatchLaterButton extends StatelessWidget {
   final String videoId;
@@ -23,7 +24,9 @@ class WatchLaterButton extends StatelessWidget {
                 : state.isInWatchLater
                 ? Icons.watch_later
                 : Icons.watch_later_outlined,
-            label: state.isInWatchLater ? 'Added' : 'Watch later',
+            label: state.isInWatchLater
+                ? S.current.added
+                : S.current.watchLater,
             onTap: () async {
               if (state.isBusy) return;
 
@@ -37,8 +40,8 @@ class WatchLaterButton extends StatelessWidget {
                     context.showErrorSnackBar(message: failure.message),
                 (isInWatchLater) => context.showSuccessSnackBar(
                   message: isInWatchLater
-                      ? 'Added to Watch later.'
-                      : 'Removed from Watch later.',
+                      ? S.current.addedToWatchLater
+                      : S.current.removedFromWatchLater,
                 ),
               );
             },

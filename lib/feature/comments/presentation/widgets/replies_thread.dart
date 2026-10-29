@@ -8,6 +8,7 @@ import 'package:stream_pro/feature/comments/presentation/controllers/replies_cub
 import 'package:stream_pro/feature/comments/presentation/controllers/replies_cubit/replies_state.dart';
 import 'package:stream_pro/feature/comments/presentation/params/user_params.dart';
 import 'package:stream_pro/feature/comments/presentation/widgets/comment_item_widget.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class RepliesThread extends StatelessWidget {
   final CommentEntity comment;
@@ -74,7 +75,7 @@ class RepliesThread extends StatelessWidget {
                         ),
                         8.horizontalSpace,
                         Text(
-                          'Posting reply…',
+                          S.current.postingReply,
                           style: textTheme.labelSmall?.copyWith(
                             color: appTheme.textSecondary,
                           ),
@@ -114,7 +115,7 @@ class RepliesThread extends StatelessWidget {
                               .read<RepliesCubit>()
                               .fetchReplies(parentId, force: true),
                           child: Text(
-                            'Retry',
+                            S.current.retry,
                             style: TextStyle(color: appTheme.primaryColor),
                           ),
                         ),
@@ -125,7 +126,7 @@ class RepliesThread extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 6.h),
                     child: Text(
-                      'No replies yet.',
+                      S.current.noRepliesYet,
                       style: textTheme.bodySmall?.copyWith(
                         color: appTheme.textSecondary,
                       ),

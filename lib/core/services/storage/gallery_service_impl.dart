@@ -1,6 +1,7 @@
 import 'package:gal/gal.dart';
 import 'package:stream_pro/core/error/exceptions/gallery_exception.dart';
 import 'package:stream_pro/core/services/storage/gallery_service.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class GalleryServiceImpl implements GalleryService {
   const GalleryServiceImpl();
@@ -9,12 +10,11 @@ class GalleryServiceImpl implements GalleryService {
   Future<void> saveVideo(String filePath) async {
     try {
       await _ensureAccess();
-
       await Gal.putVideo(filePath);
     } on GalleryException {
       rethrow;
     } catch (_) {
-      throw const GalleryException('Failed to save video to gallery');
+      throw GalleryException(S.current.failedToSaveVideoToGallery);
     }
   }
 
@@ -24,7 +24,7 @@ class GalleryServiceImpl implements GalleryService {
       hasAccess = await Gal.requestAccess();
     }
     if (!hasAccess) {
-      throw const GalleryException('Media storage permission denied');
+      throw GalleryException(S.current.mediaStoragePermissionDenied);
     }
   }
 }

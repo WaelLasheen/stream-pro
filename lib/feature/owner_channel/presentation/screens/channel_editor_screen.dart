@@ -7,6 +7,7 @@ import 'package:stream_pro/feature/owner_channel/domain/entities/owner_channel_e
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/owner_channel_cubit/owner_channel_cubit.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/owner_channel_cubit/owner_channel_state.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/widget/channel_editor_form.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class ChannelEditorScreen extends StatefulWidget {
   final OwnerChannelEntity? initialData;
@@ -117,8 +118,8 @@ class _ChannelEditorScreenState extends State<ChannelEditorScreen> {
     if (state is OwnerChannelLoadedState) {
       context.showSuccessSnackBar(
         message: _isEditMode
-            ? 'Channel updated successfully'
-            : 'Channel created successfully',
+            ? S.current.channelUpdatedSuccessfully
+            : S.current.channelCreatedSuccessfully,
       );
       Navigator.of(context).maybePop();
     }

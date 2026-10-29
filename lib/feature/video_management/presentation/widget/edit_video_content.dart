@@ -16,6 +16,7 @@ import 'package:stream_pro/feature/video_management/presentation/widget/edit_sta
 import 'package:stream_pro/feature/video_management/presentation/widget/edit_thumbnail_section.dart';
 import 'package:stream_pro/feature/video_management/presentation/widget/video_info_form.dart';
 import 'package:stream_pro/feature/video_management/presentation/widget/video_info_form_controller.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class EditVideoContent extends StatelessWidget {
   final ManagedVideoEntity video;
@@ -108,7 +109,7 @@ class EditVideoContent extends StatelessWidget {
                     ),
                     SizedBox(height: 24.h),
                     AppButton(
-                      text: 'Save changes',
+                      text: S.current.saveChanges,
                       isLoading: isBusy,
                       onPressed: isBusy ? () {} : onSave,
                       height: 48.h,

@@ -6,6 +6,7 @@ import 'package:stream_pro/feature/playlist/presentation/widgets/playlist_select
 import 'package:stream_pro/feature/video_details/presentation/widgets/action_button.dart';
 import 'package:stream_pro/feature/video_details/presentation/widgets/download_button.dart';
 import 'package:stream_pro/feature/video_details/presentation/widgets/watch_later_button.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class VideoActionsWidget extends StatelessWidget {
   final String videoId;
@@ -43,15 +44,15 @@ class VideoActionsWidget extends StatelessWidget {
 
           ActionButton(
             icon: Icons.share_outlined,
-            label: 'Share',
+            label: S.current.share,
             onTap: () {
-              context.showSuccessSnackBar(message: 'Share link copied!');
+              context.showSuccessSnackBar(message: S.current.shareLinkCopied);
             },
           ),
           SizedBox(width: 12.w),
           ActionButton(
             icon: Icons.playlist_add_outlined,
-            label: 'Save',
+            label: S.current.save,
             onTap: () {
               PlaylistSelectorSheet.show(context, videoId: videoId);
             },

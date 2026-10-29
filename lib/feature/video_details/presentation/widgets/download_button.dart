@@ -7,6 +7,7 @@ import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
 import 'package:stream_pro/feature/video_details/presentation/controllers/download_cubit/download_cubit.dart';
 import 'package:stream_pro/feature/video_details/presentation/controllers/download_cubit/download_state.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class DownloadButton extends StatefulWidget {
   final String videoId;
@@ -25,7 +26,7 @@ class _DownloadButtonState extends State<DownloadButton> {
       child: BlocConsumer<DownloadCubit, DownloadState>(
         listener: (context, state) {
           if (state is DownloadSuccess) {
-            context.showSuccessSnackBar(message: 'Video saved to gallery!');
+            context.showSuccessSnackBar(message: S.current.videoSavedToGallery);
             HapticFeedback.mediumImpact(); // Satisfying thud on success
           } else if (state is DownloadError) {
             context.showErrorSnackBar(message: state.message);
@@ -46,7 +47,7 @@ class _DownloadButtonState extends State<DownloadButton> {
           Color contentColor = appTheme.grey700;
           Color iconColor = appTheme.grey700;
 
-          String text = 'Download';
+          String text = S.current.download;
           Widget icon = Icon(
             Icons.download_rounded,
             size: 18.sp,
@@ -73,7 +74,7 @@ class _DownloadButtonState extends State<DownloadButton> {
             bgColor = appTheme.successColor.withValues(alpha: 0.1);
             contentColor = appTheme.successColor;
             iconColor = appTheme.successColor;
-            text = 'Saved';
+            text = S.current.saved;
             icon = Icon(Icons.check_rounded, size: 18.sp, color: iconColor);
           }
 

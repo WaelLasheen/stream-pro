@@ -10,6 +10,7 @@ import 'package:stream_pro/feature/playlist/presentation/controllers/video_playl
 import 'package:stream_pro/feature/playlist/presentation/view_models/playlist_sheet_view.dart';
 import 'package:stream_pro/feature/playlist/presentation/widgets/playlist_selector_row.dart';
 import 'package:stream_pro/feature/playlist/presentation/widgets/playlist_selector_row_shimmer.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class PlaylistSelectorBody extends StatelessWidget {
   final String videoId;
@@ -41,7 +42,7 @@ class PlaylistSelectorBody extends StatelessWidget {
           return Padding(
             padding: EdgeInsets.all(24.r),
             child: AppErrorWidget(
-              message: view.errorMessage ?? 'Something went wrong',
+              message: view.errorMessage ?? S.current.somethingWentWrong,
               onRetry: () =>
                   context.read<VideoPlaylistsCubit>().loadPlaylists(videoId),
             ),
@@ -51,8 +52,8 @@ class PlaylistSelectorBody extends StatelessWidget {
         if (view.playlists.isEmpty) {
           return Padding(
             padding: EdgeInsets.all(24.r),
-            child: const AppEmptyWidget(
-              message: 'You have no playlists yet.',
+            child: AppEmptyWidget(
+              message: S.current.youHaveNoPlaylistsYet,
               icon: Icons.playlist_add_outlined,
             ),
           );

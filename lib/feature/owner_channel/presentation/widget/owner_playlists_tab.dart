@@ -13,6 +13,7 @@ import 'package:stream_pro/feature/owner_channel/presentation/controllers/owner_
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/owner_playlists_cubit/owner_playlists_state.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/mappers/owner_playlist_mapper.dart';
 import 'package:stream_pro/feature/playlist/presentation/args/playlist_details_args.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class OwnerPlaylistsTab extends StatelessWidget {
   final SliverOverlapAbsorberHandle handle;
@@ -44,7 +45,7 @@ class OwnerPlaylistsTab extends StatelessWidget {
               )
             else if (state is OwnerPlaylistsLoadedState)
               if (state.playlists.isEmpty)
-                const AppEmptySliver(message: 'No playlists yet')
+                AppEmptySliver(message: S.current.noPlaylistsYet)
               else
                 SliverPadding(
                   padding: EdgeInsets.all(12.r),

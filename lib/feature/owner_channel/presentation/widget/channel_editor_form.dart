@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/app_button.dart';
 import 'package:stream_pro/core/shared/widgets/app_fields/app_form_field.dart';
 import 'package:stream_pro/feature/owner_channel/domain/entities/owner_channel_entity.dart';
+import 'package:stream_pro/generated/l10n.dart';
 import 'channel_image_picker.dart';
 
 class ChannelEditorForm extends StatelessWidget {
@@ -92,8 +93,8 @@ class ChannelEditorForm extends StatelessWidget {
                       children: [
                         AppFormField(
                           controller: titleController,
-                          label: 'Channel Title',
-                          hint: 'Enter your channel name',
+                          label: S.current.channelTitle,
+                          hint: S.current.enterYourChannelName,
                           textInputAction: TextInputAction.next,
                           onFieldSubmitted: (_) {
                             FocusScope.of(
@@ -102,7 +103,7 @@ class ChannelEditorForm extends StatelessWidget {
                           },
                           validator: (value) {
                             if (value == null || value.trim().isEmpty) {
-                              return 'Title is required';
+                              return S.current.titleIsRequired;
                             }
                             return null;
                           },
@@ -111,9 +112,8 @@ class ChannelEditorForm extends StatelessWidget {
                         AppFormField(
                           controller: descriptionController,
                           focusNode: descriptionFocusNode,
-                          label: 'Description',
-                          hint: 'Tell viewers about your channel',
-                          keyboardType: TextInputType.multiline,
+                          label: S.current.description,
+                          hint: S.current.tellViewersAboutYourChannel,
                           textInputAction: TextInputAction.newline,
                           maxLines: 4,
                           minLines: 3,
@@ -143,7 +143,9 @@ class ChannelEditorForm extends StatelessWidget {
             child: SafeArea(
               top: false,
               child: AppButton(
-                text: isEditMode ? 'Update Channel' : 'Create Channel',
+                text: isEditMode
+                    ? S.current.updateChannel
+                    : S.current.createChannel,
                 isLoading: isLoading,
                 onPressed: onSubmit,
                 backgroundColor: const Color(0xFF6C5CE7),

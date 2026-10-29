@@ -12,6 +12,7 @@ import 'package:stream_pro/feature/comments/presentation/params/user_params.dart
 import 'package:stream_pro/feature/comments/presentation/widgets/more_menu.dart';
 import 'package:stream_pro/feature/comments/presentation/widgets/replies_thread.dart';
 import 'package:stream_pro/feature/comments/presentation/widgets/top_level_actions.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class CommentItemWidget extends StatelessWidget {
   final CommentEntity comment;
@@ -40,10 +41,12 @@ class CommentItemWidget extends StatelessWidget {
 
   Future<void> _confirmDelete(BuildContext context) async {
     final confirmed = await context.showDeleteConfirmationDialog(
-      title: isReply ? 'Delete reply?' : 'Delete comment?',
+      title: isReply
+          ? S.current.deleteReplyTitle
+          : S.current.deleteCommentTitle,
       content: isReply
-          ? 'This reply will be permanently removed. This can\'t be undone.'
-          : 'This comment will be permanently removed. This can\'t be undone.',
+          ? S.current.deleteReplyMessage
+          : S.current.deleteCommentMessage,
     );
 
     if (confirmed != true || !context.mounted) return;
@@ -76,7 +79,9 @@ class CommentItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final appTheme = context.appTheme;
     final textTheme = context.textTheme;
-    final displayName = comment.userName.isEmpty ? 'You' : comment.userName;
+    final displayName = comment.userName.isEmpty
+        ? S.current.you
+        : comment.userName;
 
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8.h),
@@ -120,7 +125,7 @@ class CommentItemWidget extends StatelessWidget {
                             ),
                             TextSpan(
                               text:
-                                  '  •  ${comment.createdAt.timeAgo()}${comment.isEdited ? '  •  edited' : ''}',
+                                  '  •  ${comment.createdAt.timeAgo()}${comment.isEdited ? '  •  ${S.current.edited}' : ''}',
                               style: textTheme.labelSmall?.copyWith(
                                 color: appTheme.textSecondary,
                                 fontSize: 11.sp,

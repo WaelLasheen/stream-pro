@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/app_popup_menu.dart';
 import 'package:stream_pro/core/utils/consts/image_path.dart';
+import 'package:stream_pro/generated/l10n.dart';
 import 'package:video_player/video_player.dart';
 
 class CustomMaterialControls extends StatefulWidget {
@@ -326,7 +327,7 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
       padding: const EdgeInsets.only(right: 8, left: 4),
       child: Text(
         isLive
-            ? 'LIVE'
+            ? S.current.live
             : '${_formatDuration(position)} / ${_formatDuration(duration)}',
         style: const TextStyle(
           color: Colors.white,
@@ -340,7 +341,6 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
   Widget _buildSpeedButton() {
     final speeds = chewieController.playbackSpeeds;
     final selected = _latestValue.playbackSpeed;
-
     return AppPopupMenu<double>(
       menuWidth: 120,
       trigger: SvgPicture.asset(
@@ -357,7 +357,7 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
         for (final speed in speeds)
           AppMenuItem(
             value: speed,
-            title: speed == 1.0 ? 'Normal' : '${speed}x',
+            title: speed == 1.0 ? S.current.normal : '${speed}x',
             icon: selected == speed ? Icons.check_rounded : null,
           ),
       ],

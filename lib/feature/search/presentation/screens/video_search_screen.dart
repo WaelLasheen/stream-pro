@@ -20,6 +20,7 @@ import 'package:stream_pro/feature/search/presentation/controllers/search_sugges
 import 'package:stream_pro/feature/search/presentation/mapper/search_video_mapper.dart';
 import 'package:stream_pro/feature/search/presentation/widgets/search_suggestions_view.dart';
 import 'package:stream_pro/feature/video_details/presentation/args/video_details_args.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class VideoSearchScreen extends StatefulWidget {
   const VideoSearchScreen({super.key});
@@ -106,7 +107,7 @@ class _VideoSearchScreenState extends State<VideoSearchScreen> {
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
               child: AppFormField(
                 controller: _searchController,
-                hint: 'Search videos...',
+                hint: S.current.searchVideosHint,
                 prefixIcon: Icons.search,
                 onChanged: _onQueryChanged,
                 onFieldSubmitted: _onSubmitted,
@@ -154,7 +155,7 @@ class _VideoSearchScreenState extends State<VideoSearchScreen> {
                     builder: (context, state) {
                       if (state is SearchInitial) {
                         return AppEmptyWidget(
-                          message: 'Type to search videos...',
+                          message: S.current.typeToSearchVideos,
                           icon: Icons.play_circle_outline_rounded,
                         );
                       }
@@ -178,8 +179,9 @@ class _VideoSearchScreenState extends State<VideoSearchScreen> {
 
                         if (items.isEmpty) {
                           return AppEmptyWidget(
-                            message:
-                                'No videos found for "${_searchController.text}"',
+                            message: S.current.noVideosFoundFor(
+                              _searchController.text,
+                            ),
                             icon: Icons.search_off_rounded,
                           );
                         }

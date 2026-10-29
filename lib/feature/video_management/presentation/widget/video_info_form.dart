@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/entity/category_entity.dart';
 import 'package:stream_pro/core/shared/widgets/app_fields/app_form_field.dart';
+import 'package:stream_pro/generated/l10n.dart';
 import 'tags_input.dart';
 import 'video_info_form_controller.dart';
 
@@ -26,20 +27,20 @@ class VideoInfoForm extends StatelessWidget {
       children: [
         AppFormField(
           controller: controller.titleController,
-          label: 'Video Title *',
-          hint: 'Enter a catchy title',
+          label: S.current.videoTitleRequired,
+          hint: S.current.enterCatchyTitle,
           prefixIcon: Icons.title,
           enabled: enabled,
           textInputAction: TextInputAction.next,
           validator: (value) => (value == null || value.trim().isEmpty)
-              ? 'Title is required'
+              ? S.current.titleIsRequired
               : null,
         ),
         SizedBox(height: 16.h),
         AppFormField(
           controller: controller.descriptionController,
-          label: 'Description *',
-          hint: 'What is this video about?',
+          label: S.current.descriptionRequired,
+          hint: S.current.whatIsThisVideoAbout,
           prefixIcon: Icons.description,
           textInputAction: TextInputAction.newline,
           keyboardType: TextInputType.multiline,
@@ -47,7 +48,7 @@ class VideoInfoForm extends StatelessWidget {
           minLines: 3,
           enabled: enabled,
           validator: (value) => (value == null || value.trim().isEmpty)
-              ? 'Description is required'
+              ? S.current.descriptionIsRequired
               : null,
         ),
         SizedBox(height: 16.h),
@@ -62,7 +63,7 @@ class VideoInfoForm extends StatelessWidget {
               key: ValueKey(safeValue),
               isExpanded: true,
               decoration: InputDecoration(
-                labelText: 'Category *',
+                labelText: S.current.categoryRequired,
                 prefixIcon: const Icon(Icons.category_outlined),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16.r),
@@ -89,8 +90,7 @@ class VideoInfoForm extends StatelessWidget {
                   ? (value) => controller.categoryId.value = value
                   : null,
               validator: (value) =>
-                  value == null ? 'Category is required' : null,
-            );
+                  value == null ? S.current.categoryIsRequired : null,            );
           },
         ),
         SizedBox(height: 16.h),

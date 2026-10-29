@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class PlaylistVisibilityTile extends StatelessWidget {
   final ValueNotifier<bool> isPublic;
@@ -36,7 +37,7 @@ class PlaylistVisibilityTile extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      value ? 'Public' : 'Private',
+                      value ? S.current.public : S.current.private,
                       style: theme.textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w600,
                         color: appTheme.textPrimary,
@@ -44,8 +45,8 @@ class PlaylistVisibilityTile extends StatelessWidget {
                     ),
                     Text(
                       value
-                          ? 'Anyone can watch this playlist'
-                          : 'Only you can watch this playlist',
+                          ? S.current.anyoneCanWatchThisPlaylist
+                          : S.current.onlyYouCanWatchThisPlaylist,
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: appTheme.textSecondary,
                         fontSize: 11.sp,

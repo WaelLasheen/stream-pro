@@ -8,6 +8,7 @@ import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
 import 'package:stream_pro/feature/playlist/domain/entities/playlist_details_entity.dart';
 import 'package:stream_pro/feature/playlist/presentation/widgets/playlist_sheet_header.dart';
 import 'package:stream_pro/feature/playlist/presentation/widgets/playlist_visibility_tile.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class PlaylistEditResult {
   final String title;
@@ -72,7 +73,7 @@ class _EditPlaylistSheetState extends State<EditPlaylistSheet> {
     final title = _titleController.text.trim();
     final description = _descriptionController.text.trim();
     if (title.isEmpty) {
-      context.showErrorSnackBar(message: 'Please enter a playlist name.');
+      context.showErrorSnackBar(message: S.current.pleaseEnterPlaylistName);
       return;
     }
 
@@ -103,15 +104,15 @@ class _EditPlaylistSheetState extends State<EditPlaylistSheet> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const PlaylistSheetHeader(
-                title: 'Edit playlist',
+              PlaylistSheetHeader(
+                title: S.current.editPlaylist,
                 titleSpacing: 20,
               ),
               20.verticalSpace,
               AppFormField(
                 controller: _titleController,
-                label: 'Name',
-                hint: 'My playlist',
+                label: S.current.name,
+                hint: S.current.myPlaylistHint,
                 prefixIcon: Icons.playlist_add_outlined,
                 textInputAction: TextInputAction.next,
                 onChanged: (value) => _title.value = value,
@@ -120,8 +121,8 @@ class _EditPlaylistSheetState extends State<EditPlaylistSheet> {
               16.verticalSpace,
               AppFormField(
                 controller: _descriptionController,
-                label: 'Description (optional)',
-                hint: 'What is this playlist about?',
+                label: S.current.descriptionOptional,
+                hint: S.current.whatIsThisPlaylistAbout,
                 prefixIcon: Icons.notes_outlined,
                 maxLines: 3,
                 minLines: 2,
@@ -134,7 +135,7 @@ class _EditPlaylistSheetState extends State<EditPlaylistSheet> {
               ValueListenableBuilder<String>(
                 valueListenable: _title,
                 builder: (context, title, _) => AppButton(
-                  text: 'Save changes',
+                  text: S.current.saveChanges,
                   isEnabled: title.trim().isNotEmpty,
                   onPressed: _submit,
                   icon: const Icon(Icons.check),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stream_pro/core/shared/widgets/empty_view/app_empty_widget.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class AppEmptySliver extends StatelessWidget {
-  final String message;
+  final String? message;
   final IconData? icon;
   final double? iconSize;
   final Color? iconColor;
@@ -14,7 +15,7 @@ class AppEmptySliver extends StatelessWidget {
 
   const AppEmptySliver({
     super.key,
-    this.message = 'No data available at the moment.',
+    this.message,
     this.icon = Icons.inbox_outlined,
     this.iconSize,
     this.iconColor,
@@ -30,7 +31,7 @@ class AppEmptySliver extends StatelessWidget {
     return SliverFillRemaining(
       hasScrollBody: hasScrollBody,
       child: AppEmptyWidget(
-        message: message,
+        message: message ?? S.current.noDataAvailable,
         icon: icon,
         iconSize: iconSize,
         iconColor: iconColor,

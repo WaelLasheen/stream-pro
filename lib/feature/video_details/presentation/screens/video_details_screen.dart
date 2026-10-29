@@ -16,6 +16,7 @@ import 'package:stream_pro/feature/video_details/presentation/widgets/video_acti
 import 'package:stream_pro/feature/video_details/presentation/widgets/video_details_shimmer.dart';
 import 'package:stream_pro/feature/video_details/presentation/widgets/video_header_widget.dart';
 import 'package:stream_pro/feature/watch_history/presentation/controllers/video_track_cubit/video_track_cubit.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class VideoDetailsScreen extends StatelessWidget {
   final String videoId;
@@ -146,11 +147,11 @@ class VideoDetailsScreen extends StatelessWidget {
                                   pinned: true,
                                   delegate: SliverTabBarDelegate(
                                     height: 48.h,
-                                    child: const TabBar(
+                                    child: TabBar(
                                       indicatorSize: TabBarIndicatorSize.tab,
                                       tabs: [
-                                        Tab(text: 'Related Videos'),
-                                        Tab(text: 'Comments'),
+                                        Tab(text: S.current.relatedVideos),
+                                        Tab(text: S.current.comments),
                                       ],
                                     ),
                                   ),

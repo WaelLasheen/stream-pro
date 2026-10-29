@@ -10,6 +10,7 @@ import 'package:stream_pro/feature/library/presentation/widgets/library_rail_shi
 import 'package:stream_pro/feature/watch_history/presentation/controllers/watch_history_cubit/watch_history_cubit.dart';
 import 'package:stream_pro/feature/watch_history/presentation/controllers/watch_history_cubit/watch_history_state.dart';
 import 'package:stream_pro/feature/watch_history/presentation/mapper/watch_history_item_mapper.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class HistorySection extends StatelessWidget {
   final int previewCount;
@@ -36,10 +37,10 @@ class HistorySection extends StatelessWidget {
           case WatchHistoryInitial() || WatchHistoryLoading():
             content = const LibraryRailShimmer(key: ValueKey('loading'));
           case WatchHistoryEmpty():
-            content = const LibraryEmptyCard(
-              key: ValueKey('empty'),
+            content = LibraryEmptyCard(
+              key: const ValueKey('empty'),
               icon: Icons.history_toggle_off_rounded,
-              message: 'Videos you watch will show up here.',
+              message: S.current.historyEmptyMessage,
             );
           case WatchHistoryError():
             content = LibraryErrorCard(
@@ -65,7 +66,7 @@ class HistorySection extends StatelessWidget {
         return LibrarySection(
           icon: Icons.history_rounded,
           accent: appTheme.primaryColor,
-          title: 'History',
+          title: S.current.history,
           count: count,
           onSeeAll: onSeeAll,
           child: content,

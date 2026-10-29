@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/feature/playlist/domain/entities/video_playlist_entity.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class PlaylistSelectorRow extends StatelessWidget {
   final VideoPlaylistEntity playlist;
@@ -56,7 +57,7 @@ class PlaylistSelectorRow extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    playlist.isPublic ? 'Public' : 'Private',
+                    playlist.isPublic ? S.current.public : S.current.private,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: appTheme.textSecondary,
                       fontSize: 11.sp,

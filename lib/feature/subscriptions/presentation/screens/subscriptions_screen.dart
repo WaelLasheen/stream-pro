@@ -13,6 +13,7 @@ import 'package:stream_pro/core/shared/widgets/subscriber_card/subscriber_card_w
 import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
 import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
 import 'package:stream_pro/feature/subscriptions/presentation/mapper/subscription_mapper.dart';
+import 'package:stream_pro/generated/l10n.dart';
 import '../controllers/subscriptions_cubit/subscriptions_cubit.dart';
 import '../controllers/subscriptions_cubit/subscriptions_state.dart';
 
@@ -61,9 +62,7 @@ class SubscriptionsScreen extends StatelessWidget {
         }
 
         if (isEmpty) {
-          return const AppEmptyWidget(
-            message: 'There are no subscription till now',
-          );
+          return AppEmptyWidget(message: S.current.noSubscriptionsYet);
         }
 
         return AppRefreshIndicator(

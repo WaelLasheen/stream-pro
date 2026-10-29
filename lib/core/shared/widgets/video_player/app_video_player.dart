@@ -6,6 +6,7 @@ import 'package:stream_pro/core/routing/observers/app_route_observer.dart';
 import 'package:stream_pro/core/shared/widgets/video_player/controller/video_player_cubit.dart';
 import 'package:stream_pro/core/shared/widgets/video_player/controller/video_player_state.dart';
 import 'package:stream_pro/core/shared/widgets/video_player/video_player_data.dart';
+import 'package:stream_pro/generated/l10n.dart';
 import 'package:video_player/video_player.dart';
 
 class AppVideoPlayer extends StatefulWidget {
@@ -164,10 +165,8 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> with RouteAware {
     switch (state) {
       case VideoPlayerInitial() || VideoPlayerLoading():
         return _buildLoadingThumbnail(widget.data.posterUrl);
-
       case VideoPlayerLoaded():
         return Chewie(controller: state.chewieController!);
-
       case VideoPlayerError():
         return Center(
           child: Column(
@@ -176,7 +175,7 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> with RouteAware {
               const Icon(Icons.error_outline, color: Colors.white70, size: 48),
               SizedBox(height: 12.h),
               Text(
-                'Unable to play video',
+                S.current.unableToPlayVideo,
                 style: TextStyle(color: Colors.white70, fontSize: 16.sp),
                 textAlign: TextAlign.center,
               ),

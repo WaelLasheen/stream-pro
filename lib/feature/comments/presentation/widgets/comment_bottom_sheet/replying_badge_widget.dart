@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class ReplyingBadgeWidget extends StatelessWidget {
   final String userName;
@@ -20,7 +21,7 @@ class ReplyingBadgeWidget extends StatelessWidget {
         border: Border.all(color: appTheme.boarderPrimary, width: 1.w),
       ),
       child: Text(
-        'Replying to @$userName',
+        S.current.replyingTo(userName),
         style: textTheme.labelMedium?.copyWith(
           color: appTheme.primaryColor,
           fontWeight: FontWeight.w600,

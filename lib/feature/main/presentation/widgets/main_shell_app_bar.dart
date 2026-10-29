@@ -5,6 +5,7 @@ import 'package:stream_pro/core/shared/widgets/stream_pro_logo.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
 import 'package:stream_pro/feature/main/presentation/widgets/profile_menu.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class MainShellAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainShellAppBar({super.key});
@@ -24,7 +25,7 @@ class MainShellAppBar extends StatelessWidget implements PreferredSizeWidget {
           StreamProLogo(size: 32.r),
           8.horizontalSpace,
           Text(
-            'StreamPro',
+            S.current.streamPro,
             style: textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               fontSize: 20.sp,

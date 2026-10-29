@@ -2,6 +2,7 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stream_pro/core/shared/widgets/video_player/custom_material_controls.dart';
+import 'package:stream_pro/generated/l10n.dart';
 import 'package:video_player/video_player.dart';
 import 'video_player_state.dart';
 
@@ -64,15 +65,15 @@ class VideoPlayerCubit extends Cubit<VideoPlayerState> {
   Widget _buildErrorWidget() {
     return Container(
       color: Colors.black,
-      child: const Center(
+      child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.error_outline, color: Colors.white70, size: 48),
-            SizedBox(height: 12),
+            const Icon(Icons.error_outline, color: Colors.white70, size: 48),
+            const SizedBox(height: 12),
             Text(
-              'Unable to play video',
-              style: TextStyle(color: Colors.white70),
+              S.current.unableToPlayVideo,
+              style: const TextStyle(color: Colors.white70),
             ),
           ],
         ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class AppEmptyWidget extends StatelessWidget {
-  final String message;
+  final String? message;
   final IconData? icon;
   final double? iconSize;
   final Color? iconColor;
@@ -13,7 +14,7 @@ class AppEmptyWidget extends StatelessWidget {
 
   const AppEmptyWidget({
     super.key,
-    this.message = 'No data available at the moment.',
+    this.message,
     this.icon = Icons.inbox_outlined,
     this.iconSize,
     this.iconColor,
@@ -26,7 +27,6 @@ class AppEmptyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     return Center(
       child: Padding(
         padding: padding ?? EdgeInsets.all(24.r),
@@ -43,7 +43,7 @@ class AppEmptyWidget extends StatelessWidget {
               12.verticalSpace,
             ],
             Text(
-              message,
+              message ?? S.current.noDataAvailable,
               textAlign: TextAlign.center,
               style: messageStyle ?? theme.textTheme.bodyMedium,
             ),

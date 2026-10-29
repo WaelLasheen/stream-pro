@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/feature/library/presentation/widgets/library_inline_card.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class LibraryErrorCard extends StatelessWidget {
   final String message;
@@ -21,7 +22,11 @@ class LibraryErrorCard extends StatelessWidget {
     return LibraryInlineCard(
       child: Row(
         children: [
-          Icon(Icons.error_outline_rounded, size: 30.r, color: appTheme.errorColor),
+          Icon(
+            Icons.error_outline_rounded,
+            size: 30.r,
+            color: appTheme.errorColor,
+          ),
           14.horizontalSpace,
           Expanded(
             child: Text(
@@ -33,7 +38,7 @@ class LibraryErrorCard extends StatelessWidget {
               ),
             ),
           ),
-          TextButton(onPressed: onRetry, child: const Text('Retry')),
+          TextButton(onPressed: onRetry, child: Text(S.current.retry)),
         ],
       ),
     );

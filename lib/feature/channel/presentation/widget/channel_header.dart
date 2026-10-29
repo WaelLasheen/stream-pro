@@ -9,6 +9,7 @@ import 'package:stream_pro/feature/channel/presentation/controllers/channel_deta
 import 'package:stream_pro/feature/channel/presentation/controllers/channel_details_cubit/channel_details_state.dart';
 import 'package:stream_pro/core/shared/widgets/channel/channel_header_shimmer.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/subscribe_button.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class ChannelHeader extends StatelessWidget {
   final ChannelDetailsState state;
@@ -82,9 +83,9 @@ class ChannelHeader extends StatelessWidget {
                               ),
                               4.verticalSpace,
                               Text(
-                                '${details.subscriptionsCount.formatCount()} subscribers • '
-                                '${details.videosCount.formatCount()} videos • '
-                                '${details.totalViews.formatCount()} views',
+                                '${details.subscriptionsCount.formatCount()} ${S.current.subscribers} • ' // Reusing key from previous batches!
+                                '${details.videosCount.formatCount()} ${S.current.videos} • ' // Reusing key from previous batches!
+                                '${details.totalViews.formatCount()} ${S.current.views}', // Reusing key from previous batches!
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: theme.textTheme.bodySmall?.copyWith(

@@ -11,6 +11,7 @@ import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
 import 'package:stream_pro/feature/video_details/presentation/args/video_details_args.dart';
 import 'package:stream_pro/feature/video_details/presentation/controllers/related_videos_cubit/related_videos_cubit.dart';
 import 'package:stream_pro/feature/video_details/presentation/mapper/related_video_mapper.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class RelatedVideosTab extends StatelessWidget {
   final String videoId;
@@ -43,7 +44,7 @@ class RelatedVideosTab extends StatelessWidget {
               ),
               RelatedVideosLoaded() =>
                 state.videos.isEmpty
-                    ? const AppEmptySliver(message: 'No related videos found')
+                    ? AppEmptySliver(message: S.current.noRelatedVideosFound)
                     : SliverPadding(
                         padding: EdgeInsets.symmetric(
                           horizontal: 16.w,

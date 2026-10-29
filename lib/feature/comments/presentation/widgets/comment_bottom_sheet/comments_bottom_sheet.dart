@@ -8,6 +8,7 @@ import 'package:stream_pro/feature/comments/presentation/controllers/replies_cub
 import 'package:stream_pro/feature/comments/presentation/mappers/user_mapper.dart';
 import 'package:stream_pro/feature/comments/presentation/widgets/comment_bottom_sheet/comment_form_content.dart';
 import 'package:stream_pro/feature/profile/presentation/controller/profile_cubit/profile_cubit.dart';
+import 'package:stream_pro/generated/l10n.dart';
 
 class CommentBottomSheet extends StatefulWidget {
   final String videoId;
@@ -72,7 +73,7 @@ class _CommentBottomSheetState extends State<CommentBottomSheet> {
 
     final profile = context.read<ProfileCubit>().state.profile;
     if (profile == null) {
-      context.showErrorSnackBar(message: 'Profile is still loading.');
+      context.showErrorSnackBar(message: S.current.profileIsStillLoading);
       return;
     }
     final user = profile.toUserParams();
@@ -117,16 +118,16 @@ class _CommentBottomSheetState extends State<CommentBottomSheet> {
   @override
   Widget build(BuildContext context) {
     final title = widget.isEditing
-        ? 'Edit comment'
+        ? S.current.editComment
         : widget.isReplyAdd
-        ? 'Reply'
-        : 'Add a public comment';
+        ? S.current.reply
+        : S.current.addAPublicComment;
 
     final hint = widget.isEditing
-        ? 'Edit your comment…'
+        ? S.current.editYourComment
         : widget.isReplyAdd
-        ? 'Write a reply…'
-        : 'What are your thoughts?';
+        ? S.current.writeAReply
+        : S.current.whatAreYourThoughts;
 
     return CommentFormContent(
       title: title,
