@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:stream_pro/core/app_config/app_config_cubit.dart';
 import 'package:stream_pro/core/networking/api_service.dart';
 import 'package:stream_pro/core/notifications/notification_service.dart';
+import 'package:stream_pro/core/services/google_auth/google_auth_service.dart';
 import 'package:stream_pro/core/services/session/session_cache_registry.dart';
 import 'package:stream_pro/core/services/storage/local_storage_service.dart';
 import 'package:stream_pro/core/services/storage/secure_storage_service.dart';
@@ -17,6 +18,7 @@ class SessionCleanupServiceImpl implements SessionCleanupService {
   final SecureStorageService _secureStorage;
   final LocalStorageService _localStorage;
   final NotificationService _notificationService;
+  final GoogleAuthService _googleAuthService;
   final SessionCacheRegistry _sessionCacheRegistry;
 
   SessionCleanupServiceImpl({
@@ -24,11 +26,13 @@ class SessionCleanupServiceImpl implements SessionCleanupService {
     required SecureStorageService secureStorage,
     required LocalStorageService localStorage,
     required NotificationService notificationService,
+    required GoogleAuthService googleAuthService,
     required SessionCacheRegistry sessionCacheRegistry,
   }) : _apiService = apiService,
        _secureStorage = secureStorage,
        _localStorage = localStorage,
        _notificationService = notificationService,
+       _googleAuthService = googleAuthService,
        _sessionCacheRegistry = sessionCacheRegistry;
 
   @override
@@ -64,6 +68,7 @@ class SessionCleanupServiceImpl implements SessionCleanupService {
       _notificationService.cancelAllNotifications,
     );
     await _attempt('sign out firebase', FirebaseAuth.instance.signOut);
+    await _attempt('sign out google', _googleAuthService.signOut);
     await _attempt(
       'clear session caches',
       () async => _sessionCacheRegistry.clearAll(),
