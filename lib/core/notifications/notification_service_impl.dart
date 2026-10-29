@@ -55,7 +55,7 @@ class NotificationServiceImpl implements NotificationService {
     FirebaseMessaging.onMessageOpenedApp.listen(_handleNotificationTap);
 
     // 8. Terminated state (app opened from notification)
-    await _checkInitialMessage();
+    await _checkInitialNotification();
 
     AppDebuggingPrint.printDebug(
       '✅ NotificationService initialized successfully',
@@ -197,7 +197,23 @@ class NotificationServiceImpl implements NotificationService {
     }
   }
 
-  Future<void> _checkInitialMessage() async {
+  Future<void> _checkInitialNotification() async {
+    final launchDetails = await _localNotifications
+        .getNotificationAppLaunchDetails();
+
+    if (launchDetails?.didNotificationLaunchApp ?? false) {
+      AppDebuggingPrint.printDebug(
+        '📲 App launched from local notification: '
+        '${launchDetails?.notificationResponse?.payload}',
+      );
+
+      final response = launchDetails?.notificationResponse;
+      if (response != null) {
+        _onLocalNotificationTap(response);
+      }
+      return;
+    }
+
     final message = await _fcm.getInitialMessage();
     if (message != null) {
       _triggerTapCallback(_extractPayloadData(message));

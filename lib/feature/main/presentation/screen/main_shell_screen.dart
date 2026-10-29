@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stream_pro/core/di/di.dart';
 import 'package:stream_pro/core/routing/app_routes.dart';
+import 'package:stream_pro/core/routing/notification_router.dart';
 import 'package:stream_pro/core/utils/consts/image_path.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
@@ -34,6 +35,15 @@ class _MainShellScreenState extends State<MainShellScreen> {
 
   // Lazy tab cache
   final List<Widget?> _pages = List.filled(4, null);
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      NotificationRouter.openPendingNotifications();
+    });
+  }
 
   static const List<String> _selectedIcons = [
     ImagePath.homeActive,
