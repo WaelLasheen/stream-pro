@@ -18,6 +18,7 @@ import 'package:stream_pro/feature/profile/presentation/widgets/profile_edit_she
 import 'package:stream_pro/feature/profile/presentation/widgets/profile_header_card.dart';
 import 'package:stream_pro/feature/profile/presentation/widgets/profile_shimmer.dart';
 import 'package:stream_pro/feature/profile/presentation/widgets/profile_stat_card.dart';
+import 'package:stream_pro/feature/profile/presentation/widgets/settings_section.dart';
 import 'package:stream_pro/feature/sessions/presentation/widgets/sessions_view.dart';
 import 'package:stream_pro/generated/l10n.dart';
 
@@ -136,6 +137,9 @@ class ProfileScreen extends StatelessWidget {
                     ],
                   ),
                   24.verticalSpace,
+                  SettingsSection(),
+                  24.verticalSpace,
+
                   ProfileAccountActionsCard(
                     isLoggingOut: isLoggingOut,
                     isDeleting: isDeleting,

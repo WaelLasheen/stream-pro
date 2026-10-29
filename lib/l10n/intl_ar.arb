@@ -235,5 +235,13 @@
     "oopsError": "عذراً! حدث خطأ، يرجى المحاولة مرة أخرى",
     "googleSignInError": "فشل تسجيل الدخول بجوجل. يرجى المحاولة مرة أخرى.",
     "googleSignInConfigError": "لم يتم إعداد تسجيل الدخول بجوجل بشكل صحيح. يرجى التحقق من إعدادات التطبيق.",
-    "pathNotFound": "المسار غير موجود"
+    "pathNotFound": "المسار غير موجود",
+    "settings": "الإعدادات",
+    "language": "اللغة",
+    "theme": "المظهر",
+    "lightTheme": "فاتح",
+    "darkTheme": "داكن",
+    "systemTheme": "النظام",
+    "arabic": "العربية",
+    "english": "الانجليزية"
 }

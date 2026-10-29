@@ -235,5 +235,13 @@
     "oopsError": "Oops! There was an Error, Please try again",
     "googleSignInError": "Google sign-in failed. Please try again.",
     "googleSignInConfigError": "Google Sign-In is not configured correctly. Please check the app configuration.",
-    "pathNotFound": "Path Not Found"
+    "pathNotFound": "Path Not Found",
+    "settings": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "lightTheme": "Light",
+    "darkTheme": "Dark",
+    "systemTheme": "System",
+    "arabic":"Arabic",
+    "english":"english"
 }

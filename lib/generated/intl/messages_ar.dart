@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "appTitle": MessageLookupByLibrary.simpleMessage("StreamPro"),
     "appVersionLabel": MessageLookupByLibrary.simpleMessage("إصدار التطبيق"),
+    "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
     "badCertificate": MessageLookupByLibrary.simpleMessage("شهادة غير صالحة"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "categoryIsRequired": MessageLookupByLibrary.simpleMessage("الفئة مطلوبة"),
@@ -108,6 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "currentSessionsTitle": MessageLookupByLibrary.simpleMessage(
       "الجلسات الحالية",
     ),
+    "darkTheme": MessageLookupByLibrary.simpleMessage("داكن"),
     "daysAgo": MessageLookupByLibrary.simpleMessage(" يوم"),
     "delete": MessageLookupByLibrary.simpleMessage("حذف"),
     "deleteAccount": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
@@ -154,6 +156,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "edited": MessageLookupByLibrary.simpleMessage("تم التعديل"),
     "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
     "emailReq": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني مطلوب"),
+    "english": MessageLookupByLibrary.simpleMessage("الانجليزية"),
     "enterCatchyTitle": MessageLookupByLibrary.simpleMessage(
       "أدخل عنواناً جذاباً",
     ),
@@ -217,12 +220,14 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "ipAddressLabel": MessageLookupByLibrary.simpleMessage("عنوان IP"),
     "justNow": MessageLookupByLibrary.simpleMessage("الآن"),
+    "language": MessageLookupByLibrary.simpleMessage("اللغة"),
     "lastActive": MessageLookupByLibrary.simpleMessage("آخر نشاط"),
     "latestVideos": MessageLookupByLibrary.simpleMessage("أحدث الفيديوهات"),
     "library": MessageLookupByLibrary.simpleMessage("المكتبة"),
     "librarySubtitle": MessageLookupByLibrary.simpleMessage(
       "كل ما شاهدته، حفظته، وأحببته",
     ),
+    "lightTheme": MessageLookupByLibrary.simpleMessage("فاتح"),
     "likedVideos": MessageLookupByLibrary.simpleMessage(
       "الفيديوهات المعجب بها",
     ),
@@ -389,6 +394,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "seeAll": MessageLookupByLibrary.simpleMessage("عرض الكل"),
     "sendTimeout": MessageLookupByLibrary.simpleMessage("انتهت مهلة الإرسال"),
     "sessionsTab": MessageLookupByLibrary.simpleMessage("الجلسات"),
+    "settings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "share": MessageLookupByLibrary.simpleMessage("مشاركة"),
     "shareComingSoon": MessageLookupByLibrary.simpleMessage("المشاركة قريباً."),
     "shareLinkCopied": MessageLookupByLibrary.simpleMessage("تم نسخ الرابط!"),
@@ -403,6 +409,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "subscribe": MessageLookupByLibrary.simpleMessage("اشتراك"),
     "subscribed": MessageLookupByLibrary.simpleMessage("مشترك"),
     "subscribers": MessageLookupByLibrary.simpleMessage("مشترك"),
+    "systemTheme": MessageLookupByLibrary.simpleMessage("النظام"),
     "tags": MessageLookupByLibrary.simpleMessage("الوسوم"),
     "tapToSelectThumbnail": MessageLookupByLibrary.simpleMessage(
       "اضغط لاختيار صورة مصغرة",
@@ -416,6 +423,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "termsAndConditions": MessageLookupByLibrary.simpleMessage(
       "أوافق على الشروط والأحكام وسياسة الخصوصية",
     ),
+    "theme": MessageLookupByLibrary.simpleMessage("المظهر"),
     "thousand": MessageLookupByLibrary.simpleMessage(" ألف"),
     "thumbnailImageFormats": MessageLookupByLibrary.simpleMessage(
       "JPG, PNG (يُنصح بـ 16:9)",

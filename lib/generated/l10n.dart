@@ -2083,6 +2083,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message('Settings', name: 'settings', desc: '', args: []);
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message('Language', name: 'language', desc: '', args: []);
+  }
+
+  /// `Theme`
+  String get theme {
+    return Intl.message('Theme', name: 'theme', desc: '', args: []);
+  }
+
+  /// `Light`
+  String get lightTheme {
+    return Intl.message('Light', name: 'lightTheme', desc: '', args: []);
+  }
+
+  /// `Dark`
+  String get darkTheme {
+    return Intl.message('Dark', name: 'darkTheme', desc: '', args: []);
+  }
+
+  /// `System`
+  String get systemTheme {
+    return Intl.message('System', name: 'systemTheme', desc: '', args: []);
+  }
+
+  /// `Arabic`
+  String get arabic {
+    return Intl.message('Arabic', name: 'arabic', desc: '', args: []);
+  }
+
+  /// `english`
+  String get english {
+    return Intl.message('english', name: 'english', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

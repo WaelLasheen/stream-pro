@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "appTitle": MessageLookupByLibrary.simpleMessage("StreamPro"),
     "appVersionLabel": MessageLookupByLibrary.simpleMessage("App version"),
+    "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
     "badCertificate": MessageLookupByLibrary.simpleMessage("Bad Certificate"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "categoryIsRequired": MessageLookupByLibrary.simpleMessage(
@@ -106,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "currentSessionsTitle": MessageLookupByLibrary.simpleMessage(
       "Current Sessions",
     ),
+    "darkTheme": MessageLookupByLibrary.simpleMessage("Dark"),
     "daysAgo": MessageLookupByLibrary.simpleMessage("d ago"),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete Account"),
@@ -158,6 +160,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "edited": MessageLookupByLibrary.simpleMessage("edited"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "emailReq": MessageLookupByLibrary.simpleMessage("Email is required"),
+    "english": MessageLookupByLibrary.simpleMessage("english"),
     "enterCatchyTitle": MessageLookupByLibrary.simpleMessage(
       "Enter a catchy title",
     ),
@@ -223,12 +226,14 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "ipAddressLabel": MessageLookupByLibrary.simpleMessage("IP address"),
     "justNow": MessageLookupByLibrary.simpleMessage("Just now"),
+    "language": MessageLookupByLibrary.simpleMessage("Language"),
     "lastActive": MessageLookupByLibrary.simpleMessage("Last active"),
     "latestVideos": MessageLookupByLibrary.simpleMessage("Latest videos"),
     "library": MessageLookupByLibrary.simpleMessage("Library"),
     "librarySubtitle": MessageLookupByLibrary.simpleMessage(
       "Everything you watched, saved and loved",
     ),
+    "lightTheme": MessageLookupByLibrary.simpleMessage("Light"),
     "likedVideos": MessageLookupByLibrary.simpleMessage("Liked Videos"),
     "live": MessageLookupByLibrary.simpleMessage("LIVE"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
@@ -385,6 +390,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "seeAll": MessageLookupByLibrary.simpleMessage("See all"),
     "sendTimeout": MessageLookupByLibrary.simpleMessage("Send timeout"),
     "sessionsTab": MessageLookupByLibrary.simpleMessage("Sessions"),
+    "settings": MessageLookupByLibrary.simpleMessage("Settings"),
     "share": MessageLookupByLibrary.simpleMessage("Share"),
     "shareComingSoon": MessageLookupByLibrary.simpleMessage(
       "Share is coming soon.",
@@ -405,6 +411,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "subscribe": MessageLookupByLibrary.simpleMessage("Subscribe"),
     "subscribed": MessageLookupByLibrary.simpleMessage("Subscribed"),
     "subscribers": MessageLookupByLibrary.simpleMessage("subscribers"),
+    "systemTheme": MessageLookupByLibrary.simpleMessage("System"),
     "tags": MessageLookupByLibrary.simpleMessage("Tags"),
     "tapToSelectThumbnail": MessageLookupByLibrary.simpleMessage(
       "Tap to select thumbnail",
@@ -418,6 +425,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "termsAndConditions": MessageLookupByLibrary.simpleMessage(
       "Terms and conditions",
     ),
+    "theme": MessageLookupByLibrary.simpleMessage("Theme"),
     "thousand": MessageLookupByLibrary.simpleMessage("K"),
     "thumbnailImageFormats": MessageLookupByLibrary.simpleMessage(
       "JPG, PNG (16:9 recommended)",
