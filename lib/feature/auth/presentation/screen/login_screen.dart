@@ -6,18 +6,15 @@ import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
 import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
 import 'package:stream_pro/feature/auth/domain/use_case/login_use_case.dart';
 import 'package:stream_pro/feature/auth/presentation/controller/auth_cubit/auth_cubit.dart';
+import 'package:stream_pro/feature/auth/presentation/controllers/login_form_controller.dart';
+import 'package:stream_pro/feature/auth/presentation/widgets/auth_divider.dart';
 import 'package:stream_pro/feature/auth/presentation/widgets/auth_header.dart';
 import 'package:stream_pro/feature/auth/presentation/widgets/auth_scaffold.dart';
 import 'package:stream_pro/feature/auth/presentation/widgets/auth_switch_footer.dart';
+import 'package:stream_pro/feature/auth/presentation/widgets/google_sign_in_button.dart';
 import 'package:stream_pro/feature/auth/presentation/widgets/login/login_form.dart';
 import 'package:stream_pro/generated/l10n.dart';
 
-/// Login screen.
-///
-/// The [StatefulWidget] only owns the text controllers / focus nodes so it
-/// can dispose them; it never calls setState. All reactive state comes from:
-/// - [AuthCubit] (loading / success / failure) via BlocConsumer
-/// - a [ValueNotifier] inside the password field for visibility toggling
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -26,18 +23,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final FocusNode _emailFocusNode = FocusNode();
-  final FocusNode _passwordFocusNode = FocusNode();
+  final LoginFormController _formController = LoginFormController();
 
   @override
   void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    _emailFocusNode.dispose();
-    _passwordFocusNode.dispose();
+    _formController.dispose();
     super.dispose();
   }
 
@@ -45,7 +35,10 @@ class _LoginScreenState extends State<LoginScreen> {
     if (state is AuthFailure) {
       context.showErrorSnackBar(message: state.message);
     } else if (state is AuthSuccess) {
-      context.showSuccessSnackBar(message: S.current.loginSuccessfully);
+      final message = state.source == AuthSuccessSource.register
+          ? S.current.accountCreatedSuccessFully
+          : S.current.loginSuccessfully;
+      context.showSuccessSnackBar(message: message);
       context.navigateToAndClearStack(AppRoutes.main);
     }
   }
@@ -55,6 +48,12 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: _onAuthStateChanged,
       builder: (context, state) {
+        final isLoading = state is AuthLoading;
+        final isLocalLoading =
+            state is AuthLoading && state.source == AuthLoadingSource.local;
+        final isGoogleLoading =
+            state is AuthLoading && state.source == AuthLoadingSource.google;
+
         return AuthScaffold(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -65,15 +64,20 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 32.h),
               LoginForm(
-                formKey: _formKey,
-                emailController: _emailController,
-                passwordController: _passwordController,
-                emailFocusNode: _emailFocusNode,
-                passwordFocusNode: _passwordFocusNode,
-                isLoading: state is AuthLoading,
+                controller: _formController,
+                isLoading: isLocalLoading,
+                isEnabled: !isLoading,
                 onSubmit: (LoginParams params) {
                   context.read<AuthCubit>().login(params);
                 },
+              ),
+              SizedBox(height: 24.h),
+              const AuthDivider(),
+              SizedBox(height: 16.h),
+              GoogleSignInButton(
+                isLoading: isGoogleLoading,
+                isEnabled: !isLoading,
+                onPressed: () => context.read<AuthCubit>().loginWithGoogle(),
               ),
               SizedBox(height: 24.h),
               AuthSwitchFooter(

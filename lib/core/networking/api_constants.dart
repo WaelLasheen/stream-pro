@@ -4,8 +4,10 @@ class ApiConstants {
   // Auth
   static const String login = "auth/login";
   static const String register = "auth/register";
+  static const String google = "auth/google";
   static const String refresh = "auth/refresh";
   static const String logout = "auth/logout";
+  static const String logoutAllSessions = "auth/logout-all";
 
   // Home
   static const String feed = "feed";
@@ -85,6 +87,10 @@ class ApiConstants {
 
   // Profile
   static const String profileMe = "profile/me";
+
+  // Sessions
+  static const String sessions = "sessions";
+  static String revokeSession(String sessionId) => "sessions/$sessionId/revoke";
 
   // Search
   static const String videoSearch = "videos/search";

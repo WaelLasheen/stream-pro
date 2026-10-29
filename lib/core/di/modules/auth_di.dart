@@ -1,10 +1,13 @@
 import 'package:stream_pro/core/networking/api_service.dart';
 import 'package:stream_pro/core/notifications/notification_service.dart';
+import 'package:stream_pro/core/services/device/device_info_service.dart';
+import 'package:stream_pro/core/services/google_auth/google_auth_service.dart';
 import 'package:stream_pro/core/services/storage/token_storage_service.dart';
 import 'package:stream_pro/feature/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:stream_pro/feature/auth/data/datasources/auth_remote_datasource_impl.dart';
 import 'package:stream_pro/feature/auth/data/repositories/auth_repository_impl.dart';
 import 'package:stream_pro/feature/auth/domain/repository/auth_repository.dart';
+import 'package:stream_pro/feature/auth/domain/use_case/google_login_use_case.dart';
 import 'package:stream_pro/feature/auth/domain/use_case/login_use_case.dart';
 import 'package:stream_pro/feature/auth/domain/use_case/logout_use_case.dart';
 import 'package:stream_pro/feature/auth/domain/use_case/refresh_token_use_case.dart';
@@ -21,6 +24,8 @@ void setUpAuth() {
     () => AuthRepositoryImpl(
       remoteDataSource: getIt<AuthRemoteDataSource>(),
       notificationService: getIt<NotificationService>(),
+      deviceInfoService: getIt<DeviceInfoService>(),
+      googleAuthService: getIt<GoogleAuthService>(),
       tokenStorage: getIt<TokenStorageService>(),
     ),
   );
@@ -29,6 +34,9 @@ void setUpAuth() {
   );
   getIt.registerLazySingleton<RegisterUseCase>(
     () => RegisterUseCase(getIt<AuthRepository>()),
+  );
+  getIt.registerLazySingleton<GoogleLoginUseCase>(
+    () => GoogleLoginUseCase(repository: getIt<AuthRepository>()),
   );
   getIt.registerLazySingleton<RefreshTokenUseCase>(
     () => RefreshTokenUseCase(getIt<AuthRepository>()),
@@ -40,6 +48,7 @@ void setUpAuth() {
     () => AuthCubit(
       loginUseCase: getIt<LoginUseCase>(),
       registerUseCase: getIt<RegisterUseCase>(),
+      googleLoginUseCase: getIt<GoogleLoginUseCase>(),
     ),
   );
   getIt.registerFactory<SplashCubit>(

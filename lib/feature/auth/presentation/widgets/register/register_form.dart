@@ -1,118 +1,96 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stream_pro/core/shared/widgets/app_buttons/app_button.dart'; // Adjust path if needed
-import 'package:stream_pro/core/shared/widgets/app_fields/app_form_field.dart'; // Adjust path if needed
+import 'package:stream_pro/core/shared/widgets/app_buttons/app_button.dart';
+import 'package:stream_pro/core/shared/widgets/app_fields/app_form_field.dart';
 import 'package:stream_pro/feature/auth/domain/use_case/register_use_case.dart';
+import 'package:stream_pro/feature/auth/presentation/controllers/register_form_controller.dart';
 import 'package:stream_pro/feature/auth/presentation/widgets/auth_validators.dart';
 import 'package:stream_pro/feature/auth/presentation/widgets/register/terms_checkbox.dart';
 import 'package:stream_pro/generated/l10n.dart';
 
 class RegisterForm extends StatelessWidget {
-  final GlobalKey<FormState> formKey;
-  final TextEditingController nameController;
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
-  final TextEditingController confirmPasswordController;
-  final FocusNode nameFocusNode;
-  final FocusNode emailFocusNode;
-  final FocusNode passwordFocusNode;
-  final FocusNode confirmPasswordFocusNode;
-  final ValueNotifier<bool> termsAccepted;
+  final RegisterFormController controller;
   final bool isLoading;
+  final bool isEnabled;
   final ValueChanged<RegisterParams> onSubmit;
 
   const RegisterForm({
     super.key,
-    required this.formKey,
-    required this.nameController,
-    required this.emailController,
-    required this.passwordController,
-    required this.confirmPasswordController,
-    required this.nameFocusNode,
-    required this.emailFocusNode,
-    required this.passwordFocusNode,
-    required this.confirmPasswordFocusNode,
-    required this.termsAccepted,
+    required this.controller,
     required this.isLoading,
+    this.isEnabled = true,
     required this.onSubmit,
   });
 
   void _submit() {
-    if (formKey.currentState == null || !formKey.currentState!.validate()) {
-      return;
-    }
-    onSubmit(
-      RegisterParams(
-        name: nameController.text.trim(),
-        email: emailController.text.trim(),
-        password: passwordController.text,
-      ),
-    );
+    final params = controller.buildParams();
+    if (params == null) return;
+
+    onSubmit(params);
   }
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: formKey,
+      key: controller.formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppFormField(
-            controller: nameController,
-            focusNode: nameFocusNode,
+            controller: controller.nameController,
+            focusNode: controller.nameFocusNode,
             label: S.current.fullName,
             prefixIcon: Icons.person_outline_rounded,
             keyboardType: TextInputType.name,
             textInputAction: TextInputAction.next,
             validator: AuthValidators.validateName,
-            onFieldSubmitted: (_) => emailFocusNode.requestFocus(),
+            onFieldSubmitted: (_) => controller.focusEmail(),
           ),
           SizedBox(height: 16.h),
           AppFormField(
-            controller: emailController,
-            focusNode: emailFocusNode,
+            controller: controller.emailController,
+            focusNode: controller.emailFocusNode,
             label: S.current.email,
             prefixIcon: Icons.email_outlined,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             validator: AuthValidators.validateEmail,
-            onFieldSubmitted: (_) => passwordFocusNode.requestFocus(),
+            onFieldSubmitted: (_) => controller.focusPassword(),
           ),
           SizedBox(height: 16.h),
           AppFormField(
-            controller: passwordController,
-            focusNode: passwordFocusNode,
+            controller: controller.passwordController,
+            focusNode: controller.passwordFocusNode,
             label: S.current.password,
             isPassword: true,
             textInputAction: TextInputAction.next,
             validator: AuthValidators.validatePassword,
-            onFieldSubmitted: (_) => confirmPasswordFocusNode.requestFocus(),
+            onFieldSubmitted: (_) => controller.focusConfirmPassword(),
           ),
           SizedBox(height: 16.h),
           AppFormField(
-            controller: confirmPasswordController,
-            focusNode: confirmPasswordFocusNode,
+            controller: controller.confirmPasswordController,
+            focusNode: controller.confirmPasswordFocusNode,
             label: S.current.confirmPassword,
             isPassword: true,
             textInputAction: TextInputAction.done,
             validator: (value) => AuthValidators.validateConfirmPassword(
               value,
-              passwordController.text,
+              controller.passwordController.text,
             ),
             onFieldSubmitted: (_) => _submit(),
           ),
           SizedBox(height: 12.h),
-          TermsCheckbox(isChecked: termsAccepted),
+          TermsCheckbox(isChecked: controller.termsAccepted),
           SizedBox(height: 20.h),
           ValueListenableBuilder<bool>(
-            valueListenable: termsAccepted,
+            valueListenable: controller.termsAccepted,
             builder: (context, accepted, _) {
               return AppButton(
                 text: S.current.signup,
                 isLoading: isLoading,
-                // Note: Since AppButton doesn't have an `isEnabled` property,
-                // we pass a no-op function when terms are not accepted.
-                onPressed: accepted ? _submit : () {},
+                isEnabled: isEnabled && accepted,
+                onPressed: _submit,
                 height: 52.h,
                 borderRadius: 16.r,
               );

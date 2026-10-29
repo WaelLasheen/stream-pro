@@ -16,12 +16,8 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
-
-  // Logo: fade in quickly while zooming OUT (1.5 -> 1.0)
   late final Animation<double> _logoFade;
   late final Animation<double> _logoScale;
-
-  // Wordmark: fade in + slide up after the logo settles
   late final Animation<double> _textFade;
   late final Animation<Offset> _textSlide;
 
@@ -100,7 +96,6 @@ class _SplashScreenState extends State<SplashScreen>
               ),
               SizedBox(height: 28.h),
 
-              // Animated wordmark (fade in + slide up)
               AnimatedBuilder(
                 animation: _controller,
                 builder: (context, _) => Opacity(

@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:stream_pro/core/error/exceptions/gallery_exception.dart';
+import 'package:stream_pro/core/error/exceptions/google_auth_exception.dart';
 import 'package:stream_pro/core/error/exceptions/server_exception.dart';
 import 'package:stream_pro/core/error/failures/failure.dart';
 import 'package:stream_pro/core/error/failures/gallery_failure.dart';
+import 'package:stream_pro/core/error/failures/google_auth_failure.dart';
 import 'package:stream_pro/core/error/failures/server_failure.dart';
 import 'package:stream_pro/core/error/failures/unknown_failure.dart';
 
@@ -13,6 +15,8 @@ Future<Either<Failure, T>> safeCall<T>(Future<T> Function() action) async {
     return Left(ServerFailure(e.message, statusCode: e.statusCode));
   } on GalleryException catch (e) {
     return Left(GalleryFailure(e.message));
+  } on GoogleAuthException catch (e) {
+    return Left(GoogleAuthFailure(e.message, isCancelled: e.isCancelled));
   } catch (e) {
     return Left(UnknownFailure(e.toString()));
   }

@@ -1,64 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:stream_pro/core/shared/widgets/app_buttons/app_button.dart'; // Adjust path if needed
-import 'package:stream_pro/core/shared/widgets/app_fields/app_form_field.dart'; // Adjust path if needed
+import 'package:stream_pro/core/shared/widgets/app_buttons/app_button.dart';
+import 'package:stream_pro/core/shared/widgets/app_fields/app_form_field.dart';
 import 'package:stream_pro/feature/auth/domain/use_case/login_use_case.dart';
+import 'package:stream_pro/feature/auth/presentation/controllers/login_form_controller.dart';
 import 'package:stream_pro/feature/auth/presentation/widgets/auth_validators.dart';
 import 'package:stream_pro/generated/l10n.dart';
 
 class LoginForm extends StatelessWidget {
-  final GlobalKey<FormState> formKey;
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
-  final FocusNode emailFocusNode;
-  final FocusNode passwordFocusNode;
+  final LoginFormController controller;
   final bool isLoading;
+  final bool isEnabled;
   final ValueChanged<LoginParams> onSubmit;
 
   const LoginForm({
     super.key,
-    required this.formKey,
-    required this.emailController,
-    required this.passwordController,
-    required this.emailFocusNode,
-    required this.passwordFocusNode,
+    required this.controller,
     required this.isLoading,
+    this.isEnabled = true,
     required this.onSubmit,
   });
 
   void _submit() {
-    if (formKey.currentState == null || !formKey.currentState!.validate()) {
-      return;
-    }
-    onSubmit(
-      LoginParams(
-        email: emailController.text.trim(),
-        password: passwordController.text,
-      ),
-    );
+    final params = controller.buildParams();
+    if (params == null) return;
+
+    onSubmit(params);
   }
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: formKey,
+      key: controller.formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppFormField(
-            controller: emailController,
-            focusNode: emailFocusNode,
+            controller: controller.emailController,
+            focusNode: controller.emailFocusNode,
             label: S.current.email,
             prefixIcon: Icons.email_outlined,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             validator: AuthValidators.validateEmail,
-            onFieldSubmitted: (_) => passwordFocusNode.requestFocus(),
+            onFieldSubmitted: (_) => controller.focusPassword(),
           ),
           SizedBox(height: 16.h),
           AppFormField(
-            controller: passwordController,
-            focusNode: passwordFocusNode,
+            controller: controller.passwordController,
+            focusNode: controller.passwordFocusNode,
             label: S.current.password,
             isPassword: true,
             textInputAction: TextInputAction.done,
@@ -69,6 +59,7 @@ class LoginForm extends StatelessWidget {
           AppButton(
             text: S.current.login,
             isLoading: isLoading,
+            isEnabled: isEnabled,
             onPressed: _submit,
             height: 52.h,
             borderRadius: 16.r,
