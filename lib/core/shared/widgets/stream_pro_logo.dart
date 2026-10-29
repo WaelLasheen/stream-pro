@@ -1,10 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:stream_pro/core/utils/consts/image_path.dart';
 
-/// Logo built 100% from Flutter widgets (no image assets):
-/// a blue play triangle + a rotated wifi icon whose arcs are
-/// tinted with the brand gradient (teal -> purple -> pink).
 class StreamProLogo extends StatelessWidget {
   final double size;
 
@@ -20,42 +17,7 @@ class StreamProLogo extends StatelessWidget {
     return SizedBox(
       width: size * 1.8,
       height: size,
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          // ▶ Play triangle
-          Positioned(
-            left: 0,
-            top: 0,
-            bottom: 0,
-            child: Icon(Icons.play_arrow_rounded, color: playBlue, size: size),
-          ),
-
-          // Gradient waves: wifi icon rotated 90° so the arcs
-          // radiate to the right, tinted by a gradient shader.
-          Positioned(
-            right: 0,
-            top: 0,
-            bottom: 0,
-            child: ShaderMask(
-              blendMode: BlendMode.srcIn,
-              shaderCallback: (rect) => const LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [waveTeal, wavePurple, wavePink],
-              ).createShader(rect),
-              child: Transform.rotate(
-                angle: pi / 2,
-                child: Icon(
-                  Icons.wifi_rounded,
-                  color: Colors.white,
-                  size: size,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+      child: SvgPicture.asset(ImagePath.appLogo),
     );
   }
 }

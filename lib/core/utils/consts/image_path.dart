@@ -19,4 +19,6 @@ abstract class ImagePath {
   static const playCircle = '$_baseUrl/play_circle.svg';
   static const fullScreen = '$_baseUrl/full_screen.svg';
   static const quitFullScreen = '$_baseUrl/quit_full_screen.svg';
+  static const appLogo = '$_baseUrl/app_logo.svg';
+  static const google = '$_baseUrl/google.svg';
 }

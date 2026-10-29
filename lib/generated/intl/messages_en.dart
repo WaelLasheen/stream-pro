@@ -33,6 +33,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Account Created Successfully",
     ),
     "actionButton": MessageLookupByLibrary.simpleMessage("Create Account"),
+    "activeNow": MessageLookupByLibrary.simpleMessage("Active now"),
+    "activeSessionsLabel": MessageLookupByLibrary.simpleMessage(
+      "Active sessions",
+    ),
     "addCard": MessageLookupByLibrary.simpleMessage("Add card"),
     "addComment": MessageLookupByLibrary.simpleMessage("Add a comment..."),
     "addPaymentMethod": MessageLookupByLibrary.simpleMessage(
@@ -51,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Already have an account?",
     ),
     "appTitle": MessageLookupByLibrary.simpleMessage("Day I"),
+    "appVersionLabel": MessageLookupByLibrary.simpleMessage("App version"),
     "approved": MessageLookupByLibrary.simpleMessage("Approved"),
     "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
     "assignedTeam": MessageLookupByLibrary.simpleMessage(
@@ -93,6 +98,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "contactInfo": MessageLookupByLibrary.simpleMessage("Contact Information"),
     "contactUs": MessageLookupByLibrary.simpleMessage("Contact Us"),
     "continuePayment": MessageLookupByLibrary.simpleMessage("Continue Payment"),
+    "continueWithGoogle": MessageLookupByLibrary.simpleMessage(
+      "Continue with Google",
+    ),
     "createCompany": MessageLookupByLibrary.simpleMessage(
       "Create Your Company",
     ),
@@ -100,6 +108,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Start building your company\'s presence on the platform by entering its data.",
     ),
     "currentPassword": MessageLookupByLibrary.simpleMessage("Current Password"),
+    "currentSessionsSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Devices where your account is currently signed in.",
+    ),
+    "currentSessionsTitle": MessageLookupByLibrary.simpleMessage(
+      "Current sessions",
+    ),
     "dataUsage": MessageLookupByLibrary.simpleMessage("Data Usage"),
     "deactivateAccount": MessageLookupByLibrary.simpleMessage(
       "Deactivate Account",
@@ -134,6 +148,7 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "Enter a strong password to protect your account",
         ),
+    "expiresAtLabel": MessageLookupByLibrary.simpleMessage("Expires"),
     "expiresIn": MessageLookupByLibrary.simpleMessage("Expires in"),
     "expiryDate": MessageLookupByLibrary.simpleMessage("Expiry Date"),
     "faqs": MessageLookupByLibrary.simpleMessage("FAQs"),
@@ -151,6 +166,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "fullNameReq": MessageLookupByLibrary.simpleMessage(
       "Full Name is required",
     ),
+    "googleSignInConfigError": MessageLookupByLibrary.simpleMessage(
+      "Google Sign-In is not configured correctly. Please check the app configuration.",
+    ),
+    "googleSignInError": MessageLookupByLibrary.simpleMessage(
+      "Google sign-in failed. Please try again.",
+    ),
     "hello": MessageLookupByLibrary.simpleMessage("Hello World!"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
     "industry": MessageLookupByLibrary.simpleMessage("Industry"),
@@ -163,8 +184,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalidPassword": MessageLookupByLibrary.simpleMessage(
       "Password must be at least 8 characters",
     ),
+    "ipAddressLabel": MessageLookupByLibrary.simpleMessage("IP address"),
+    "lastActive": MessageLookupByLibrary.simpleMessage("Last active"),
     "late": MessageLookupByLibrary.simpleMessage("Late"),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
+    "loginMethodApple": MessageLookupByLibrary.simpleMessage("Apple"),
+    "loginMethodGoogle": MessageLookupByLibrary.simpleMessage("Google"),
+    "loginMethodLocal": MessageLookupByLibrary.simpleMessage(
+      "Email & password",
+    ),
     "loginSubtitle": MessageLookupByLibrary.simpleMessage(
       "Login to manage book fairs and cultural events",
     ),
@@ -172,8 +200,24 @@ class MessageLookup extends MessageLookupByLibrary {
       "Login Successfully",
     ),
     "logout": MessageLookupByLibrary.simpleMessage("Logout"),
+    "logoutAllConfirmMessage": MessageLookupByLibrary.simpleMessage(
+      "This will sign out every device, including this one. You will need to sign in again.",
+    ),
+    "logoutAllConfirmTitle": MessageLookupByLibrary.simpleMessage(
+      "Log out all devices?",
+    ),
+    "logoutAllDevices": MessageLookupByLibrary.simpleMessage(
+      "Log out all devices",
+    ),
     "logoutConfirm": MessageLookupByLibrary.simpleMessage(
       "Are you sure of logout?",
+    ),
+    "logoutSession": MessageLookupByLibrary.simpleMessage("Log out"),
+    "logoutSessionConfirmMessage": MessageLookupByLibrary.simpleMessage(
+      "This device will need to sign in again to access your account.",
+    ),
+    "logoutSessionConfirmTitle": MessageLookupByLibrary.simpleMessage(
+      "Log out this session?",
     ),
     "managerOnly": MessageLookupByLibrary.simpleMessage("Manager only"),
     "markevaDescription": MessageLookupByLibrary.simpleMessage(
@@ -186,6 +230,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "memberSince": MessageLookupByLibrary.simpleMessage("Member since"),
     "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
     "next": MessageLookupByLibrary.simpleMessage("next"),
+    "noActiveSessions": MessageLookupByLibrary.simpleMessage(
+      "No active sessions",
+    ),
+    "noActiveSessionsMessage": MessageLookupByLibrary.simpleMessage(
+      "Your account is not signed in on any other devices.",
+    ),
     "noCommentsYet": MessageLookupByLibrary.simpleMessage(
       "No comments yet. Be the first!",
     ),
@@ -293,6 +343,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sendTimeout": MessageLookupByLibrary.simpleMessage("Send timeout"),
     "serviceRegister": MessageLookupByLibrary.simpleMessage("Service Register"),
     "services": MessageLookupByLibrary.simpleMessage("Services"),
+    "sessionsTab": MessageLookupByLibrary.simpleMessage("Sessions"),
     "setDefaultPayment": MessageLookupByLibrary.simpleMessage(
       "Set as default payment card",
     ),
@@ -304,6 +355,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "Share order data with assigned service team only",
     ),
     "showDetails": MessageLookupByLibrary.simpleMessage("Show details"),
+    "signInMethod": MessageLookupByLibrary.simpleMessage("Sign-in method"),
+    "signedInAt": MessageLookupByLibrary.simpleMessage("Signed in"),
     "signup": MessageLookupByLibrary.simpleMessage("Create New Account"),
     "signupSubtitle": MessageLookupByLibrary.simpleMessage(
       "Create your account to manage your marketing campaigns smartly within minutes",
@@ -325,6 +378,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "unexpectedError": MessageLookupByLibrary.simpleMessage(
       "Unexpected Error, Please try again!",
     ),
+    "unknownDevice": MessageLookupByLibrary.simpleMessage("Unknown device"),
+    "unknownLocation": MessageLookupByLibrary.simpleMessage("Unknown location"),
     "userMessage": MessageLookupByLibrary.simpleMessage("User Message"),
     "verifyCode": MessageLookupByLibrary.simpleMessage("Verify Code"),
     "videoLoadError": MessageLookupByLibrary.simpleMessage(

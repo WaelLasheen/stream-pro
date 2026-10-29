@@ -33,6 +33,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "تم إنشاء الحساب بنجاح",
     ),
     "actionButton": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
+    "activeNow": MessageLookupByLibrary.simpleMessage("نشط الآن"),
+    "activeSessionsLabel": MessageLookupByLibrary.simpleMessage(
+      "الجلسات النشطة",
+    ),
     "addCard": MessageLookupByLibrary.simpleMessage("اضافة بطاقة"),
     "addComment": MessageLookupByLibrary.simpleMessage("أضف تعليقًا..."),
     "addPaymentMethod": MessageLookupByLibrary.simpleMessage("إضافة وسيلة دفع"),
@@ -51,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "لديك حساب بالفعل؟",
     ),
     "appTitle": MessageLookupByLibrary.simpleMessage("يومي"),
+    "appVersionLabel": MessageLookupByLibrary.simpleMessage("إصدار التطبيق"),
     "approved": MessageLookupByLibrary.simpleMessage("تمت الموافقة"),
     "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
     "assignedTeam": MessageLookupByLibrary.simpleMessage("فريق الخدمة المعين"),
@@ -91,12 +96,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "contactInfo": MessageLookupByLibrary.simpleMessage("معلومات التواصل"),
     "contactUs": MessageLookupByLibrary.simpleMessage("تواصل معنا"),
     "continuePayment": MessageLookupByLibrary.simpleMessage("متابعة الدفع"),
+    "continueWithGoogle": MessageLookupByLibrary.simpleMessage(
+      "المتابعة باستخدام جوجل",
+    ),
     "createCompany": MessageLookupByLibrary.simpleMessage("إنشاء شركتك"),
     "createCompanySubtitle": MessageLookupByLibrary.simpleMessage(
       "ابدأ ببناء حضور شركتك على المنصة من خلال إدخال بياناتها .",
     ),
     "currentPassword": MessageLookupByLibrary.simpleMessage(
       "كلمة المرور الحالية",
+    ),
+    "currentSessionsSubtitle": MessageLookupByLibrary.simpleMessage(
+      "الأجهزة التي تم تسجيل الدخول إلى حسابك منها حاليًا.",
+    ),
+    "currentSessionsTitle": MessageLookupByLibrary.simpleMessage(
+      "الجلسات الحالية",
     ),
     "dataUsage": MessageLookupByLibrary.simpleMessage("استخدام البيانات"),
     "deactivateAccount": MessageLookupByLibrary.simpleMessage("تعطيل الحساب"),
@@ -132,6 +146,7 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "أدخل كلمة مرور قوية لحماية حسابك",
         ),
+    "expiresAtLabel": MessageLookupByLibrary.simpleMessage("تنتهي في"),
     "expiresIn": MessageLookupByLibrary.simpleMessage("تنتهي في"),
     "expiryDate": MessageLookupByLibrary.simpleMessage("تاريخ الإنتهاء"),
     "faqs": MessageLookupByLibrary.simpleMessage("الأسئلة الشائعة"),
@@ -149,6 +164,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "fullName": MessageLookupByLibrary.simpleMessage("الأسم كامل"),
     "fullNameReq": MessageLookupByLibrary.simpleMessage("الاسم الكامل مطلوب"),
+    "googleSignInConfigError": MessageLookupByLibrary.simpleMessage(
+      "لم يتم إعداد تسجيل الدخول باستخدام جوجل بشكل صحيح. يرجى التحقق من إعدادات التطبيق.",
+    ),
+    "googleSignInError": MessageLookupByLibrary.simpleMessage(
+      "تعذر تسجيل الدخول باستخدام جوجل. يرجى المحاولة مرة أخرى.",
+    ),
     "hello": MessageLookupByLibrary.simpleMessage("مرحباً بالعالم!"),
     "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "industry": MessageLookupByLibrary.simpleMessage("مجال العمل"),
@@ -161,8 +182,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalidPassword": MessageLookupByLibrary.simpleMessage(
       "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
     ),
+    "ipAddressLabel": MessageLookupByLibrary.simpleMessage("عنوان IP"),
+    "lastActive": MessageLookupByLibrary.simpleMessage("آخر نشاط"),
     "late": MessageLookupByLibrary.simpleMessage("متأخر"),
     "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+    "loginMethodApple": MessageLookupByLibrary.simpleMessage("آبل"),
+    "loginMethodGoogle": MessageLookupByLibrary.simpleMessage("جوجل"),
+    "loginMethodLocal": MessageLookupByLibrary.simpleMessage(
+      "البريد الإلكتروني وكلمة المرور",
+    ),
     "loginSubtitle": MessageLookupByLibrary.simpleMessage(
       "سجل الدخول لإدارة معارض الكتب والفعاليات الثقافية",
     ),
@@ -170,8 +198,24 @@ class MessageLookup extends MessageLookupByLibrary {
       "تم تسجيل الدخول بنجاح",
     ),
     "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
+    "logoutAllConfirmMessage": MessageLookupByLibrary.simpleMessage(
+      "سيؤدي هذا إلى تسجيل الخروج من كل جهاز، بما في ذلك هذا الجهاز. ستحتاج إلى تسجيل الدخول مرة أخرى.",
+    ),
+    "logoutAllConfirmTitle": MessageLookupByLibrary.simpleMessage(
+      "تسجيل الخروج من جميع الأجهزة؟",
+    ),
+    "logoutAllDevices": MessageLookupByLibrary.simpleMessage(
+      "تسجيل الخروج من جميع الأجهزة",
+    ),
     "logoutConfirm": MessageLookupByLibrary.simpleMessage(
       "هل أنت متأكد من تسجيل الخروج؟",
+    ),
+    "logoutSession": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
+    "logoutSessionConfirmMessage": MessageLookupByLibrary.simpleMessage(
+      "سيحتاج هذا الجهاز إلى تسجيل الدخول مرة أخرى للوصول إلى حسابك.",
+    ),
+    "logoutSessionConfirmTitle": MessageLookupByLibrary.simpleMessage(
+      "تسجيل الخروج من هذه الجلسة؟",
     ),
     "managerOnly": MessageLookupByLibrary.simpleMessage("المدير فقط"),
     "markevaDescription": MessageLookupByLibrary.simpleMessage(
@@ -184,6 +228,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "memberSince": MessageLookupByLibrary.simpleMessage("عضو منذ"),
     "newPassword": MessageLookupByLibrary.simpleMessage("كلمة المرور الجديدة"),
     "next": MessageLookupByLibrary.simpleMessage("التالي"),
+    "noActiveSessions": MessageLookupByLibrary.simpleMessage(
+      "لا توجد جلسات نشطة",
+    ),
+    "noActiveSessionsMessage": MessageLookupByLibrary.simpleMessage(
+      "حسابك غير مسجل الدخول على أي أجهزة أخرى.",
+    ),
     "noCommentsYet": MessageLookupByLibrary.simpleMessage(
       "لا توجد تعليقات بعد. كن أول من يعلّق!",
     ),
@@ -287,6 +337,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sendTimeout": MessageLookupByLibrary.simpleMessage("انتهى وقت الإرسال"),
     "serviceRegister": MessageLookupByLibrary.simpleMessage("سجل الخدمات"),
     "services": MessageLookupByLibrary.simpleMessage("الخدمات"),
+    "sessionsTab": MessageLookupByLibrary.simpleMessage("الجلسات"),
     "setDefaultPayment": MessageLookupByLibrary.simpleMessage(
       "تعيين كبطاقة الدفع الافتراضية",
     ),
@@ -298,6 +349,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "مشاركة بيانات الطلب مع فريق الخدمة المعين فقط",
     ),
     "showDetails": MessageLookupByLibrary.simpleMessage("عرض التفاصيل"),
+    "signInMethod": MessageLookupByLibrary.simpleMessage("طريقة تسجيل الدخول"),
+    "signedInAt": MessageLookupByLibrary.simpleMessage("تم تسجيل الدخول"),
     "signup": MessageLookupByLibrary.simpleMessage("إنشاء حساب جديد"),
     "signupSubtitle": MessageLookupByLibrary.simpleMessage(
       "أنشئ حسابك لادارة حملاتك التسويقية بذكاء خلال دقائق",
@@ -319,6 +372,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "unexpectedError": MessageLookupByLibrary.simpleMessage(
       "خطأ غير متوقع، يرجى المحاولة مرة أخرى!",
     ),
+    "unknownDevice": MessageLookupByLibrary.simpleMessage("جهاز غير معروف"),
+    "unknownLocation": MessageLookupByLibrary.simpleMessage("موقع غير معروف"),
     "userMessage": MessageLookupByLibrary.simpleMessage("رسالة المستخدم"),
     "verifyCode": MessageLookupByLibrary.simpleMessage("تأكيد رمز التحقق"),
     "videoLoadError": MessageLookupByLibrary.simpleMessage(

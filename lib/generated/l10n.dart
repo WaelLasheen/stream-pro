@@ -269,6 +269,36 @@ class S {
     return Intl.message('OR', name: 'or', desc: '', args: []);
   }
 
+  /// `Continue with Google`
+  String get continueWithGoogle {
+    return Intl.message(
+      'Continue with Google',
+      name: 'continueWithGoogle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Google sign-in failed. Please try again.`
+  String get googleSignInError {
+    return Intl.message(
+      'Google sign-in failed. Please try again.',
+      name: 'googleSignInError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Google Sign-In is not configured correctly. Please check the app configuration.`
+  String get googleSignInConfigError {
+    return Intl.message(
+      'Google Sign-In is not configured correctly. Please check the app configuration.',
+      name: 'googleSignInConfigError',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Don't have an account?`
   String get dontHaveAccount {
     return Intl.message(
@@ -1524,6 +1554,211 @@ class S {
     return Intl.message(
       'This permanently deletes your account and all associated data. This action cannot be undone.',
       name: 'deleteAccountMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sessions`
+  String get sessionsTab {
+    return Intl.message('Sessions', name: 'sessionsTab', desc: '', args: []);
+  }
+
+  /// `Current sessions`
+  String get currentSessionsTitle {
+    return Intl.message(
+      'Current sessions',
+      name: 'currentSessionsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Devices where your account is currently signed in.`
+  String get currentSessionsSubtitle {
+    return Intl.message(
+      'Devices where your account is currently signed in.',
+      name: 'currentSessionsSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Active sessions`
+  String get activeSessionsLabel {
+    return Intl.message(
+      'Active sessions',
+      name: 'activeSessionsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No active sessions`
+  String get noActiveSessions {
+    return Intl.message(
+      'No active sessions',
+      name: 'noActiveSessions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your account is not signed in on any other devices.`
+  String get noActiveSessionsMessage {
+    return Intl.message(
+      'Your account is not signed in on any other devices.',
+      name: 'noActiveSessionsMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log out all devices`
+  String get logoutAllDevices {
+    return Intl.message(
+      'Log out all devices',
+      name: 'logoutAllDevices',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log out all devices?`
+  String get logoutAllConfirmTitle {
+    return Intl.message(
+      'Log out all devices?',
+      name: 'logoutAllConfirmTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This will sign out every device, including this one. You will need to sign in again.`
+  String get logoutAllConfirmMessage {
+    return Intl.message(
+      'This will sign out every device, including this one. You will need to sign in again.',
+      name: 'logoutAllConfirmMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log out`
+  String get logoutSession {
+    return Intl.message('Log out', name: 'logoutSession', desc: '', args: []);
+  }
+
+  /// `Log out this session?`
+  String get logoutSessionConfirmTitle {
+    return Intl.message(
+      'Log out this session?',
+      name: 'logoutSessionConfirmTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This device will need to sign in again to access your account.`
+  String get logoutSessionConfirmMessage {
+    return Intl.message(
+      'This device will need to sign in again to access your account.',
+      name: 'logoutSessionConfirmMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last active`
+  String get lastActive {
+    return Intl.message('Last active', name: 'lastActive', desc: '', args: []);
+  }
+
+  /// `Active now`
+  String get activeNow {
+    return Intl.message('Active now', name: 'activeNow', desc: '', args: []);
+  }
+
+  /// `Signed in`
+  String get signedInAt {
+    return Intl.message('Signed in', name: 'signedInAt', desc: '', args: []);
+  }
+
+  /// `Expires`
+  String get expiresAtLabel {
+    return Intl.message('Expires', name: 'expiresAtLabel', desc: '', args: []);
+  }
+
+  /// `IP address`
+  String get ipAddressLabel {
+    return Intl.message(
+      'IP address',
+      name: 'ipAddressLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign-in method`
+  String get signInMethod {
+    return Intl.message(
+      'Sign-in method',
+      name: 'signInMethod',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `App version`
+  String get appVersionLabel {
+    return Intl.message(
+      'App version',
+      name: 'appVersionLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email & password`
+  String get loginMethodLocal {
+    return Intl.message(
+      'Email & password',
+      name: 'loginMethodLocal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Google`
+  String get loginMethodGoogle {
+    return Intl.message(
+      'Google',
+      name: 'loginMethodGoogle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apple`
+  String get loginMethodApple {
+    return Intl.message('Apple', name: 'loginMethodApple', desc: '', args: []);
+  }
+
+  /// `Unknown device`
+  String get unknownDevice {
+    return Intl.message(
+      'Unknown device',
+      name: 'unknownDevice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknown location`
+  String get unknownLocation {
+    return Intl.message(
+      'Unknown location',
+      name: 'unknownLocation',
       desc: '',
       args: [],
     );
