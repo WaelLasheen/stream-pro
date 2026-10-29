@@ -25,10 +25,12 @@ extension FormatCount on int {
 extension FormatTime on DateTime {
   String timeAgo() {
     final diff = DateTime.now().difference(this);
-    if (diff.inDays > 365)
+    if (diff.inDays > 365) {
       return '${(diff.inDays / 365).floor()}${S.current.yearsAgo}';
-    if (diff.inDays > 30)
+    }
+    if (diff.inDays > 30) {
       return '${(diff.inDays / 30).floor()}${S.current.monthsAgo}';
+    }
     if (diff.inDays > 0) return '${diff.inDays}${S.current.daysAgo}';
     if (diff.inHours > 0) return '${diff.inHours}${S.current.hoursAgo}';
     if (diff.inMinutes > 0) return '${diff.inMinutes}${S.current.minutesAgo}';
