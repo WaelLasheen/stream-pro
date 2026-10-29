@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_pro/core/routing/app_routes.dart';
 import 'package:stream_pro/core/shared/widgets/app_error_widget/app_error_sliver.dart';
 import 'package:stream_pro/core/shared/widgets/channel/common_slivers.dart';
 import 'package:stream_pro/core/shared/widgets/empty_view/app_empty_sliver.dart';
@@ -8,6 +9,7 @@ import 'package:stream_pro/core/shared/widgets/load_more_listener.dart';
 import 'package:stream_pro/core/shared/widgets/shimmer_list/sliver_shimmer_list.dart';
 import 'package:stream_pro/core/shared/widgets/subscriber_card/subscriber_card_shimmer.dart';
 import 'package:stream_pro/core/shared/widgets/subscriber_card/subscriber_card_widget.dart';
+import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
 import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/subscribers_cubit/subscribers_cubit.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/subscribers_cubit/subscribers_state.dart';
@@ -74,7 +76,10 @@ class SubscribersTab extends StatelessWidget {
                         final subscriber = items[index];
                         return SubscriberCardWidget(
                           subscriber: subscriber.toSubscriberCardData(),
-                          onTap: () {},
+                          onTap: () => context.navigateTo(
+                            AppRoutes.channelDetails,
+                            arguments: subscriber.userChannelId,
+                          ),
                         );
                       }, childCount: items.length),
                     ),

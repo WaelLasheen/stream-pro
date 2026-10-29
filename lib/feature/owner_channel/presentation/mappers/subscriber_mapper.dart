@@ -6,6 +6,7 @@ extension SubscriberMapper on SubscriberEntity {
     return SubscriberCardData(
       name: name,
       description: email,
+      avatarUrl: avatarUrl,
       subscribedAt: createdAt,
     );
   }
