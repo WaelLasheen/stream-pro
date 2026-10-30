@@ -6,6 +6,7 @@ import 'package:stream_pro/core/routing/observers/app_route_observer.dart';
 import 'package:stream_pro/core/shared/widgets/video_player/controller/video_player_cubit.dart';
 import 'package:stream_pro/core/shared/widgets/video_player/controller/video_player_state.dart';
 import 'package:stream_pro/core/shared/widgets/video_player/video_player_data.dart';
+import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/generated/l10n.dart';
 import 'package:video_player/video_player.dart';
 
@@ -151,7 +152,7 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> with RouteAware {
             child: AspectRatio(
               aspectRatio: aspectRatio,
               child: Container(
-                color: Colors.black,
+                color: context.appTheme.textPrimary,
                 child: _buildContent(state),
               ),
             ),
@@ -186,19 +187,22 @@ class _AppVideoPlayerState extends State<AppVideoPlayer> with RouteAware {
   }
 
   Widget _buildLoadingThumbnail(String? posterUrl) {
+    final appTheme = context.appTheme;
     if (posterUrl != null && posterUrl.isNotEmpty) {
       return Stack(
         fit: StackFit.expand,
         children: [
-          Container(color: Colors.black.withValues(alpha: 0.4)),
-          const Center(child: CircularProgressIndicator(color: Colors.white)),
+          Container(color: appTheme.textPrimary.withValues(alpha: 0.4)),
+          Center(
+            child: CircularProgressIndicator(color: appTheme.surfaceColor),
+          ),
         ],
       );
     }
     return Container(
-      color: Colors.black,
-      child: const Center(
-        child: CircularProgressIndicator(color: Colors.white),
+      color: appTheme.textPrimary,
+      child: Center(
+        child: CircularProgressIndicator(color: appTheme.surfaceColor),
       ),
     );
   }

@@ -51,7 +51,7 @@ class EditVideoShimmer extends StatelessWidget {
           AspectRatio(
             aspectRatio: 16 / 9,
             child: Container(
-              color: isDark ? const Color(0xFF2A2A2A) : const Color(0xFFE2E8F0),
+              color: isDark ? appTheme.surfaceDark : appTheme.borderLight,
             ),
           ),
           28.verticalSpace,
@@ -65,9 +65,7 @@ class EditVideoShimmer extends StatelessWidget {
                   width: 120.w,
                   height: 68.h,
                   decoration: BoxDecoration(
-                    color: isDark
-                        ? const Color(0xFF2A2A2A)
-                        : const Color(0xFFE2E8F0),
+                    color: isDark ? appTheme.surfaceDark : appTheme.borderLight,
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                 ),
@@ -78,8 +76,8 @@ class EditVideoShimmer extends StatelessWidget {
                     height: 44.h,
                     decoration: BoxDecoration(
                       color: isDark
-                          ? const Color(0xFF2A2A2A)
-                          : const Color(0xFFE2E8F0),
+                          ? appTheme.surfaceDark
+                          : appTheme.borderLight,
                       borderRadius: BorderRadius.circular(8.r),
                     ),
                   ),
@@ -94,9 +92,7 @@ class EditVideoShimmer extends StatelessWidget {
             child: Container(
               height: 70.h,
               decoration: BoxDecoration(
-                color: isDark
-                    ? const Color(0xFF2A2A2A)
-                    : const Color(0xFFE2E8F0),
+                color: isDark ? appTheme.surfaceDark : appTheme.borderLight,
                 borderRadius: BorderRadius.circular(12.r),
               ),
             ),
@@ -111,17 +107,13 @@ class EditVideoShimmer extends StatelessWidget {
                 Container(
                   width: 100.w,
                   height: 14.h,
-                  color: isDark
-                      ? const Color(0xFF2A2A2A)
-                      : const Color(0xFFE2E8F0),
+                  color: isDark ? appTheme.surfaceDark : appTheme.borderLight,
                 ),
                 SizedBox(height: 8.h),
                 Container(
                   height: 52.h,
                   decoration: BoxDecoration(
-                    color: isDark
-                        ? const Color(0xFF2A2A2A)
-                        : const Color(0xFFE2E8F0),
+                    color: isDark ? appTheme.surfaceDark : appTheme.borderLight,
                     borderRadius: BorderRadius.circular(16.r),
                   ),
                 ),
@@ -138,17 +130,13 @@ class EditVideoShimmer extends StatelessWidget {
                 Container(
                   width: 120.w,
                   height: 14.h,
-                  color: isDark
-                      ? const Color(0xFF2A2A2A)
-                      : const Color(0xFFE2E8F0),
+                  color: isDark ? appTheme.surfaceDark : appTheme.borderLight,
                 ),
                 SizedBox(height: 8.h),
                 Container(
                   height: 120.h,
                   decoration: BoxDecoration(
-                    color: isDark
-                        ? const Color(0xFF2A2A2A)
-                        : const Color(0xFFE2E8F0),
+                    color: isDark ? appTheme.surfaceDark : appTheme.borderLight,
                     borderRadius: BorderRadius.circular(16.r),
                   ),
                 ),
@@ -165,17 +153,13 @@ class EditVideoShimmer extends StatelessWidget {
                 Container(
                   width: 80.w,
                   height: 14.h,
-                  color: isDark
-                      ? const Color(0xFF2A2A2A)
-                      : const Color(0xFFE2E8F0),
+                  color: isDark ? appTheme.surfaceDark : appTheme.borderLight,
                 ),
                 SizedBox(height: 8.h),
                 Container(
                   height: 52.h,
                   decoration: BoxDecoration(
-                    color: isDark
-                        ? const Color(0xFF2A2A2A)
-                        : const Color(0xFFE2E8F0),
+                    color: isDark ? appTheme.surfaceDark : appTheme.borderLight,
                     borderRadius: BorderRadius.circular(16.r),
                   ),
                 ),
@@ -192,17 +176,13 @@ class EditVideoShimmer extends StatelessWidget {
                 Container(
                   width: 50.w,
                   height: 14.h,
-                  color: isDark
-                      ? const Color(0xFF2A2A2A)
-                      : const Color(0xFFE2E8F0),
+                  color: isDark ? appTheme.surfaceDark : appTheme.borderLight,
                 ),
                 SizedBox(height: 8.h),
                 Container(
                   height: 52.h,
                   decoration: BoxDecoration(
-                    color: isDark
-                        ? const Color(0xFF2A2A2A)
-                        : const Color(0xFFE2E8F0),
+                    color: isDark ? appTheme.surfaceDark : appTheme.borderLight,
                     borderRadius: BorderRadius.circular(16.r),
                   ),
                 ),
@@ -216,9 +196,7 @@ class EditVideoShimmer extends StatelessWidget {
             child: Container(
               height: 48.h,
               decoration: BoxDecoration(
-                color: isDark
-                    ? const Color(0xFF2A2A2A)
-                    : const Color(0xFFE2E8F0),
+                color: isDark ? appTheme.surfaceDark : appTheme.borderLight,
                 borderRadius: BorderRadius.circular(10.r),
               ),
             ),

@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:equatable/equatable.dart';
+import 'package:stream_pro/core/theme/app_themes.dart';
 
 class AppConfigState extends Equatable {
   final Locale locale;
-  final ThemeMode themeMode;
+  final AppThemeType currentTheme;
 
-  const AppConfigState({required this.locale, required this.themeMode});
+  const AppConfigState({
+    required this.locale,
+    this.currentTheme = AppThemeType.light,
+  });
 
-  AppConfigState copyWith({Locale? locale, ThemeMode? themeMode}) {
+  AppConfigState copyWith({Locale? locale, AppThemeType? currentTheme}) {
     return AppConfigState(
       locale: locale ?? this.locale,
-      themeMode: themeMode ?? this.themeMode,
+      currentTheme: currentTheme ?? this.currentTheme,
     );
   }
 
   @override
-  List<Object?> get props => [locale, themeMode];
+  List<Object?> get props => [locale, currentTheme];
 }

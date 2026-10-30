@@ -208,6 +208,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "googleSignInError": MessageLookupByLibrary.simpleMessage(
       "Google sign-in failed. Please try again.",
     ),
+    "greenTheme": MessageLookupByLibrary.simpleMessage("Fresh Green"),
     "hideReplies": MessageLookupByLibrary.simpleMessage("Hide replies"),
     "history": MessageLookupByLibrary.simpleMessage("History"),
     "historyEmptyMessage": MessageLookupByLibrary.simpleMessage(
@@ -273,6 +274,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "memberSince": MessageLookupByLibrary.simpleMessage("Member since"),
     "million": MessageLookupByLibrary.simpleMessage("M"),
     "minutesAgo": MessageLookupByLibrary.simpleMessage("m ago"),
+    "modernTheme": MessageLookupByLibrary.simpleMessage("Modern"),
     "monthsAgo": MessageLookupByLibrary.simpleMessage("mo ago"),
     "myPlaylistHint": MessageLookupByLibrary.simpleMessage("My playlist"),
     "name": MessageLookupByLibrary.simpleMessage("Name"),
@@ -366,6 +368,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "public": MessageLookupByLibrary.simpleMessage("Public"),
     "published": MessageLookupByLibrary.simpleMessage("Published"),
     "receiveTimeout": MessageLookupByLibrary.simpleMessage("Receive timeout"),
+    "redTheme": MessageLookupByLibrary.simpleMessage("Crimson Red"),
     "registerNow": MessageLookupByLibrary.simpleMessage("Register Now"),
     "relatedVideos": MessageLookupByLibrary.simpleMessage("Related Videos"),
     "removeFromWatchLater": MessageLookupByLibrary.simpleMessage(

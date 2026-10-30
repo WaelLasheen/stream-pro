@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/core/utils/extensions/size_extension.dart';
 
 class AppButton extends StatelessWidget {
@@ -50,7 +51,7 @@ class AppButton extends StatelessWidget {
           width: 24.h,
           child: CircularProgressIndicator(
             color: isPrimary
-                ? (textColor ?? Colors.white)
+                ? (textColor ?? context.appTheme.surfaceColor)
                 : Theme.of(context).primaryColor,
             strokeWidth: 2.w,
           ),
@@ -90,7 +91,7 @@ class AppButton extends StatelessWidget {
               fontSize: fontSize?.sp ?? 16.sp,
               fontWeight: FontWeight.w500,
             ),
-            foregroundColor: textColor ?? Colors.white,
+            foregroundColor: textColor ?? context.appTheme.surfaceColor,
             elevation: backgroundColor != null ? 0 : null,
             padding: EdgeInsets.zero,
             disabledBackgroundColor: backgroundColor != null

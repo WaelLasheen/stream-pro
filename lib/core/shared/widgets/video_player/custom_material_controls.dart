@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/app_popup_menu.dart';
 import 'package:stream_pro/core/utils/consts/image_path.dart';
+import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/generated/l10n.dart';
 import 'package:video_player/video_player.dart';
 
@@ -151,6 +152,7 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = context.appTheme;
     if (!_isInitialized) return const SizedBox.shrink();
 
     if (_latestValue.hasError) {
@@ -158,7 +160,9 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
             context,
             _latestValue.errorDescription!,
           ) ??
-          const Center(child: Icon(Icons.error, color: Colors.white, size: 42));
+          Center(
+            child: Icon(Icons.error, color: appTheme.surfaceColor, size: 42),
+          );
     }
 
     final isFinished =
@@ -206,7 +210,7 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
                         ? ImagePath.pauseCircle
                         : ImagePath.playCircle,
                     colorFilter: ColorFilter.mode(
-                      Colors.white,
+                      appTheme.surfaceColor,
                       BlendMode.srcIn,
                     ),
                     width: 64,
@@ -239,6 +243,7 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
   Widget _buildBottomBarContent(BuildContext context) {
     final isLive = chewieController.isLive;
     final isMuted = _latestValue.volume == 0.0;
+    final appTheme = context.appTheme;
 
     return Container(
       decoration: const BoxDecoration(
@@ -261,8 +266,8 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
                 colors:
                     chewieController.materialProgressColors ??
                     ChewieProgressColors(
-                      playedColor: Colors.red,
-                      handleColor: Colors.red,
+                      playedColor: appTheme.errorColor,
+                      handleColor: appTheme.errorColor,
                       backgroundColor: Colors.white24,
                       bufferedColor: Colors.white12,
                     ),
@@ -284,7 +289,10 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
               IconButton(
                 icon: SvgPicture.asset(
                   isMuted ? ImagePath.soundMute : ImagePath.sound,
-                  colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                  colorFilter: ColorFilter.mode(
+                    appTheme.surfaceColor,
+                    BlendMode.srcIn,
+                  ),
                   width: 24,
                   height: 24,
                 ),
@@ -309,7 +317,10 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
     return IconButton(
       icon: SvgPicture.asset(
         _latestValue.isPlaying ? ImagePath.pause : ImagePath.play,
-        colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+        colorFilter: ColorFilter.mode(
+          context.appTheme.surfaceColor,
+          BlendMode.srcIn,
+        ),
         width: 24,
         height: 24,
       ),
@@ -329,8 +340,8 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
         isLive
             ? S.current.live
             : '${_formatDuration(position)} / ${_formatDuration(duration)}',
-        style: const TextStyle(
-          color: Colors.white,
+        style: TextStyle(
+          color: context.appTheme.surfaceColor,
           fontSize: 12,
           fontFeatures: [FontFeature.tabularFigures()],
         ),
@@ -345,7 +356,10 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
       menuWidth: 120,
       trigger: SvgPicture.asset(
         ImagePath.speedChanger,
-        colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+        colorFilter: ColorFilter.mode(
+          context.appTheme.surfaceColor,
+          BlendMode.srcIn,
+        ),
         width: 24,
         height: 24,
       ),
@@ -370,7 +384,10 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls> {
         chewieController.isFullScreen
             ? ImagePath.quitFullScreen
             : ImagePath.fullScreen,
-        colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+        colorFilter: ColorFilter.mode(
+          context.appTheme.surfaceColor,
+          BlendMode.srcIn,
+        ),
         width: 22,
         height: 22,
       ),

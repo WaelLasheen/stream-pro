@@ -70,7 +70,7 @@ class _DownloadButtonState extends State<DownloadButton> {
               ),
             );
           } else if (isSuccess) {
-            // Soft green tint on success
+            // Soft context.appTheme.successColor tint on success
             bgColor = appTheme.successColor.withValues(alpha: 0.1);
             contentColor = appTheme.successColor;
             iconColor = appTheme.successColor;

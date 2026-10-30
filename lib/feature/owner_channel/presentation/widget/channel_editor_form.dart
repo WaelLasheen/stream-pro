@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/app_button.dart';
 import 'package:stream_pro/core/shared/widgets/app_fields/app_form_field.dart';
+import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/feature/owner_channel/domain/entities/owner_channel_entity.dart';
 import 'package:stream_pro/generated/l10n.dart';
 import 'channel_image_picker.dart';
@@ -39,6 +40,7 @@ class ChannelEditorForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isKeyboardVisible = MediaQuery.of(context).viewInsets.bottom > 0;
+    final appTheme = context.appTheme;
 
     return Form(
       key: formKey,
@@ -134,7 +136,7 @@ class ChannelEditorForm extends StatelessWidget {
               color: Theme.of(context).scaffoldBackgroundColor,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.05),
+                  color: appTheme.textPrimary.withValues(alpha: 0.05),
                   blurRadius: 10,
                   offset: const Offset(0, -4),
                 ),
@@ -148,8 +150,8 @@ class ChannelEditorForm extends StatelessWidget {
                     : S.current.createChannel,
                 isLoading: isLoading,
                 onPressed: onSubmit,
-                backgroundColor: const Color(0xFF6C5CE7),
-                textColor: Colors.white,
+                backgroundColor: appTheme.accentPurple,
+                textColor: appTheme.surfaceColor,
                 borderRadius: 16.r,
                 fontSize: 16.sp,
                 height: 56.h,

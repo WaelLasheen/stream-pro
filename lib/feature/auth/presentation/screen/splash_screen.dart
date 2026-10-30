@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/routing/app_routes.dart';
 import 'package:stream_pro/core/shared/widgets/stream_pro_logo.dart';
+import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
 import 'package:stream_pro/feature/auth/presentation/controller/splash_cubit/splash_cubit.dart';
 import 'package:stream_pro/generated/l10n.dart';
@@ -71,6 +72,8 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = context.appTheme;
+
     return Scaffold(
       body: BlocListener<SplashCubit, SplashState>(
         listener: (context, state) {
@@ -105,11 +108,12 @@ class _SplashScreenState extends State<SplashScreen>
                     translation: _textSlide.value,
                     child: ShaderMask(
                       blendMode: BlendMode.srcIn,
-                      shaderCallback: (rect) => const LinearGradient(
+                      shaderCallback: (rect) => LinearGradient(
                         colors: [
-                          StreamProLogo.playBlue,
-                          StreamProLogo.wavePurple,
-                          StreamProLogo.wavePink,
+                          appTheme.blueAccent,
+                          appTheme.tealAccent,
+                          appTheme.purpleTint,
+                          appTheme.pinkAccent,
                         ],
                       ).createShader(rect),
                       child: Text(
@@ -118,7 +122,7 @@ class _SplashScreenState extends State<SplashScreen>
                           fontSize: 36.sp,
                           fontWeight: FontWeight.w800,
                           letterSpacing: 1.2,
-                          color: Colors.white,
+                          color: context.appTheme.surfaceColor,
                         ),
                       ),
                     ),

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/widgets/network_image/app_circle_network_image.dart';
 import 'package:stream_pro/core/shared/widgets/network_image/app_network_image.dart';
 import 'package:stream_pro/core/utils/extensions/formatters.dart';
+import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/feature/playlist/domain/entities/playlist_details_entity.dart';
 import 'package:stream_pro/generated/l10n.dart';
 
@@ -30,7 +31,8 @@ class PlaylistDetailsHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final textTheme = context.textTheme;
+    final appTheme = context.appTheme;
 
     return Stack(
       fit: StackFit.expand,
@@ -46,8 +48,8 @@ class PlaylistDetailsHeader extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Colors.black.withValues(alpha: 0.15),
-                Colors.black.withValues(alpha: 0.85),
+                appTheme.textPrimary.withValues(alpha: 0.15),
+                appTheme.textPrimary.withValues(alpha: 0.85),
               ],
             ),
           ),
@@ -92,8 +94,8 @@ class PlaylistDetailsHeader extends StatelessWidget {
                             playlist.title,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              color: Colors.white,
+                            style: textTheme.titleMedium?.copyWith(
+                              color: appTheme.surfaceColor,
                               fontWeight: FontWeight.w800,
                             ),
                           ),
@@ -112,14 +114,14 @@ class PlaylistDetailsHeader extends StatelessWidget {
                                 playlist.isPublic
                                     ? S.current.public
                                     : S.current.private,
-                                style: theme.textTheme.bodySmall?.copyWith(
+                                style: textTheme.bodySmall?.copyWith(
                                   color: Colors.white70,
                                 ),
                               ),
                               8.horizontalSpace,
                               Text(
                                 '• ${playlist.videos.length.formatCount()} ${S.current.videos}',
-                                style: theme.textTheme.bodySmall?.copyWith(
+                                style: textTheme.bodySmall?.copyWith(
                                   color: Colors.white70,
                                 ),
                               ),
@@ -137,7 +139,7 @@ class PlaylistDetailsHeader extends StatelessWidget {
                     playlist.description!,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodySmall?.copyWith(
+                    style: textTheme.bodySmall?.copyWith(
                       color: Colors.white70,
                       height: 1.3,
                     ),
@@ -160,15 +162,17 @@ class _RoundActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = context.appTheme;
+
     return Material(
-      color: Colors.black.withValues(alpha: 0.4),
+      color: appTheme.textPrimary.withValues(alpha: 0.4),
       shape: const CircleBorder(),
       child: InkWell(
         onTap: onTap,
         customBorder: const CircleBorder(),
         child: Padding(
           padding: EdgeInsets.all(8.r),
-          child: Icon(icon, color: Colors.white, size: 20.r),
+          child: Icon(icon, color: appTheme.surfaceColor, size: 20.r),
         ),
       ),
     );

@@ -5,6 +5,7 @@ import 'package:stream_pro/core/shared/widgets/app_error_widget/app_error_widget
 import 'package:stream_pro/core/shared/widgets/network_image/app_circle_network_image.dart';
 import 'package:stream_pro/core/shared/widgets/network_image/app_network_image.dart';
 import 'package:stream_pro/core/utils/extensions/formatters.dart';
+import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/feature/channel/presentation/controllers/channel_details_cubit/channel_details_cubit.dart';
 import 'package:stream_pro/feature/channel/presentation/controllers/channel_details_cubit/channel_details_state.dart';
 import 'package:stream_pro/core/shared/widgets/channel/channel_header_shimmer.dart';
@@ -44,8 +45,8 @@ class ChannelHeader extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withValues(alpha: 0.15),
-                    Colors.black.withValues(alpha: 0.78),
+                    context.appTheme.textPrimary.withValues(alpha: 0.15),
+                    context.appTheme.textPrimary.withValues(alpha: 0.78),
                   ],
                 ),
               ),
@@ -77,7 +78,7 @@ class ChannelHeader extends StatelessWidget {
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: theme.textTheme.titleMedium?.copyWith(
-                                  color: Colors.white,
+                                  color: context.appTheme.surfaceColor,
                                   fontWeight: FontWeight.w800,
                                 ),
                               ),

@@ -11,6 +11,7 @@ import 'package:stream_pro/core/shared/widgets/video_card/video_card_data.dart';
 import 'package:stream_pro/core/shared/widgets/video_card/video_card_shimmer.dart';
 import 'package:stream_pro/core/shared/widgets/video_card/video_card_widget.dart';
 import 'package:stream_pro/core/utils/consts/image_path.dart';
+import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/core/utils/extensions/navigation_extension.dart';
 import 'package:stream_pro/feature/owner_channel/domain/entities/owner_video_entity.dart';
 import 'package:stream_pro/feature/owner_channel/presentation/controllers/owner_videos_cubit/owner_videos_cubit.dart';
@@ -119,7 +120,7 @@ class OwnerVideosTab extends StatelessWidget {
                                       child: Text(
                                         S.current.draft,
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: context.appTheme.surfaceColor,
                                           fontSize: 11.sp,
                                           fontWeight: FontWeight.w600,
                                         ),

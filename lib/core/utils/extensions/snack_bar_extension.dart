@@ -8,11 +8,8 @@ extension SnackBarExtension on BuildContext {
     final appTheme = Theme.of(this).extension<AppTheme>();
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
-        content: Text(
-          message,
-          style: TextStyle(color: appTheme?.onPrimary ?? Colors.white),
-        ),
-        backgroundColor: appTheme?.successColor ?? Colors.green,
+        content: Text(message, style: TextStyle(color: appTheme?.onPrimary)),
+        backgroundColor: appTheme?.successColor,
         behavior: SnackBarBehavior.floating,
         dismissDirection: DismissDirection.horizontal,
       ),
@@ -25,11 +22,8 @@ extension SnackBarExtension on BuildContext {
     final appTheme = Theme.of(this).extension<AppTheme>();
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
-        content: Text(
-          message,
-          style: TextStyle(color: appTheme?.onPrimary ?? Colors.white),
-        ),
-        backgroundColor: appTheme?.errorColor ?? Colors.red,
+        content: Text(message, style: TextStyle(color: appTheme?.onPrimary)),
+        backgroundColor: appTheme?.errorColor,
         behavior: SnackBarBehavior.floating,
         dismissDirection: DismissDirection.horizontal,
       ),

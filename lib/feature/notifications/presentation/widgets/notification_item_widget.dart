@@ -21,7 +21,7 @@ class NotificationItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final appTheme = context.appTheme;
     final theme = Theme.of(context);
-    final typeColor = item.type.color;
+    final typeColor = item.type.color(context);
 
     return Dismissible(
       key: Key(item.notificationId),
@@ -35,7 +35,7 @@ class NotificationItemWidget extends StatelessWidget {
         ),
         child: Icon(
           Icons.delete_outline_rounded,
-          color: Colors.white,
+          color: context.appTheme.surfaceColor,
           size: 24.r,
         ),
       ),

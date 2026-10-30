@@ -3,21 +3,26 @@ import 'package:flutter/material.dart';
 /// Semantic color tokens for StreamPro, exposed as a [ThemeExtension] so
 /// widgets can read them via `context.appTheme` (see
 /// `lib/core/utils/extensions/get_app_theme.dart`).
-///
-/// Naming guide:
-///   • brand      → [primaryColor], [secondaryColor] and their tints
-///   • surfaces   → [backgroundColor], [surfaceColor]
-///   • text       → [textPrimary], [textSecondary], [onPrimary]
-///   • feedback   → [errorColor], [redNormalColor], [successColor],
-///                  [warningColor], [liveColor], [starColor]
-///   • neutrals   → grey200 … grey800 (cool slate scale)
-///   • lines      → [boarderPrimary]
 class AppTheme extends ThemeExtension<AppTheme> {
   // Brand
   final Color primaryColor;
   final Color secondaryColor;
   final Color primaryTint;
-  final Color secondaryTint;
+
+  // New Extracted Colors
+  final Color surfaceDark;
+  final Color borderLight;
+  final Color accentPurple;
+  final Color blueAccent;
+  final Color tealAccent;
+  final Color purpleTint;
+  final Color pinkAccent;
+  final Color canvasLight;
+  final Color dividerMuted;
+
+  // Specific Shaded/Tinted Tokens requested
+  final Color errorColorShade400;
+  final Color textSecondaryShade500;
 
   // Surfaces
   final Color backgroundColor;
@@ -29,8 +34,6 @@ class AppTheme extends ThemeExtension<AppTheme> {
   final Color redNormalColor;
   final Color successColor;
   final Color warningColor;
-  final Color liveColor;
-  final Color starColor;
 
   // Text
   final Color textPrimary;
@@ -47,17 +50,23 @@ class AppTheme extends ThemeExtension<AppTheme> {
   // Lines
   final Color boarderPrimary;
 
-  // Legacy alias kept for backward compatibility: soft primary tint used
-  // for chip/badge backgrounds. Same value as [primaryTint].
-  final Color blueLight;
-
   final OutlineInputBorder outlineInputBorder;
 
   AppTheme({
     required this.primaryColor,
     required this.secondaryColor,
     required this.primaryTint,
-    required this.secondaryTint,
+    required this.surfaceDark,
+    required this.borderLight,
+    required this.accentPurple,
+    required this.blueAccent,
+    required this.tealAccent,
+    required this.purpleTint,
+    required this.pinkAccent,
+    required this.canvasLight,
+    required this.dividerMuted,
+    required this.errorColorShade400,
+    required this.textSecondaryShade500,
     required this.backgroundColor,
     required this.surfaceColor,
     required this.overlayColor,
@@ -65,8 +74,6 @@ class AppTheme extends ThemeExtension<AppTheme> {
     required this.errorColor,
     required this.successColor,
     required this.warningColor,
-    required this.liveColor,
-    required this.starColor,
     required this.textPrimary,
     required this.textSecondary,
     required this.onPrimary,
@@ -76,7 +83,6 @@ class AppTheme extends ThemeExtension<AppTheme> {
     required this.grey700,
     required this.grey800,
     required this.boarderPrimary,
-    required this.blueLight,
     required this.outlineInputBorder,
   });
 
@@ -85,7 +91,17 @@ class AppTheme extends ThemeExtension<AppTheme> {
     Color? primaryColor,
     Color? secondaryColor,
     Color? primaryTint,
-    Color? secondaryTint,
+    Color? surfaceDark,
+    Color? borderLight,
+    Color? accentPurple,
+    Color? blueAccent,
+    Color? tealAccent,
+    Color? purpleTint,
+    Color? pinkAccent,
+    Color? canvasLight,
+    Color? dividerMuted,
+    Color? errorColorShade400,
+    Color? textSecondaryShade500,
     Color? backgroundColor,
     Color? surfaceColor,
     Color? overlayColor,
@@ -93,8 +109,6 @@ class AppTheme extends ThemeExtension<AppTheme> {
     Color? errorColor,
     Color? successColor,
     Color? warningColor,
-    Color? liveColor,
-    Color? starColor,
     Color? textPrimary,
     Color? textSecondary,
     Color? onPrimary,
@@ -104,14 +118,24 @@ class AppTheme extends ThemeExtension<AppTheme> {
     Color? grey700,
     Color? grey800,
     Color? boarderPrimary,
-    Color? blueLight,
     OutlineInputBorder? outlineInputBorder,
   }) {
     return AppTheme(
       primaryColor: primaryColor ?? this.primaryColor,
       secondaryColor: secondaryColor ?? this.secondaryColor,
       primaryTint: primaryTint ?? this.primaryTint,
-      secondaryTint: secondaryTint ?? this.secondaryTint,
+      surfaceDark: surfaceDark ?? this.surfaceDark,
+      borderLight: borderLight ?? this.borderLight,
+      accentPurple: accentPurple ?? this.accentPurple,
+      blueAccent: blueAccent ?? this.blueAccent,
+      tealAccent: tealAccent ?? this.tealAccent,
+      purpleTint: purpleTint ?? this.purpleTint,
+      pinkAccent: pinkAccent ?? this.pinkAccent,
+      canvasLight: canvasLight ?? this.canvasLight,
+      dividerMuted: dividerMuted ?? this.dividerMuted,
+      errorColorShade400: errorColorShade400 ?? this.errorColorShade400,
+      textSecondaryShade500:
+          textSecondaryShade500 ?? this.textSecondaryShade500,
       backgroundColor: backgroundColor ?? this.backgroundColor,
       surfaceColor: surfaceColor ?? this.surfaceColor,
       overlayColor: overlayColor ?? this.overlayColor,
@@ -119,8 +143,6 @@ class AppTheme extends ThemeExtension<AppTheme> {
       errorColor: errorColor ?? this.errorColor,
       successColor: successColor ?? this.successColor,
       warningColor: warningColor ?? this.warningColor,
-      liveColor: liveColor ?? this.liveColor,
-      starColor: starColor ?? this.starColor,
       textPrimary: textPrimary ?? this.textPrimary,
       textSecondary: textSecondary ?? this.textSecondary,
       onPrimary: onPrimary ?? this.onPrimary,
@@ -130,7 +152,6 @@ class AppTheme extends ThemeExtension<AppTheme> {
       grey700: grey700 ?? this.grey700,
       grey800: grey800 ?? this.grey800,
       boarderPrimary: boarderPrimary ?? this.boarderPrimary,
-      blueLight: blueLight ?? this.blueLight,
       outlineInputBorder: outlineInputBorder ?? this.outlineInputBorder,
     );
   }
@@ -145,7 +166,25 @@ class AppTheme extends ThemeExtension<AppTheme> {
       primaryColor: Color.lerp(primaryColor, other.primaryColor, t)!,
       secondaryColor: Color.lerp(secondaryColor, other.secondaryColor, t)!,
       primaryTint: Color.lerp(primaryTint, other.primaryTint, t)!,
-      secondaryTint: Color.lerp(secondaryTint, other.secondaryTint, t)!,
+      surfaceDark: Color.lerp(surfaceDark, other.surfaceDark, t)!,
+      borderLight: Color.lerp(borderLight, other.borderLight, t)!,
+      accentPurple: Color.lerp(accentPurple, other.accentPurple, t)!,
+      blueAccent: Color.lerp(blueAccent, other.blueAccent, t)!,
+      tealAccent: Color.lerp(tealAccent, other.tealAccent, t)!,
+      purpleTint: Color.lerp(purpleTint, other.purpleTint, t)!,
+      pinkAccent: Color.lerp(pinkAccent, other.pinkAccent, t)!,
+      canvasLight: Color.lerp(canvasLight, other.canvasLight, t)!,
+      dividerMuted: Color.lerp(dividerMuted, other.dividerMuted, t)!,
+      errorColorShade400: Color.lerp(
+        errorColorShade400,
+        other.errorColorShade400,
+        t,
+      )!,
+      textSecondaryShade500: Color.lerp(
+        textSecondaryShade500,
+        other.textSecondaryShade500,
+        t,
+      )!,
       backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t)!,
       surfaceColor: Color.lerp(surfaceColor, other.surfaceColor, t)!,
       overlayColor: Color.lerp(overlayColor, other.overlayColor, t)!,
@@ -153,8 +192,6 @@ class AppTheme extends ThemeExtension<AppTheme> {
       redNormalColor: Color.lerp(redNormalColor, other.redNormalColor, t)!,
       successColor: Color.lerp(successColor, other.successColor, t)!,
       warningColor: Color.lerp(warningColor, other.warningColor, t)!,
-      liveColor: Color.lerp(liveColor, other.liveColor, t)!,
-      starColor: Color.lerp(starColor, other.starColor, t)!,
       textPrimary: Color.lerp(textPrimary, other.textPrimary, t)!,
       textSecondary: Color.lerp(textSecondary, other.textSecondary, t)!,
       onPrimary: Color.lerp(onPrimary, other.onPrimary, t)!,
@@ -164,7 +201,6 @@ class AppTheme extends ThemeExtension<AppTheme> {
       grey700: Color.lerp(grey700, other.grey700, t)!,
       grey800: Color.lerp(grey800, other.grey800, t)!,
       boarderPrimary: Color.lerp(boarderPrimary, other.boarderPrimary, t)!,
-      blueLight: Color.lerp(blueLight, other.blueLight, t)!,
       outlineInputBorder: outlineInputBorder,
     );
   }

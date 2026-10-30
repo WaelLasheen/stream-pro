@@ -141,7 +141,7 @@ class _PlaylistThumbnail extends StatelessWidget {
             width: width ?? double.infinity,
             fit: BoxFit.cover,
             borderRadius: borderRadius,
-            color: Colors.black.withValues(alpha: 0.3),
+            color: appTheme.textPrimary.withValues(alpha: 0.3),
             colorBlendMode: BlendMode.darken,
           ),
 

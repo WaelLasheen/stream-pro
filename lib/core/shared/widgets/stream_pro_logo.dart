@@ -7,11 +7,6 @@ class StreamProLogo extends StatelessWidget {
 
   const StreamProLogo({super.key, required this.size});
 
-  static const Color playBlue = Color(0xFF2196F3);
-  static const Color waveTeal = Color(0xFF1DE9B6);
-  static const Color wavePurple = Color(0xFF8B5CF6);
-  static const Color wavePink = Color(0xFFEC4899);
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(

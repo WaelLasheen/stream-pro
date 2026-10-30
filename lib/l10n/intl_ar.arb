@@ -243,5 +243,41 @@
     "darkTheme": "داكن",
     "systemTheme": "النظام",
     "arabic": "العربية",
-    "english": "الانجليزية"
+    "english": "الانجليزية",
+    "modernTheme": "الحديثة",
+    "greenTheme": "الأخضر المنعش",
+    "redTheme": "الأحمر القرمزي",
+    "@settings": {
+        "description": "عنوان قسم الإعدادات"
+    },
+    "@language": {
+        "description": "عنوان إعداد اللغة"
+    },
+    "@arabic": {
+        "description": "خيار اللغة العربية"
+    },
+    "@english": {
+        "description": "خيار اللغة الإنجليزية"
+    },
+    "@theme": {
+        "description": "عنوان إعداد السمة"
+    },
+    "@lightTheme": {
+        "description": "خيار السمة الفاتحة"
+    },
+    "@darkTheme": {
+        "description": "خيار السمة الداكنة"
+    },
+    "@systemTheme": {
+        "description": "خيار سمة النظام الافتراضية"
+    },
+    "@modernTheme": {
+        "description": "خيار السمة الحديثة"
+    },
+    "@greenTheme": {
+        "description": "خيار السمة الخضراء"
+    },
+    "@redTheme": {
+        "description": "خيار السمة الحمراء"
+    }
 }

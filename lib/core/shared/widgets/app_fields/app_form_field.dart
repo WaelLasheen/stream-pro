@@ -69,11 +69,11 @@ class _AppFormFieldState extends State<AppFormField> {
 
     final fillColor =
         widget.fillColor ??
-        (isDark ? const Color(0xFF2A2A2A) : const Color(0xFFF5F7FA));
+        (isDark ? appTheme.surfaceDark : appTheme.canvasLight);
 
     final idleBorder =
         widget.idleBorderColor ??
-        (isDark ? const Color(0xFF3F3F46) : const Color(0xFFD9DEE5));
+        (isDark ? appTheme.grey800 : appTheme.dividerMuted);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,7 +116,10 @@ class _AppFormFieldState extends State<AppFormField> {
           ),
           decoration: InputDecoration(
             hintText: widget.hint,
-            hintStyle: TextStyle(color: Colors.grey.shade500, fontSize: 15.sp),
+            hintStyle: TextStyle(
+              color: appTheme.textSecondaryShade500,
+              fontSize: 15.sp,
+            ),
             filled: true,
             fillColor: fillColor,
             contentPadding: EdgeInsets.symmetric(
@@ -126,8 +129,8 @@ class _AppFormFieldState extends State<AppFormField> {
             border: _border(idleBorder, 1.w),
             enabledBorder: _border(idleBorder, 1.w),
             focusedBorder: _border(appTheme.primaryColor, 1.6.w),
-            errorBorder: _border(Colors.red.shade400, 1.w),
-            focusedErrorBorder: _border(Colors.red.shade400, 1.6.w),
+            errorBorder: _border(appTheme.errorColorShade400, 1.w),
+            focusedErrorBorder: _border(appTheme.errorColorShade400, 1.6.w),
             prefixIcon:
                 widget.prefixWidget ??
                 (widget.prefixIcon != null

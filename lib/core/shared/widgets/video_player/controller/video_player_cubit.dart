@@ -2,6 +2,7 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:stream_pro/core/shared/widgets/video_player/custom_material_controls.dart';
+import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/generated/l10n.dart';
 import 'package:video_player/video_player.dart';
 import 'video_player_state.dart';
@@ -35,7 +36,9 @@ class VideoPlayerCubit extends Cubit<VideoPlayerState> {
         aspectRatio: aspectRatio,
         playbackSpeeds: const [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2.0],
         customControls: const CustomMaterialControls(),
-        placeholder: Container(color: Colors.black),
+        placeholder: Builder(
+          builder: (context) => Container(color: context.appTheme.textPrimary),
+        ),
         errorBuilder: (context, errorMessage) => _buildErrorWidget(),
       );
 
@@ -63,21 +66,29 @@ class VideoPlayerCubit extends Cubit<VideoPlayerState> {
   }
 
   Widget _buildErrorWidget() {
-    return Container(
-      color: Colors.black,
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.error_outline, color: Colors.white70, size: 48),
-            const SizedBox(height: 12),
-            Text(
-              S.current.unableToPlayVideo,
-              style: const TextStyle(color: Colors.white70),
+    return Builder(
+      builder: (context) {
+        return Container(
+          color: context.appTheme.textPrimary,
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(
+                  Icons.error_outline,
+                  color: Colors.white70,
+                  size: 48,
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  S.current.unableToPlayVideo,
+                  style: const TextStyle(color: Colors.white70),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 

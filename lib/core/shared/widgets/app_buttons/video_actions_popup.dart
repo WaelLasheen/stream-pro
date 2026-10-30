@@ -116,11 +116,11 @@ class _Trigger extends StatelessWidget {
       width: 30.w,
       height: 30.h,
       decoration: BoxDecoration(
-        color: Colors.black.withValues(alpha: 0.45),
+        color: context.appTheme.textPrimary.withValues(alpha: 0.45),
         shape: BoxShape.circle,
         border: Border.all(color: appTheme.grey600.withValues(alpha: 0.4)),
       ),
-      child: Icon(Icons.more_vert, size: 16.r, color: Colors.white),
+      child: Icon(Icons.more_vert, size: 16.r, color: context.appTheme.surfaceColor),
     );
   }
 }

@@ -242,6 +242,42 @@
     "lightTheme": "Light",
     "darkTheme": "Dark",
     "systemTheme": "System",
-    "arabic":"Arabic",
-    "english":"english"
+    "arabic": "Arabic",
+    "english": "english",
+    "modernTheme": "Modern",
+    "greenTheme": "Fresh Green",
+    "redTheme": "Crimson Red",
+    "@settings": {
+        "description": "Settings section title"
+    },
+    "@language": {
+        "description": "Language setting title"
+    },
+    "@arabic": {
+        "description": "Arabic language option"
+    },
+    "@english": {
+        "description": "English language option"
+    },
+    "@theme": {
+        "description": "Theme setting title"
+    },
+    "@lightTheme": {
+        "description": "Light theme option"
+    },
+    "@darkTheme": {
+        "description": "Dark theme option"
+    },
+    "@systemTheme": {
+        "description": "System default theme option"
+    },
+    "@modernTheme": {
+        "description": "Modern theme option"
+    },
+    "@greenTheme": {
+        "description": "Green theme option"
+    },
+    "@redTheme": {
+        "description": "Red theme option"
+    }
 }

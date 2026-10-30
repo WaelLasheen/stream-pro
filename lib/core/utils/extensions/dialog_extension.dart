@@ -60,7 +60,7 @@ extension DialogExtension on BuildContext {
                   backgroundColor: isDestructive
                       ? appTheme.redNormalColor
                       : appTheme.primaryColor,
-                  textColor: Colors.white,
+                  textColor: appTheme.surfaceColor,
                   borderRadius: 12.r,
                   onPressed: () => Navigator.pop(dialogContext, true),
                 ),
@@ -122,7 +122,7 @@ extension DialogExtension on BuildContext {
                   isFullWidth: false,
                   width: double.infinity,
                   backgroundColor: appTheme.redNormalColor,
-                  textColor: Colors.white,
+                  textColor: appTheme.surfaceColor,
                   borderRadius: 12.r,
                   onPressed: () => Navigator.pop(dialogContext, true),
                 ),

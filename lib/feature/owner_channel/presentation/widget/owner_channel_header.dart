@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/widgets/network_image/app_circle_network_image.dart';
 import 'package:stream_pro/core/shared/widgets/network_image/app_network_image.dart';
 import 'package:stream_pro/core/utils/extensions/formatters.dart';
+import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/feature/owner_channel/domain/entities/owner_channel_entity.dart';
 import 'package:stream_pro/generated/l10n.dart';
 
@@ -14,7 +15,8 @@ class OwnerChannelHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final textTheme = context.textTheme;
+    final appTheme = context.appTheme;
 
     return Stack(
       fit: StackFit.expand,
@@ -30,8 +32,8 @@ class OwnerChannelHeader extends StatelessWidget {
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Colors.black.withValues(alpha: 0.15),
-                Colors.black.withValues(alpha: 0.85),
+                appTheme.textPrimary.withValues(alpha: 0.15),
+                appTheme.textPrimary.withValues(alpha: 0.85),
               ],
             ),
           ),
@@ -41,14 +43,18 @@ class OwnerChannelHeader extends StatelessWidget {
             top: kToolbarHeight,
             right: 16.w,
             child: Material(
-              color: Colors.black.withValues(alpha: 0.4),
+              color: appTheme.textPrimary.withValues(alpha: 0.4),
               shape: const CircleBorder(),
               child: InkWell(
                 onTap: onEditTap,
                 customBorder: const CircleBorder(),
                 child: Padding(
                   padding: EdgeInsets.all(8.r),
-                  child: Icon(Icons.edit, color: Colors.white, size: 20.r),
+                  child: Icon(
+                    Icons.edit,
+                    color: appTheme.surfaceColor,
+                    size: 20.r,
+                  ),
                 ),
               ),
             ),
@@ -78,8 +84,8 @@ class OwnerChannelHeader extends StatelessWidget {
                             channel.title,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              color: Colors.white,
+                            style: textTheme.titleMedium?.copyWith(
+                              color: appTheme.surfaceColor,
                               fontWeight: FontWeight.w800,
                             ),
                           ),
@@ -90,7 +96,7 @@ class OwnerChannelHeader extends StatelessWidget {
                             '${channel.totalViews.formatCount()} ${S.current.views}',
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: theme.textTheme.bodySmall?.copyWith(
+                            style: textTheme.bodySmall?.copyWith(
                               color: Colors.white70,
                             ),
                           ),
@@ -106,7 +112,7 @@ class OwnerChannelHeader extends StatelessWidget {
                     channel.description!,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodySmall?.copyWith(
+                    style: textTheme.bodySmall?.copyWith(
                       color: Colors.white70,
                       height: 1.3,
                     ),

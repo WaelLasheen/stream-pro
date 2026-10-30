@@ -202,6 +202,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "googleSignInError": MessageLookupByLibrary.simpleMessage(
       "فشل تسجيل الدخول بجوجل. يرجى المحاولة مرة أخرى.",
     ),
+    "greenTheme": MessageLookupByLibrary.simpleMessage("الأخضر المنعش"),
     "hideReplies": MessageLookupByLibrary.simpleMessage("إخفاء الردود"),
     "history": MessageLookupByLibrary.simpleMessage("السجل"),
     "historyEmptyMessage": MessageLookupByLibrary.simpleMessage(
@@ -269,6 +270,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "memberSince": MessageLookupByLibrary.simpleMessage("عضو منذ"),
     "million": MessageLookupByLibrary.simpleMessage(" مليون"),
     "minutesAgo": MessageLookupByLibrary.simpleMessage(" دقيقة"),
+    "modernTheme": MessageLookupByLibrary.simpleMessage("الحديثة"),
     "monthsAgo": MessageLookupByLibrary.simpleMessage(" شهر"),
     "myPlaylistHint": MessageLookupByLibrary.simpleMessage(
       "قائمة التشغيل الخاصة بي",
@@ -370,6 +372,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "receiveTimeout": MessageLookupByLibrary.simpleMessage(
       "انتهت مهلة الاستقبال",
     ),
+    "redTheme": MessageLookupByLibrary.simpleMessage("الأحمر القرمزي"),
     "registerNow": MessageLookupByLibrary.simpleMessage("سجل الآن"),
     "relatedVideos": MessageLookupByLibrary.simpleMessage("فيديوهات مشابهة"),
     "removeFromWatchLater": MessageLookupByLibrary.simpleMessage(

@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/theme/font_styles.dart';
+import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 
 class FilePickTile extends StatelessWidget {
   final PlatformFile? file;
@@ -35,6 +36,7 @@ class FilePickTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final appTheme = context.appTheme;
     final selected = file;
 
     if (selected == null) {
@@ -71,7 +73,7 @@ class FilePickTile extends StatelessWidget {
       decoration: BoxDecoration(
         color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.4),
         borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: Colors.green.withValues(alpha: 0.5)),
+        border: Border.all(color: appTheme.successColor.withValues(alpha: 0.5)),
       ),
       child: Row(
         children: [
@@ -89,10 +91,10 @@ class FilePickTile extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(10.w),
               decoration: BoxDecoration(
-                color: Colors.green.withValues(alpha: 0.1),
+                color: appTheme.successColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8.r),
               ),
-              child: const Icon(Icons.check_circle, color: Colors.green),
+              child: Icon(Icons.check_circle, color: appTheme.successColor),
             ),
           SizedBox(width: 12.w),
           Expanded(
@@ -115,7 +117,7 @@ class FilePickTile extends StatelessWidget {
           ),
           if (enabled)
             IconButton(
-              icon: const Icon(Icons.close, color: Colors.redAccent),
+              icon: Icon(Icons.close, color: appTheme.errorColor),
               onPressed: onClear,
             ),
         ],

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/shared/widgets/network_image/app_circle_network_image.dart';
 import 'package:stream_pro/core/shared/widgets/network_image/app_network_image.dart';
+import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 
 class ChannelCoverPicker extends StatelessWidget {
   final String? networkUrl;
@@ -19,6 +20,7 @@ class ChannelCoverPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final appTheme = context.appTheme;
 
     return InkWell(
       onTap: onTap,
@@ -45,28 +47,30 @@ class ChannelCoverPicker extends StatelessWidget {
               }
 
               return Container(
-                color: isDark
-                    ? const Color(0xFF2A2A2A)
-                    : const Color(0xFFE2E8F0),
+                color: isDark ? appTheme.surfaceDark : appTheme.borderLight,
                 child: Center(
                   child: Icon(
                     Icons.panorama_outlined,
                     size: 48.r,
-                    color: Colors.grey,
+                    color: appTheme.textSecondary,
                   ),
                 ),
               );
             },
           ),
-          Container(color: Colors.black.withValues(alpha: 0.2)),
+          Container(color: appTheme.textPrimary.withValues(alpha: 0.2)),
           Center(
             child: Container(
               padding: EdgeInsets.all(12.r),
               decoration: BoxDecoration(
-                color: Colors.black.withValues(alpha: 0.4),
+                color: appTheme.textPrimary.withValues(alpha: 0.4),
                 shape: BoxShape.circle,
               ),
-              child: Icon(Icons.camera_alt, color: Colors.white, size: 28.r),
+              child: Icon(
+                Icons.camera_alt,
+                color: appTheme.surfaceColor,
+                size: 28.r,
+              ),
             ),
           ),
         ],
@@ -93,6 +97,7 @@ class ChannelAvatarPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final radius = 45.r;
+    final appTheme = context.appTheme;
 
     return InkWell(
       onTap: onTap,
@@ -134,14 +139,18 @@ class ChannelAvatarPicker extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.all(6.r),
               decoration: BoxDecoration(
-                color: const Color(0xFF6C5CE7),
+                color: appTheme.accentPurple,
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: theme.scaffoldBackgroundColor,
                   width: 2.w,
                 ),
               ),
-              child: Icon(Icons.camera_alt, color: Colors.white, size: 16.r),
+              child: Icon(
+                Icons.camera_alt,
+                color: appTheme.surfaceColor,
+                size: 16.r,
+              ),
             ),
           ),
         ],

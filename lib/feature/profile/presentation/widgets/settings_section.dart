@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/app_config/app_config_cubit.dart';
 import 'package:stream_pro/core/app_config/app_config_state.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/app_popup_menu.dart';
+import 'package:stream_pro/core/theme/app_themes.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/generated/l10n.dart';
 
@@ -97,20 +98,26 @@ class SettingsSection extends StatelessWidget {
               BlocBuilder<AppConfigCubit, AppConfigState>(
                 builder: (context, configState) {
                   String themeLabel;
-                  switch (configState.themeMode) {
-                    case ThemeMode.light:
+                  switch (configState.currentTheme) {
+                    case AppThemeType.light:
                       themeLabel = S.current.lightTheme;
                       break;
-                    case ThemeMode.dark:
+                    case AppThemeType.dark:
                       themeLabel = S.current.darkTheme;
                       break;
-                    case ThemeMode.system:
-                      themeLabel = S.current.systemTheme;
+                    case AppThemeType.modern:
+                      themeLabel = S.current.modernTheme;
+                      break;
+                    case AppThemeType.green:
+                      themeLabel = S.current.greenTheme;
+                      break;
+                    case AppThemeType.red:
+                      themeLabel = S.current.redTheme;
                       break;
                   }
                   return ListTile(
                     leading: Icon(
-                      Icons.brightness_6_rounded,
+                      Icons.palette_outlined,
                       color: appTheme.textSecondary,
                     ),
                     title: Text(
@@ -120,7 +127,7 @@ class SettingsSection extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    trailing: AppPopupMenu<ThemeMode>(
+                    trailing: AppPopupMenu<AppThemeType>(
                       trigger: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -140,19 +147,29 @@ class SettingsSection extends StatelessWidget {
                       ),
                       items: [
                         AppMenuItem(
-                          value: ThemeMode.light,
+                          value: AppThemeType.light,
                           title: S.current.lightTheme,
                           icon: Icons.light_mode_outlined,
                         ),
                         AppMenuItem(
-                          value: ThemeMode.dark,
+                          value: AppThemeType.dark,
                           title: S.current.darkTheme,
                           icon: Icons.dark_mode_outlined,
                         ),
                         AppMenuItem(
-                          value: ThemeMode.system,
-                          title: S.current.systemTheme,
-                          icon: Icons.brightness_auto_outlined,
+                          value: AppThemeType.modern,
+                          title: S.current.modernTheme,
+                          icon: Icons.auto_awesome_outlined,
+                        ),
+                        AppMenuItem(
+                          value: AppThemeType.green,
+                          title: S.current.greenTheme,
+                          icon: Icons.eco_outlined,
+                        ),
+                        AppMenuItem(
+                          value: AppThemeType.red,
+                          title: S.current.redTheme,
+                          icon: Icons.theaters_outlined,
                         ),
                       ],
                       onSelected: (theme) {

@@ -84,11 +84,11 @@ class _CircleAction extends StatelessWidget {
           width: 28.w,
           height: 28.h,
           decoration: BoxDecoration(
-            color: Colors.black.withValues(alpha: 0.45),
+            color: appTheme.textPrimary.withValues(alpha: 0.45),
             shape: BoxShape.circle,
             border: Border.all(color: appTheme.grey600.withValues(alpha: 0.4)),
           ),
-          child: Icon(icon, size: 15.r, color: Colors.white),
+          child: Icon(icon, size: 15.r, color: appTheme.surfaceColor),
         ),
       ),
     );

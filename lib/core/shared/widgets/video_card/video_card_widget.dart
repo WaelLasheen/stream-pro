@@ -473,7 +473,7 @@ class _CompactVideoCard extends StatelessWidget {
                           stops: const [0.6, 1],
                           colors: [
                             Colors.transparent,
-                            Colors.black.withValues(alpha: 0.45),
+                            appTheme.textPrimary.withValues(alpha: 0.45),
                           ],
                         ),
                       ),

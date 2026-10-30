@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import '../../domain/entities/notification_type_enum.dart';
 
 extension NotificationTypeVisuals on NotificationType {
@@ -19,20 +20,20 @@ extension NotificationTypeVisuals on NotificationType {
     }
   }
 
-  Color get color {
+  Color color(BuildContext context) {
     switch (this) {
       case NotificationType.like:
-        return Colors.redAccent;
+        return context.appTheme.errorColor;
       case NotificationType.comment:
-        return Colors.blue;
+        return context.appTheme.blueAccent;
       case NotificationType.reply:
-        return Colors.lightBlue;
+        return context.appTheme.blueAccent;
       case NotificationType.playlist:
-        return Colors.teal;
+        return context.appTheme.tealAccent;
       case NotificationType.subscription:
-        return Colors.deepPurple;
+        return context.appTheme.accentPurple;
       case NotificationType.unknown:
-        return Colors.orange;
+        return context.appTheme.warningColor;
     }
   }
 }

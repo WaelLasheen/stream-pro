@@ -16,6 +16,7 @@ import 'package:stream_pro/generated/l10n.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setUpLocators();
+
   FlutterError.onError = (FlutterErrorDetails details) {
     getIt<CrashlyticsService>().logFatal(
       details.exception,
@@ -27,6 +28,7 @@ void main() async {
     getIt<CrashlyticsService>().logFatal(error, stack);
     return true;
   };
+
   runApp(const MyApp());
 }
 
@@ -44,15 +46,21 @@ class MyApp extends StatelessWidget {
           create: (_) => getIt<AppConfigCubit>(),
           child: BlocBuilder<AppConfigCubit, AppConfigState>(
             builder: (_, configState) {
+              final isLightTheme =
+                  configState.currentTheme == AppThemeType.light ||
+                  configState.currentTheme == AppThemeType.green;
+
               return MaterialApp(
                 title: 'StreamPro',
                 debugShowCheckedModeBanner: false,
 
-                // Theme Configuration
-                theme: AppThemes().lightTheme,
-                themeMode: configState.themeMode,
+                // 1. Theme Configuration
+                theme: AppThemes.getTheme(configState.currentTheme),
+                themeMode: isLightTheme ? ThemeMode.light : ThemeMode.dark,
+                themeAnimationCurve: Curves.bounceInOut,
+                themeAnimationDuration: Duration(milliseconds: 300),
 
-                // Localization Configuration
+                // 2. Localization Configuration
                 localizationsDelegates: const [
                   S.delegate,
                   GlobalMaterialLocalizations.delegate,
@@ -62,11 +70,11 @@ class MyApp extends StatelessWidget {
                 supportedLocales: S.delegate.supportedLocales,
                 locale: configState.locale,
 
-                // Navigation & Routing
+                // 3. Navigation & Routing
                 navigatorKey: navigatorKey,
                 onGenerateRoute: getIt<AppRouter>().onGenerateRoute,
                 initialRoute: AppRoutes.splash,
-                navigatorObservers: [routeObserver,routeHistoryObserver],
+                navigatorObservers: [routeObserver, routeHistoryObserver],
               );
             },
           ),

@@ -30,7 +30,7 @@ class SubscribeButton extends StatelessWidget {
         },
         builder: (context, state) {
           final currentIsSubscribed = state.isSubscribed;
-          final theme = Theme.of(context);
+          final textTheme = context.textTheme;
           final appTheme = context.appTheme;
 
           // Target values for smooth animation
@@ -39,8 +39,8 @@ class SubscribeButton extends StatelessWidget {
               : appTheme.primaryColor;
 
           final targetTextColor = currentIsSubscribed
-              ? (theme.textTheme.bodyLarge?.color ?? appTheme.textPrimary)
-              : theme.colorScheme.onPrimary;
+              ? (textTheme.bodyLarge?.color ?? appTheme.textPrimary)
+              : appTheme.onPrimary;
 
           final targetBorderColor = currentIsSubscribed
               ? appTheme.grey500
