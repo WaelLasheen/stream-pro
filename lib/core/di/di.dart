@@ -32,6 +32,7 @@ Future<void> setUpLocators() async {
   setUpFilePicker();
   setUpDeviceInfo();
   setUpGoogleAuth();
+  setUpShare();
   setUpRouter();
   setUpSession();
   setUpAuth();

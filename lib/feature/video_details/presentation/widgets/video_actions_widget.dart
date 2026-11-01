@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stream_pro/core/di/di.dart';
+import 'package:stream_pro/core/services/share/share_service.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/like_button.dart';
 import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
 import 'package:stream_pro/feature/playlist/presentation/widgets/playlist_selector_sheet.dart';
@@ -45,8 +47,17 @@ class VideoActionsWidget extends StatelessWidget {
           ActionButton(
             icon: Icons.share_outlined,
             label: S.current.share,
-            onTap: () {
-              context.showSuccessSnackBar(message: S.current.shareLinkCopied);
+            onTap: () async {
+              try {
+                await getIt<ShareService>().shareVideo(
+                  context,
+                  videoId: videoId,
+                );
+              } catch (_) {
+                if (context.mounted) {
+                  context.showErrorSnackBar(message: S.current.unexpectedError);
+                }
+              }
             },
           ),
           SizedBox(width: 12.w),

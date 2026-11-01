@@ -17,6 +17,8 @@ import 'package:stream_pro/core/services/file_picker/file_picker_service_impl.da
 import 'package:stream_pro/core/services/google_auth/google_auth_service.dart';
 import 'package:stream_pro/core/services/google_auth/google_auth_service_impl.dart';
 import 'package:stream_pro/core/services/file_picker/file_picker_service.dart';
+import 'package:stream_pro/core/services/share/share_service.dart';
+import 'package:stream_pro/core/services/share/share_service_impl.dart';
 import 'package:stream_pro/core/services/storage/local_storage_service.dart';
 import 'package:stream_pro/core/services/storage/local_storage_service_impl.dart';
 import 'package:stream_pro/core/services/storage/secure_storage_service.dart';
@@ -107,4 +109,8 @@ void setUpDeviceInfo() {
 
 void setUpGoogleAuth() {
   getIt.registerLazySingleton<GoogleAuthService>(() => GoogleAuthServiceImpl());
+}
+
+void setUpShare() {
+  getIt.registerLazySingleton<ShareService>(() => const ShareServiceImpl());
 }

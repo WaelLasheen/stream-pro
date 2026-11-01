@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/di/di.dart';
+import 'package:stream_pro/core/services/share/share_service.dart';
 import 'package:stream_pro/core/shared/widgets/app_buttons/app_popup_menu.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
 import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
@@ -64,7 +65,13 @@ class VideoActionsPopup extends StatelessWidget {
         await _handleWatchLater(context);
         break;
       case VideoAction.share:
-        context.showSuccessSnackBar(message: S.current.shareComingSoon);
+        try {
+          await getIt<ShareService>().shareVideo(context, videoId: videoId);
+        } catch (_) {
+          if (context.mounted) {
+            context.showErrorSnackBar(message: S.current.unexpectedError);
+          }
+        }
         break;
     }
   }
@@ -120,7 +127,11 @@ class _Trigger extends StatelessWidget {
         shape: BoxShape.circle,
         border: Border.all(color: appTheme.grey600.withValues(alpha: 0.4)),
       ),
-      child: Icon(Icons.more_vert, size: 16.r, color: context.appTheme.surfaceColor),
+      child: Icon(
+        Icons.more_vert,
+        size: 16.r,
+        color: context.appTheme.surfaceColor,
+      ),
     );
   }
 }
