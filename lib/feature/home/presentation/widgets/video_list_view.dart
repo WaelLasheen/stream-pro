@@ -17,6 +17,7 @@ class VideoListView extends StatelessWidget {
   final String? loadMoreError;
   final Future<void> Function() onRefresh;
   final VoidCallback? onLoadMore;
+  final VoidCallback? onRetry;
 
   const VideoListView({
     super.key,
@@ -25,6 +26,7 @@ class VideoListView extends StatelessWidget {
     this.loadMoreError,
     required this.onRefresh,
     this.onLoadMore,
+    this.onRetry
   });
 
   @override
@@ -47,7 +49,10 @@ class VideoListView extends StatelessWidget {
           itemBuilder: (context, index) {
             if (index >= videos.length) {
               if (loadMoreError != null) {
-                return LoadMoreErrorWidget(message: loadMoreError!);
+                return LoadMoreErrorWidget(
+                  message: loadMoreError!,
+                  onRetry: onRetry,
+                );
               }
 
               return Padding(

@@ -47,9 +47,10 @@ class HomeScreen extends StatelessWidget {
           isLoadingMore: isLoadingMore,
           loadMoreError: loadMoreError ? errorMessage : null,
           onRefresh: () => context.read<HomeCubit>().fetchFeed(),
-          onLoadMore: state is HomeLoadedState && !state.hasReachedMax
+          onLoadMore: state is HomeLoadedState
               ? () => context.read<HomeCubit>().loadMore()
               : null,
+          onRetry: () => context.read<HomeCubit>().loadMore(),
         );
       },
     );
