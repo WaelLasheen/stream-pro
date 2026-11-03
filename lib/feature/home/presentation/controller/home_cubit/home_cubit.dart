@@ -26,26 +26,28 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> loadMore() async {
     final currentState = state;
-    if (currentState is! HomeLoadedState ||
-        currentState.hasReachedMax ||
-        currentState.isLoadingMore) {
+    final currentVideos = currentState.videos;
+
+    if (currentVideos.isEmpty) return;
+
+    if (currentState is HomeLoadedState &&
+        (currentState.hasReachedMax || currentState.isLoadingMore)) {
       return;
     }
 
-    emit(currentState.copyWith(isLoadingMore: true));
+    emit(HomeLoadedState(videos: currentVideos, isLoadingMore: true));
 
     final result = await getFeedUseCase(excludeIds: _loadedIds);
     if (isClosed) return;
 
     result.fold(
-      (failure) => emit(
-        HomeErrorState(videos: currentState.videos, message: failure.message),
-      ),
+      (failure) =>
+          emit(HomeErrorState(videos: currentVideos, message: failure.message)),
       (newVideos) {
-        _loadedIds.addAll(newVideos.map((v) => v.id));
+        _loadedIds.addAll(newVideos.map((video) => video.id));
         emit(
           HomeLoadedState(
-            videos: [...currentState.videos, ...newVideos],
+            videos: [...currentVideos, ...newVideos],
             hasReachedMax: newVideos.isEmpty,
             isLoadingMore: false,
           ),

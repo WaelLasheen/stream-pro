@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stream_pro/core/routing/app_routes.dart';
+import 'package:stream_pro/core/shared/widgets/app_error_widget/load_more_error_widget.dart';
 import 'package:stream_pro/core/shared/widgets/app_refresh_indicator.dart';
 import 'package:stream_pro/core/shared/widgets/load_more_listener.dart';
 import 'package:stream_pro/core/utils/extensions/app_padding.dart';
@@ -13,6 +14,7 @@ import 'package:stream_pro/feature/video_details/presentation/args/video_details
 class VideoListView extends StatelessWidget {
   final List<VideoEntity> videos;
   final bool isLoadingMore;
+  final String? loadMoreError;
   final Future<void> Function() onRefresh;
   final VoidCallback? onLoadMore;
 
@@ -20,12 +22,15 @@ class VideoListView extends StatelessWidget {
     super.key,
     required this.videos,
     this.isLoadingMore = false,
+    this.loadMoreError,
     required this.onRefresh,
     this.onLoadMore,
   });
 
   @override
   Widget build(BuildContext context) {
+    final hasFooter = isLoadingMore || loadMoreError != null;
+
     return AppRefreshIndicator(
       onRefresh: onRefresh,
       child: LoadMoreListener(
@@ -38,9 +43,13 @@ class VideoListView extends StatelessWidget {
             16.w,
             context.bottomNavPadding,
           ),
-          itemCount: videos.length + (isLoadingMore ? 1 : 0),
+          itemCount: videos.length + (hasFooter ? 1 : 0),
           itemBuilder: (context, index) {
             if (index >= videos.length) {
+              if (loadMoreError != null) {
+                return LoadMoreErrorWidget(message: loadMoreError!);
+              }
+
               return Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.h),
                 child: const Center(child: CircularProgressIndicator()),
