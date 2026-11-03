@@ -1,243 +1,381 @@
-# StreamPro
-
-![CI](https://github.com/WaelLasheen/stream-pro/actions/workflows/main.yml/badge.svg)
-![Flutter](https://img.shields.io/badge/Flutter-3.32.7-02569B?logo=flutter)
-![Dart](https://img.shields.io/badge/Dart-3.8-0175C2?logo=dart)
-![Platform](https://img.shields.io/badge/platform-Android-3DDC84?logo=android)
-![License](https://img.shields.io/badge/license-MIT-blue)
-
-A production-grade video streaming client built with Flutter. StreamPro delivers
-HLS video playback, threaded comments, creator tools (upload & manage videos),
-watch history, subscriptions, and push notifications — all on top of a clean,
-scalable, feature-first architecture.
-
----
-
-## Table of Contents
-
-- [Features](#features)
-- [Screenshots](#screenshots)
-- [Architecture](#architecture)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Configuration](#configuration)
-- [Testing](#testing)
-- [CI/CD](#cicd)
-- [Contributing](#contributing)
-- [License](#license)
+<div align="center">
+  <img src="assets/images/app_logo.svg" alt="StreamPro logo" width="112" />
+  <h1>StreamPro</h1>
+  <p><strong>A mobile video platform built around thoughtful product and engineering decisions.</strong></p>
+  <p>Video discovery · Playback · Creator workflows · Community · Account management</p>
+  <p>
+    <a href="https://github.com/WaelLasheen/stream-pro/actions/workflows/main.yml"><img src="https://github.com/WaelLasheen/stream-pro/actions/workflows/main.yml/badge.svg?branch=master" alt="StreamPro CI/CD" /></a>
+    <img src="https://img.shields.io/badge/Flutter-3.32.7-02569B?logo=flutter" alt="Flutter 3.32.7" />
+    <img src="https://img.shields.io/badge/Architecture-Clean%20Architecture-6C5CE7" alt="Clean Architecture" />
+    <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License" /></a>
+  </p>
+</div>
 
 ---
 
-## Features
+## Overview
 
-| Area | Capabilities |
-| --- | --- |
-| **Authentication** | Login & registration, secure token storage, automatic access-token refresh |
-| **Home Feed** | Paginated video feed with category filters and shimmer loading states |
-| **Search** | Video search with category filtering |
-| **Video Playback** | HLS streaming via Chewie with custom controls: double-tap seek (±10s), mute, variable playback speed, fullscreen, auto-hiding UI |
-| **Comments** | Add, edit, delete, optimistic UI, and nested **threaded replies** with per-thread loading/error states |
-| **Profile** | Fetch profile, update name, upload avatar, delete account |
-| **Channels** | Public channel pages, owner channel management, subscribers list |
-| **Subscriptions** | Subscribe/unsubscribe with dedicated toggle state |
-| **Likes** | Like videos and browse liked videos |
-| **Watch History** | Automatic progress tracking with periodic sync and session de-duplication |
-| **Video Management** | Multi-step upload (initiate → upload → complete), thumbnail upload, edit, publish/unpublish, delete |
-| **Downloads** | Download videos to the device gallery with progress reporting |
-| **Notifications** | Firebase Cloud Messaging with foreground, background, and cold-start tap routing |
+**StreamPro** is a collaborative mobile video platform developed with Flutter. It brings together the experiences of watching, discovering, organizing, and publishing video content in one application.
 
----
+The product direction was shaped through hands-on observation of established video platforms: studying interaction patterns, navigation behavior, creator workflows, and the details that make a video experience feel coherent. Those observations informed the product decisions, while the mobile flows, architecture, state handling, API boundaries, and delivery pipeline were designed and implemented as part of this project.
 
-## Screenshots
+This repository contains the **Flutter mobile client**. The project was built collaboratively: the mobile application was developed by **Wael Lasheen**, while a teammate worked on the web client and backend.
 
-| Home | Video Details | Comments | Profile |
-| --- | --- | --- | --- |
-| _`docs/screenshots/home.png`_ | _`docs/screenshots/details.png`_ | _`docs/screenshots/comments.png`_ | _`docs/screenshots/profile.png`_ |
+> The focus of this project is not only the screens users see. A considerable part of the work went into the engineering behind them: state transitions, pagination behavior, session cleanup, navigation history, authenticated networking, and a separated media-upload flow.
 
-> Replace the placeholders above with real screenshots in a `docs/screenshots/` folder.
+## Product capabilities
 
----
+### Viewing and discovery
 
-## Architecture
+- Browse a video feed with paginated loading.
+- Search videos, explore suggestions, and filter by categories.
+- Watch videos with integrated playback controls and related-video content.
+- View channel pages, channel videos, and channel playlists.
+- Like videos, subscribe to channels, and manage saved content.
+- Read comments, participate in threaded replies, and manage personal interactions.
+- Keep track of watch history, liked videos, and Watch Later content through a consolidated library.
+- Download videos to the device.
+- Share a video link that opens the corresponding web experience.
 
-StreamPro follows **Clean Architecture** organized **feature-first**. Each feature
-is an isolated module with three layers:
+### Creator workflows
 
-```
+- Manage the owner channel and its content.
+- Upload videos with metadata and a dedicated thumbnail.
+- Edit video details, update thumbnails, change publishing status, and delete content.
+- Create, edit, delete, and reorder playlists.
+- Add or remove videos from playlists.
+- View channel subscribers and manage creator-side content.
+
+### Accounts and personalization
+
+- Register and sign in using email and password.
+- Sign in with Google; the mobile client obtains a Google ID token and exchanges it with the project backend.
+- View active account sessions, revoke an individual session, or request logout from all sessions.
+- Receive push notifications through Firebase Cloud Messaging and view application notifications fetched from the backend.
+- Use the interface in **Arabic or English**.
+- Choose from **five themes**: Light, Dark, Modern, Green, and Red.
+
+## Engineering highlights
+
+The following sections describe implementation decisions that are particularly important to how StreamPro behaves.
+
+<details>
+<summary><strong>1. Feature-first Clean Architecture</strong></summary>
+
+The codebase is organized by feature, with presentation, domain, and data responsibilities separated inside the feature modules.
+
+A typical feature follows this direction:
+
+```text
 feature/
-├── data/          # Datasources, DTO models, repository implementations
-│   ├── datasources/
-│   ├── models/
-│   └── repositories/
-├── domain/        # Pure business logic — no Flutter dependencies
-│   ├── entities/
-│   ├── repositories/   # Abstract contracts
-│   └── use_cases/      # One class per action
-└── presentation/  # UI + state management
-    ├── controllers/    # Cubits
-    ├── screens/
-    ├── widgets/
-    └── mappers/        # Entity → UI model / params
+└── some_feature/
+    ├── data/
+    │   ├── datasources/
+    │   ├── models/
+    │   └── repositories/
+    ├── domain/
+    │   ├── entities/
+    │   ├── repositories/
+    │   └── use_cases/
+    └── presentation/
+        ├── controllers/
+        ├── screens/
+        └── widgets/
 ```
 
-**Key principles**
+Repository contracts live in the domain layer, while their implementations and remote data sources live in the data layer. Use cases provide feature-level operations to Cubits. Dependencies are assembled through `GetIt`, with feature registration split into DI modules.
 
-- **Layered dependencies** — `presentation → domain ← data`. The domain layer is
-  framework-agnostic and depends only on `dartz`.
-- **Error handling as values** — repositories return `Either<Failure, T>`, so
-  failures are explicit, type-safe, and never thrown across layer boundaries.
-  A single `safeCall` wrapper converts exceptions into `Failure`s.
-- **State management** — `flutter_bloc` / Cubit with immutable, `Equatable`
-  states. Mutations use optimistic updates with rollback and guard against
-  duplicate submissions and emits after disposal.
-- **Dependency injection** — `get_it` with a per-feature registration module;
-  repositories and use cases are lazy singletons, cubits are factories.
-- **Networking** — `dio` with an interceptor pipeline: persistent cookie jar,
-  bearer-token injection, and a queued 401 refresh-and-retry interceptor.
+This structure keeps UI code away from transport details and makes individual features easier to reason about and test.
 
----
+</details>
 
-## Tech Stack
+<details>
+<summary><strong>2. State management is chosen per feature</strong></summary>
 
-| Concern | Package |
-| --- | --- |
-| State management | `flutter_bloc`, `bloc` |
-| Dependency injection | `get_it` |
-| Functional types | `dartz` |
-| Networking | `dio`, `dio_cookie_manager`, `cookie_jar`, `pretty_dio_logger` |
-| Video | `video_player`, `chewie` |
-| Backend services | `firebase_core`, `firebase_auth`, `firebase_messaging`, `firebase_crashlytics` |
-| Notifications | `flutter_local_notifications` |
-| Storage | `flutter_secure_storage`, `shared_preferences` |
-| UI / Media | `flutter_screenutil`, `cached_network_image`, `shimmer`, `flutter_svg`, `gal` |
-| Localization | `intl`, `flutter_localizations`, `intl_utils` |
-| Utilities | `equatable`, `timeago`, `file_picker`, `path_provider`, `curved_navigation_bar` |
+StreamPro intentionally uses more than one state-modeling style. The choice depends on the shape of the feature rather than forcing every screen into one pattern.
 
----
+- **Sealed state hierarchies** are used when the UI moves between distinct modes, such as initial, loading, loaded, empty, and failure. Examples include the home feed, comments, notifications, and video details.
+- **A single immutable state object with `copyWith`** is used when several independent values coexist and can change without representing mutually exclusive screen modes. The application configuration state, for example, keeps the selected locale and theme together.
+- Some features use a hybrid: a shared state base carries existing data, while concrete state types represent the current operation or outcome. This helps preserve content when an operation fails.
 
-## Project Structure
+The goal is to make state transitions explicit while keeping the state shape appropriate to the feature.
 
+</details>
+
+<details>
+<summary><strong>3. Centralized error handling and typed failures</strong></summary>
+
+The data layer uses `Either<Failure, T>` to return expected operation results. The shared `safeCall` helper wraps asynchronous operations and maps known exceptions into feature-facing failures, with an unknown-failure fallback.
+
+This reduces repeated `try/catch` and exception-to-failure mapping across repositories. The project also defines application-specific exception and failure types for cases such as server, cache, gallery, and Google authentication errors.
+
+The UI is designed around explicit loading, empty, and error states. Shimmer placeholders are used while content is loading, while empty and failure states have dedicated views.
+
+For paginated lists, some features preserve previously loaded content when a later page fails. Comments and notifications, for example, can keep the current items visible and expose a retry action for the next page instead of replacing the whole screen with an initial-load error.
+
+</details>
+
+<details>
+<summary><strong>4. Two deliberately separate HTTP clients</strong></summary>
+
+The application uses two different HTTP service abstractions for two different trust boundaries.
+
+| Client          | Responsibility                                                                              |
+| --------------- | ------------------------------------------------------------------------------------------- |
+| `ApiService`    | Communicates with the StreamPro backend.                                                    |
+| `RawApiService` | Sends requests to external media services without reusing the authenticated backend client. |
+
+The main `ApiService` is configured with the backend base URL and the application's networking behavior, including:
+
+- Bearer access-token attachment.
+- Cookie persistence and cleanup.
+- A refresh interceptor that retries requests after an authentication failure.
+- Debug-only request and response logging.
+
+`RawApiService` uses a separate `Dio` instance. It is not configured with the backend base URL, application access-token interceptor, refresh interceptor, or backend cookie manager.
+
+This separation is used in the Cloudinary upload flow: the backend issues the upload signature and parameters, and the mobile client sends the media request directly to Cloudinary through the raw client. The external upload request does not need the application's backend access token or backend cookies.
+
+</details>
+
+<details>
+<summary><strong>5. Signed media-upload workflow</strong></summary>
+
+The current upload flow is coordinated between the mobile client, the backend, and Cloudinary:
+
+```mermaid
+sequenceDiagram
+    participant App as Flutter App
+    participant API as StreamPro Backend
+    participant Cloud as Cloudinary
+
+    App->>API: Initiate video upload
+    API-->>App: Video ID + signed upload parameters
+    App->>Cloud: Upload video using RawApiService
+    Cloud-->>App: Video upload result
+    App->>Cloud: Upload thumbnail using RawApiService
+    Cloud-->>App: Thumbnail upload result
+    App->>API: Confirm video upload
+    App->>API: Confirm thumbnail upload
+    API-->>App: Updated upload state
 ```
+
+The backend remains responsible for issuing the signed parameters and receiving the completion details. The mobile client handles the media transfer without attaching its authenticated backend session to the Cloudinary request.
+
+**Current limitation:** the video is uploaded as one file in a single upload operation. Resumable/chunked transfer is planned and is not yet implemented.
+
+</details>
+
+<details>
+<summary><strong>6. Navigation history and context-aware routing</strong></summary>
+
+Navigation behavior is handled with a route observer and a route-history observer.
+
+One concrete case is channel navigation. Before opening a channel, the navigation extension checks whether that same channel is already present in the active route history. If it is, the app pops back to the existing route instead of pushing another copy. If it is not, the channel route is pushed normally.
+
+This avoids unnecessary duplicate channel pages while preserving the useful navigation history underneath the target route.
+
+Application notifications also use their payload type to select an appropriate destination:
+
+- A **like** opens the related video.
+- A **comment or reply** opens that video with the comments tab selected.
+- A **subscription** opens the owner-channel area at the relevant tab.
+
+The external FCM/system-notification tap flow currently opens the in-app notifications screen after the app is ready. Routing directly from an external push payload to its original video, comment, or channel is still planned.
+
+</details>
+
+<details>
+<summary><strong>7. Session-aware cache management</strong></summary>
+
+Some server-backed values are cached in memory to avoid asking the backend for the same information repeatedly.
+
+For example, the Watch Later repository maintains a `Map<String, bool>` keyed by video ID. Once the app knows whether a video is in Watch Later, later checks can use the cached value. When the value is not known, the repository asks the backend and stores the result. Successful add/remove operations update the cached value.
+
+The repository registers itself with `SessionCacheRegistry`. During session cleanup, registered caches are cleared so one account's cached state is not reused after another account signs in.
+
+The session cleanup service also coordinates cookie cleanup, secure and local storage cleanup, notification cancellation, Firebase/Google sign-out, and Flutter image-cache cleanup. The user's selected locale and theme are preserved across this cleanup.
+
+</details>
+
+<details>
+<summary><strong>8. Optimistic interactions</strong></summary>
+
+Several interactions update the UI before the remote operation finishes, then reconcile the result.
+
+Examples include playlist updates such as adding/removing a video, reordering playlist items, and editing playlist details. Comment and profile operations also use optimistic updates in selected flows.
+
+Where the remote operation fails, the relevant feature can restore the previously held data and expose the failure. This keeps common interactions responsive without silently treating a failed server operation as successful.
+
+</details>
+
+## Architecture at a glance
+
+```mermaid
+flowchart TD
+    UI["Screens and Widgets"] --> C["Cubit / State"]
+    C --> U["Use Cases"]
+    U --> R["Repository Contract"]
+    R --> RI["Repository Implementation"]
+    RI --> DS["Remote Data Source"]
+    DS --> API["ApiService"]
+    DS --> RAW["RawApiService"]
+    API --> BE["StreamPro Backend"]
+    RAW --> CLOUD["Cloudinary"]
+```
+
+## Technology stack
+
+| Area                      | Technologies                                                     |
+| ------------------------- | ---------------------------------------------------------------- |
+| Mobile                    | Flutter, Dart                                                    |
+| State management          | Bloc, Cubit, Equatable                                           |
+| Architecture and DI       | Clean Architecture, Repository Pattern, GetIt                    |
+| Networking                | Dio, interceptors, cookie manager                                |
+| Functional error handling | Dartz `Either`                                                   |
+| Authentication            | Backend email/password authentication, Google Sign-In            |
+| Firebase services         | Firebase Core, Cloud Messaging, Crashlytics                      |
+| Video                     | `video_player`, Chewie                                           |
+| UI and localization       | Material 3, ScreenUtil, Shimmer, Flutter Localizations, `intl`   |
+| Local persistence         | Shared Preferences, Flutter Secure Storage, cookie storage       |
+| Device integrations       | Share Plus, file picker, gallery integration, device information |
+| Automation                | GitHub Actions, Firebase App Distribution, Telegram delivery     |
+
+## Project structure
+
+```text
 lib/
-├── main.dart                     # App entry: DI bootstrap, error handlers, MaterialApp
-├── core/                         # Cross-cutting, feature-agnostic code
-│   ├── di/                       # get_it setup + per-feature modules
-│   ├── networking/               # ApiService, Dio interceptors, endpoint constants
-│   ├── error/                    # Exceptions, Failures, safeCall
-│   ├── routing/                  # AppRouter, route names, observers, 404 route
-│   ├── theme/                    # AppTheme extension, ThemeData, typography
-│   ├── services/                 # Storage, file picker, gallery abstractions
-│   ├── notifications/            # FCM + local notification service
-│   ├── shared/                   # Reusable widgets (errors, inputs, video cards…)
-│   └── utils/                    # Extensions, constants, helpers, bloc observer
-├── feature/                      # 15 self-contained feature modules
-│   ├── auth/  home/  search/  category/  subscriptions/  Likes/
-│   ├── video_details/  comments/  watch_history/  video_management/
-│   ├── channel/  owner_channel/  profile/  notifications/  main/
-├── generated/  l10n/             # Generated localizations (AR / EN)
-└── firebase_options.dart
+├── core/
+│   ├── app_config/
+│   ├── di/
+│   ├── error/
+│   ├── networking/
+│   ├── notifications/
+│   ├── routing/
+│   ├── services/
+│   ├── shared/
+│   ├── theme/
+│   └── utils/
+├── feature/
+│   ├── Likes/
+│   ├── auth/
+│   ├── category/
+│   ├── channel/
+│   ├── comments/
+│   ├── home/
+│   ├── library/
+│   ├── notifications/
+│   ├── owner_channel/
+│   ├── playlist/
+│   ├── profile/
+│   ├── search/
+│   ├── sessions/
+│   ├── subscriptions/
+│   ├── video_details/
+│   ├── video_management/
+│   ├── watch_history/
+│   └── watch_later/
+├── generated/
+└── l10n/
 ```
 
----
+Each feature owns its models, domain entities, repository contract, use cases, presentation state, and UI components where applicable. Shared infrastructure and reusable widgets live under `core`.
 
-## Getting Started
+## Getting started
 
-### Prerequisites
+### Requirements
 
-- **Flutter** `3.32.7` (stable channel)
-- **Dart** `^3.8.1`
-- **Java JDK** `18` (for Android builds)
-- **Android SDK** — `minSdk 23`, `compileSdk 36`
-- A configured **Firebase** project (see [Configuration](#configuration))
+- Flutter **3.32.7** (the version currently used by the CI workflow).
+- Android development toolchain configured through Flutter.
+- Access to a compatible StreamPro backend.
+- Firebase and Google OAuth configuration when using the corresponding integrations.
 
-### Installation
+### Run locally
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/WaelLasheen/stream-pro.git
+   cd stream-pro
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   flutter pub get
+   ```
+
+3. Check the backend endpoint in `lib/core/networking/api_constants.dart` and make sure it points to the backend you intend to use.
+
+4. Configure Firebase for your own application when needed. The project uses `firebase_options.dart` and the Android Firebase configuration for its Firebase integrations.
+
+5. Supply the Google server client ID when running with Google Sign-In:
+
+   ```bash
+   flutter run --dart-define=GOOGLE_SERVER_CLIENT_ID=YOUR_SERVER_CLIENT_ID
+   ```
+
+6. Run the app:
+
+   ```bash
+   flutter run
+   ```
+
+### Build an Android release
 
 ```bash
-git clone https://github.com/WaelLasheen/stream-pro.git
-cd stream-pro
-flutter pub get
-```
-
-### Run
-
-```bash
-flutter run
-```
-
-### Build
-
-```bash
-# Split ABI release APKs
 flutter build apk --release --split-per-abi
 ```
 
----
-
-## Configuration
-
-- **API base URL** — set in `lib/core/networking/api_constants.dart`.
-- **Firebase** — provide platform options via `lib/firebase_options.dart`
-  (generated with the FlutterFire CLI). Android is currently configured;
-  additional platforms can be enabled by extending `DefaultFirebaseOptions`.
-- **Localization** — ARB files live in `lib/l10n/` (`intl_en.arb`,
-  `intl_ar.arb`). After editing, regenerate with:
-  ```bash
-  flutter gen-l10n
-  ```
-- **Theming** — design tokens are defined in
-  `lib/core/theme/app_themes.dart` and exposed as a `ThemeExtension`
-  (`context.appTheme`).
-
----
-
-## Testing
-
-```bash
-# Static analysis
-flutter analyze
-
-# Unit / widget tests
-flutter test
-```
-
----
+The current CI workflow builds Android release APKs. An iOS build is not currently part of that workflow.
 
 ## CI/CD
 
-The GitHub Actions pipeline (`.github/workflows/main.yml`) runs on every push
-and pull request to `main` / `master`:
+The GitHub Actions workflow runs on pushes and pull requests targeting `main` or `master`.
 
-1. Checkout and set up Java 18 + Flutter 3.32.7 (with caching)
-2. `flutter pub get`
-3. `flutter analyze`
-4. `flutter test`
-5. Build split-ABI release APKs
-6. Upload the APK as a build artifact
-7. Distribute to **Firebase App Distribution**
-8. Send a **Telegram** build notification
+Its current pipeline:
 
----
+1. Checks out the repository and configures Java and Flutter.
+2. Installs Flutter dependencies.
+3. Runs `flutter analyze`.
+4. Runs `flutter test`.
+5. Builds release APKs split by ABI.
+6. Uploads the ARM64 APK as a GitHub Actions artifact.
+7. Distributes the APK through Firebase App Distribution.
+8. Sends the APK to the configured Telegram chat.
 
-## Contributing
+Secrets for Firebase and Telegram are configured through GitHub Actions repository secrets.
 
-1. Fork the repository and create a feature branch.
-2. Follow the existing **feature-first Clean Architecture** and the lint rules
-   in `analysis_options.yaml`.
-3. Keep the domain layer free of Flutter dependencies and return
-   `Either<Failure, T>` from repositories.
-4. Ensure `flutter analyze` and `flutter test` pass.
-5. Open a pull request with a clear description.
+[View the GitHub Actions workflow](.github/workflows/main.yml).
 
-Commit messages follow **Conventional Commits** (`feat:`, `fix:`, `refactor:`,
-`style:`, `chore:`).
+## Testing
 
----
+Run the current automated test suite with:
+
+```bash
+flutter test
+```
+
+The existing tests cover selected playlist models and Cubit behavior, owner-playlist behavior, and profile/account actions. The project has a broader feature surface than the current test suite, so expanding coverage for networking, authentication refresh, pagination, session cleanup, notification routing, and upload failure scenarios is an important next step.
+
+## Roadmap
+
+The following items are planned improvements; they should not be read as already shipped functionality.
+
+- [ ] **Payload-aware push navigation:** open the exact video, comment, reply, or channel associated with an external FCM/system notification.
+- [ ] **App Links and deep links:** open shared video URLs directly in StreamPro when the app is installed, while retaining a web fallback.
+- [ ] **Canonical URL alignment:** define a consistent URL strategy between the mobile app, web client, and backend.
+- [ ] **Resumable chunked uploads:** split large video uploads into chunks, track acknowledged progress, retry failed chunks, and resume an interrupted upload instead of restarting the entire file.
+- [ ] **Consistent pagination recovery:** standardize retained-content errors and retry controls across every paginated feature, including the home feed.
+- [ ] **Playback-position continuity:** resume a video from its last known position across all relevant entry points, not only the watch-history flow.
+- [ ] **Broader automated coverage:** add tests for API interceptors, token-refresh concurrency, repository caching, notification routing, and upload failures.
+
+## Collaboration and ownership
+
+StreamPro was developed collaboratively. This repository focuses on the Flutter mobile application; the web client and backend are maintained separately as part of the same project.
+
+For questions about the mobile implementation, you can reach **Wael Lasheen** through [GitHub](https://github.com/WaelLasheen).
 
 ## License
 
-Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for details.
-
----
-
-<p align="center">Built with Flutter 💙</p>
+This project is licensed under the [MIT License](LICENSE).
