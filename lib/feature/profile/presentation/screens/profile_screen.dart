@@ -19,6 +19,9 @@ import 'package:stream_pro/feature/profile/presentation/widgets/profile_header_c
 import 'package:stream_pro/feature/profile/presentation/widgets/profile_shimmer.dart';
 import 'package:stream_pro/feature/profile/presentation/widgets/profile_stat_card.dart';
 import 'package:stream_pro/feature/profile/presentation/widgets/settings_section.dart';
+import 'package:stream_pro/feature/sessions/presentation/controllers/sessions_cubit/sessions_cubit.dart';
+import 'package:stream_pro/feature/sessions/presentation/controllers/sessions_cubit/sessions_state.dart';
+import 'package:stream_pro/feature/sessions/presentation/widgets/sessions_operation_guard.dart';
 import 'package:stream_pro/feature/sessions/presentation/widgets/sessions_view.dart';
 import 'package:stream_pro/generated/l10n.dart';
 
@@ -87,6 +90,7 @@ class ProfileScreen extends StatelessWidget {
         },
         builder: (context, state) {
           final profile = state.profile;
+          final isLoggingOut = state is ProfileLoaded && state.isLoggingOut;
 
           Widget overviewBody;
           if (state is ProfileError && profile == null) {
@@ -101,7 +105,6 @@ class ProfileScreen extends StatelessWidget {
           } else {
             final isSaving = state is ProfileLoaded && state.isSaving;
             final isDeleting = state is ProfileLoaded && state.isDeleting;
-            final isLoggingOut = state is ProfileLoaded && state.isLoggingOut;
 
             overviewBody = AppRefreshIndicator(
               onRefresh: () => context.read<ProfileCubit>().fetchProfile(),
@@ -151,26 +154,47 @@ class ProfileScreen extends StatelessWidget {
             );
           }
 
-          return Scaffold(
-            backgroundColor: appTheme.backgroundColor,
-            appBar: AppBar(
-              title: Text(S.current.profileTitle),
-              actions: [
-                if (profile != null)
-                  IconButton(
-                    tooltip: S.current.editProfilePage,
-                    icon: const Icon(Icons.edit_outlined),
-                    onPressed: () => _openEditSheet(context, profile),
+          return BlocBuilder<SessionsCubit, SessionsState>(
+            builder: (context, sessionsState) {
+              final isLoggingOutAll =
+                  sessionsState is SessionsLoaded &&
+                  sessionsState.isLoggingOutAll;
+
+              return SessionsOperationGuard(
+                isBlocking: isLoggingOutAll,
+                child: PopScope(
+                  canPop: !isLoggingOut,
+                  child: IgnorePointer(
+                    ignoring: isLoggingOut,
+                    child: Scaffold(
+                      backgroundColor: appTheme.backgroundColor,
+                      appBar: AppBar(
+                        title: Text(S.current.profileTitle),
+                        actions: [
+                          if (profile != null)
+                            IconButton(
+                              tooltip: S.current.editProfilePage,
+                              icon: const Icon(Icons.edit_outlined),
+                              onPressed: isLoggingOut
+                                  ? null
+                                  : () => _openEditSheet(context, profile),
+                            ),
+                        ],
+                        bottom: TabBar(
+                          tabs: [
+                            Tab(text: S.current.profileTitle),
+                            Tab(text: S.current.sessionsTab),
+                          ],
+                        ),
+                      ),
+                      body: TabBarView(
+                        children: [overviewBody, const SessionsView()],
+                      ),
+                    ),
                   ),
-              ],
-              bottom: TabBar(
-                tabs: [
-                  Tab(text: S.current.profileTitle),
-                  Tab(text: S.current.sessionsTab),
-                ],
-              ),
-            ),
-            body: TabBarView(children: [overviewBody, const SessionsView()]),
+                ),
+              );
+            },
           );
         },
       ),

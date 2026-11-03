@@ -37,45 +37,59 @@ class SessionCleanupServiceImpl implements SessionCleanupService {
 
   @override
   Future<void> clearSession() async {
-    final savedLocale = await _readPreference(AppConfigCubit.localeKey);
-    final savedTheme = await _readPreference(AppConfigCubit.themeKey);
+    final (savedLocale, savedTheme) = await (
+      _readPreference(AppConfigCubit.localeKey),
+      _readPreference(AppConfigCubit.themeKey),
+    ).wait;
 
-    await _attempt('clear cookies', _apiService.clearCookies);
-    await _attempt('clear secure storage', _secureStorage.clearAll);
-    await _attempt('clear local storage', _localStorage.clearAll);
+    final localStorageCleanup = _attempt(
+      'clear local storage',
+      _localStorage.clearAll,
+    );
 
+    final otherCleanup = Future.wait<void>([
+      _attempt('clear cookies', _apiService.clearCookies),
+      _attempt('clear secure storage', _secureStorage.clearAll),
+      _attempt(
+        'cancel displayed notifications',
+        _notificationService.cancelAllNotifications,
+      ),
+      _attempt('sign out firebase', FirebaseAuth.instance.signOut),
+      _attempt('sign out google', _googleAuthService.signOut),
+    ]);
+
+    _sessionCacheRegistry.clearAll();
+    PaintingBinding.instance.imageCache.clear();
+    PaintingBinding.instance.imageCache.clearLiveImages();
+
+    await localStorageCleanup;
+
+    final restoreTasks = <Future<void>>[];
     if (savedLocale != null) {
-      await _attempt(
-        'restore locale',
-        () => _localStorage.writeString(
-          key: AppConfigCubit.localeKey,
-          value: savedLocale,
+      restoreTasks.add(
+        _attempt(
+          'restore locale',
+          () => _localStorage.writeString(
+            key: AppConfigCubit.localeKey,
+            value: savedLocale,
+          ),
         ),
       );
     }
     if (savedTheme != null) {
-      await _attempt(
-        'restore theme',
-        () => _localStorage.writeString(
-          key: AppConfigCubit.themeKey,
-          value: savedTheme,
+      restoreTasks.add(
+        _attempt(
+          'restore theme',
+          () => _localStorage.writeString(
+            key: AppConfigCubit.themeKey,
+            value: savedTheme,
+          ),
         ),
       );
     }
+    await Future.wait<void>(restoreTasks);
 
-    await _attempt(
-      'cancel displayed notifications',
-      _notificationService.cancelAllNotifications,
-    );
-    await _attempt('sign out firebase', FirebaseAuth.instance.signOut);
-    await _attempt('sign out google', _googleAuthService.signOut);
-    await _attempt(
-      'clear session caches',
-      () async => _sessionCacheRegistry.clearAll(),
-    );
-
-    PaintingBinding.instance.imageCache.clear();
-    PaintingBinding.instance.imageCache.clearLiveImages();
+    await otherCleanup;
   }
 
   Future<String?> _readPreference(String key) async {

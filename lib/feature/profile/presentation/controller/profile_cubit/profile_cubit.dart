@@ -106,7 +106,15 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(ProfileLoaded(profile: currentProfile, isLoggingOut: true));
     }
 
-    await logoutUseCase();
+    final result = await logoutUseCase();
+
+    if (result.isLeft()) {
+      final message = result.fold((failure) => failure.message, (_) => '');
+      if (isClosed) return;
+      emit(ProfileError(message: message, profile: currentProfile));
+      return;
+    }
+
     await sessionCleanupService.clearSession();
     if (isClosed) return;
 

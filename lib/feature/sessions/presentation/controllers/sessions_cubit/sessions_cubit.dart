@@ -31,10 +31,12 @@ class SessionsCubit extends Cubit<SessionsState> {
   }
 
   Future<void> fetchSessions() async {
+    if (_isLoggingOutAll) return;
+
     emit(const SessionsLoading());
 
     final result = await _getSessionsUseCase();
-    if (isClosed) return;
+    if (isClosed || _isLoggingOutAll) return;
 
     result.fold((failure) => emit(SessionsError(message: failure.message)), (
       sessions,
@@ -47,6 +49,8 @@ class SessionsCubit extends Cubit<SessionsState> {
   }
 
   Future<void> revokeSession(SessionEntity session) async {
+    if (_isLoggingOutAll) return;
+
     final currentSessions = state.sessions;
     final index = currentSessions.indexWhere((item) => item.id == session.id);
     if (index == -1) return;
@@ -60,7 +64,7 @@ class SessionsCubit extends Cubit<SessionsState> {
     );
 
     final result = await _revokeSessionUseCase(session.id);
-    if (isClosed) return;
+    if (isClosed || _isLoggingOutAll) return;
 
     result.fold((failure) {
       final latestSessions = [...state.sessions];
@@ -74,9 +78,18 @@ class SessionsCubit extends Cubit<SessionsState> {
   Future<void> logoutAll() async {
     if (_isLoggingOutAll) return;
 
-    emit(SessionsLoaded(sessions: state.sessions, isLoggingOutAll: true));
+    final currentSessions = state.sessions;
+    emit(SessionsLoaded(sessions: currentSessions, isLoggingOutAll: true));
 
-    await _logoutAllSessionsUseCase();
+    final result = await _logoutAllSessionsUseCase();
+
+    if (result.isLeft()) {
+      final message = result.fold((failure) => failure.message, (_) => '');
+      if (isClosed) return;
+      emit(SessionsError(message: message, sessions: currentSessions));
+      return;
+    }
+
     await _sessionCleanupService.clearSession();
     if (isClosed) return;
 
