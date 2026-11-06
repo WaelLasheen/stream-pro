@@ -117,6 +117,7 @@ class ChannelEditorForm extends StatelessWidget {
                           label: S.current.description,
                           hint: S.current.tellViewersAboutYourChannel,
                           textInputAction: TextInputAction.newline,
+                          keyboardType: TextInputType.multiline,
                           maxLines: 4,
                           minLines: 3,
                         ),
