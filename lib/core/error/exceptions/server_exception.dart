@@ -56,5 +56,5 @@ class ServerException extends AppException {
   }
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [message, statusCode];
 }
