@@ -11,10 +11,6 @@ class UpdateProfileUseCase {
     String? name,
     String? avatarPath,
   }) async {
-    assert(name != null || avatarPath != null, 'Nothing to update');
-    return await _repository.updateProfile(
-      name: name,
-      avatarPath: avatarPath,
-    );
+    return await _repository.updateProfile(name: name, avatarPath: avatarPath);
   }
 }

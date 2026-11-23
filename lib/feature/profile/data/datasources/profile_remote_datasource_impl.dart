@@ -18,20 +18,12 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
 
   @override
   Future<ProfileModel> updateProfile({String? name, String? avatarPath}) async {
-    assert(
-      name != null || avatarPath != null,
-      'Provide at least name or avatarPath',
-    );
-
     dynamic payload;
     if (avatarPath != null && avatarPath.isNotEmpty) {
       final fileName = avatarPath.split('/').last;
       payload = FormData.fromMap({
         if (name != null) 'name': name,
-        'avatar': await MultipartFile.fromFile(
-          avatarPath,
-          filename: fileName,
-        ),
+        'avatar': await MultipartFile.fromFile(avatarPath, filename: fileName),
       });
     } else {
       payload = {'name': name};
@@ -43,10 +35,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
     );
     final envelope = response.data as Map<String, dynamic>?;
     final data = envelope?['data'];
-    if (data is Map<String, dynamic>) {
-      return ProfileModel.fromJson(data);
-    }
-    return getProfile();
+    return ProfileModel.fromJson(data);
   }
 
   @override
