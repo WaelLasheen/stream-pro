@@ -75,15 +75,31 @@ class ProfileScreen extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: BlocConsumer<ProfileCubit, ProfileState>(
-        listenWhen: (previous, current) =>
-            current is ProfileDeleted ||
-            current is ProfileLoggedOut ||
-            (current is ProfileError && current.profile != null),
+        listenWhen: (previous, current) {
+          final updateSucceeded =
+              previous is ProfileLoaded &&
+              previous.isSaving &&
+              current is ProfileLoaded &&
+              !current.isSaving;
+
+          return current is ProfileDeleted ||
+              current is ProfileLoggedOut ||
+              (current is ProfileError && current.profile != null) ||
+              updateSucceeded;
+        },
         listener: (context, state) {
           if (state is ProfileDeleted || state is ProfileLoggedOut) {
             context.pushAndClearStack(AppRoutes.login);
             return;
           }
+
+          if (state is ProfileLoaded && !state.isSaving) {
+            context.showSuccessSnackBar(
+              message: S.current.profileUpdatedSuccessfully,
+            );
+            return;
+          }
+
           if (state is ProfileError) {
             context.showErrorSnackBar(message: state.message);
           }
@@ -91,6 +107,9 @@ class ProfileScreen extends StatelessWidget {
         builder: (context, state) {
           final profile = state.profile;
           final isLoggingOut = state is ProfileLoaded && state.isLoggingOut;
+          final isDeleting = state is ProfileLoaded && state.isDeleting;
+
+          final isProfileOperationInProgress = isLoggingOut || isDeleting;
 
           Widget overviewBody;
           if (state is ProfileError && profile == null) {
@@ -163,9 +182,9 @@ class ProfileScreen extends StatelessWidget {
               return SessionsOperationGuard(
                 isBlocking: isLoggingOutAll,
                 child: PopScope(
-                  canPop: !isLoggingOut,
+                  canPop: !isProfileOperationInProgress,
                   child: IgnorePointer(
-                    ignoring: isLoggingOut,
+                    ignoring: isProfileOperationInProgress,
                     child: Scaffold(
                       backgroundColor: appTheme.backgroundColor,
                       appBar: AppBar(
@@ -175,7 +194,7 @@ class ProfileScreen extends StatelessWidget {
                             IconButton(
                               tooltip: S.current.editProfilePage,
                               icon: const Icon(Icons.edit_outlined),
-                              onPressed: isLoggingOut
+                              onPressed: isProfileOperationInProgress
                                   ? null
                                   : () => _openEditSheet(context, profile),
                             ),

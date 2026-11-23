@@ -8,7 +8,6 @@ import 'package:stream_pro/core/shared/widgets/app_buttons/app_button.dart';
 import 'package:stream_pro/core/shared/widgets/app_fields/app_form_field.dart';
 import 'package:stream_pro/core/shared/widgets/network_image/app_circle_network_image.dart';
 import 'package:stream_pro/core/utils/extensions/get_app_theme.dart';
-import 'package:stream_pro/core/utils/extensions/snack_bar_extension.dart';
 import 'package:stream_pro/feature/profile/domain/entities/profile_entity.dart';
 import 'package:stream_pro/feature/profile/presentation/controller/profile_cubit/profile_cubit.dart';
 import 'package:stream_pro/feature/profile/presentation/controller/profile_cubit/profile_state.dart';
@@ -72,15 +71,22 @@ class _ProfileEditSheetState extends State<ProfileEditSheet> {
     final appTheme = context.appTheme;
 
     return BlocListener<ProfileCubit, ProfileState>(
-      listenWhen: (previous, current) =>
-          previous is ProfileLoaded &&
-          previous.isSaving &&
-          current is ProfileLoaded &&
-          !current.isSaving,
-      listener: (context, _) {
-        context.showSuccessSnackBar(
-          message: S.current.profileUpdatedSuccessfully,
-        );
+      listenWhen: (previous, current) {
+        final saveStarted =
+            previous is ProfileLoaded &&
+            !previous.isSaving &&
+            current is ProfileLoaded &&
+            current.isSaving;
+
+        final saveFinished =
+            previous is ProfileLoaded &&
+            previous.isSaving &&
+            ((current is ProfileLoaded && !current.isSaving) ||
+                (current is ProfileError && current.profile != null));
+
+        return saveStarted || saveFinished;
+      },
+      listener: (context, state) {
         Navigator.of(context).pop();
       },
       child: Padding(
@@ -224,7 +230,7 @@ class _ProfileEditSheetState extends State<ProfileEditSheet> {
                                 width: double.infinity,
                                 borderRadius: 14.r,
                                 onPressed: () {
-                                  if (isSaving) Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
                                 },
                                 textColor: appTheme.grey800,
                                 border: BorderSide(color: appTheme.grey500),
