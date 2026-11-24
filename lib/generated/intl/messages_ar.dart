@@ -61,7 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "anyoneCanWatchThisPlaylist": MessageLookupByLibrary.simpleMessage(
       "يمكن لأي شخص مشاهدة هذه القائمة",
     ),
-    "appTitle": MessageLookupByLibrary.simpleMessage("StreamPro"),
+    "appTitle": MessageLookupByLibrary.simpleMessage("Stream Pro"),
     "appVersionLabel": MessageLookupByLibrary.simpleMessage("إصدار التطبيق"),
     "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
     "badCertificate": MessageLookupByLibrary.simpleMessage("شهادة غير صالحة"),
@@ -408,7 +408,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "somethingWentWrong": MessageLookupByLibrary.simpleMessage("حدث خطأ ما"),
     "startUpload": MessageLookupByLibrary.simpleMessage("بدء الرفع"),
-    "streamPro": MessageLookupByLibrary.simpleMessage("StreamPro"),
+    "streamPro": MessageLookupByLibrary.simpleMessage("Stream Pro"),
     "subscribe": MessageLookupByLibrary.simpleMessage("اشتراك"),
     "subscribed": MessageLookupByLibrary.simpleMessage("مشترك"),
     "subscribers": MessageLookupByLibrary.simpleMessage("مشترك"),

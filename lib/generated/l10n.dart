@@ -1254,9 +1254,9 @@ class S {
     );
   }
 
-  /// `StreamPro`
+  /// `Stream Pro`
   String get streamPro {
-    return Intl.message('StreamPro', name: 'streamPro', desc: '', args: []);
+    return Intl.message('Stream Pro', name: 'streamPro', desc: '', args: []);
   }
 
   /// `Liked Videos`
@@ -1614,9 +1614,9 @@ class S {
     return Intl.message('Welcome to', name: 'welcomeTo', desc: '', args: []);
   }
 
-  /// `StreamPro`
+  /// `Stream Pro`
   String get appTitle {
-    return Intl.message('StreamPro', name: 'appTitle', desc: '', args: []);
+    return Intl.message('Stream Pro', name: 'appTitle', desc: '', args: []);
   }
 
   /// `Email is required`

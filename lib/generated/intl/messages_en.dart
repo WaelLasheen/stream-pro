@@ -61,7 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "anyoneCanWatchThisPlaylist": MessageLookupByLibrary.simpleMessage(
       "Anyone can watch this playlist",
     ),
-    "appTitle": MessageLookupByLibrary.simpleMessage("StreamPro"),
+    "appTitle": MessageLookupByLibrary.simpleMessage("Stream Pro"),
     "appVersionLabel": MessageLookupByLibrary.simpleMessage("App version"),
     "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
     "badCertificate": MessageLookupByLibrary.simpleMessage("Bad Certificate"),
@@ -410,7 +410,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Something went wrong",
     ),
     "startUpload": MessageLookupByLibrary.simpleMessage("Start Upload"),
-    "streamPro": MessageLookupByLibrary.simpleMessage("StreamPro"),
+    "streamPro": MessageLookupByLibrary.simpleMessage("Stream Pro"),
     "subscribe": MessageLookupByLibrary.simpleMessage("Subscribe"),
     "subscribed": MessageLookupByLibrary.simpleMessage("Subscribed"),
     "subscribers": MessageLookupByLibrary.simpleMessage("subscribers"),

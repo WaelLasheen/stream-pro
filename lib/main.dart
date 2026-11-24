@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
                   configState.currentTheme == AppThemeType.green;
 
               return MaterialApp(
-                title: 'StreamPro',
+                title: 'Stream Pro',
                 debugShowCheckedModeBanner: false,
 
                 // 1. Theme Configuration
