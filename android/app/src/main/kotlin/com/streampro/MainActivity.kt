@@ -1,4 +1,4 @@
-package com.example.stream_pro
+package com.streampro
 
 import io.flutter.embedding.android.FlutterActivity
 
