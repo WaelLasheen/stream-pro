@@ -1,72 +1,44 @@
-name: StreamPro CI/CD Pipeline
+name: StreamPro CI
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
+
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
+
+permissions:
+  contents: read
 
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository code
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # Step 2: Setup Java JDK environment for Android build
       - name: Setup Java JDK
         uses: actions/setup-java@v4
         with:
-          distribution: 'zulu'
+          distribution: zulu
           java-version: '18'
 
-      # Step 3: Setup Flutter SDK with caching enabled
       - name: Setup Flutter SDK
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.32.7'
-          channel: 'stable'
+          channel: stable
           cache: true
 
-      # Step 4: Install Flutter project dependencies
       - name: Install Dependencies
         run: flutter pub get
 
-      # Step 5: Perform static code analysis
       - name: Analyze Code
         run: flutter analyze
 
-      # Step 6: Run unit tests
-      - name: Run Unit Tests
+      - name: Run Tests
         run: flutter test
 
-      # Step 7: Build release APK (مع التقسيم)
-      - name: Build Release APK
-        run: flutter build apk --release --split-per-abi
-
-      # Step 8: Upload build APK as GitHub artifact
-      - name: Upload APK Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: stream-pro-release-apk
-          path: build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
-
-      # Step 9: Distribute APK to Firebase App Distribution
-      - name: Upload APK to Firebase App Distribution
-        uses: w9jds/firebase-action@master
-        with:
-          args: appdistribution:distribute build/app/outputs/flutter-apk/app-arm64-v8a-release.apk --app "${{ secrets.FIREBASE_APP_ID }}"
-        env:
-          GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}
-
-      # Step 10: Send Telegram Notification with APK Attachment (بـ curl لضمان الأمان)
-      - name: Send Telegram Notification
-        if: always()
-        run: |
-          curl -F chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
-               -F document=@"build/app/outputs/flutter-apk/app-arm64-v8a-release.apk" \
-               -F caption="📱 *Project:* `${{ github.repository }}`%0A*Status:* ${{ job.status == 'success' && '✅ Success' || '❌ Failed' }}" \
-               -F parse_mode="Markdown" \
-               https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendDocument
+      - name: Build Debug APK
+        run: flutter build apk --debug
