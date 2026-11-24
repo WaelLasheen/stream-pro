@@ -41,6 +41,51 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43555663248:android:2415f60e71778369d89715",
+        "android_client_info": {
+          "package_name": "com.streampro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "43555663248-rpkfj084aoap9q67n7eqpg1igvp942f7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.streampro",
+            "certificate_hash": "ec963bd6838875ed53461b7aefa64bf0b01ab425"
+          }
+        },
+        {
+          "client_id": "43555663248-tk4pf27m42ap17j3b2t5h8utk6nupit2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.streampro",
+            "certificate_hash": "e8f3d50cda7d759293d746c73a7834bdb7286fcd"
+          }
+        },
+        {
+          "client_id": "43555663248-ogh650ua50uco2a3cuvkoun33pp2a1f0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9p6HZRECxRrM_6sfghgnMJzD6-etaeb0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "43555663248-ogh650ua50uco2a3cuvkoun33pp2a1f0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"
