@@ -47,3 +47,8 @@ app.*.map.json
 
 # AI configs
 .continue
+
+# Android Release Signing
+/android/key.properties
+*.jks
+*.keystore
