@@ -39,12 +39,22 @@ class _SplashScreenState extends State<SplashScreen>
       ),
     );
 
-    _logoScale = Tween(begin: 1.5, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: const Interval(0.0, 0.5, curve: Curves.easeOutCubic),
+    _logoScale = TweenSequence<double>([
+      TweenSequenceItem(
+        tween: Tween(
+          begin: 0.5,
+          end: 1.2,
+        ).chain(CurveTween(curve: Curves.easeOutQuart)),
+        weight: 40,
       ),
-    );
+      TweenSequenceItem(
+        tween: Tween(
+          begin: 1.2,
+          end: 1.0,
+        ).chain(CurveTween(curve: Curves.easeInOutCubic)),
+        weight: 60,
+      ),
+    ]).animate(_controller);
 
     _textFade = Tween(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(

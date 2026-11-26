@@ -6,7 +6,7 @@ part 'splash_state.dart';
 
 /// Total duration of the entrance animation.
 /// The cubit waits for whichever is longer: this or the refresh call.
-const Duration kSplashAnimationDuration = Duration(milliseconds: 500);
+const Duration kSplashAnimationDuration = Duration(milliseconds: 900);
 
 class SplashCubit extends Cubit<SplashState> {
   final RefreshTokenUseCase refreshTokenUseCase;
