@@ -180,8 +180,9 @@ Application notifications also use their payload type to select an appropriate d
 - A **like** opens the related video.
 - A **comment or reply** opens that video with the comments tab selected.
 - A **subscription** opens the owner-channel area at the relevant tab.
+- A **playlist** opens the playlist details screen.
 
-The external FCM/system-notification tap flow currently opens the in-app notifications screen after the app is ready. Routing directly from an external push payload to its original video, comment, or channel is still planned.
+Both in-app notification taps and external FCM/system-notification taps use this payload-aware routing. If the payload does not contain enough information to resolve a destination, the app opens the in-app notifications screen instead.
 
 </details>
 
@@ -362,7 +363,7 @@ The existing tests cover selected playlist models and Cubit behavior, owner-play
 
 The following items are planned improvements; they should not be read as already shipped functionality.
 
-- [ ] **Payload-aware push navigation:** open the exact video, comment, reply, or channel associated with an external FCM/system notification.
+- [x] **Payload-aware push navigation:** open the exact video, comment, reply, playlist, or channel associated with an external FCM/system notification.
 - [ ] **App Links and deep links:** open shared video URLs directly in StreamPro when the app is installed, while retaining a web fallback.
 - [ ] **Canonical URL alignment:** define a consistent URL strategy between the mobile app, web client, and backend.
 - [ ] **Resumable chunked uploads:** split large video uploads into chunks, track acknowledged progress, retry failed chunks, and resume an interrupted upload instead of restarting the entire file.
